@@ -19,36 +19,16 @@
                    || window.innerWidth <= 768;
 
     // =============================================
-    // Custom cursor (desktop / mouse only)
+    // Tap-to-call: sticky "Call" button on phones, built from the page's
+    // first tel: link so every lead page gets it without template edits.
     // =============================================
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorRing = document.querySelector('.cursor-ring');
-    var hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    if (hasFinePointer && cursorDot && cursorRing) {
-        var ringX = 0, ringY = 0, targetX = 0, targetY = 0;
-
-        window.addEventListener('mousemove', function (e) {
-            targetX = e.clientX;
-            targetY = e.clientY;
-            cursorDot.style.transform = 'translate(' + targetX + 'px,' + targetY + 'px) translate(-50%,-50%)';
-        });
-
-        function animateRing() {
-            ringX += (targetX - ringX) * 0.18;
-            ringY += (targetY - ringY) * 0.18;
-            cursorRing.style.transform = 'translate(' + ringX + 'px,' + ringY + 'px) translate(-50%,-50%)';
-            requestAnimationFrame(animateRing);
-        }
-        requestAnimationFrame(animateRing);
-
-        document.querySelectorAll('a, button, .work-item, input, textarea').forEach(function (el) {
-            el.addEventListener('mouseenter', function () { cursorRing.classList.add('is-active'); });
-            el.addEventListener('mouseleave', function () { cursorRing.classList.remove('is-active'); });
-        });
-    } else if (cursorDot && cursorRing) {
-        cursorDot.style.display = 'none';
-        cursorRing.style.display = 'none';
+    var telLink = document.querySelector('a[href^="tel:"]');
+    if (telLink && !document.querySelector('.call-fab')) {
+        var fab = document.createElement('a');
+        fab.className = 'call-fab';
+        fab.href = telLink.getAttribute('href');
+        fab.textContent = 'Call ' + telLink.textContent.trim();
+        document.body.appendChild(fab);
     }
 
     // =============================================
@@ -256,12 +236,26 @@
     }
 
     // --- Contact Form ---
+    // No backend on static hosting: open the visitor's email app with the
+    // message pre-filled to the business address shown on the page, instead
+    // of pretending the message was sent. Live client sites swap this for
+    // the email form service at fulfilment.
     var contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
+            var mail = document.querySelector('a[href^="mailto:"]');
+            var to = mail ? mail.getAttribute('href').replace('mailto:', '') : '';
+            var f = contactForm.querySelectorAll('input, textarea');
+            var name = f[0] ? f[0].value : '', from = f[1] ? f[1].value : '', msg = f[2] ? f[2].value : '';
+            var body = msg + '\n\n' + name + (from ? ' (' + from + ')' : '');
+            window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Quote request from ' + (name || 'website')) + '&body=' + encodeURIComponent(body);
+            if (!contactForm.querySelector('.form-note')) {
+                var note = document.createElement('p');
+                note.className = 'form-note';
+                note.textContent = 'Your email app should open with your message ready to send. If it does not, call or email us using the details below.';
+                contactForm.appendChild(note);
+            }
         });
     }
 
