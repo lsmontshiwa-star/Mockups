@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{business_name}} | {{trade_label}} in {{area}}</title>
+    <meta name="description" content="{{business_name}}: {{trade_label}} in {{area}}. {{headline}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="{{font_url}}" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/local.css">
+    <script>document.documentElement.classList.add('js');setTimeout(function(){if(!document.documentElement.classList.contains('anim-ready'))document.documentElement.classList.remove('js');},2500);</script>
+</head>
+<body data-theme="{{theme}}">
+
+    <div class="sample-ribbon">Sample website by Digital Switch &middot; built for {{business_name}}</div>
+
+    <header class="nav">
+        <a href="#top" class="nav-brand">{{business_name}}</a>
+        <nav class="nav-links" id="navLinks">
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a href="#how">How it works</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a href="https://wa.me/{{whatsapp_intl}}?text={{wa_text}}" class="nav-cta magnetic">WhatsApp us</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span></button>
+    </header>
+
+    <main id="top">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-media" data-parallax="0.25">
+                <img src="{{hero_image}}" alt="{{business_name}} at work" fetchpriority="high">
+            </div>
+            <div class="hero-shade"></div>
+            <div class="hero-content">
+                <p class="eyebrow reveal-up">{{trade_label}} &middot; {{area}}</p>
+                <h1 class="hero-title split">{{headline}}</h1>
+                <p class="hero-intro reveal-up">{{intro}}</p>
+                <div class="hero-actions reveal-up">
+                    <a href="https://wa.me/{{whatsapp_intl}}?text={{wa_text}}" class="btn btn-primary magnetic">{{cta_label}}</a>
+                    <a href="tel:+{{phone_intl}}" class="btn btn-ghost magnetic">Call {{phone_display}}</a>
+                </div>
+            </div>
+            <div class="hero-scroll" aria-hidden="true"><span></span></div>
+        </section>
+
+        <!-- Marquee -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>{{service_1_title}}</span><i></i><span>{{service_2_title}}</span><i></i><span>{{service_3_title}}</span><i></i><span>{{service_4_title}}</span><i></i><span>{{area}}</span><i></i>
+                <span>{{service_1_title}}</span><i></i><span>{{service_2_title}}</span><i></i><span>{{service_3_title}}</span><i></i><span>{{service_4_title}}</span><i></i><span>{{area}}</span><i></i>
+            </div>
+        </div>
+
+        <!-- Services -->
+        <section class="section services" id="services">
+            <div class="section-head">
+                <p class="eyebrow reveal-up">What we do</p>
+                <h2 class="section-title split">{{services_title}}</h2>
+            </div>
+            <div class="service-grid">
+                <article class="service-card reveal-card">
+                    <span class="service-num">01</span>
+                    <h3>{{service_1_title}}</h3>
+                    <p>{{service_1_desc}}</p>
+                </article>
+                <article class="service-card reveal-card">
+                    <span class="service-num">02</span>
+                    <h3>{{service_2_title}}</h3>
+                    <p>{{service_2_desc}}</p>
+                </article>
+                <article class="service-card reveal-card">
+                    <span class="service-num">03</span>
+                    <h3>{{service_3_title}}</h3>
+                    <p>{{service_3_desc}}</p>
+                </article>
+                <article class="service-card reveal-card">
+                    <span class="service-num">04</span>
+                    <h3>{{service_4_title}}</h3>
+                    <p>{{service_4_desc}}</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Work: horizontal scroll gallery on desktop, swipe on phones -->
+        <section class="work" id="work">
+            <div class="work-head">
+                <p class="eyebrow">Recent work</p>
+                <h2 class="section-title">{{work_title}}</h2>
+            </div>
+            <div class="work-rail">
+                <div class="work-track">
+                    <figure class="work-item"><img src="{{work_1_image}}" alt="{{work_1_caption}}" loading="lazy"><figcaption>{{work_1_caption}}</figcaption></figure>
+                    <figure class="work-item"><img src="{{work_2_image}}" alt="{{work_2_caption}}" loading="lazy"><figcaption>{{work_2_caption}}</figcaption></figure>
+                    <figure class="work-item"><img src="{{work_3_image}}" alt="{{work_3_caption}}" loading="lazy"><figcaption>{{work_3_caption}}</figcaption></figure>
+                    <figure class="work-item"><img src="{{work_4_image}}" alt="{{work_4_caption}}" loading="lazy"><figcaption>{{work_4_caption}}</figcaption></figure>
+                    <figure class="work-item"><img src="{{work_5_image}}" alt="{{work_5_caption}}" loading="lazy"><figcaption>{{work_5_caption}}</figcaption></figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="section how" id="how">
+            <div class="section-head">
+                <p class="eyebrow reveal-up">How it works</p>
+                <h2 class="section-title split">Three steps. No runaround.</h2>
+            </div>
+            <ol class="steps">
+                <li class="step"><span class="step-dot"></span><h3>{{step_1_title}}</h3><p>{{step_1_desc}}</p></li>
+                <li class="step"><span class="step-dot"></span><h3>{{step_2_title}}</h3><p>{{step_2_desc}}</p></li>
+                <li class="step"><span class="step-dot"></span><h3>{{step_3_title}}</h3><p>{{step_3_desc}}</p></li>
+                <span class="steps-line" aria-hidden="true"><span></span></span>
+            </ol>
+        </section>
+
+        <!-- About -->
+        <section class="section about">
+            <div class="about-media clip-reveal"><img src="{{about_image}}" alt="{{business_name}}" loading="lazy"></div>
+            <div class="about-copy">
+                <p class="eyebrow reveal-up">About us</p>
+                <h2 class="section-title split">{{about_title}}</h2>
+                <p class="reveal-up">{{about_text}}</p>
+                <ul class="facts reveal-up">
+                    <li><strong>Area</strong><span>{{area}} &amp; surrounds</span></li>
+                    <li><strong>Hours</strong><span>{{hours}}</span></li>
+                    <li><strong>Contact</strong><span><a href="tel:+{{phone_intl}}">{{phone_display}}</a></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section faq">
+            <div class="section-head">
+                <p class="eyebrow reveal-up">Questions</p>
+                <h2 class="section-title split">Good to know</h2>
+            </div>
+            <div class="faq-list">
+                <details class="reveal-up"><summary>{{faq_1_q}}</summary><p>{{faq_1_a}}</p></details>
+                <details class="reveal-up"><summary>{{faq_2_q}}</summary><p>{{faq_2_a}}</p></details>
+                <details class="reveal-up"><summary>{{faq_3_q}}</summary><p>{{faq_3_a}}</p></details>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact" id="contact">
+            <div class="contact-inner">
+                <p class="eyebrow">Get in touch</p>
+                <h2 class="contact-title split">{{contact_title}}</h2>
+                <p class="contact-sub reveal-up">WhatsApp is quickest. Send a message and a photo if it helps, and we'll come back to you.</p>
+                <div class="contact-actions reveal-up">
+                    <a href="https://wa.me/{{whatsapp_intl}}?text={{wa_text}}" class="btn btn-primary btn-lg magnetic">WhatsApp {{business_name}}</a>
+                    <a href="tel:+{{phone_intl}}" class="btn btn-ghost btn-lg magnetic">Call {{phone_display}}</a>
+                </div>
+                <p class="contact-meta reveal-up">{{address_line}} &middot; <a href="mailto:{{email}}">{{email}}</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 {{business_name}} &middot; {{area}}</p>
+    </footer>
+
+    <!-- Phone action bar -->
+    <div class="action-bar">
+        <a href="tel:+{{phone_intl}}" class="action-call">Call</a>
+        <a href="https://wa.me/{{whatsapp_intl}}?text={{wa_text}}" class="action-wa">WhatsApp</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="../assets/local.js"></script>
+</body>
+</html>
