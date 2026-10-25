@@ -131,28 +131,51 @@ h2{font-family:var(--f-display);font-size:clamp(20px,3.6vw,36px);line-height:1.3
 @keyframes rise{from{transform:translateY(20px);opacity:.4}to{transform:none;opacity:1}}
 
 /* ---------- TITLE ---------- */
-#menu{min-height:min(980px,96svh);display:grid;place-items:center;text-align:center;padding-top:calc(var(--hud-h) + 40px);padding-bottom:110px;isolation:isolate}
-/* quiet zone: the road stays visible at the edges, the words get a calm dark field */
-#menu::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(ellipse 820px 600px at 50% 50%,rgba(5,3,3,.95) 0%,rgba(5,3,3,.88) 48%,rgba(5,3,3,.5) 75%,rgba(5,3,3,0) 100%)}
-.title{display:grid;justify-items:center}
-.hero-logo{width:clamp(72px,7vw,96px);height:auto;clip-path:circle(46%);margin-bottom:22px;animation:float 4s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-8px)}}
-.kicker{font-family:var(--f-label);font-size:13px;letter-spacing:.24em;color:var(--white);margin:0 0 26px;display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;
-  background:#070505;border:1px solid var(--line);padding:8px 14px}
-.kicker b{color:var(--white);font-weight:400;display:inline-flex;align-items:center;gap:8px;background:var(--red);padding:3px 8px;margin:-3px -8px -3px 0}
-.kicker b::before{content:"";width:6px;height:6px;background:var(--white);animation:blink 1.2s steps(2) infinite}
-.kicker span{color:var(--dim)}
-.big-title{font-family:var(--f-display);font-size:clamp(58px,16.5vw,150px);line-height:.98;margin:0;letter-spacing:-.03em;color:var(--white);
-  text-shadow:0 0 0 #000,5px 5px 0 var(--red),10px 10px 0 var(--red-deep)}
-.big-title span{display:block}
-.tagline{font-size:clamp(22px,2.6vw,30px);max-width:32ch;margin:30px auto 0}
+#menu{min-height:100svh;display:flex;align-items:center;padding-top:calc(var(--hud-h) + 24px);padding-bottom:32px}
+#menu .wrap{width:100%}
+.title-card{width:min(600px,100%);padding:30px 34px 26px;background:rgba(8,5,5,.93);display:grid;gap:22px;animation:cardIn .6s steps(6) both}
+@keyframes cardIn{from{transform:translateX(-30px);opacity:0}}
+.stat-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--f-label);font-size:12px;letter-spacing:.2em;color:var(--dim)}
+.stat-row img{width:30px;height:30px;clip-path:circle(46%)}
+.stat-row .live{margin-left:auto;display:inline-flex;align-items:center;gap:8px;background:var(--red);color:var(--white);padding:5px 9px}
+.stat-row .live::before{content:"";width:6px;height:6px;background:var(--white);animation:blink 1.2s steps(2) infinite}
+.big-title{font-family:var(--f-display);font-size:clamp(50px,7.6vw,108px);line-height:1;margin:0;letter-spacing:-.03em;color:var(--white);text-shadow:5px 5px 0 var(--red),9px 9px 0 var(--red-deep)}
+.big-title .ln{display:block;white-space:nowrap}
+.big-title .ch{display:inline-block;animation:drop .55s cubic-bezier(.3,1.7,.5,1) both;animation-play-state:paused;transition:transform .12s steps(2)}
+body.playing .big-title .ch{animation-play-state:running}
+.big-title .ch:hover{transform:translateY(-10px);color:var(--red-hot)}
+@keyframes drop{from{transform:translateY(-80px);opacity:0}}
+.tagline{font-size:clamp(21px,2vw,25px);margin:0;max-width:34ch;color:var(--white)}
 .tagline em{font-style:normal;color:var(--red-hot)}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:32px}
-.drive{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:grid;justify-items:center;gap:8px;font-family:var(--f-display);font-size:9px;letter-spacing:.1em;color:var(--white);text-decoration:none;white-space:nowrap}
-.drive span{animation:blink 1.2s steps(2) infinite}
-.drive i{font-style:normal;color:var(--red-hot);animation:down 1s steps(3) infinite}
-@keyframes down{50%{transform:translateY(5px)}}
+.start-menu{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.start-menu a{display:grid;grid-template-columns:18px 1fr auto;align-items:center;gap:10px;padding:13px 14px;text-decoration:none;font-family:var(--f-display);font-size:12px;letter-spacing:.03em;color:var(--dim);border:1px solid var(--line);background:rgba(0,0,0,.35);transition:color .1s,background .1s,border-color .1s}
+.start-menu a i{font-style:normal;color:var(--red-hot);visibility:hidden}
+.start-menu a small{font-family:var(--f-label);font-size:11px;letter-spacing:.12em;color:var(--red)}
+.start-menu a.sel{color:var(--white);background:rgba(227,18,30,.18);border-color:var(--red)}
+.start-menu a.sel i{visibility:visible;animation:nudge .5s steps(2) infinite}
+.start-menu a.primary{background:var(--red);border-color:var(--red);color:var(--white)}
+.start-menu a.primary small{color:var(--white);opacity:.8}
+.start-menu a.primary.sel{background:var(--red-hot)}
+.start-menu a.primary i{visibility:visible;color:var(--white)}
+.card-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--f-label);font-size:11px;letter-spacing:.16em;color:var(--dim)}
+.card-foot .drive{color:var(--white);text-decoration:none;animation:blink 1.2s steps(2) infinite}
+.card-foot .drive i{font-style:normal;color:var(--red-hot)}
+@media (max-width:860px){
+  #menu{align-items:flex-end;padding-top:calc(var(--hud-h) + 120px);padding-bottom:86px}
+  .title-card{margin:0 auto}
+}
+@media (max-width:620px){
+  .title-card{padding:20px 18px 18px;gap:16px}
+  .big-title{font-size:min(15vw,64px)}
+  .stat-row{font-size:10px;letter-spacing:.14em;gap:8px}
+  .stat-row img{width:24px;height:24px}
+  .start-menu{gap:5px}
+  .start-menu a{padding:11px 12px;font-size:10px}
+  .start-menu a small,.card-foot span{display:none}
+  .card-foot{font-size:10px;justify-content:center}
+  .tagline{font-size:19px;line-height:1.2}
+}
+@media (max-height:720px) and (min-width:861px){.big-title{font-size:clamp(46px,6vw,80px)}.start-menu a{padding:10px 14px}}
 
 /* ---------- SELECT YOUR GAME ---------- */
 .roster{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
@@ -261,8 +284,10 @@ h2{font-family:var(--f-display);font-size:clamp(20px,3.6vw,36px);line-height:1.3
 @media (max-width:460px){.two{grid-template-columns:1fr}}
 
 /* ---------- FINISH ---------- */
-footer{text-align:center;padding-block:120px calc(90px + env(safe-area-inset-bottom,0px))}
-.finish-k{font-family:var(--f-label);font-size:13px;letter-spacing:.3em;color:var(--red-hot);margin:0 0 16px}
+footer{text-align:center;padding-block:120px calc(90px + env(safe-area-inset-bottom,0px));isolation:isolate}
+footer::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 760px 72% at 50% 55%,rgba(5,3,3,.92) 0%,rgba(5,3,3,.8) 50%,rgba(5,3,3,0) 100%)}
+.finish-k{font-family:var(--f-label);font-size:13px;letter-spacing:.3em;color:var(--white);margin:0 0 18px;display:inline-flex;align-items:center;gap:10px;background:#070505;border:1px solid rgba(227,18,30,.6);padding:7px 12px}
+.finish-k::before{content:"";width:8px;height:8px;background:var(--red);box-shadow:0 0 8px var(--red)}
 .gameover{font-family:var(--f-display);font-size:clamp(20px,4.6vw,42px);margin:0;text-shadow:0 3px 0 #000,4px 4px 0 var(--red)}
 .credits{font-family:var(--f-label);font-size:12px;letter-spacing:.14em;color:var(--dim);display:grid;gap:10px;margin:30px 0 34px;text-shadow:0 2px 4px #000}
 .credits b{color:var(--white);font-weight:400}
@@ -304,10 +329,6 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
   .btn.sm{font-size:9px}
   .fab{width:52px;height:52px}
   .soc{font-size:7px;padding:12px 4px}
-  #menu{min-height:86svh;padding-bottom:96px}
-  .kicker{font-size:11px;letter-spacing:.16em;gap:8px;padding:7px 10px}
-  .kicker b{margin:0}
-  #menu::before{background:radial-gradient(ellipse 120% 58% at 50% 46%,rgba(5,3,3,.95) 0%,rgba(5,3,3,.88) 55%,rgba(5,3,3,.4) 85%,rgba(5,3,3,0) 100%)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -361,17 +382,20 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
 <main>
 <!-- ===== TITLE ===== -->
 <section id="menu" data-lvl="1-1 START">
-  <div class="wrap title">
-    <img class="hero-logo" src="img/logo.jpg" alt="Kasi Lobby KL emblem" width="132" height="132">
-    <p class="kicker">PLAYER 1 <span>·</span> ALEXANDRA <b>3 HUBS OPEN</b></p>
-    <h1 class="big-title"><span>KASI</span><span>LOBBY</span></h1>
-    <p class="tagline">Gaming hubs in Alex, <em>tournaments</em> at HQ, and VR, racing sim and ice cream rentals for your event.</p>
-    <div class="cta-row">
-      <a class="btn" href="#save">▶ START ENQUIRY</a>
-      <a class="btn ghost" href="#select">LEVEL SELECT</a>
+  <div class="wrap">
+    <div class="panel title-card">
+      <div class="stat-row"><img src="img/logo.jpg" alt="" width="30" height="30">PLAYER 1 · ALEXANDRA<span class="live">3 HUBS OPEN</span></div>
+      <h1 class="big-title" aria-label="Kasi Lobby"><span class="ln">KASI</span><span class="ln">LOBBY</span></h1>
+      <p class="tagline">Gaming hubs and <em>tournaments</em> in Alex. VR, racing sim and ice cream rentals for your event.</p>
+      <ul class="start-menu" id="startMenu">
+        <li><a class="primary sel" href="#save"><i>▶</i>START ENQUIRY<small>1-6</small></a></li>
+        <li><a href="#select"><i>▶</i>SELECT YOUR GAME<small>1-2</small></a></li>
+        <li><a href="#map"><i>▶</i>FIND A HUB<small>1-3</small></a></li>
+        <li><a href="#coop"><i>▶</i>BECOME A SPONSOR<small>1-4</small></a></li>
+      </ul>
+      <div class="card-foot"><span>© 2026 KASI LOBBY</span><a class="drive" href="#select">SCROLL TO DRIVE <i>▼</i></a></div>
     </div>
   </div>
-  <a class="drive" href="#select"><span>SCROLL TO DRIVE</span><i>▼</i></a>
 </section>
 
 <!-- ===== SELECT YOUR GAME ===== -->
@@ -725,6 +749,14 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
     catch(e){ const code = b.parentElement.querySelector("code"); const r = document.createRange(); r.selectNodeContents(code); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "SELECTED"; }
     setTimeout(()=> b.textContent = "COPY", 1600);
   }));
+
+
+  /* ---------- title letters + start menu ---------- */
+  let ci = 0;
+  $$(".big-title .ln").forEach(ln => { const t = ln.textContent; ln.textContent = ""; [...t].forEach(c => { const sp = document.createElement("span"); sp.className = "ch"; sp.setAttribute("aria-hidden","true"); sp.textContent = c; sp.style.animationDelay = (120 + ci++ * 70) + "ms"; sp.addEventListener("mouseenter", () => tone(400 + Math.random()*500, .05, "square", .02)); ln.append(sp); }); });
+  const sm = $$("#startMenu a");
+  const selSm = a => sm.forEach(x => x.classList.toggle("sel", x === a));
+  sm.forEach(a => { a.addEventListener("mouseenter", () => { if(!a.classList.contains("sel")){ selSm(a); sfx.blip(); } }); a.addEventListener("focus", () => selSm(a)); });
 
   /* ---------- level tracking ---------- */
   const secs = $$("main section");
