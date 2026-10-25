@@ -234,7 +234,7 @@ details .ans .say{font-family:var(--serif);font-style:italic;font-size:24px;line
       <a href="#how" class="hide-m">How it works</a>
       <a href="#sell" class="hide-m">What you sell</a>
       <a href="#messages" class="hide-m">Messages</a>
-      <a href="#join" class="btn btn-solid">I'm in</a>
+      <a href="https://wa.me/27761293926?text=Hi%20Digital%20Switch%2C%20I%27m%20in!%20Please%20send%20me%20the%20referral%20details." class="btn btn-solid" target="_blank" rel="noopener">I'm in</a>
     </div>
   </div>
 </nav>
@@ -473,8 +473,9 @@ details .ans .say{font-family:var(--serif);font-style:italic;font-size:24px;line
       <span class="label">Ready?</span>
       <h2 id="joinH" style="margin-top:20px">Reply <em>"I'm in"</em> and let's get your first R750.</h2>
       <div class="final-row">
+        <a href="https://wa.me/27761293926?text=Hi%20Digital%20Switch%2C%20I%27m%20in!%20Please%20send%20me%20the%20referral%20details." class="btn btn-solid" target="_blank" rel="noopener">I'm in: message us on WhatsApp</a>
         <span class="contact"><span data-fill="contact"></span> on WhatsApp: <span data-fill="number"></span></span>
-        <button class="btn btn-solid" type="button" data-copy-fill="number">Copy number</button>
+        <button class="btn" type="button" data-copy-fill="number">Copy number</button>
       </div>
     </div>
     <div class="wrap"><div class="giant" id="giant" aria-hidden="true">Switch</div></div>
@@ -495,8 +496,8 @@ details .ans .say{font-family:var(--serif);font-style:italic;font-size:24px;line
 /* ---- Fill these in before sharing ---- */
 const CONFIG = {
   demoLink: "https://lsmontshiwa-star.github.io/Mockups/local/demo-roofer/",
-  number: "",        // e.g. "072 000 0000"
-  contact: ""        // e.g. "Lethabo"
+  number: "076 129 3926",
+  contact: "Digital Switch"
 };
 const PH = { demoLink: "[demo link]", number: "[your WhatsApp number]", contact: "[your name]" };
 const val = k => CONFIG[k] || PH[k];
@@ -545,7 +546,7 @@ const MSGS = [
   { id: "price", tab: "When they ask the price", note: "Say the price with confidence.",
     text: "It's R2,999 once-off for the design and build, then R199 a month for hosting, your own .co.za address and small updates. Most agencies charge R5,000 to R15,000 for a custom site, and this one is animated and built for your industry." },
   { id: "handover", tab: "Handover", note: "When they've said yes. Tick the checklist below first.",
-    text: "Amazing! I'll connect you with {contact} from Digital Switch now. They'll send you the agreement and payment details, and your site will be live within a week of getting your logo and photos." }
+    text: "Amazing! I'll connect you with {contact} now. They'll send you the agreement and payment details, and your site will be live within a week of getting your logo and photos." }
 ];
 const tabsEl = document.getElementById("tabs"), bodyEl = document.getElementById("msgBody"), noteEl = document.getElementById("msgNote");
 let current = MSGS[0];
