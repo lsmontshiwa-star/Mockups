@@ -1,0 +1,23 @@
+Digital Switch logo pack (Neon route brand, October 2026)
+
+LOGO (4096 px wide)
+  ds-logo-on-dark.png    transparent, for dark backgrounds
+  ds-logo-dark-bg.png    on Night #071719
+  ds-logo-on-light.png   transparent, for light backgrounds
+  ds-logo-light-bg.png   on light #F3FAF7
+
+MARK / ICON (2048 x 2048)
+  ds-mark-app-icon.png        app icon / WhatsApp profile picture (dark)
+  ds-mark-app-icon-light.png  light version
+  ds-mark-on-dark.png / ds-mark-on-light.png   transparent switch only
+
+ANIMATED (GIF, loops every 7 seconds: switches on, "Switch" flickers on in neon, holds, switches off)
+  ds-logo-animated-dark.gif   1600 px wide
+  ds-logo-animated-light.gif  1600 px wide
+  ds-mark-animated.gif        1024 x 1024
+
+FAVICON (browser tab icon)
+  favicon.svg, favicon.ico, favicon-32/192/512.png, apple-touch-icon.png
+
+Colours: Night #071719 · Lilac #C3B0FF · Glow #9B7BFF · Mint #DDF5EC · Violet (on light) #6A4FE0
+Type: Unbounded 200 ("Digital") · Ballet ("Switch") · Inter Tight (body) · IBM Plex Mono (labels)
