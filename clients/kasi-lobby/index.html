@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Kasi Lobby: three gaming hubs in Alexandra, Johannesburg. Tournaments, plus VR, racing simulator and ice cream machine rentals.">
+<meta property="og:title" content="Kasi Lobby">
+<meta property="og:description" content="Gaming hubs, tournaments and gear rentals in Alexandra, JHB.">
+<meta property="og:image" content="img/logo.jpg">
+<meta name="theme-color" content="#070606">
+<link rel="icon" href="img/logo.jpg">
+<title>Kasi Lobby</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen:wght@400;700&display=swap">
+<style>
+/* Layout: one continuous game cartridge — boot → title menu → levels stacked as screens, HUD pinned on top, CRT glass over everything */
+:root{
+  --void:#070606;      /* screen black */
+  --panel:#120d0d;     /* raised panel */
+  --grid:#2a1a1b;      /* tile lines */
+  --red:#e3121e;       /* kasi red */
+  --red-hot:#ff3b45;   /* glow */
+  --red-deep:#5c070c;  /* shadow red */
+  --white:#f4efe9;     /* bone white */
+  --dim:#9a8f8c;       /* dim text */
+  --tan:#d08a3c;       /* cone only */
+  --f-display:"Press Start 2P", "Courier New", monospace;
+  --f-body:"VT323", "Courier New", monospace;
+  --f-label:"Silkscreen", "Courier New", monospace;
+  --px:4px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--void)}
+html,body{margin:0}
+[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+body{background:var(--void);color:var(--white);font-family:var(--f-body);font-size:22px;line-height:1.25;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' shape-rendering='crispEdges'%3E%3Cpath d='M2 2h3v3h3v3h3v3h3v3h3v3h-6v3h-3v3H8v-3H5v3H2z' fill='%23f4efe9' stroke='%23070606' stroke-width='1.5'/%3E%3C/svg%3E") 2 2, auto}
+a,button,[role=button],summary,label[for]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' shape-rendering='crispEdges'%3E%3Cpath d='M10 0h4v8h8v4h-8v8h4v4H6v-4h4v-8H2V8h8z' fill='%23e3121e' stroke='%23070606' stroke-width='1.2'/%3E%3C/svg%3E") 12 12, pointer}
+::selection{background:var(--red);color:var(--white)}
+img{max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px dashed var(--red-hot);outline-offset:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- CRT glass ---------- */
+.glass{position:fixed;inset:0;pointer-events:none;z-index:90;
+  background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.28) 2px 3px);mix-blend-mode:multiply}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:91;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+.flicker{position:fixed;inset:0;pointer-events:none;z-index:92;background:var(--white);opacity:0;animation:flick 7s infinite steps(1)}
+@keyframes flick{0%,96%,100%{opacity:0}97%{opacity:.025}98%{opacity:0}99%{opacity:.04}}
+
+/* ---------- BOOT ---------- */
+#boot{position:fixed;inset:0;z-index:100;background:var(--void);display:grid;place-items:center;
+  padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+#boot.off{animation:crtOff .55s ease-in forwards}
+@keyframes crtOff{0%{transform:scale(1,1);filter:brightness(1)}55%{transform:scale(1,.006);filter:brightness(3)}100%{transform:scale(0,.006);filter:brightness(5);opacity:0}}
+.power-line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--white);box-shadow:0 0 18px var(--white);transform:scaleX(0);animation:pwr .7s ease-out forwards}
+@keyframes pwr{0%{transform:scaleX(0)}50%{transform:scaleX(1);height:2px;top:50%}100%{transform:scaleX(1);height:100%;top:0;opacity:0}}
+#bios{position:absolute;top:max(18px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));right:16px;margin:0;font-family:var(--f-body);font-size:clamp(17px,2.4vw,24px);color:var(--dim);white-space:pre-wrap;line-height:1.15}
+#bios b{color:var(--red-hot);font-weight:400}
+#bios i{color:var(--white);font-style:normal}
+.load{display:grid;justify-items:center;gap:22px;text-align:center;width:min(560px,100%)}
+.boot-logo{font-family:var(--f-display);font-size:clamp(26px,7vw,58px);line-height:1.1;color:var(--white);
+  text-shadow:4px 4px 0 var(--red),8px 8px 0 var(--red-deep);animation:drop .6s cubic-bezier(.3,1.6,.5,1) both}
+.boot-logo small{display:block;font-size:.28em;letter-spacing:.3em;color:var(--red-hot);text-shadow:none;margin-top:16px}
+@keyframes drop{from{transform:translateY(-120px)}to{transform:none}}
+.bar{width:100%;height:28px;border:4px solid var(--white);padding:3px;box-shadow:4px 4px 0 var(--red-deep)}
+.bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--red) 0 14px,var(--red-hot) 14px 18px)}
+.load-row{display:flex;justify-content:space-between;width:100%;font-family:var(--f-label);font-size:14px;letter-spacing:.08em;color:var(--dim);gap:12px}
+.load-row span:last-child{color:var(--white);font-variant-numeric:tabular-nums}
+.press{font-family:var(--f-display);font-size:clamp(14px,3.4vw,22px);background:none;border:0;color:var(--white);padding:14px 10px;animation:blink 1s steps(2) infinite;letter-spacing:.05em}
+.press-sub{font-family:var(--f-label);font-size:12px;color:var(--dim);letter-spacing:.1em}
+@keyframes blink{50%{opacity:0}}
+#skip{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));background:none;border:2px solid var(--dim);color:var(--dim);font-family:var(--f-label);font-size:13px;padding:8px 12px;letter-spacing:.1em}
+#skip:hover{border-color:var(--white);color:var(--white)}
+.boot-copy{position:absolute;bottom:max(20px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-family:var(--f-label);font-size:11px;color:var(--dim);letter-spacing:.12em}
+
+/* ---------- HUD ---------- */
+.hud{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(7,6,6,.92);border-bottom:4px solid var(--red);
+  padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;gap:clamp(10px,2.5vw,28px);font-family:var(--f-display);font-size:clamp(8px,1.4vw,11px);letter-spacing:.05em;transform:translateY(-110%);transition:transform .4s steps(5)}
+body.playing .hud{transform:none}
+.hud .lbl{color:var(--red-hot);display:block;margin-bottom:5px}
+.hud .val{font-variant-numeric:tabular-nums}
+.hud-brand{font-size:clamp(9px,1.6vw,12px);text-decoration:none;color:var(--white);text-shadow:2px 2px 0 var(--red)}
+.hud-hearts{display:flex;gap:4px;align-items:center}
+.hud-sp{flex:1}
+.hud-btn{background:var(--panel);border:2px solid var(--white);font-family:var(--f-display);font-size:inherit;padding:7px 8px;color:var(--white);box-shadow:3px 3px 0 var(--red-deep)}
+.hud-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--red-deep)}
+.hud-lvl .val{color:var(--white)}
+@media (max-width:620px){.hud .hide-s{display:none}}
+
+/* ---------- shared ---------- */
+main{position:relative}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{position:relative;padding-block:clamp(72px,10vw,120px)}
+.lvl-head{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:clamp(30px,5vw,52px)}
+.lvl-tag{font-family:var(--f-label);font-size:14px;letter-spacing:.18em;color:var(--red-hot);display:flex;align-items:center;gap:10px}
+.lvl-tag::before{content:"";width:10px;height:10px;background:var(--red);box-shadow:0 0 10px var(--red)}
+h2{font-family:var(--f-display);font-size:clamp(20px,4.2vw,40px);line-height:1.25;margin:10px 0 0;text-wrap:balance;text-shadow:4px 4px 0 var(--red-deep)}
+.lede{max-width:62ch;color:var(--dim);font-size:24px;margin:14px 0 0}
+.lvl-head .grow{flex:1;min-width:260px}
+.qblock{width:52px;height:52px;flex:none;background:var(--red);border:4px solid var(--white);font-family:var(--f-display);font-size:20px;display:grid;place-items:center;box-shadow:inset -6px -6px 0 var(--red-deep),inset 6px 6px 0 var(--red-hot),4px 4px 0 #000;color:var(--white);padding:0}
+.qblock.used{background:var(--grid);box-shadow:inset -6px -6px 0 #000,4px 4px 0 #000;color:var(--dim)}
+.qblock.bump{animation:bump .25s steps(3)}
+@keyframes bump{50%{transform:translateY(-14px)}}
+.pxbtn{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:12px;letter-spacing:.04em;text-decoration:none;
+  background:var(--red);color:var(--white);border:4px solid var(--white);padding:14px 16px;box-shadow:5px 5px 0 #000,inset -4px -4px 0 var(--red-deep);transition:transform .08s steps(1)}
+.pxbtn:hover{background:var(--red-hot)}
+.pxbtn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 #000,inset -4px -4px 0 var(--red-deep)}
+.pxbtn.ghost{background:var(--void);box-shadow:5px 5px 0 var(--red-deep)}
+.pxbtn.ghost:hover{background:var(--panel)}
+.frame{border:4px solid var(--white);background:var(--panel);box-shadow:8px 8px 0 var(--red-deep);position:relative}
+.frame::after{content:"";position:absolute;inset:4px;border:2px solid var(--grid);pointer-events:none}
+.enter{animation:rise .5s steps(6) both}
+@keyframes rise{from{transform:translateY(24px)}to{transform:none}}
+
+/* ---------- TITLE / MENU ---------- */
+#menu{min-height:min(860px,100svh);display:flex;align-items:center;padding-top:110px;overflow:hidden;isolation:isolate}
+#horizon{position:absolute;inset:0;width:100%;height:100%;z-index:-1;image-rendering:pixelated}
+.title-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,60px);align-items:center;width:100%}
+.p1{font-family:var(--f-label);font-size:14px;letter-spacing:.2em;color:var(--dim);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.p1 .live{color:var(--red-hot)}
+.p1 .live::before{content:"● ";animation:blink 1.2s steps(2) infinite}
+.logo-slot{margin:22px 0 8px}
+.big-title{font-family:var(--f-display);font-size:clamp(38px,9.5vw,104px);line-height:.98;margin:0;letter-spacing:-.02em;color:var(--white);
+  text-shadow:5px 5px 0 var(--red),10px 10px 0 var(--red-deep),0 0 40px rgba(227,18,30,.35)}
+.big-title .row2{display:block;color:var(--void);-webkit-text-stroke:3px var(--white);text-shadow:6px 6px 0 var(--red)}
+.tagline{font-size:clamp(24px,3vw,32px);max-width:28ch;margin:26px 0 0;color:var(--white)}
+.tagline em{font-style:normal;color:var(--red-hot)}
+.menu-box{padding:26px 22px 22px}
+.menu-box h3{font-family:var(--f-display);font-size:12px;margin:0 0 18px;color:var(--red-hot);letter-spacing:.08em}
+.menu-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.menu-list a{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--f-display);font-size:clamp(11px,1.5vw,14px);padding:12px 8px;color:var(--dim);border:2px solid transparent}
+.menu-list a .arrow{width:14px;color:var(--red-hot);visibility:hidden}
+.menu-list a .num{margin-left:auto;font-family:var(--f-label);font-size:12px;color:var(--grid)}
+.menu-list a.sel,.menu-list a:hover,.menu-list a:focus-visible{color:var(--white);background:var(--red-deep);border-color:var(--red)}
+.menu-list a.sel .arrow,.menu-list a:hover .arrow,.menu-list a:focus-visible .arrow{visibility:visible;animation:nudge .5s steps(2) infinite}
+.menu-list a.sel .num{color:var(--red-hot)}
+@keyframes nudge{50%{transform:translateX(4px)}}
+.menu-hint{margin-top:16px;font-family:var(--f-label);font-size:12px;color:var(--dim);letter-spacing:.08em;display:flex;gap:14px;flex-wrap:wrap}
+.key{display:inline-block;border:2px solid var(--dim);padding:0 5px;margin-right:4px;color:var(--white)}
+.ticker{position:absolute;left:0;right:0;bottom:0;border-top:4px solid var(--red);background:var(--void);overflow:hidden;font-family:var(--f-display);font-size:11px;padding-block:12px;white-space:nowrap}
+.ticker div{display:inline-block;animation:tick 30s linear infinite;padding-left:100%}
+.ticker span{margin-right:48px}
+.ticker span::before{content:"◆ ";color:var(--red)}
+@keyframes tick{to{transform:translateX(-100%)}}
+@media (max-width:860px){.title-grid{grid-template-columns:1fr}#menu{padding-bottom:90px}}
+
+/* ---------- SELECT YOUR GAME ---------- */
+.roster{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.char{grid-column:span 2;padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px;transition:transform .12s steps(2);min-width:0}
+.char:nth-child(4),.char:nth-child(5){grid-column:span 3}
+.char:hover,.char:focus-within{transform:translateY(-6px);border-color:var(--red-hot);box-shadow:8px 8px 0 var(--red)}
+.char:hover .sel-arrow,.char:focus-within .sel-arrow{visibility:visible}
+.sel-arrow{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-family:var(--f-display);font-size:16px;color:var(--red-hot);visibility:hidden;animation:bob .5s steps(2) infinite}
+@keyframes bob{50%{margin-top:-6px}}
+.char-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sprite-box{width:96px;height:96px;background:var(--void);border:2px solid var(--grid);display:grid;place-items:center;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:12px 12px}
+.sprite-box canvas{image-rendering:pixelated;animation:idle 1.2s steps(2) infinite}
+@keyframes idle{50%{transform:translateY(-3px)}}
+.pill{font-family:var(--f-label);font-size:11px;letter-spacing:.1em;padding:4px 8px;border:2px solid var(--red);color:var(--red-hot);white-space:nowrap}
+.pill.w{border-color:var(--white);color:var(--white)}
+.char h3{font-family:var(--f-display);font-size:clamp(13px,1.6vw,16px);margin:0;line-height:1.4}
+.char p{margin:0;color:var(--dim);font-size:22px}
+.best{display:flex;flex-wrap:wrap;gap:6px;font-family:var(--f-label);font-size:11px;letter-spacing:.06em}
+.best span{background:var(--void);padding:4px 7px;color:var(--white);border:1px solid var(--grid)}
+.best b{color:var(--red-hot);font-weight:400;margin-right:2px;align-self:center}
+.char .pxbtn{margin-top:auto;align-self:flex-start;font-size:10px;padding:11px 13px}
+@media (max-width:900px){.char,.char:nth-child(4),.char:nth-child(5){grid-column:span 3}}
+@media (max-width:600px){.roster{grid-template-columns:1fr}.char,.char:nth-child(4),.char:nth-child(5){grid-column:auto}}
+
+/* ---------- WORLD MAP ---------- */
+.map-wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:26px;align-items:start}
+.map{aspect-ratio:4/3;max-width:100%;overflow:hidden}
+.map canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+.pin{position:absolute;transform:translate(-50%,-100%);background:none;border:0;padding:0;display:grid;justify-items:center;gap:4px;z-index:2}
+.pin .flag{font-family:var(--f-display);font-size:9px;background:var(--void);border:2px solid var(--white);padding:5px 6px;white-space:nowrap}
+.pin .dot{width:22px;height:22px;background:var(--red);border:3px solid var(--white);box-shadow:3px 3px 0 #000;animation:pinb 1s steps(2) infinite}
+.pin.hq .dot{width:30px;height:30px;background:var(--red-hot)}
+.pin.hq .flag{background:var(--red);border-color:var(--white)}
+.pin.on .flag{background:var(--white);color:var(--void)}
+@keyframes pinb{50%{transform:translateY(-4px)}}
+.map-legend{position:absolute;left:12px;bottom:10px;font-family:var(--f-label);font-size:11px;color:var(--dim);z-index:2;letter-spacing:.06em;background:rgba(7,6,6,.8);padding:3px 6px}
+.hubs{display:grid;gap:14px}
+.hub{padding:18px 18px 16px;display:grid;gap:8px;transition:transform .1s steps(2)}
+.hub.on{border-color:var(--red-hot);transform:translateX(-6px)}
+.hub-k{font-family:var(--f-label);font-size:12px;letter-spacing:.14em;color:var(--red-hot)}
+.hub h3{font-family:var(--f-display);font-size:13px;margin:0;line-height:1.5}
+.hub p{margin:0;color:var(--dim);font-size:21px}
+.hub .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.hub .pxbtn{font-size:9px;padding:10px 11px}
+@media (max-width:860px){.map-wrap{grid-template-columns:1fr}.pin .flag{font-size:7px}}
+
+/* ---------- CO-OP ---------- */
+.coop{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.coop-card{padding:28px 24px}
+.coop-card .vs{font-family:var(--f-display);font-size:clamp(16px,2.6vw,24px);line-height:1.6;margin:0}
+.coop-card .vs span{color:var(--red-hot)}
+.coop-card p{color:var(--dim);margin:16px 0 22px}
+.powerups{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pu{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:16px;border:3px solid var(--grid);background:var(--panel);align-items:start}
+.pu:hover{border-color:var(--red)}
+.pu-ico{width:44px;height:44px;background:var(--red);border:3px solid var(--white);display:grid;place-items:center;font-family:var(--f-display);font-size:14px;box-shadow:3px 3px 0 #000}
+.pu h3{font-family:var(--f-display);font-size:11px;margin:4px 0 8px;line-height:1.5}
+.pu p{margin:0;color:var(--dim);font-size:20px}
+@media (max-width:860px){.coop{grid-template-columns:1fr}}
+@media (max-width:560px){.powerups{grid-template-columns:1fr}}
+
+/* ---------- SCREENSHOTS ---------- */
+.shots{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(130px,17vw,200px);gap:14px}
+.shot{position:relative;overflow:hidden;border:4px solid var(--white);background:var(--void);margin:0;box-shadow:6px 6px 0 var(--red-deep)}
+.shot:nth-child(1){grid-column:span 2;grid-row:span 2}
+.shot:nth-child(4){grid-column:span 2}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.05);transition:transform .4s steps(6),filter .3s}
+.shot::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.22) 2px 3px)}
+.shot:hover img{transform:scale(1.06);filter:saturate(1.2) contrast(1.1) sepia(.15) hue-rotate(-12deg)}
+.shot:hover{border-color:var(--red-hot)}
+.shot canvas.noise{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;z-index:2;opacity:0;pointer-events:none}
+.shot.tune canvas.noise{animation:tune .9s steps(6) both}
+@keyframes tune{0%{opacity:1}70%{opacity:.85}100%{opacity:0}}
+.shot .ch{position:absolute;right:8px;top:8px;z-index:3;font-family:var(--f-display);font-size:10px;color:#7dff8a;text-shadow:2px 2px 0 #000}
+.shot figcaption{position:absolute;left:8px;bottom:8px;z-index:3;font-family:var(--f-label);font-size:11px;letter-spacing:.1em;background:var(--void);padding:4px 7px;border:2px solid var(--red)}
+@media (max-width:700px){.shots{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.shot:nth-child(4){grid-column:span 2}}
+/* logo */
+#pixLogo{width:min(200px,46vw);height:auto;aspect-ratio:1;image-rendering:pixelated}
+.start-logo{width:min(200px,46vw);height:auto;mix-blend-mode:lighten;animation:coinflip 1.4s steps(8) both;filter:drop-shadow(0 0 24px rgba(227,18,30,.45))}
+@keyframes coinflip{0%{transform:scaleX(0) translateY(-40px)}40%{transform:scaleX(-1)}70%{transform:scaleX(1) translateY(0)}100%{transform:none}}
+.boot-name{font-family:var(--f-display);font-size:clamp(18px,4.4vw,34px);text-shadow:4px 4px 0 var(--red),7px 7px 0 var(--red-deep)}
+.boot-name small{display:block;font-size:.34em;letter-spacing:.3em;color:var(--red-hot);text-shadow:none;margin-top:14px}
+.hud-brand{display:flex;align-items:center;gap:8px}
+.hud-brand img{width:34px;height:34px;mix-blend-mode:lighten}
+.hero-logo{width:clamp(96px,12vw,150px);height:auto;mix-blend-mode:lighten;display:block;margin-bottom:14px;filter:drop-shadow(0 0 30px rgba(227,18,30,.5));animation:hover 3s ease-in-out infinite}
+@keyframes hover{50%{transform:translateY(-8px) rotate(-3deg)}}
+
+/* ---------- SAVE POINT ---------- */
+.save{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.save-left{display:grid;gap:18px}
+.wa{padding:26px 22px;display:grid;gap:14px}
+.wa h3,.mail h3{font-family:var(--f-display);font-size:14px;margin:0;line-height:1.5}
+.wa p,.mail p{margin:0;color:var(--dim)}
+.copyrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--void);border:2px solid var(--grid);padding:10px 12px}
+.copyrow code{font-family:var(--f-display);font-size:clamp(11px,1.6vw,14px);user-select:all;word-break:break-all;flex:1;min-width:0}
+.copy{background:none;border:2px solid var(--dim);color:var(--white);font-family:var(--f-label);font-size:12px;padding:5px 9px;letter-spacing:.08em}
+.copy:hover{border-color:var(--red-hot)}
+.socials{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.soc{display:grid;justify-items:center;gap:8px;padding:16px 8px;text-decoration:none;border:3px solid var(--white);background:var(--panel);box-shadow:5px 5px 0 var(--red-deep);font-family:var(--f-display);font-size:9px;text-align:center}
+.soc:hover{background:var(--red);box-shadow:5px 5px 0 #000}
+.soc svg{width:30px;height:30px}
+.soc small{font-family:var(--f-label);font-size:11px;color:var(--dim)}
+.soc:hover small{color:var(--white)}
+.mail{padding:26px 22px;display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-family:var(--f-label);font-size:12px;letter-spacing:.12em;color:var(--red-hot)}
+.field input,.field select,.field textarea{font-family:var(--f-body);font-size:22px;background:var(--void);color:var(--white);border:3px solid var(--grid);padding:9px 11px;border-radius:0;width:100%}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);outline:none;box-shadow:4px 4px 0 var(--red-deep)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.status{font-size:20px;color:var(--white);border-left:4px solid var(--red);padding-left:12px}
+@media (max-width:860px){.save{grid-template-columns:1fr}}
+@media (max-width:460px){.two{grid-template-columns:1fr}}
+
+/* ---------- CREDITS ---------- */
+footer{border-top:4px solid var(--red);text-align:center;padding-block:70px calc(70px + env(safe-area-inset-bottom,0px));position:relative;overflow:hidden}
+.gameover{font-family:var(--f-display);font-size:clamp(20px,5vw,44px);margin:0;text-shadow:4px 4px 0 var(--red)}
+.credits{font-family:var(--f-label);font-size:13px;letter-spacing:.14em;color:var(--dim);display:grid;gap:10px;margin:30px 0}
+.credits b{color:var(--white);font-weight:400}
+.continue{margin:6px auto 0}
+.countdown{font-family:var(--f-display);font-size:28px;color:var(--red-hot);margin-top:18px;font-variant-numeric:tabular-nums}
+
+/* ---------- floating / toasts ---------- */
+.fab{position:fixed;z-index:85;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:64px;height:64px;
+  background:#1faa59;border:4px solid var(--white);box-shadow:5px 5px 0 #000,inset -5px -5px 0 #0c6b34;display:grid;place-items:center;text-decoration:none;
+  transform:scale(0);transition:transform .3s steps(4)}
+body.playing .fab{transform:none;animation:fabb 3s steps(1) infinite 2s}
+.fab svg{width:32px;height:32px}
+.fab .tip{position:absolute;right:76px;top:50%;transform:translateY(-50%);background:var(--white);color:var(--void);font-family:var(--f-display);font-size:9px;padding:8px;white-space:nowrap;border:3px solid var(--void);visibility:hidden}
+.fab:hover .tip,.fab:focus-visible .tip{visibility:visible}
+@keyframes fabb{0%,90%{translate:0 0}93%{translate:0 -10px}96%{translate:0 0}}
+.toast{position:fixed;z-index:86;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;
+  background:var(--void);border:4px solid var(--white);box-shadow:6px 6px 0 var(--red);padding:12px 16px 12px 12px;max-width:min(380px,calc(100vw - 110px));transform:translateY(160%);transition:transform .35s steps(5)}
+.toast.show{transform:none}
+.toast .tk{font-family:var(--f-display);font-size:9px;color:var(--red-hot);display:block;margin-bottom:6px}
+.toast .tt{font-family:var(--f-display);font-size:10px;line-height:1.5;display:block}
+.toast canvas{image-rendering:pixelated;flex:none}
+.pop{position:fixed;z-index:95;pointer-events:none;font-family:var(--f-display);font-size:12px;color:var(--white);text-shadow:2px 2px 0 var(--red);animation:popup .8s steps(8) forwards}
+@keyframes popup{to{transform:translateY(-50px);opacity:0}}
+.coin{display:inline-block;width:12px;height:14px;background:var(--white);border:2px solid var(--red);box-shadow:inset -3px 0 0 var(--dim);vertical-align:-2px;animation:spin 1s steps(4) infinite}
+@keyframes spin{25%{transform:scaleX(.6)}50%{transform:scaleX(.15)}75%{transform:scaleX(.6)}}
+body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .ticker div{padding-left:0}
+}
+</style>
+</head>
+<body>
+
+
+<!-- ===== CRT glass ===== -->
+<div class="glass" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="flicker" aria-hidden="true"></div>
+
+<!-- ===== BOOT ===== -->
+<div id="boot" role="dialog" aria-modal="true" aria-label="Kasi Lobby is loading">
+  <div class="power-line" aria-hidden="true"></div>
+  <pre id="bios" aria-hidden="true"></pre>
+  <div class="load" id="loader" hidden>
+    <canvas id="pixLogo" width="240" height="240" aria-hidden="true"></canvas>
+    <div class="boot-name">KASI LOBBY<small>ENTERTAINMENT SYSTEM</small></div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="barWrap"><i id="bar"></i></div>
+    <div class="load-row"><span id="loadMsg">INSERTING CARTRIDGE…</span><span id="loadPct">0%</span></div>
+  </div>
+  <div class="load" id="startWrap" hidden>
+    <img class="start-logo" src="img/logo.jpg" alt="Kasi Lobby logo" width="220" height="220">
+    <div class="boot-name">KASI LOBBY<small>ALEXANDRA · JHB</small></div>
+    <button class="press" id="pressStart">▶ PRESS START</button>
+    <div class="press-sub">TAP · CLICK · OR HIT ENTER</div>
+  </div>
+  <button id="skip">SKIP ▸▸</button>
+  <div class="boot-copy" id="bootCopy" hidden>© 2026 KASI LOBBY · KASILOBBY.CO.ZA</div>
+</div>
+
+<!-- ===== HUD ===== -->
+<header class="hud" aria-label="Game status">
+  <a class="hud-brand" href="#menu"><img src="img/logo.jpg" alt="" width="34" height="34"><span>KASI<br>LOBBY</span></a>
+  <div class="hide-s"><span class="lbl">1UP</span><span class="val" id="score">000000</span></div>
+  <div><span class="lbl">LIVES</span><span class="hud-hearts" id="hearts"></span></div>
+  <div class="hide-s"><span class="lbl">COINS</span><span class="val"><i class="coin"></i> ×<span id="coins">00</span></span></div>
+  <div class="hud-lvl"><span class="lbl">WORLD</span><span class="val" id="lvl">1-1 MENU</span></div>
+  <div class="hud-sp"></div>
+  <button class="hud-btn" id="soundBtn" aria-pressed="true">♪ ON</button>
+</header>
+
+<main>
+<!-- ===== TITLE MENU ===== -->
+<section id="menu" data-lvl="1-1 MENU">
+  <canvas id="horizon" aria-hidden="true"></canvas>
+  <div class="wrap title-grid">
+    <div>
+      <div class="p1"><span>PLAYER 1</span><span>·</span><span>ALEXANDRA, JOHANNESBURG</span><span class="live">HUBS OPEN</span></div>
+      <div class="logo-slot" id="logoSlot">
+        <img class="hero-logo" src="img/logo.jpg" alt="Kasi Lobby KL emblem" width="150" height="150">
+        <h1 class="big-title">KASI<span class="row2">LOBBY</span></h1>
+      </div>
+      <p class="tagline">Three gaming hubs in Alex, <em>tournaments</em> at HQ, and VR, racing sim and ice cream rentals for your event.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:30px">
+        <a class="pxbtn" href="#save" data-sfx="select">▶ START ENQUIRY</a>
+        <a class="pxbtn ghost" href="#select" data-sfx="select">VIEW GAMES</a>
+      </div>
+    </div>
+    <nav class="frame menu-box" aria-label="Main menu">
+      <h3>MAIN MENU</h3>
+      <ul class="menu-list" id="menuList">
+        <li><a href="#select" class="sel"><span class="arrow">▶</span>SELECT GAME<span class="num">1-2</span></a></li>
+        <li><a href="#map"><span class="arrow">▶</span>WORLD MAP<span class="num">1-3</span></a></li>
+        <li><a href="#coop"><span class="arrow">▶</span>CO-OP / SPONSOR<span class="num">1-4</span></a></li>
+        <li><a href="#shots"><span class="arrow">▶</span>SCREENSHOTS<span class="num">1-5</span></a></li>
+        <li><a href="#save"><span class="arrow">▶</span>SAVE POINT<span class="num">1-6</span></a></li>
+      </ul>
+      <div class="menu-hint"><span><span class="key">↑</span><span class="key">↓</span>MOVE</span><span><span class="key">ENTER</span>SELECT</span></div>
+    </nav>
+  </div>
+  <div class="ticker" aria-hidden="true"><div>
+    <span>VR SETUP NOW RENTING</span><span>RACING SIMULATOR AVAILABLE FOR EVENTS</span><span>ICE CREAM MACHINE FOR HIRE</span><span>TOURNAMENTS AT THE MAIN HUB · 2041 ROOSEVELD ST</span><span>FOLLOW @KASILOBBY FOR BRACKETS</span><span>SPONSORS: PLAYER 2 SLOT OPEN</span>
+  </div></div>
+</section>
+
+<!-- ===== SELECT YOUR GAME ===== -->
+<section id="select" data-lvl="1-2 SELECT">
+  <div class="wrap">
+    <div class="lvl-head">
+      <div class="grow">
+        <div class="lvl-tag">WORLD 1-2</div>
+        <h2>SELECT YOUR GAME</h2>
+        <p class="lede">Rent the gear for your party, school day or brand activation, or pull up to a hub and play. Pick one to enquire on WhatsApp.</p>
+      </div>
+      <button class="qblock" data-coin aria-label="Bonus block">!</button>
+    </div>
+    <div class="roster">
+      <article class="frame char">
+        <span class="sel-arrow" aria-hidden="true">▼</span>
+        <div class="char-top"><div class="sprite-box"><canvas data-sprite="vr"></canvas></div><span class="pill">RENTAL</span></div>
+        <h3>VR SETUP</h3>
+        <p>A full virtual reality rig, set up at your venue. Guests step in and play in other worlds.</p>
+        <div class="best"><b>BEST FOR</b><span>PARTIES</span><span>SCHOOLS</span><span>ACTIVATIONS</span></div>
+        <a class="pxbtn" data-wa="Hi Kasi Lobby, I'd like to enquire about renting the VR setup." href="#">ENQUIRE ▸</a>
+      </article>
+      <article class="frame char">
+        <span class="sel-arrow" aria-hidden="true">▼</span>
+        <div class="char-top"><div class="sprite-box"><canvas data-sprite="wheel"></canvas></div><span class="pill">RENTAL</span></div>
+        <h3>RACING SIMULATOR</h3>
+        <p>Seat, wheel and pedals. Bring the race track to your event and run lap-time challenges.</p>
+        <div class="best"><b>BEST FOR</b><span>EVENTS</span><span>CORPORATE</span><span>COMPETITIONS</span></div>
+        <a class="pxbtn" data-wa="Hi Kasi Lobby, I'd like to enquire about renting the racing simulator." href="#">ENQUIRE ▸</a>
+      </article>
+      <article class="frame char">
+        <span class="sel-arrow" aria-hidden="true">▼</span>
+        <div class="char-top"><div class="sprite-box"><canvas data-sprite="ice"></canvas></div><span class="pill">RENTAL</span></div>
+        <h3>ICE CREAM MACHINE</h3>
+        <p>Soft serve on tap. The side quest every guest takes, kids and adults alike.</p>
+        <div class="best"><b>BEST FOR</b><span>BIRTHDAYS</span><span>FUN DAYS</span><span>MARKETS</span></div>
+        <a class="pxbtn" data-wa="Hi Kasi Lobby, I'd like to enquire about renting the ice cream machine." href="#">ENQUIRE ▸</a>
+      </article>
+      <article class="frame char">
+        <span class="sel-arrow" aria-hidden="true">▼</span>
+        <div class="char-top"><div class="sprite-box"><canvas data-sprite="trophy"></canvas></div><span class="pill w">MAIN HUB</span></div>
+        <h3>TOURNAMENTS</h3>
+        <p>Compete at HQ on Rooseveld Street. Brackets, dates and results go out on our socials first.</p>
+        <div class="best"><b>MODE</b><span>VERSUS</span><span>TEAMS</span></div>
+        <a class="pxbtn" data-wa="Hi Kasi Lobby, I'd like to know about upcoming tournaments." href="#">JOIN NEXT ▸</a>
+      </article>
+      <article class="frame char">
+        <span class="sel-arrow" aria-hidden="true">▼</span>
+        <div class="char-top"><div class="sprite-box"><canvas data-sprite="pad"></canvas></div><span class="pill w">3 HUBS</span></div>
+        <h3>HUB SESSIONS</h3>
+        <p>Pull up to any of our three hubs in Alexandra, grab a controller and play with the squad.</p>
+        <div class="best"><b>MODE</b><span>1P</span><span>CO-OP</span><span>WALK-IN</span></div>
+        <a class="pxbtn" href="#map" data-sfx="select">FIND A HUB ▸</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORLD MAP ===== -->
+<section id="map" data-lvl="1-3 MAP">
+  <div class="wrap">
+    <div class="lvl-head">
+      <div class="grow">
+        <div class="lvl-tag">WORLD 1-3</div>
+        <h2>WORLD MAP: ALEX</h2>
+        <p class="lede">Three hubs, one neighbourhood. HQ on Rooseveld Street runs every tournament and handles admin.</p>
+      </div>
+      <button class="qblock" data-coin aria-label="Bonus block">!</button>
+    </div>
+    <div class="map-wrap">
+      <div class="frame map" id="mapBox">
+        <canvas id="mapCanvas" width="160" height="120" aria-hidden="true"></canvas>
+        <button class="pin hq" data-hub="0" style="left:30%;top:42%"><span class="flag">HQ</span><span class="dot"></span></button>
+        <button class="pin" data-hub="1" style="left:68%;top:30%"><span class="flag">HUB 2</span><span class="dot"></span></button>
+        <button class="pin" data-hub="2" style="left:60%;top:78%"><span class="flag">HUB 3</span><span class="dot"></span></button>
+        <span class="map-legend">ALEXANDRA · NOT TO SCALE</span>
+      </div>
+      <div class="hubs">
+        <article class="frame hub" data-hubcard="0">
+          <span class="hub-k">STAGE 01 · BOSS LEVEL</span>
+          <h3>MAIN HUB · HQ</h3>
+          <p>2041 Rooseveld Street, Alexandra. Tournaments and admin.</p>
+          <div class="row"><a class="pxbtn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=2041+Rooseveld+Street+Alexandra+Johannesburg">OPEN IN MAPS ▸</a></div>
+        </article>
+        <article class="frame hub" data-hubcard="1">
+          <span class="hub-k">STAGE 02</span>
+          <h3>HUB 2 · 11TH AVENUE</h3>
+          <p>2981 11th Avenue, Alexandra.</p>
+          <div class="row"><a class="pxbtn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=2981+11th+Avenue+Alexandra+Johannesburg">OPEN IN MAPS ▸</a></div>
+        </article>
+        <article class="frame hub" data-hubcard="2">
+          <span class="hub-k">STAGE 03</span>
+          <h3>HUB 3 · MAIL STREET</h3>
+          <p>7698 Mail Street, Alexandra.</p>
+          <div class="row"><a class="pxbtn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=7698+Mail+Street+Alexandra+Johannesburg">OPEN IN MAPS ▸</a></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CO-OP ===== -->
+<section id="coop" data-lvl="1-4 CO-OP">
+  <div class="wrap">
+    <div class="lvl-head">
+      <div class="grow">
+        <div class="lvl-tag">WORLD 1-4</div>
+        <h2>CO-OP MODE</h2>
+        <p class="lede">For companies who want to partner with Kasi Lobby. Player 2 slot is open.</p>
+      </div>
+      <button class="qblock" data-coin aria-label="Bonus block">!</button>
+    </div>
+    <div class="coop">
+      <div class="frame coop-card">
+        <p class="vs">KASI LOBBY <span>+</span><br>YOUR BRAND</p>
+        <p>Put your name in front of the gamers and young people of Alexandra, at our hubs and at every tournament we run. Tell us what you want to achieve and we'll build the partnership around it.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a class="pxbtn" data-wa="Hi Kasi Lobby, I'm interested in sponsoring or partnering with you. Please send more info." href="#">PRESS 2P ▸</a>
+          <a class="pxbtn ghost" href="#save" data-topic="Sponsorship" data-sfx="select">EMAIL US</a>
+        </div>
+      </div>
+      <div class="powerups">
+        <div class="pu"><div class="pu-ico">★</div><div><h3>SCREEN TIME</h3><p>Your brand on screen and on the floor at our tournaments.</p></div></div>
+        <div class="pu"><div class="pu-ico">♥</div><div><h3>COMMUNITY REACH</h3><p>Connect with the local gaming crowd across three hubs.</p></div></div>
+        <div class="pu"><div class="pu-ico">▲</div><div><h3>ACTIVATIONS</h3><p>Run a VR or racing sim experience under your brand.</p></div></div>
+        <div class="pu"><div class="pu-ico">⚑</div><div><h3>CUSTOM QUESTS</h3><p>Sponsored brackets, prizes or events built with you.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCREENSHOTS ===== -->
+<section id="shots" data-lvl="1-5 SHOTS">
+  <div class="wrap">
+    <div class="lvl-head">
+      <div class="grow">
+        <div class="lvl-tag">WORLD 1-5</div>
+        <h2>SCREENSHOTS</h2>
+        <p class="lede">Real players, real hubs, real Alex. No cutscenes, just gameplay.</p>
+      </div>
+      <button class="qblock" data-coin aria-label="Bonus block">!</button>
+    </div>
+    <div class="shots" id="shotGrid">
+      <figure class="shot"><img src="img/vr-crowd.jpg" alt="A player in a VR headset races while friends watch the screen" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 01</span><figcaption>VR + RACING SIM</figcaption></figure>
+      <figure class="shot"><img src="img/squad.jpg" alt="A row of young players gripping controllers, locked in" loading="lazy" style="object-position:50% 35%"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 02</span><figcaption>THE SQUAD</figcaption></figure>
+      <figure class="shot"><img src="img/vr-wheel.jpg" alt="Close-up of a player on the racing wheel wearing a VR headset" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 03</span><figcaption>COCKPIT VIEW</figcaption></figure>
+      <figure class="shot"><img src="img/two-games.jpg" alt="Football on one screen, racing on the other, players crowding around" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 04</span><figcaption>TWO GAMES, ONE ROOM</figcaption></figure>
+      <figure class="shot"><img src="img/hub-night.jpg" alt="A red container hub at night, doors open, players inside" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 05</span><figcaption>HUB AFTER DARK</figcaption></figure>
+      <figure class="shot"><img src="img/popup.jpg" alt="Pop-up gaming setup under a gazebo against a red container" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 06</span><figcaption>POP-UP EVENT</figcaption></figure>
+      <figure class="shot"><img src="img/versus.jpg" alt="Players shouting at a football match on two screens" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 07</span><figcaption>VERSUS</figcaption></figure>
+      <figure class="shot"><img src="img/hub-shack.jpg" alt="Kids playing on wall-mounted screens in a neighbourhood hub" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 08</span><figcaption>HUB SESSIONS</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAVE POINT ===== -->
+<section id="save" data-lvl="1-6 SAVE">
+  <div class="wrap">
+    <div class="lvl-head">
+      <div class="grow">
+        <div class="lvl-tag">WORLD 1-6</div>
+        <h2>SAVE POINT</h2>
+        <p class="lede">Rentals, tournaments, sponsorships or anything else. WhatsApp is fastest.</p>
+      </div>
+      <button class="qblock" data-coin aria-label="Bonus block">!</button>
+    </div>
+    <div class="save">
+      <div class="save-left">
+        <div class="frame wa">
+          <h3>WHATSAPP US</h3>
+          <p>Message the Kasi Lobby team directly.</p>
+          <div class="copyrow"><code id="waNum">068 943 6410</code><button class="copy" data-copy="068 943 6410">COPY</button></div>
+          <a class="pxbtn" style="justify-self:start;background:#1faa59" data-wa="Hi Kasi Lobby, I have an enquiry." href="#">OPEN WHATSAPP ▸</a>
+        </div>
+        <div class="socials">
+          <a class="soc" target="_blank" rel="noopener" href="https://www.instagram.com/kasilobby/">
+            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="M3 1h10v1h1v1h1v10h-1v1h-1v1H3v-1H2v-1H1V3h1V2h1zm0 2v10h10V3zm5 2h1v1h1v1h1v2h-1v1H9v1H7v-1H6V9H5V7h1V6h1V5zm0 2v2h1V7zM11 4h1v1h-1z"/></svg>
+            INSTAGRAM<small>@kasilobby</small></a>
+          <a class="soc" target="_blank" rel="noopener" href="https://www.tiktok.com/@kasilobby">
+            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="M8 1h3v1h1v1h1v1h1v3h-2V6h-1v1h-1v5H9v1H8v1H5v-1H4v-1H3V9h1V8h1V7h3v3H6v2h2V1z"/></svg>
+            TIKTOK<small>@kasilobby</small></a>
+          <a class="soc" target="_blank" rel="noopener" href="https://www.facebook.com/kasilobby">
+            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="M9 1h4v3h-3v2h3v3h-3v6H7V9H5V6h2V3h1V2h1z"/></svg>
+            FACEBOOK<small>@kasilobby</small></a>
+        </div>
+      </div>
+      <form class="frame mail" id="mailForm" novalidate>
+        <h3>SEND AN EMAIL</h3>
+        <div class="copyrow"><code>info@kasilobby.co.za</code><button type="button" class="copy" data-copy="info@kasilobby.co.za">COPY</button></div>
+        <div class="two">
+          <div class="field"><label for="f-name">PLAYER NAME</label><input id="f-name" name="name" autocomplete="name" placeholder="Your name" required></div>
+          <div class="field"><label for="f-topic">QUEST</label>
+            <select id="f-topic" name="topic">
+              <option>VR setup rental</option><option>Racing simulator rental</option><option>Ice cream machine rental</option>
+              <option>Tournaments</option><option>Sponsorship</option><option>Something else</option>
+            </select></div>
+        </div>
+        <div class="field"><label for="f-msg">MESSAGE</label><textarea id="f-msg" name="message" placeholder="Event date, venue, number of guests, or your question" required></textarea></div>
+        <button class="pxbtn" type="submit" style="justify-self:start">SEND ▸</button>
+        <p class="status" id="mailStatus" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="gameover">THANKS FOR PLAYING</p>
+    <div class="credits">
+      <span><b>KASI LOBBY</b> · ALEXANDRA, JOHANNESBURG</span>
+      <span>KASILOBBY.CO.ZA · INFO@KASILOBBY.CO.ZA</span>
+      <span>© 2026 · SITE BY <b>DIGITAL SWITCH</b></span>
+    </div>
+    <a class="pxbtn continue" href="#menu" data-sfx="start">INSERT COIN · CONTINUE?</a>
+    <div class="countdown" id="countdown" aria-hidden="true">9</div>
+  </div>
+</footer>
+
+<a class="fab" data-wa="Hi Kasi Lobby, I have an enquiry." href="#" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#fff" d="M5 1h6v1h2v1h1v2h1v6h-1v2h-1v1h-2v1H5v-1H3l-2 1 1-3V11H1V5h1V3h1V2h2zm0 3v2h1v1h1v1h1v1h1v1h2V9h-1V8H9v1H8V8H7V7h1V6H7V4z"/></svg>
+  <span class="tip">CHAT ON WHATSAPP</span>
+</a>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><canvas id="toastIco"></canvas><div><span class="tk">ACHIEVEMENT UNLOCKED</span><span class="tt" id="toastText"></span></div></div>
+
+<script>
+(() => {
+  const WA = "27689436410";
+  const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const store = { get(k){try{return sessionStorage.getItem(k)}catch(e){return null}}, set(k,v){try{sessionStorage.setItem(k,v)}catch(e){}},
+                  lget(k){try{return localStorage.getItem(k)}catch(e){return null}}, lset(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
+
+  /* ---------- sound ---------- */
+  let actx = null, soundOn = store.lget("kl-sound") !== "off";
+  const sb = $("#soundBtn");
+  const paintSound = () => { sb.textContent = soundOn ? "♪ ON" : "♪ OFF"; sb.setAttribute("aria-pressed", soundOn); };
+  paintSound();
+  function tone(f, d=.08, type="square", v=.035, slide=0, when=0){
+    if(!soundOn) return;
+    try{
+      actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+      const t = actx.currentTime + when, o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.setValueAtTime(f, t); if(slide) o.frequency.exponentialRampToValueAtTime(slide, t+d);
+      g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t+d);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t+d+.02);
+    }catch(e){}
+  }
+  const sfx = {
+    blip: () => tone(660,.04),
+    select: () => { tone(523,.06); tone(784,.08,"square",.035,0,.06); },
+    coin: () => { tone(988,.06); tone(1319,.18,"square",.035,0,.06); },
+    start: () => [523,659,784,1047,784,1047].forEach((f,i)=>tone(f,.11,"square",.04,0,i*.1)),
+    unlock: () => [659,784,988,1319].forEach((f,i)=>tone(f,.09,"triangle",.06,0,i*.08)),
+    bump: () => tone(180,.1,"square",.05,90),
+    power: () => tone(110,.6,"sawtooth",.03,880)
+  };
+  sb.addEventListener("click", () => { soundOn = !soundOn; store.lset("kl-sound", soundOn?"on":"off"); paintSound(); sfx.select(); });
+
+  /* ---------- sprites ---------- */
+  const PAL = { W:"#f4efe9", R:"#e3121e", D:"#5c070c", G:"#4a4444", K:"#1d1717", T:"#d08a3c", Y:"#ffd25a" };
+  const SPR = {
+    vr:["............","..WWWWWWWW..",".WGGGGGGGGW.","WGRRGGGGRRGW","WGRRGGGGRRGW","WGGGGGGGGGGW",".WGGGWWGGGW.","..WWW..WWW..","............"],
+    wheel:["....WWWW....","..WW....WW..",".W........W.",".W........W.","W....RR....W","WWWWWRRWWWWW","W...WRRW...W",".W..W..W..W.",".W..W..W..W.","..WWW..WWW..","....WWWW...."],
+    ice:["....RRRR....","...RRWRRR...","..RRRRRRRR..","..RWWWWWWR..","..WWWWWWWW..","...TTTTTT...","...TDTTDT...","....TTTT....","....TDTT....",".....TT.....",".....TT....."],
+    trophy:["..WWWWWWWW..","WWWWRRRRWWWW","W.WWRRRRWW.W","W.WWWRRWWW.W",".WWWWWWWWWW.","...WWWWWW...","....WWWW....",".....WW.....",".....WW.....","....WWWW....","...RRRRRR...","...RRRRRR..."],
+    pad:["............","..GGGGGGGG..",".GGGGGGGGGG.","GGWGGGGGGRGG","GWWWGGGGRGRG","GGWGGWWGGRGG","GGGGGGGGGGGG","GGG......GGG",".GG......GG."],
+    heart:[".RR.RR.","RRRRRRR","RRWRRRR",".RRRRR.","..RRR..","...R..."]
+  };
+  function draw(cv, map, s){
+    const h = map.length, w = map[0].length; cv.width = w*s; cv.height = h*s;
+    const c = cv.getContext("2d");
+    map.forEach((row,y)=>[...row].forEach((ch,x)=>{ if(PAL[ch]){ c.fillStyle = PAL[ch]; c.fillRect(x*s,y*s,s,s);} }));
+  }
+  $$("canvas[data-sprite]").forEach(cv => draw(cv, SPR[cv.dataset.sprite], 6));
+  draw($("#toastIco"), SPR.trophy, 3);
+  let lives = 3;
+  function paintHearts(){ const h = $("#hearts"); h.innerHTML = ""; for(let i=0;i<Math.min(lives,5);i++){ const c=document.createElement("canvas"); draw(c,SPR.heart,2); h.append(c);} if(lives>5){ const s=document.createElement("span"); s.textContent="×"+lives; h.append(s);} }
+  paintHearts();
+
+  /* ---------- score / coins / toast ---------- */
+  let score = 0, coins = 0;
+  const pad = (n,l) => String(n).padStart(l,"0");
+  function addScore(n){ score += n; $("#score").textContent = pad(score,6); }
+  function addCoin(){ coins++; $("#coins").textContent = pad(coins,2); addScore(100); if(coins===5) achieve("COIN COLLECTOR · ALL 5 BONUS BLOCKS"); }
+  function pop(x,y,txt){ const p=document.createElement("span"); p.className="pop"; p.textContent=txt; p.style.left=x+"px"; p.style.top=y+"px"; document.body.append(p); setTimeout(()=>p.remove(),850); }
+  let toastT, queue = [], showing = false;
+  function achieve(t){ queue.push(t); if(!showing) nextToast(); }
+  function nextToast(){ const t = queue.shift(); if(!t){ showing=false; return; } showing = true; $("#toastText").textContent = t; $("#toast").classList.add("show"); sfx.unlock();
+    clearTimeout(toastT); toastT = setTimeout(()=>{ $("#toast").classList.remove("show"); setTimeout(nextToast, 450); }, 2600); }
+
+  /* ---------- BOOT ---------- */
+  const boot = $("#boot"), bios = $("#bios");
+  const seen = store.get("kl-booted");
+  const BIOS = [
+    "<i>KASI LOBBY ENTERTAINMENT SYSTEM</i>  v2.0.26",
+    "(C) 2026 KASI LOBBY · ALEXANDRA, JHB",
+    "",
+    "CPU ............................ <b>OK</b>",
+    "MEMORY TEST ........ 640K ...... <b>OK</b>",
+    "VR HEADSET ..................... <b>DETECTED</b>",
+    "RACING SIM PEDALS .............. <b>DETECTED</b>",
+    "ICE CREAM LEVELS ............... <b>FULL</b>",
+    "HUBS ONLINE .................... <b>3 / 3</b>",
+    "",
+    "BOOTING CARTRIDGE..."
+  ];
+  const MSGS = ["INSERTING CARTRIDGE…","BLOWING ON CARTRIDGE…","LOADING ALEX MAP…","SPAWNING PLAYERS…","WARMING UP CONTROLLERS…","CHILLING THE SOFT SERVE…","READY PLAYER ONE"];
+  const logoImg = new Image(); logoImg.src = "img/logo.jpg";
+  const plc = document.getElementById("pixLogo"), plx = plc.getContext("2d");
+  function pixLogo(p){
+    if(!logoImg.complete || !logoImg.naturalWidth) return;
+    const steps = [6,10,16,24,40,60,90,240], r = steps[Math.min(steps.length-1, Math.floor(p/100*steps.length))];
+    const tmp = document.createElement("canvas"); tmp.width = tmp.height = r;
+    tmp.getContext("2d").drawImage(logoImg, 0, 0, r, r);
+    plx.imageSmoothingEnabled = false; plx.clearRect(0,0,240,240); plx.drawImage(tmp, 0, 0, 240, 240);
+  }
+  logoImg.onload = () => pixLogo(0);
+  const timers = []; const later = (fn,ms) => timers.push(setTimeout(fn,ms));
+  let stage = "bios";
+  function runBios(){
+    let i = 0; const speed = seen || RM ? 20 : 120;
+    later(function line(){ if(stage!=="bios") return; bios.innerHTML += BIOS[i] + "\n"; if(BIOS[i].includes("OK")||BIOS[i].includes("DET")) tone(1200,.02,"square",.015); i++;
+      if(i<BIOS.length) later(line, speed); else later(runLoad, seen||RM ? 150 : 500); }, seen||RM ? 100 : 700);
+  }
+  function runLoad(){
+    if(stage!=="bios") return; stage = "load"; bios.hidden = true; $("#loader").hidden = false; $("#bootCopy").hidden = false;
+    let p = 0; const bar = $("#bar"), pct = $("#loadPct"), msg = $("#loadMsg"), bw = $("#barWrap");
+    (function step(){ if(stage!=="load") return;
+      p = Math.min(100, p + (seen||RM ? 25 : Math.random()*9+3));
+      bar.style.width = p+"%"; pct.textContent = Math.floor(p)+"%"; pixLogo(p); bw.setAttribute("aria-valuenow", Math.floor(p));
+      msg.textContent = MSGS[Math.min(MSGS.length-1, Math.floor(p/100*(MSGS.length-1)))];
+      if(p<100) later(step, seen||RM ? 60 : 90 + Math.random()*110); else later(showStart, 350);
+    })();
+  }
+  function showStart(){
+    if(stage==="done") return; stage = "start"; bios.hidden = true; $("#loader").hidden = true; $("#startWrap").hidden = false; $("#skip").hidden = true; $("#bootCopy").hidden = false;
+    $("#pressStart").focus({preventScroll:true});
+    later(()=>{ if(stage==="start") enter(false); }, 12000); // idle visitors still get in
+  }
+  function enter(withSound = true){
+    if(stage==="done") return; stage = "done"; timers.forEach(clearTimeout);
+    store.set("kl-booted","1");
+    if(withSound) sfx.start();
+    boot.classList.add("off"); document.body.classList.add("playing");
+    setTimeout(()=>{ boot.remove(); achieve("PRESS START · WELCOME TO KASI LOBBY"); addScore(1000); }, RM ? 10 : 560);
+  }
+  $("#skip").addEventListener("click", e => { e.stopPropagation(); timers.forEach(clearTimeout); showStart(); });
+  $("#pressStart").addEventListener("click", e => { e.stopPropagation(); enter(); });
+  boot.addEventListener("click", () => { if(stage==="start") enter(); });
+  addEventListener("keydown", e => { if(stage==="start" && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); enter(); } else if((stage==="bios"||stage==="load") && e.key==="Escape"){ timers.forEach(clearTimeout); showStart(); } });
+  runBios();
+
+  /* ---------- WhatsApp links ---------- */
+  $$("[data-wa]").forEach(a => { a.href = "https://wa.me/"+WA+"?text="+encodeURIComponent(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+
+  /* ---------- click feedback ---------- */
+  document.addEventListener("click", e => {
+    const t = e.target.closest("a,button"); if(!t || !document.body.classList.contains("playing")) return;
+    if(t.matches("[data-coin]")) return;
+    if(t.dataset.sfx && sfx[t.dataset.sfx]) sfx[t.dataset.sfx](); else sfx.blip();
+    if(t.matches("[data-wa]")){ pop(e.clientX, e.clientY, "+500"); addScore(500); if(!store.get("kl-wa")){ store.set("kl-wa","1"); achieve("FIRST CONTACT · OPENED WHATSAPP"); } }
+    if(t.dataset.topic){ $("#f-topic").value = t.dataset.topic; }
+  });
+  $$("[data-coin]").forEach(b => b.addEventListener("click", e => {
+    if(b.classList.contains("used")){ sfx.bump(); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); return; }
+    b.classList.add("bump","used"); b.textContent = ""; sfx.coin(); const r = b.getBoundingClientRect(); pop(r.left+8, r.top-10, "+100"); addCoin();
+  }));
+
+  /* ---------- copy ---------- */
+  $$("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    const txt = b.dataset.copy;
+    try { await navigator.clipboard.writeText(txt); b.textContent = "COPIED"; }
+    catch(e){ const code = b.parentElement.querySelector("code"); const r = document.createRange(); r.selectNodeContents(code); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "SELECTED"; }
+    setTimeout(()=> b.textContent = "COPY", 1600);
+  }));
+
+  /* ---------- menu keyboard ---------- */
+  const items = $$("#menuList a"); let mi = 0;
+  const setSel = i => { mi = (i+items.length)%items.length; items.forEach((a,j)=>a.classList.toggle("sel", j===mi)); };
+  items.forEach((a,i)=>a.addEventListener("mouseenter",()=>{ if(i!==mi){ setSel(i); sfx.blip(); } }));
+  let menuVisible = true;
+  addEventListener("keydown", e => {
+    if(stage!=="done" || !menuVisible || e.target.closest("input,textarea,select")) return;
+    if(e.key==="ArrowDown"){ e.preventDefault(); setSel(mi+1); sfx.blip(); }
+    else if(e.key==="ArrowUp"){ e.preventDefault(); setSel(mi-1); sfx.blip(); }
+    else if(e.key==="Enter" && !e.target.closest("a,button")){ e.preventDefault(); sfx.select(); items[mi].click(); }
+  });
+
+  /* ---------- level tracking ---------- */
+  const visited = new Set(["menu"]);
+  const LVL_ACH = { select:"WORLD 1-2 · CHOOSE YOUR GAME", map:"EXPLORER · FOUND ALL 3 HUBS", coop:"PLAYER 2 SLOT DISCOVERED", shots:"PHOTO MODE UNLOCKED", save:"SAVE POINT REACHED" };
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    const s = en.target;
+    if(s.id==="menu") menuVisible = en.isIntersecting;
+    if(en.isIntersecting && en.intersectionRatio > .25){
+      $("#lvl").textContent = s.dataset.lvl;
+      if(!visited.has(s.id) && document.body.classList.contains("playing")){
+        visited.add(s.id); addScore(500); if(LVL_ACH[s.id]) achieve(LVL_ACH[s.id]);
+        s.querySelectorAll(".lvl-head, .frame, .pu, .shot").forEach((el,i)=>{ el.style.animationDelay = (i*60)+"ms"; el.classList.add("enter"); });
+      }
+    }
+  }), { threshold:[0,.26] });
+  $$("main section").forEach(s => io.observe(s));
+
+  /* ---------- hero horizon ---------- */
+  const hz = $("#horizon"), hc = hz.getContext("2d");
+  let hzOn = true, hzT = 0;
+  new IntersectionObserver(es => hzOn = es[0].isIntersecting).observe(hz);
+  const stars = Array.from({length:70},()=>({x:Math.random(),y:Math.random()*.5,s:Math.random()<.2?2:1,b:Math.random()*6}));
+  function sizeHz(){ const W = Math.ceil(innerWidth/4), H = Math.ceil(hz.parentElement.offsetHeight/4); hz.width = W; hz.height = H; }
+  function drawHz(){
+    const W = hz.width, H = hz.height, hy = Math.floor(H*.58);
+    hc.fillStyle = "#070606"; hc.fillRect(0,0,W,H);
+    stars.forEach(s=>{ const on = Math.sin(hzT*.05 + s.b) > -.3; if(on){ hc.fillStyle = s.s>1 ? "#f4efe9" : "#9a8f8c"; hc.fillRect(Math.floor(s.x*W), Math.floor(s.y*H), s.s, s.s);} });
+    // sun
+    const cx = Math.floor(W*.72), r = Math.floor(Math.min(W,H)*.22);
+    for(let y=-r; y<0; y++){ const w = Math.floor(Math.sqrt(r*r-y*y)); const band = (y + Math.floor(hzT*.15)) % 7; if(y > -r*.55 && (band===0 || band===1)) continue;
+      hc.fillStyle = y < -r*.6 ? "#ff3b45" : "#e3121e"; hc.fillRect(cx-w, hy+y, w*2, 1); }
+    // skyline (township rooftops)
+    hc.fillStyle = "#120d0d";
+    let x = 0, seed = 7; while(x < W){ seed = (seed*9301+49297)%233280; const bw = 6 + seed%12, bh = 4 + seed%14; hc.fillRect(x, hy-bh, bw, bh); if(seed%3===0){ hc.fillStyle="#5c070c"; hc.fillRect(x+2,hy-bh+2,1,1); hc.fillStyle="#120d0d"; } x += bw+1; }
+    // floor
+    hc.fillStyle = "#0b0707"; hc.fillRect(0,hy,W,H-hy);
+    hc.fillStyle = "#e3121e"; hc.fillRect(0,hy,W,1);
+    const off = (hzT*.6) % 12;
+    for(let i=0;i<14;i++){ const z = (i*12 + off)/ (14*12); const y = hy + Math.floor(Math.pow(z,2.2)*(H-hy)); hc.fillStyle = z>.15 ? "#5c070c" : "#2a1a1b"; hc.fillRect(0,y,W,1); }
+    for(let i=-20;i<=20;i++){ const x0 = W/2 + i*3, x1 = W/2 + i*W/8; hc.strokeStyle = "#3a0a0e"; hc.beginPath(); hc.moveTo(x0+.5,hy); hc.lineTo(x1+.5,H); hc.stroke(); }
+  }
+  function loopHz(){ if(hzOn){ hzT++; drawHz(); } if(!RM) requestAnimationFrame(loopHz); }
+  sizeHz(); drawHz(); addEventListener("resize", () => { sizeHz(); drawHz(); drawMap(); }); loopHz();
+
+  /* ---------- world map ---------- */
+  const mc = $("#mapCanvas"), mx = mc.getContext("2d");
+  function drawMap(){
+    const W = 160, H = 120; mx.fillStyle = "#0e0a0a"; mx.fillRect(0,0,W,H);
+    let seed = 3;
+    for(let y=4;y<H;y+=10) for(let x=4;x<W;x+=10){ seed=(seed*9301+49297)%233280; const v = seed%5;
+      mx.fillStyle = v===0 ? "#1a1212" : v===1 ? "#2a1a1b" : "#1f1515"; mx.fillRect(x,y,7,7); if(v===4){ mx.fillStyle="#3b2627"; mx.fillRect(x+1,y+1,5,2);} }
+    mx.fillStyle = "#070606"; for(let x=2;x<W;x+=30) mx.fillRect(x,0,3,H); for(let y=2;y<H;y+=30) mx.fillRect(0,y,W,3);
+    // Jukskei river
+    mx.fillStyle = "#16202a"; for(let y=0;y<H;y++){ const x = 140 + Math.round(Math.sin(y/9)*4); mx.fillRect(x,y,5,1); }
+    // dashed route HQ -> hub2 -> hub3
+    const pts = [[48,50],[109,36],[96,94]];
+    mx.fillStyle = "#e3121e";
+    for(let k=0;k<pts.length;k++){ const a = pts[k], b = pts[(k+1)%pts.length]; if(k===2) break; const n = Math.hypot(b[0]-a[0], b[1]-a[1]); for(let i=0;i<n;i+=4){ if((i/4)%2) continue; mx.fillRect(Math.round(a[0]+(b[0]-a[0])*i/n), Math.round(a[1]+(b[1]-a[1])*i/n), 2, 2); } }
+  }
+  drawMap();
+  const pins = $$(".pin"), cards = $$("[data-hubcard]");
+  function focusHub(i){ pins.forEach(p=>p.classList.toggle("on", p.dataset.hub==i)); cards.forEach(c=>c.classList.toggle("on", c.dataset.hubcard==i)); }
+  pins.forEach(p => { p.addEventListener("click", () => { focusHub(p.dataset.hub); const c = cards[p.dataset.hub]; if(innerWidth<860) c.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"}); });
+                      p.addEventListener("mouseenter", () => focusHub(p.dataset.hub)); });
+  cards.forEach(c => c.addEventListener("mouseenter", () => focusHub(c.dataset.hubcard)));
+  focusHub(0);
+
+  /* ---------- TV static for photo slots ---------- */
+  const noise = $$("canvas.noise"); let nzOn = false, tuned = false;
+  new IntersectionObserver(es => {
+    if(!es[0].isIntersecting || tuned || !document.body.classList.contains("playing")) return;
+    tuned = true; nzOn = true;
+    $$(".shot").forEach((s,i) => setTimeout(() => { s.classList.add("tune"); tone(140+i*40,.12,"sawtooth",.02,60); }, RM ? 0 : i*140));
+    setTimeout(() => nzOn = false, RM ? 50 : 2300);
+  }, { threshold:.2 }).observe($("#shotGrid"));
+  function paintNoise(cv){ const c = cv.getContext("2d"), d = c.createImageData(cv.width, cv.height);
+    for(let i=0;i<d.data.length;i+=4){ const v = Math.random()*90|0, red = Math.random()<.04; d.data[i]= red?200:v; d.data[i+1]=red?20:v*.85; d.data[i+2]=red?28:v*.85; d.data[i+3]=255; } c.putImageData(d,0,0); }
+  noise.forEach(paintNoise);
+  let lastN = 0; (function nz(t){ if(nzOn && t-lastN > 90){ lastN = t; noise.forEach(cv => { if(cv.isConnected) paintNoise(cv); }); } if(!RM) requestAnimationFrame(nz); })(0);
+
+  /* ---------- email form ---------- */
+  $("#mailForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = $("#f-name").value.trim(), topic = $("#f-topic").value, msg = $("#f-msg").value.trim(), st = $("#mailStatus");
+    st.hidden = false;
+    if(!name || !msg){ st.textContent = "Add your name and a message, then press SEND again."; sfx.bump(); (!name ? $("#f-name") : $("#f-msg")).focus(); return; }
+    const body = msg + "\n\n— " + name;
+    location.href = "mailto:info@kasilobby.co.za?subject=" + encodeURIComponent("Enquiry: " + topic) + "&body=" + encodeURIComponent(body);
+    st.textContent = "Your email app should open with the message ready. If nothing opened, copy the address above and send it from your own inbox.";
+    sfx.select(); addScore(500);
+  });
+
+  /* ---------- footer countdown ---------- */
+  const cd = $("#countdown"); let n = 9, cdT;
+  new IntersectionObserver(es => { clearInterval(cdT); if(es[0].isIntersecting && !RM){ n = 9; cd.textContent = n; cdT = setInterval(()=>{ n = n<=0 ? 9 : n-1; cd.textContent = n; tone(n?440:220,.05,"square",.02); }, 1000); } }).observe(cd);
+
+  /* ---------- Konami ---------- */
+  const code = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"]; let ki = 0;
+  addEventListener("keydown", e => { ki = (e.key.toLowerCase()===code[ki].toLowerCase() || e.key===code[ki]) ? ki+1 : (e.key===code[0]?1:0);
+    if(ki===code.length){ ki = 0; lives = 30; paintHearts(); document.body.classList.toggle("cheat"); sfx.power(); achieve("CHEAT CODE · 30 LIVES"); } });
+
+  /* ---------- hot reload state ---------- */
+  window.claude?.hot?.snapshot?.(() => ({ score, coins }));
+})();
+</script>
+
+</body>
+</html>
