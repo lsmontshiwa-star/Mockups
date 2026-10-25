@@ -36,7 +36,7 @@
 html{scroll-behavior:smooth;background:var(--void)}
 html,body{margin:0}
 [hidden]{display:none!important}
-:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+:root{padding-top:env(safe-area-inset-top)}
 body{background:var(--void);color:var(--white);font-family:var(--f-body);font-size:22px;line-height:1.25;overflow-x:hidden;
   cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' shape-rendering='crispEdges'%3E%3Cpath d='M2 2h3v3h3v3h3v3h3v3h3v3h-6v3h-3v3H8v-3H5v3H2z' fill='%23f4efe9' stroke='%23070606' stroke-width='1.5'/%3E%3C/svg%3E") 2 2, auto}
 a,button,[role=button],summary,label[for]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' shape-rendering='crispEdges'%3E%3Cpath d='M10 0h4v8h8v4h-8v8h4v4H6v-4h4v-8H2V8h8z' fill='%23e3121e' stroke='%23070606' stroke-width='1.2'/%3E%3C/svg%3E") 12 12, pointer}
@@ -116,8 +116,7 @@ h2{font-family:var(--f-display);font-size:clamp(20px,4.2vw,40px);line-height:1.2
 .pxbtn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 #000,inset -4px -4px 0 var(--red-deep)}
 .pxbtn.ghost{background:var(--void);box-shadow:5px 5px 0 var(--red-deep)}
 .pxbtn.ghost:hover{background:var(--panel)}
-.frame{border:4px solid var(--white);background:var(--panel);box-shadow:8px 8px 0 var(--red-deep);position:relative}
-.frame::after{content:"";position:absolute;inset:4px;border:2px solid var(--grid);pointer-events:none}
+.frame{border:3px solid var(--white);background:var(--panel);box-shadow:6px 6px 0 var(--red-deep);position:relative}
 .enter{animation:rise .5s steps(6) both}
 @keyframes rise{from{transform:translateY(24px)}to{transform:none}}
 
@@ -231,13 +230,13 @@ h2{font-family:var(--f-display);font-size:clamp(20px,4.2vw,40px);line-height:1.2
 @media (max-width:700px){.shots{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.shot:nth-child(4){grid-column:span 2}}
 /* logo */
 #pixLogo{width:min(200px,46vw);height:auto;aspect-ratio:1;image-rendering:pixelated}
-.start-logo{width:min(200px,46vw);height:auto;mix-blend-mode:lighten;animation:coinflip 1.4s steps(8) both;filter:drop-shadow(0 0 24px rgba(227,18,30,.45))}
+.start-logo{width:min(200px,46vw);height:auto;clip-path:circle(46%);animation:coinflip 1.4s steps(8) both}
 @keyframes coinflip{0%{transform:scaleX(0) translateY(-40px)}40%{transform:scaleX(-1)}70%{transform:scaleX(1) translateY(0)}100%{transform:none}}
 .boot-name{font-family:var(--f-display);font-size:clamp(18px,4.4vw,34px);text-shadow:4px 4px 0 var(--red),7px 7px 0 var(--red-deep)}
 .boot-name small{display:block;font-size:.34em;letter-spacing:.3em;color:var(--red-hot);text-shadow:none;margin-top:14px}
 .hud-brand{display:flex;align-items:center;gap:8px}
-.hud-brand img{width:34px;height:34px;mix-blend-mode:lighten}
-.hero-logo{width:clamp(96px,12vw,150px);height:auto;mix-blend-mode:lighten;display:block;margin-bottom:14px;filter:drop-shadow(0 0 30px rgba(227,18,30,.5));animation:hover 3s ease-in-out infinite}
+.hud-brand img{width:34px;height:34px;clip-path:circle(46%)}
+.hero-logo{width:clamp(96px,12vw,150px);height:auto;border-radius:50%;clip-path:circle(46%);display:block;margin-bottom:14px;box-shadow:0 0 40px rgba(227,18,30,.35);animation:hover 3s ease-in-out infinite}
 @keyframes hover{50%{transform:translateY(-8px) rotate(-3deg)}}
 
 /* ---------- SAVE POINT ---------- */
@@ -296,6 +295,79 @@ body.playing .fab{transform:none;animation:fabb 3s steps(1) infinite 2s}
 @keyframes spin{25%{transform:scaleX(.6)}50%{transform:scaleX(.15)}75%{transform:scaleX(.6)}}
 body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
 
+/* ---------- RUNNER: the level you play by scrolling ---------- */
+:root{--run-h:56px}
+@media (min-width:1100px){:root{--run-h:84px}}
+body{padding-bottom:calc(var(--run-h) + env(safe-area-inset-bottom,0px))}
+.runner{position:fixed;left:0;right:0;bottom:0;z-index:84;background:var(--void);border-top:3px solid var(--red);
+  padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);
+  transform:translateY(110%);transition:transform .45s steps(6)}
+body.playing .runner{transform:none}
+.runner canvas{display:block;width:100%;height:var(--run-h);image-rendering:pixelated;image-rendering:crisp-edges}
+.run-hint{position:absolute;left:50%;top:6px;transform:translateX(-50%);font-family:var(--f-display);font-size:8px;color:var(--white);white-space:nowrap;
+  background:rgba(7,6,6,.85);padding:4px 6px;animation:blink 1.2s steps(2) infinite;pointer-events:none;transition:opacity .3s}
+.run-hint.gone{opacity:0;animation:none}
+.run-banner{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,10px) scale(.6);font-family:var(--f-display);font-size:clamp(10px,2vw,14px);
+  background:var(--red);border:3px solid var(--white);box-shadow:4px 4px 0 #000;padding:8px 12px;white-space:nowrap;opacity:0;pointer-events:none;transition:all .25s steps(4)}
+.run-banner.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.fab{bottom:calc(var(--run-h) + 16px + env(safe-area-inset-bottom,0px))}
+.toast{bottom:calc(var(--run-h) + 16px + env(safe-area-inset-bottom,0px))}
+footer{padding-bottom:70px}
+
+/* ---------- calmer cards on touch, tidy phone layout ---------- */
+@media (hover:none){.char:hover{transform:none}}
+@media (max-width:860px){
+  section{padding-block:56px}
+  #menu{min-height:0;padding-top:96px;padding-bottom:84px}
+  .lvl-head{margin-bottom:24px;gap:10px}
+  h2{font-size:clamp(17px,5.4vw,24px);text-shadow:3px 3px 0 var(--red-deep)}
+  .lede{font-size:20px;margin-top:10px}
+  .lvl-tag{font-size:12px}
+  .menu-box{padding:14px 12px}
+  .menu-box h3,.menu-hint,.menu-list a .num{display:none}
+  .menu-list{grid-template-columns:1fr 1fr;gap:6px}
+  .menu-list a{font-size:9px;padding:11px 8px;border-color:var(--grid);gap:6px}
+  .menu-list a .arrow{width:8px}
+  .menu-list li:last-child{grid-column:span 2}
+  .ticker{font-size:9px;padding-block:9px}
+  .hero-logo{width:84px;margin-bottom:10px}
+  .tagline{font-size:22px;margin-top:18px}
+  .p1 span:nth-child(2),.p1 span:nth-child(3){display:none}
+}
+@media (max-width:600px){
+  .roster{gap:14px}
+  .char{display:grid;grid-template-columns:64px 1fr;grid-template-areas:"spr ttl" "spr txt" "btn btn";column-gap:14px;row-gap:8px;padding:16px 14px}
+  .char-top{display:contents}
+  .char .sprite-box{grid-area:spr;width:64px;height:64px;background-size:8px 8px}
+  .char .sprite-box canvas{width:48px;height:auto}
+  .char .pill{position:absolute;top:-11px;right:10px;background:var(--void);font-size:10px}
+  .char h3{grid-area:ttl;align-self:end;font-size:12px}
+  .char p{grid-area:txt;font-size:19px;line-height:1.15}
+  .char .best,.sel-arrow{display:none}
+  .char .pxbtn{grid-area:btn;margin-top:4px}
+  .hub{padding:14px}
+  .hub h3{font-size:11px}
+  .coop-card{padding:20px 16px}
+  .powerups{gap:10px}
+  .pu{padding:12px;gap:12px}
+  .pu-ico{width:36px;height:36px;font-size:12px}
+  .pu p{font-size:18px}
+  .wa,.mail{padding:18px 14px}
+  .soc{padding:12px 4px;font-size:8px}
+  .hud{gap:12px;padding-bottom:6px}
+  .hud-brand span{display:none}
+  .pxbtn{font-size:10px;padding:12px 13px}
+  .toast{max-width:calc(100vw - 32px);right:calc(16px + env(safe-area-inset-right,0px))}
+  .fab{width:54px;height:54px}
+  .gameover{font-size:18px}
+  #horizon{opacity:.45}
+  .toast{top:calc(64px + env(safe-area-inset-top,0px));bottom:auto;transform:translateY(-220%);padding:8px 10px 8px 8px;gap:10px;box-shadow:4px 4px 0 var(--red);border-width:3px}
+  .toast.show{transform:none}
+  .toast canvas{width:24px;height:auto}
+  .toast .tk{font-size:7px;margin-bottom:4px}
+  .toast .tt{font-size:8px}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .ticker div{padding-left:0}
@@ -334,8 +406,8 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
 <header class="hud" aria-label="Game status">
   <a class="hud-brand" href="#menu"><img src="img/logo.jpg" alt="" width="34" height="34"><span>KASI<br>LOBBY</span></a>
   <div class="hide-s"><span class="lbl">1UP</span><span class="val" id="score">000000</span></div>
-  <div><span class="lbl">LIVES</span><span class="hud-hearts" id="hearts"></span></div>
-  <div class="hide-s"><span class="lbl">COINS</span><span class="val"><i class="coin"></i> ×<span id="coins">00</span></span></div>
+  <div class="hide-s"><span class="lbl">LIVES</span><span class="hud-hearts" id="hearts"></span></div>
+  <div><span class="lbl">COINS</span><span class="val"><i class="coin"></i> ×<span id="coins">00</span></span></div>
   <div class="hud-lvl"><span class="lbl">WORLD</span><span class="val" id="lvl">1-1 MENU</span></div>
   <div class="hud-sp"></div>
   <button class="hud-btn" id="soundBtn" aria-pressed="true">♪ ON</button>
@@ -384,7 +456,6 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
         <h2>SELECT YOUR GAME</h2>
         <p class="lede">Rent the gear for your party, school day or brand activation, or pull up to a hub and play. Pick one to enquire on WhatsApp.</p>
       </div>
-      <button class="qblock" data-coin aria-label="Bonus block">!</button>
     </div>
     <div class="roster">
       <article class="frame char">
@@ -440,7 +511,6 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
         <h2>WORLD MAP: ALEX</h2>
         <p class="lede">Three hubs, one neighbourhood. HQ on Rooseveld Street runs every tournament and handles admin.</p>
       </div>
-      <button class="qblock" data-coin aria-label="Bonus block">!</button>
     </div>
     <div class="map-wrap">
       <div class="frame map" id="mapBox">
@@ -483,7 +553,6 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
         <h2>CO-OP MODE</h2>
         <p class="lede">For companies who want to partner with Kasi Lobby. Player 2 slot is open.</p>
       </div>
-      <button class="qblock" data-coin aria-label="Bonus block">!</button>
     </div>
     <div class="coop">
       <div class="frame coop-card">
@@ -513,7 +582,6 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
         <h2>SCREENSHOTS</h2>
         <p class="lede">Real players, real hubs, real Alex. No cutscenes, just gameplay.</p>
       </div>
-      <button class="qblock" data-coin aria-label="Bonus block">!</button>
     </div>
     <div class="shots" id="shotGrid">
       <figure class="shot"><img src="img/vr-crowd.jpg" alt="A player in a VR headset races while friends watch the screen" loading="lazy"><canvas class="noise" width="80" height="60"></canvas><span class="ch">CH 01</span><figcaption>VR + RACING SIM</figcaption></figure>
@@ -537,7 +605,6 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
         <h2>SAVE POINT</h2>
         <p class="lede">Rentals, tournaments, sponsorships or anything else. WhatsApp is fastest.</p>
       </div>
-      <button class="qblock" data-coin aria-label="Bonus block">!</button>
     </div>
     <div class="save">
       <div class="save-left">
@@ -591,6 +658,12 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
     <div class="countdown" id="countdown" aria-hidden="true">9</div>
   </div>
 </footer>
+
+<div class="runner" id="runner">
+  <canvas id="runCv" aria-label="Level progress: tap a flag to jump to that section" role="img"></canvas>
+  <div class="run-hint" id="runHint">SCROLL TO RUN ▸ TAP A FLAG TO WARP</div>
+  <div class="run-banner" id="runBanner" aria-live="polite"></div>
+</div>
 
 <a class="fab" data-wa="Hi Kasi Lobby, I have an enquiry." href="#" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#fff" d="M5 1h6v1h2v1h1v2h1v6h-1v2h-1v1h-2v1H5v-1H3l-2 1 1-3V11H1V5h1V3h1V2h2zm0 3v2h1v1h1v1h1v1h1v1h2V9h-1V8H9v1H8V8H7V7h1V6H7V4z"/></svg>
@@ -658,7 +731,7 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
   let score = 0, coins = 0;
   const pad = (n,l) => String(n).padStart(l,"0");
   function addScore(n){ score += n; $("#score").textContent = pad(score,6); }
-  function addCoin(){ coins++; $("#coins").textContent = pad(coins,2); addScore(100); if(coins===5) achieve("COIN COLLECTOR · ALL 5 BONUS BLOCKS"); }
+  function setCoins(n){ if(n>coins){ addScore((n-coins)*100); } coins = n; $("#coins").textContent = pad(coins,2); }
   function pop(x,y,txt){ const p=document.createElement("span"); p.className="pop"; p.textContent=txt; p.style.left=x+"px"; p.style.top=y+"px"; document.body.append(p); setTimeout(()=>p.remove(),850); }
   let toastT, queue = [], showing = false;
   function achieve(t){ queue.push(t); if(!showing) nextToast(); }
@@ -733,16 +806,10 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
   /* ---------- click feedback ---------- */
   document.addEventListener("click", e => {
     const t = e.target.closest("a,button"); if(!t || !document.body.classList.contains("playing")) return;
-    if(t.matches("[data-coin]")) return;
     if(t.dataset.sfx && sfx[t.dataset.sfx]) sfx[t.dataset.sfx](); else sfx.blip();
     if(t.matches("[data-wa]")){ pop(e.clientX, e.clientY, "+500"); addScore(500); if(!store.get("kl-wa")){ store.set("kl-wa","1"); achieve("FIRST CONTACT · OPENED WHATSAPP"); } }
     if(t.dataset.topic){ $("#f-topic").value = t.dataset.topic; }
   });
-  $$("[data-coin]").forEach(b => b.addEventListener("click", e => {
-    if(b.classList.contains("used")){ sfx.bump(); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); return; }
-    b.classList.add("bump","used"); b.textContent = ""; sfx.coin(); const r = b.getBoundingClientRect(); pop(r.left+8, r.top-10, "+100"); addCoin();
-  }));
-
   /* ---------- copy ---------- */
   $$("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     const txt = b.dataset.copy;
@@ -765,25 +832,133 @@ body.cheat{--red:#ff1aa0;--red-hot:#ff6ad0;--red-deep:#5c0738}
 
   /* ---------- level tracking ---------- */
   const visited = new Set(["menu"]);
-  const LVL_ACH = { select:"WORLD 1-2 · CHOOSE YOUR GAME", map:"EXPLORER · FOUND ALL 3 HUBS", coop:"PLAYER 2 SLOT DISCOVERED", shots:"PHOTO MODE UNLOCKED", save:"SAVE POINT REACHED" };
   const io = new IntersectionObserver(es => es.forEach(en => {
     const s = en.target;
     if(s.id==="menu") menuVisible = en.isIntersecting;
     if(en.isIntersecting && en.intersectionRatio > .25){
       $("#lvl").textContent = s.dataset.lvl;
       if(!visited.has(s.id) && document.body.classList.contains("playing")){
-        visited.add(s.id); addScore(500); if(LVL_ACH[s.id]) achieve(LVL_ACH[s.id]);
+        visited.add(s.id);
         s.querySelectorAll(".lvl-head, .frame, .pu, .shot").forEach((el,i)=>{ el.style.animationDelay = (i*60)+"ms"; el.classList.add("enter"); });
       }
     }
   }), { threshold:[0,.26] });
   $$("main section").forEach(s => io.observe(s));
 
+
+  /* ---------- RUNNER: scroll = run through the level ---------- */
+  const rc = $("#runCv"), rx = rc.getContext("2d"), H = 28, GROUND = 22;
+  const KID = {
+    top:["..KKKK..",".KKKKKK.",".KBBBBB.",".KBBKBKB","..BBBBB.",".RRRRRR.","RRRRRRRR","BRRRRRRB",".RRRRRR.",".JJJJJJ."],
+    idle:[".JJ..JJ.",".WW..WW."], a:["JJ....JJ","WW....WW"], b:["..JJJJ..","..WWWW.."]
+  };
+  const KPAL = { K:"#1b1212", B:"#7a4a2c", R:"#e3121e", J:"#2d3a5a", W:"#f4efe9" };
+  const DIG = { "0":"111101101101111","1":"010110010010111","2":"111001111100111","3":"111001111001111","4":"101101111001001","5":"111100111001111","6":"111100111101111","7":"111001001001001","8":"111101111101111","9":"111101111001111","-":"000000111000000" };
+  const runSecs = $$("main section").slice(1);
+  let S = 2, VW = 200, worldLen = 900, flags = [], blocks = [], coinXs = [], goalX = 860;
+  let curX = 20, lastX = 20, maxX = 20, dist = 0, facing = 1, camX = 0, passed = new Set(), goalDone = false;
+  const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+  const hash = n => { n = (n ^ 61) ^ (n >>> 16); n = n + (n << 3); n = n ^ (n >>> 4); n = Math.imul(n, 0x27d4eb2d); return (n ^ (n >>> 15)) >>> 0; };
+  function maxScroll(){ return Math.max(1, document.documentElement.scrollHeight - innerHeight); }
+  const toX = p => 20 + p * (worldLen - 70);
+  function layoutRun(){
+    S = innerWidth >= 1100 ? 3 : 2;
+    VW = Math.ceil(rc.getBoundingClientRect().width / S) || Math.ceil(innerWidth / S);
+    rc.width = VW; rc.height = H;
+    worldLen = Math.max(VW * 2.6, 900);
+    const m = maxScroll();
+    flags = runSecs.map(sec => ({ x: toX(clamp((sec.offsetTop - innerHeight * .4) / m, 0, 1)), sec, label: sec.dataset.lvl.split(" ")[0] }));
+    goalX = worldLen - 48;
+    const pts = [20, ...flags.map(f => f.x), goalX];
+    blocks = []; for(let i=0;i<pts.length-1;i++) if(pts[i+1]-pts[i] > 40) blocks.push((pts[i]+pts[i+1])/2);
+    coinXs = []; for(let x=44; x<goalX-10; x+=14){ if(flags.some(f=>Math.abs(f.x-x)<9) || blocks.some(b=>Math.abs(b-x)<11)) continue; coinXs.push(x); }
+  }
+  function px(x,y,w,h,c){ rx.fillStyle = c; rx.fillRect(Math.round(x), Math.round(y), w, h); }
+  function digits(str, x, y, c){ let cx = x; for(const ch of str){ const g = DIG[ch]; if(g) for(let i=0;i<15;i++) if(g[i]==="1") px(cx+i%3, y+(i/3|0), 1, 1, c); cx += 4; } }
+  function drawKid(x, y, legs, flip){
+    const rows = KID.top.concat(legs);
+    rows.forEach((row, ry) => [...row].forEach((ch, cxi) => { if(KPAL[ch]) px(x + (flip ? 7 - cxi : cxi), y + ry, 1, 1, KPAL[ch]); }));
+  }
+  let banT;
+  function banner(txt){ const b = $("#runBanner"); b.textContent = txt; b.classList.add("show"); clearTimeout(banT); banT = setTimeout(() => b.classList.remove("show"), 1500); }
+  let lastCoinSfx = 0;
+  function frame(t){
+    const p = clamp(scrollY / maxScroll(), 0, 1), target = toX(p);
+    curX = RM ? target : curX + (target - curX) * .16;
+    const dx = curX - lastX; if(Math.abs(dx) > .05) facing = dx > 0 ? 1 : -1; dist += Math.abs(dx); lastX = curX;
+    maxX = Math.max(maxX, curX);
+    camX = clamp(curX - VW * .35, 0, Math.max(0, worldLen - VW));
+    const moving = Math.abs(target - curX) > .3;
+
+    // coins and blocks collected = everything you've run past
+    const got = coinXs.filter(x => x <= maxX).length + blocks.filter(x => x <= maxX).length;
+    if(got !== coins && document.body.classList.contains("playing")){ if(got > coins && t - lastCoinSfx > 90){ sfx.coin(); lastCoinSfx = t; } setCoins(got); }
+    flags.forEach((f, i) => { if(curX >= f.x && !passed.has(i) && document.body.classList.contains("playing")){ passed.add(i); banner("▶ WORLD " + f.sec.dataset.lvl); addScore(500); sfx.unlock(); } });
+    if(!goalDone && curX >= goalX - 6 && document.body.classList.contains("playing")){ goalDone = true; banner("HUB REACHED · YOU WIN"); setTimeout(() => achieve("FULL CLEAR · " + coins + " COINS"), 1700); }
+    $("#runHint").classList.toggle("gone", scrollY > 40);
+
+    // sky + far township skyline (parallax)
+    px(0, 0, VW, H, "#070606");
+    const off = camX * .4, base = Math.floor(off / 12);
+    for(let k=-1; k<VW/12+2; k++){
+      const idx = base + k, hv = hash(idx + 7), h = 5 + hv % 11, x = idx * 12 - off;
+      px(x, GROUND - h, 10, h, "#160f10");
+      if(hv % 3 === 0) px(x + 3, GROUND - h + 2, 1, 1, "#5c070c");
+      if(hv % 5 === 0) px(x + 6, GROUND - h + 3, 1, 1, "#9a8f8c");
+      if(hv % 7 === 0){ px(x + 11, 9, 1, GROUND - 9, "#2a1a1b"); px(x + 10, 9, 3, 1, "#f4efe9"); }
+    }
+    // ground: brick road
+    px(0, GROUND, VW, H - GROUND, "#1a1212"); px(0, GROUND, VW, 1, "#e3121e");
+    const go = camX % 8;
+    for(let x=-go; x<VW; x+=8){ px(x, GROUND+1, 1, 2, "#2a1a1b"); px(x+4, GROUND+4, 1, 2, "#2a1a1b"); }
+    px(0, GROUND+3, VW, 1, "#2a1a1b");
+    // coins
+    coinXs.forEach(x => { if(x <= maxX) return; const sx = x - camX; if(sx < -4 || sx > VW + 4) return;
+      const w = RM ? 3 : [3,2,1,2][Math.floor(t/140 + x) % 4]; const by = RM ? 0 : Math.round(Math.sin(t/260 + x) * .8);
+      px(sx - (w >> 1), 14 + by, w, 4, "#f4efe9"); if(w > 1) px(sx - (w >> 1) + w - 1, 15 + by, 1, 2, "#e3121e"); });
+    // ! blocks
+    blocks.forEach(x => { const sx = x - camX - 2; if(sx < -6 || sx > VW + 6) return; const hit = x <= maxX, bump = Math.abs(curX - x) < 2.5 ? -1 : 0;
+      px(sx, bump, 5, 5, hit ? "#4a4444" : "#f4efe9"); px(sx+1, 1+bump, 3, 3, hit ? "#2a1a1b" : "#e3121e"); if(!hit){ px(sx+2, 1+bump, 1, 1, "#f4efe9"); px(sx+2, 3+bump, 1, 1, "#f4efe9"); } });
+    // checkpoint flags
+    flags.forEach((f, i) => { const sx = Math.round(f.x - camX); if(sx < -12 || sx > VW + 12) return; const up = passed.has(i);
+      px(sx, 8, 1, GROUND - 8, "#f4efe9"); px(sx - 1, GROUND - 1, 3, 1, "#9a8f8c");
+      const fy = up ? 8 : GROUND - 5, fc = up ? "#e3121e" : "#4a4444";
+      px(sx+1, fy, 4, 1, fc); px(sx+1, fy+1, 3, 1, fc); px(sx+1, fy+2, 2, 1, fc);
+      digits(f.label, sx - 5, 1, up ? "#ff3b45" : "#9a8f8c"); });
+    // goal: the red container hub
+    const gx = Math.round(goalX - camX);
+    if(gx < VW + 2){
+      px(gx, 9, 32, GROUND - 9, "#b5121b"); for(let x=gx+2; x<gx+32; x+=3) px(x, 10, 1, GROUND - 11, "#7a0c12");
+      px(gx, 9, 32, 1, "#e3121e"); px(gx+20, 12, 9, GROUND - 12, goalDone ? "#f4efe9" : "#120d0d"); px(gx+24, 12, 1, GROUND - 12, "#9a8f8c");
+      px(gx+3, 12, 2, 1, "#f4efe9"); px(gx+3, 13, 1, 3, "#f4efe9"); px(gx+4, 14, 1, 1, "#f4efe9"); px(gx+5, 13, 1, 1, "#f4efe9"); px(gx+5, 15, 1, 1, "#f4efe9");
+      px(gx+8, 12, 1, 4, "#f4efe9"); px(gx+8, 15, 3, 1, "#f4efe9");
+      if(!RM && Math.floor(t/500) % 2) px(gx+1, 6, 2, 2, "#ff3b45");
+    }
+    // player: jumps when passing a block
+    let jy = 0; blocks.forEach(x => { const d = curX - x; if(Math.abs(d) < 10) jy = Math.min(jy, -5 * (1 - (d/10)*(d/10))); });
+    const legs = jy < -.5 ? KID.a : moving ? (Math.floor(dist / 3) % 2 ? KID.a : KID.b) : KID.idle;
+    const bob = (!moving && !RM && jy === 0 && Math.floor(t/600) % 2) ? 1 : 0;
+    drawKid(curX - camX - 4, GROUND - 12 + Math.round(jy) + bob, legs, facing < 0);
+    requestAnimationFrame(frame);
+  }
+  rc.addEventListener("click", e => {
+    const r = rc.getBoundingClientRect(), wx = camX + (e.clientX - r.left) / r.width * VW;
+    let best = null, bd = 26;
+    flags.forEach(f => { const d = Math.abs(f.x - wx); if(d < bd){ bd = d; best = f.sec; } });
+    if(Math.abs(goalX + 16 - wx) < 22) best = $("#save");
+    if(best){ sfx.select(); best.scrollIntoView({ behavior: RM ? "auto" : "smooth" }); }
+  });
+  layoutRun();
+  addEventListener("resize", layoutRun);
+  addEventListener("load", layoutRun);
+  new ResizeObserver(() => layoutRun()).observe(document.querySelector("main"));
+  requestAnimationFrame(frame);
+
   /* ---------- hero horizon ---------- */
   const hz = $("#horizon"), hc = hz.getContext("2d");
   let hzOn = true, hzT = 0;
   new IntersectionObserver(es => hzOn = es[0].isIntersecting).observe(hz);
-  const stars = Array.from({length:70},()=>({x:Math.random(),y:Math.random()*.5,s:Math.random()<.2?2:1,b:Math.random()*6}));
+  const stars = Array.from({length: innerWidth < 600 ? 28 : 70},()=>({x:Math.random(),y:Math.random()*.5,s:(innerWidth >= 600 && Math.random()<.2)?2:1,b:Math.random()*6}));
   function sizeHz(){ const W = Math.ceil(innerWidth/4), H = Math.ceil(hz.parentElement.offsetHeight/4); hz.width = W; hz.height = H; }
   function drawHz(){
     const W = hz.width, H = hz.height, hy = Math.floor(H*.58);
