@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amara Hair Studio | Hair salon on Bree Street, Cape Town</title>
+<meta name="description" content="Silk presses, braids, locs, colour and cuts on Bree Street, Cape Town. Book on WhatsApp.">
+<meta name="theme-color" content="#f4eee7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<style>
+:root{
+  --bone:#f4eee7; --paper:#ebe2d8; --ink:#1d1517; --soft:#5a4a4c; --mute:#8d7b7c;
+  --ox:#5e1a24; --blush:#e9b9a6; --gold:#c8a46a; --line:rgba(29,21,23,.14);
+  --display:'Syne', system-ui, sans-serif; --body:'Manrope', system-ui, sans-serif; --serif:'Cormorant Garamond', Georgia, serif;
+  --pad:clamp(20px,4vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{overflow-x:clip;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--ox);outline-offset:3px}
+.wrap{width:100%;max-width:1400px;margin:0 auto;padding:0 var(--pad)}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+em.s{font-family:var(--serif);font-style:italic;font-weight:500;letter-spacing:0;text-transform:none}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 28px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .3s,color .3s;white-space:nowrap;border:0;cursor:pointer;font-family:var(--body)}
+.btn-dark{background:var(--ink);color:var(--bone)}
+.btn-dark:hover{background:var(--ox);transform:translateY(-2px)}
+.btn-line{border:1px solid var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--bone);transform:translateY(-2px)}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:30;transition:background .3s,box-shadow .3s}
+.nav.solid{background:rgba(244,238,231,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.nav .wrap{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{text-decoration:none;display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.04em}
+.brand span{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ox)}
+.links{display:flex;gap:30px;align-items:center;font-size:15px;font-weight:500}
+.links a{text-decoration:none}
+.links a:not(.btn):hover{color:var(--ox)}
+.links .btn{padding:11px 20px}
+@media (max-width:860px){.links a:not(.btn){display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;padding:110px 0 40px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.strands{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.strands path{fill:none;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 3.2s cubic-bezier(.65,0,.35,1) forwards,sway 9s ease-in-out infinite alternate}
+.letters{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;margin-top:auto}
+.letters span{font-family:var(--display);font-weight:800;font-size:clamp(84px,19vw,300px);line-height:.8;letter-spacing:-.02em;display:block;text-align:center;will-change:transform;opacity:0;animation:drop 1.4s cubic-bezier(.16,1,.3,1) forwards}
+.letters span:nth-child(1){transform:translateY(0);animation-delay:.2s}
+.letters span:nth-child(2){margin-bottom:.32em;animation-delay:.32s}
+.letters span:nth-child(3){margin-bottom:.06em;animation-delay:.44s;color:var(--ox)}
+.letters span:nth-child(4){margin-bottom:.42em;animation-delay:.56s}
+.letters span:nth-child(5){margin-bottom:.14em;animation-delay:.68s}
+.hero-top{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:start}
+.hero-top h1{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1.02;letter-spacing:-.03em;max-width:12ch}
+.hero-top h1 em.s{font-size:1.12em;color:var(--ox)}
+.hero-side{justify-self:end;max-width:380px;display:flex;flex-direction:column;gap:20px;padding-top:10px}
+.hero-side p{margin:0;color:var(--soft)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:10px}
+.hero-bar{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:18px;margin-top:22px}
+@media (max-width:860px){.hero-top{grid-template-columns:1fr}.hero-side{justify-self:start}.hero-bar span:nth-child(2){display:none}}
+
+/* marquee */
+.marquee{background:var(--ox);color:var(--bone);overflow:hidden;padding:22px 0}
+.mq{display:flex;gap:46px;white-space:nowrap;animation:mq 30s linear infinite;font-family:var(--display);font-weight:500;font-size:clamp(26px,3vw,40px)}
+.mq em.s{color:var(--blush);font-size:1.15em}
+
+section{position:relative}
+.sec{padding:clamp(80px,10vw,150px) 0}
+.h2{font-family:var(--display);font-weight:500;font-size:clamp(40px,6vw,92px);line-height:.98;letter-spacing:-.04em;margin:18px 0 0}
+.h2 em.s{color:var(--ox);font-size:1.1em}
+
+/* services index */
+.svc-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+.svc-head p{max-width:380px;color:var(--soft);margin:0}
+.svc{margin-top:56px;border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:70px minmax(0,1fr) 140px 150px;gap:20px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .4s cubic-bezier(.16,1,.3,1)}
+.row::before{content:"";position:absolute;inset:0 calc(var(--pad) * -1);background:var(--blush);transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:-1}
+.row:hover::before{transform:scaleY(1)}
+.row:hover{padding-left:14px}
+.row .n{font-size:13px;font-weight:600;color:var(--mute)}
+.row h3{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(24px,2.6vw,38px);letter-spacing:-.03em;line-height:1.1}
+.row p{margin:6px 0 0;color:var(--soft);font-size:15px;max-width:520px}
+.row .t{color:var(--soft);font-size:15px}
+.row .p{text-align:right;font-family:var(--display);font-weight:500;font-size:22px}
+@media (max-width:760px){.row{grid-template-columns:44px minmax(0,1fr) auto}.row .t{display:none}}
+
+/* colour bar */
+.bar-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:56px}
+.sw{position:relative;aspect-ratio:3/5;border-radius:120px 120px 18px 18px;overflow:hidden;cursor:default;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.sw:hover{transform:translateY(-10px)}
+.sw svg{position:absolute;inset:0;width:100%;height:100%}
+.sw figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px;color:#fff;font-weight:600;font-size:14px;background:linear-gradient(transparent,rgba(0,0,0,.45))}
+.sw figcaption em.s{display:block;font-size:24px;font-weight:500}
+@media (max-width:1000px){.bar-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.bar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* statement */
+.statement{background:var(--ink);color:var(--bone);overflow:hidden}
+.statement .big{font-family:var(--display);font-weight:500;font-size:clamp(34px,5.2vw,82px);line-height:1.04;letter-spacing:-.035em;margin:0;max-width:15ch}
+.statement .big em.s{color:var(--blush);font-size:1.1em}
+.statement .grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:60px;align-items:end}
+.facts{display:grid;gap:0;border-top:1px solid rgba(244,238,231,.2)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid rgba(244,238,231,.2)}
+.facts b{font-family:var(--display);font-weight:500;font-size:28px}
+.facts span{color:#bfb0ad;font-size:15px;align-self:center}
+@media (max-width:900px){.statement .grid{grid-template-columns:1fr}}
+
+/* visit + book */
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,80px)}
+.hours{margin-top:30px;border-top:1px solid var(--line)}
+.hours div{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+.hours div.today{color:var(--ox);font-weight:600}
+.addr{font-family:var(--display);font-weight:500;font-size:26px;line-height:1.2;margin:24px 0 0;letter-spacing:-.02em}
+.form{background:var(--paper);border-radius:28px;padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;gap:16px}
+.form h3{margin:0;font-family:var(--display);font-weight:500;font-size:32px;letter-spacing:-.03em}
+.form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.form input,.form select{font:500 17px var(--body);color:var(--ink);background:var(--bone);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-transform:none;letter-spacing:0}
+.form input:focus,.form select:focus{outline:2px solid var(--ox);outline-offset:1px}
+.form .btn{justify-content:center;margin-top:6px}
+.form small{color:var(--mute);font-size:13px}
+@media (max-width:900px){.visit{grid-template-columns:1fr}}
+
+footer{padding:60px 0 110px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+.foot .giant{font-family:var(--display);font-weight:800;font-size:clamp(56px,10vw,160px);line-height:.8;letter-spacing:-.02em}
+.foot .giant em.s{font-weight:500;color:var(--ox);font-size:.42em;letter-spacing:0;white-space:nowrap}
+.credit{margin-top:30px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute)}
+.credit a{color:var(--ox)}
+
+/* sticky mobile actions */
+.dock{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:none;gap:8px;padding:8px;border-radius:999px;background:rgba(29,21,23,.92);backdrop-filter:blur(10px)}
+.dock a{flex:1;text-align:center;padding:13px 10px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;color:var(--bone)}
+.dock a.main{background:var(--blush);color:var(--ink)}
+@media (max-width:760px){.dock{display:flex}}
+
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes sway{from{transform:translateY(0)}to{transform:translateY(18px)}}
+@keyframes drop{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:translateY(0)}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.letters span{opacity:1}.strands path{stroke-dashoffset:0}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="brand" href="#top"><b>AMARA</b><span>hair studio</span></a>
+  <nav class="links"><a href="#services">Services</a><a href="#colour">Colour bar</a><a href="#visit">Visit</a><a class="btn btn-dark wa" href="#">Book on WhatsApp</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero">
+  <svg class="strands" id="strands" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  <div class="wrap hero-top">
+    <h1>Hair, <em class="s">considered</em>. Every strand, every time.</h1>
+    <div class="hero-side">
+      <p>Silk presses, braids, locs, colour and cuts by a small team who take their time. On Bree Street, in the middle of the city.</p>
+      <div class="hero-ctas"><a class="btn btn-dark wa" href="#">Book on WhatsApp</a><a class="btn btn-line" href="tel:+27000000000">Call the studio</a></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="letters" aria-label="Amara"><span>A</span><span>M</span><span>A</span><span>R</span><span>A</span></div>
+    <div class="hero-bar kicker"><span>Bree Street, Cape Town</span><span>Tue to Sat, 8:00 to 18:00</span><span>Walk-ins when we can</span></div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="mq" id="mq">
+  <span>Silk press</span><em class="s">and</em><span>Knotless braids</span><em class="s">and</em><span>Locs</span><em class="s">and</em><span>Colour</span><em class="s">and</em><span>Precision cuts</span><em class="s">and</em><span>Treatments</span><em class="s">and</em>
+</div></div>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="svc-head">
+      <div><span class="kicker rv">The menu</span><h2 class="h2 rv">What we <em class="s">do</em> best.</h2></div>
+      <p class="rv">Prices are a starting point. Length, thickness and what you have in mind can change them, and we will always tell you before we start.</p>
+    </div>
+    <div class="svc">
+      <div class="row rv"><span class="n">01</span><div><h3>Silk press</h3><p>Wash, deep condition and a press that moves. Heat protection, always.</p></div><span class="t">2 hours</span><span class="p">from R650</span></div>
+      <div class="row rv"><span class="n">02</span><div><h3>Knotless braids</h3><p>Small, medium or large, any length. Hair included on request.</p></div><span class="t">4 to 7 hours</span><span class="p">from R900</span></div>
+      <div class="row rv"><span class="n">03</span><div><h3>Locs</h3><p>Starter locs, retwists and repairs, with scalp care.</p></div><span class="t">2 to 4 hours</span><span class="p">from R550</span></div>
+      <div class="row rv"><span class="n">04</span><div><h3>Colour</h3><p>Full colour, highlights and gloss. A patch test is booked first.</p></div><span class="t">2 to 3 hours</span><span class="p">from R800</span></div>
+      <div class="row rv"><span class="n">05</span><div><h3>Cut and shape</h3><p>Dry or wet cutting for curls, coils and straight hair.</p></div><span class="t">1 hour</span><span class="p">from R380</span></div>
+      <div class="row rv"><span class="n">06</span><div><h3>Treatment</h3><p>Protein, moisture or scalp detox, matched to your hair.</p></div><span class="t">45 minutes</span><span class="p">from R300</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="colour" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker rv">The colour bar</span>
+    <h2 class="h2 rv">Six shades we <em class="s">love</em> right now.</h2>
+    <div class="bar-grid" id="bar"></div>
+  </div>
+</section>
+
+<section class="sec statement">
+  <div class="wrap grid">
+    <p class="big rv">One chair at a time. No rushing, no double booking, <em class="s">no shortcuts</em>.</p>
+    <div class="facts rv">
+      <div><b>4</b><span>chairs, never overbooked</span></div>
+      <div><b>Tue to Sat</b><span>open from 8am</span></div>
+      <div><b>1</b><span>WhatsApp message to book</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="visit">
+  <div class="wrap visit">
+    <div>
+      <span class="kicker rv">Visit</span>
+      <h2 class="h2 rv">Come <em class="s">in</em>.</h2>
+      <p class="addr rv">Bree Street, Cape Town City Centre</p>
+      <p class="rv" style="color:var(--soft);margin:10px 0 0">Paid parking on the street and in the Bree Street parkade.</p>
+      <div class="hero-ctas rv" style="margin-top:22px"><a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Bree+Street+Cape+Town" target="_blank" rel="noopener">Get directions ↗</a></div>
+      <div class="hours rv" id="hours">
+        <div data-d="1"><span>Monday</span><span>Closed</span></div>
+        <div data-d="2"><span>Tuesday</span><span>8:00 to 18:00</span></div>
+        <div data-d="3"><span>Wednesday</span><span>8:00 to 18:00</span></div>
+        <div data-d="4"><span>Thursday</span><span>8:00 to 19:00</span></div>
+        <div data-d="5"><span>Friday</span><span>8:00 to 19:00</span></div>
+        <div data-d="6"><span>Saturday</span><span>8:00 to 16:00</span></div>
+        <div data-d="0"><span>Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <form class="form rv" id="book">
+      <h3>Book your <em class="s">chair</em></h3>
+      <label>Your name<input name="name" required autocomplete="name" placeholder="Name"></label>
+      <label>Service<select name="service"><option>Silk press</option><option>Knotless braids</option><option>Locs</option><option>Colour</option><option>Cut and shape</option><option>Treatment</option><option>Not sure yet</option></select></label>
+      <label>Preferred day<input name="day" type="date"></label>
+      <button class="btn btn-dark" type="submit">Send on WhatsApp</button>
+      <small>This opens WhatsApp with your request ready to send. We reply to confirm a time.</small>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <div class="foot"><div class="giant">AMARA <em class="s">hair studio</em></div><a class="btn btn-dark wa" href="#">Book on WhatsApp</a></div>
+  <div class="credit"><span>Bree Street, Cape Town · Tue to Sat</span><span>Demo website by <a href="https://lsmontshiwa-star.github.io/Mockups/ds/" target="_blank" rel="noopener">Digital Switch</a></span></div>
+</div></footer>
+
+<div class="dock"><a href="tel:+27000000000">Call</a><a class="main wa" href="#">Book</a></div>
+
+<script>
+(function(){
+  var WA='https://wa.me/27000000000?text='+encodeURIComponent('Hi Amara Hair Studio, I found you online and would like to book an appointment.');
+  document.querySelectorAll('.wa').forEach(function(a){a.href=WA;a.target='_blank';a.rel='noopener'});
+  var mq=document.getElementById('mq');mq.innerHTML+=mq.innerHTML;
+
+  // generative hair strands
+  var svg=document.getElementById('strands'),NS='http://www.w3.org/2000/svg',cols=['#5e1a24','#5e1a24','#e9b9a6','#c8a46a','#1d1517'];
+  for(var i=0;i<22;i++){
+    var y=80+i*34+Math.sin(i)*30, a=y+Math.cos(i*1.7)*260, b=y-Math.sin(i*.9)*240, e=y+Math.sin(i*2.3)*120;
+    var p=document.createElementNS(NS,'path');
+    p.setAttribute('d','M-60 '+y.toFixed(0)+' C 420 '+a.toFixed(0)+', 1080 '+b.toFixed(0)+', 1660 '+e.toFixed(0));
+    p.setAttribute('stroke',cols[i%cols.length]);p.setAttribute('stroke-width',(i%4===0?2.4:1.1));p.setAttribute('opacity',(i%5===2?.9:.35));
+    p.style.animationDelay=(i*0.06)+'s, '+(i*0.2)+'s';
+    svg.appendChild(p);var L=Math.ceil(p.getTotalLength());p.style.setProperty('--len',L);
+  }
+
+  // colour bar swatches (generative strands per shade)
+  var shades=[['Espresso','#2b1a14','#5a3a2c'],['Copper','#8a3b1c','#d27a43'],['Honey','#a8742f','#e3b46a'],['Burgundy','#4d0f1c','#8f2639'],['Platinum','#bdb4a9','#f1ece4'],['Jet','#0e0c0c','#3a3434']];
+  var bar=document.getElementById('bar');
+  shades.forEach(function(s,k){
+    var f=document.createElement('figure');f.className='sw rv';f.style.margin='0';f.style.background=s[1];
+    var paths='';for(var j=0;j<16;j++){var x=-20+j*14;paths+='<path d="M'+x+' -10 C '+(x+40)+' 120, '+(x-30)+' 220, '+(x+20)+' 360" fill="none" stroke="'+(j%3?s[2]:s[1])+'" stroke-width="'+(j%3?6:3)+'" opacity="'+(0.35+0.05*(j%5))+'"/>';}
+    f.innerHTML='<svg viewBox="0 0 200 340" preserveAspectRatio="none" aria-hidden="true">'+paths+'</svg><figcaption><em class="s">'+s[0]+'</em>Shade 0'+(k+1)+'</figcaption>';
+    bar.appendChild(f);
+  });
+
+  // today's hours
+  var d=new Date().getDay();var row=document.querySelector('#hours [data-d="'+d+'"]');if(row)row.classList.add('today');
+
+  // booking form -> WhatsApp
+  document.getElementById('book').addEventListener('submit',function(e){e.preventDefault();var f=e.target;
+    var msg='Hi Amara Hair Studio, I would like to book.\nName: '+f.name.value+'\nService: '+f.service.value+(f.day.value?'\nPreferred day: '+f.day.value:'');
+    window.open('https://wa.me/27000000000?text='+encodeURIComponent(msg),'_blank','noopener');});
+
+  // nav + reveals + letter parallax
+  var nav=document.getElementById('nav'),letters=document.querySelectorAll('.letters span'),t=false;
+  function sc(){var y=scrollY;nav.classList.toggle('solid',y>30);
+    letters.forEach(function(l,i){l.style.translate='0 '+(y*(0.04+i*0.035)).toFixed(1)+'px'});t=false}
+  addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(sc)}},{passive:true});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=((i%3)*90)+'ms';io.observe(el)});
+})();
+</script>
+</body>
+</html>
