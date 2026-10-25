@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-21.0 18.700000000000003 120 120" role="img" aria-label="Digital Switch">
+<path d="M5.4 18.7H72.6A26.4 26.4 0 0 1 99 45.1V112.3A26.4 26.4 0 0 1 72.6 138.7H5.4A26.4 26.4 0 0 1 -21 112.3V45.1A26.4 26.4 0 0 1 5.4 18.7Z" fill="#0d0d0b"/><g transform="translate(0.0,0.0)">
+  <path d="M22 57.7H56A21 21 0 0 1 77 78.7V78.7A21 21 0 0 1 56 99.7H22A21 21 0 0 1 1 78.7V78.7A21 21 0 0 1 22 57.7Z" fill="#c4532b" stroke="#c4532b" stroke-width="2"/>
+  <circle cx="56.0" cy="78.7" r="15.0" fill="#ece7dd"/>
+</g>
+</svg>
