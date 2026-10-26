@@ -142,7 +142,7 @@ details p{color:var(--mist);margin:0 0 12px}
     <p><span class="path">Business tools → Business profile</span>. Set the photo and cover, then fill in:</p>
     <div class="copy"><span class="k">Name</span>Digital Switch</div>
     <div class="copy"><span class="k">Category</span>Internet company (or Advertising/Marketing)</div>
-    <div class="copy" data-copy><span class="k">Description</span>Animated, phone-first websites for South African businesses. R2,999 once-off, live on your own web address within 24 hours. Then R199 a month for hosting, your address, updates and support. See our work: digitalswitch.co.za</div>
+    <div class="copy" data-copy><span class="k">Description</span>Animated, phone-first websites for South African businesses. R2,999 to set up, live on your own web address within 24 hours. Then R199 a month for hosting, your address, updates and support. See our work: digitalswitch.co.za</div>
     <div class="copy"><span class="k">Address</span>Johannesburg (set it as a service area: Gauteng)</div>
     <div class="copy"><span class="k">Hours</span>Mon to Sat, 08:00 to 18:00</div>
     <div class="copy" data-copy><span class="k">Email</span>digitalswitch28@gmail.com</div>
@@ -162,7 +162,7 @@ details p{color:var(--mist);margin:0 0 12px}
   <div class="step" data-s="wa4"><button class="chk" aria-label="Mark done"></button>
     <h3>Greeting message</h3>
     <p><span class="path">Business tools → Greeting message</span> → on. Recipients: everyone not in your address book.</p>
-    <div class="copy" data-copy><span class="k">Greeting</span>Hi! Thanks for messaging Digital Switch. We build animated websites for local businesses: R2,999 once-off, live in 24 hours. Tell us your business name and what you do, and we'll show you what your site could look like.</div>
+    <div class="copy" data-copy><span class="k">Greeting</span>Hi! Thanks for messaging Digital Switch. We build animated websites for local businesses: R2,999 to set up, then R199 a month, live in 24 hours. Tell us your business name and what you do, and we'll show you what your site could look like.</div>
   </div>
 
   <div class="step" data-s="wa5"><button class="chk" aria-label="Mark done"></button>
@@ -207,7 +207,7 @@ details p{color:var(--mist);margin:0 0 12px}
 <!-- 3 CALLS -->
 <section id="calls">
   <h2>Today's <em>calls</em></h2>
-  <p class="lead">Every roofer below already has a website built for them. Call, or send <b>1 · First message</b> on WhatsApp. When they say yes, send <b>2 · Send the link</b>. If anyone replies STOP, tap "Don't contact" and leave it there. Status saves as you tap.</p>
+  <p class="lead">Every roofer below already has a website built for them. <b>Step 1:</b> send <b>1 · First message</b> on WhatsApp. <b>Step 2:</b> when they say yes, send <b>2 · Send the link</b>. <b>Step 3:</b> once they've opened it, call them to walk them through it and close. No reply means no: don't message or call again. Anyone who replies STOP gets "Don't contact". Status saves as you tap.</p>
   <div class="stats" id="stats"></div>
   <div class="row" style="margin-bottom:6px"><button class="btn sm" id="toggleAll">Show all 54 roofers</button><button class="btn sm" data-go="script">Open the script</button></div>
   <div id="leadList"></div>
@@ -218,19 +218,21 @@ details p{color:var(--mist);margin:0 0 12px}
 <section id="script" class="script">
   <h2>The <em>script</em></h2>
   <p class="lead">Short, friendly, and about them. The site does the selling. Your job is to get them to look at it.</p>
-  <h3>1 · Open (10 seconds)</h3>
+  <h3>Call only people who said yes on WhatsApp</h3>
+  <div class="say">Hi, it's <b class="nm">[your name]</b> from Digital Switch. I sent you the website I made for <b>[Business]</b>. Did you get a chance to look at it?</div>
+  <h3>1 · If they haven't seen it yet</h3>
   <div class="say">Hi, is this <b>[Business]</b>? I'm <b class="nm">[your name]</b> from Digital Switch, a web design studio in Joburg. I made a <b>free website</b> for <b>[Business]</b>. May I send you the link so that you can see?</div>
   <h3>2 · Send the link while they're on the line</h3>
   <div class="say">Great, I'm sending it now. <b>[Tap "2 · Send the link"]</b> Just open it on your phone, have a scroll and tell me what you think.</div>
   <p class="lead" style="margin-top:6px">If they're busy: "No problem, I'll send it now and call you back at [time]. Which is better, this afternoon or tomorrow morning?"</p>
   <h3>3 · The offer (only after they've looked)</h3>
-  <div class="say">It's yours for <b>R2,999 once-off</b>. We put it on your own web address, set you up on Google, and it's <b>live within 24 hours</b>. After that it's R199 a month for hosting, your address, changes and support. No contract.</div>
+  <div class="say">It's <b>R2,999 to set up</b>: we put it on your own web address, set you up on Google, and it's <b>live within 24 hours</b>. Then it's <b>R199 a month</b> for hosting, your address, changes and support. No contract, cancel any time.</div>
   <h3>4 · Close</h3>
   <div class="say">Shall I send you the payment link so we can have it live by tomorrow?</div>
   <p class="lead" style="margin-top:6px">If yes: send <b>/pay</b>, then <b>/details</b> to collect their logo, photos and service areas. Label the chat <span class="path">Paid</span> once the money is in.</p>
 
   <h3>If they say…</h3>
-  <details><summary>"It's too expensive."</summary><p>"I hear you. Most web designers charge R8,000 to R15,000 for a custom site. This is R2,999 once-off and already built for you. One extra roofing job pays for it many times over."</p></details>
+  <details><summary>"It's too expensive."</summary><p>"I hear you. Most web designers charge R8,000 to R15,000 for a custom site. This is R2,999 to set up and R199 a month for hosting and updates, and it's already built for you. One extra roofing job pays for it many times over."</p></details>
   <details><summary>"I get my work from word of mouth."</summary><p>"That's the best kind of work. When someone recommends you, the first thing they do is Google you. This makes sure they find you, see your work and can call you in one tap, instead of finding the next roofer."</p></details>
   <details><summary>"I have a Facebook page."</summary><p>"Keep it! This works with it. A website on your own address shows up on Google, looks established, and you own it. We can link your Facebook page from it."</p></details>
   <details><summary>"Send me info, I'll think about it."</summary><p>"Of course, it's on your WhatsApp now. What would you want to see changed for it to be a yes? I can tweak it today." Then follow up tomorrow with the follow-up message.</p></details>
@@ -304,7 +306,7 @@ function addCopy(el){ if(el.querySelector('.cp')) return; var b=document.createE
 
 /* quick replies */
 var QUICK = [
- ['/price','Our websites are R2,999 once-off. That includes the design, your own web address, Google set-up, and it\'s live within 24 hours. After that it\'s R199 a month for hosting, your address, changes and support. No contract.'],
+ ['/price','Our websites are R2,999 to set up, then R199 a month. The setup includes the design, your own web address, Google set-up, and it\'s live within 24 hours. After that it\'s R199 a month for hosting, your address, changes and support. No contract.'],
  ['/included','Your website comes with: a custom animated design, built for phones first, tap-to-call and WhatsApp buttons, a map and a quote form, your own .co.za address, and Google set-up.'],
  ['/monthly','The R199 a month covers hosting and security, renewing your web address every year, one batch of changes every month, free fixes if anything breaks, enquiries sent straight to your WhatsApp, and a monthly report. You can cancel any time.'],
  ['/howlong','Once payment is in, your site is live within 24 hours. You can send your logo and photos any time, it goes live either way.'],
@@ -320,7 +322,7 @@ function renderText(){
   var m='Hey! It\'s '+me()+'. I\'ve started Digital Switch, we build animated websites for small businesses. I\'m running a referral programme: bring me a business that signs up and I pay you R750, with no limit on how many. Everything\'s here: https://digitalswitch.co.za/refer\n\nReply "I\'m in" and I\'ll send you what you need.';
   $('#referMsg').innerHTML='<span class="k">Message</span>'+m.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   $('#referShare').href='https://wa.me/?text='+encodeURIComponent(m);
-  var p='Welcome aboard! Here\'s how it works:\n\n1. Find a business owner who needs a website.\n2. WhatsApp me their business name before you start, so it\'s registered to you.\n3. Show them our work (digitalswitch.co.za) and the price: R2,999 once-off, R199 a month.\n4. When they\'re ready, connect us. I handle the rest.\n5. You get R750 once they\'ve paid in full.\n\nMessages you can send them, the price sheet and the rules are all here: https://digitalswitch.co.za/refer';
+  var p='Welcome aboard! Here\'s how it works:\n\n1. Find a business owner who needs a website.\n2. WhatsApp me their business name before you start, so it\'s registered to you.\n3. Show them our work (digitalswitch.co.za) and the price: R2,999 to set up, then R199 a month.\n4. When they\'re ready, connect us. I handle the rest.\n5. You get R750 once they\'ve paid in full.\n\nMessages you can send them, the price sheet and the rules are all here: https://digitalswitch.co.za/refer';
   $('#partnerMsg').innerHTML='<span class="k">Reply</span>'+p;
   $$('.nm').forEach(function(e){e.textContent=me()});
   $$('[data-copy]').forEach(addCopy);
@@ -345,7 +347,7 @@ function renderLeads(){
     return '<article class="lead-card s-'+st+'" data-id="'+l.id+'">'+
       '<div class="lc-top"><div><h3>'+(l.today?(LEADS.indexOf(l)+1)+'. ':'')+esc(l.name)+'</h3><div class="meta">'+esc(l.area)+' · '+local(l.num)+(l.mobile?'':' · landline')+'</div></div><span class="badge s-'+st+'">'+lab+'</span></div>'+
       '<div class="row"><a class="btn p sm" href="tel:+'+l.num+'">Call</a><a class="btn sm" href="'+SITE+l.id+'/" target="_blank" rel="noopener">Their site ↗</a>'+
-      (l.mobile?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgMissed(l)))+'">1 · First message</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgAfter(l)))+'">2 · Send the link</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">3 · Follow-up</a>':'')+'</div>'+
+      (l.mobile?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgMissed(l)))+'">1 · First message</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgAfter(l)))+'">2 · Send the link</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">3 · Follow-up (only if they said yes)</a>':'')+'</div>'+
       '<div class="status-row">'+STATUSES.map(function(s){return '<button data-st="'+s[0]+'" class="'+(s[0]===st?'on':'')+'">'+s[1]+'</button>'}).join('')+'</div>'+
       '<textarea placeholder="Notes: who you spoke to, call-back time…" data-note>'+esc(note)+'</textarea></article>';
   }).join('');
