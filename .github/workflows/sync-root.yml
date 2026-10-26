@@ -1,0 +1,18 @@
+name: Sync DS site to domain root
+on:
+  push:
+    branches: [main]
+    paths: ['ds/index.html', 'tools/sync_root.py']
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/sync_root.py
+      - run: |
+          if ! git diff --quiet index.html; then
+            git config user.name "ds-bot"; git config user.email "ds-bot@users.noreply.github.com"
+            git add index.html && git commit -m "Sync root index from ds/index.html" && git push
+          fi

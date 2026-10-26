@@ -1,0 +1,799 @@
+<!doctype html>
+<!-- generated from ds/index.html by tools/sync_root.py: edit ds/index.html, not this file -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Switch</title>
+<meta name="description" content="Animated, phone-first websites for Joburg businesses. R2,999 once-off, R199 a month, live in 24 hours.">
+<meta name="theme-color" content="#071719">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23071719%22/%3E%3Crect%20x%3D%229%22%20y%3D%2219%22%20width%3D%2246%22%20height%3D%2226%22%20rx%3D%2213%22%20fill%3D%22%23c3b0ff%22/%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%2232%22%20r%3D%229%22%20fill%3D%22%23071719%22/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Playfair+Display:ital,wght@0,500;1,500&family=Bricolage+Grotesque:wght@600;700;800&family=Instrument+Serif:ital@1&family=Unbounded:wght@200;300;500&family=Inter+Tight:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#071719; --night-2:#0b2124; --card:rgba(13,37,40,.86);
+  --street:#123336; --river:#1b4a4d; --deep:#164043;
+  --lilac:#c3b0ff; --lilac-deep:#9b7bff; --mint:#ddf5ec; --mist:#b6d3cc; --sage:#9cc0b9; --dim:#6f9993;
+  --pad: clamp(20px, 4vw, 64px);
+  --display:'Unbounded', system-ui, sans-serif;
+  --script:'Ballet', cursive;
+  --body:'Inter Tight', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --neon-text:0 0 8px rgba(195,176,255,.95),0 0 22px rgba(155,123,255,.75),0 0 48px rgba(155,123,255,.45);
+  --neon-box:0 0 14px rgba(195,176,255,.7),0 0 36px rgba(155,123,255,.45),0 0 80px rgba(155,123,255,.2);
+}
+:root[data-theme="dark"]{color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:18px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.script{font-family:var(--script);font-weight:400;color:var(--lilac);letter-spacing:0;text-transform:none;transition:text-shadow .35s,color .35s}
+.script:hover{color:#e4dbff;text-shadow:var(--neon-text)}
+.glow{text-shadow:0 0 18px rgba(155,123,255,.6)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;font-weight:500;font-size:16px;text-decoration:none;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,background .25s,border-color .25s;white-space:nowrap}
+.btn-primary{background:var(--lilac);color:var(--night);box-shadow:0 0 0 rgba(155,123,255,0)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--neon-box)}
+.btn-ghost{border:1px solid var(--river);color:var(--mint)}
+.btn-ghost:hover{border-color:var(--lilac);color:#fff;transform:translateY(-2px);box-shadow:var(--neon-box),inset 0 0 14px rgba(195,176,255,.18);text-shadow:0 0 10px rgba(195,176,255,.8)}
+.btn svg{width:18px;height:18px}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(7,23,25,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--street)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo svg{width:44px;height:25px;filter:drop-shadow(0 0 6px rgba(195,176,255,.7));overflow:visible;transition:filter .5s .35s}
+.logo svg rect{transition:fill .45s .3s}
+.logo svg circle{transition:transform .6s cubic-bezier(.34,1.56,.64,1) .25s}
+.nav .logo{transition:opacity .45s,transform .45s}
+.nav.logo-off .logo{opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .35s,transform .35s}
+.nav.logo-off .logo svg{filter:none;transition-delay:0s}
+.nav.logo-off .logo svg rect{fill:#164043;transition-delay:0s}
+.nav.logo-off .logo svg circle{transform:translateX(-34px);fill:#6f9993;transition-delay:0s}
+.nav.logo-off .logo .w2{text-shadow:none;opacity:.25}
+.logo .w2.flick{animation:neonOn 1.2s linear both}
+.logo:hover svg{filter:drop-shadow(0 0 10px #c3b0ff) drop-shadow(0 0 26px rgba(155,123,255,.7))}
+.logo .w1{font-family:var(--display);font-weight:200;font-size:21px;letter-spacing:-.03em}
+.logo .w2{font-family:var(--script);font-size:38px;line-height:.6;color:#f1ecff;text-shadow:0 0 6px #fff,0 0 14px var(--lilac),0 0 30px var(--lilac-deep);margin-left:2px;display:inline-block;transition:opacity .4s .3s}
+.nav-links{display:flex;align-items:center;gap:30px;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--mist);transition:color .2s}
+.nav-links a:not(.btn):hover{color:var(--lilac);text-shadow:var(--neon-text)}
+.nav .btn{padding:10px 20px;font-size:15px}
+.nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:var(--night)}
+.menu-btn{display:none;background:none;border:1px solid var(--river);color:var(--mint);border-radius:999px;padding:9px 16px;font:500 14px var(--body)}
+@media (max-width: 960px){
+  .nav-links{position:fixed;inset:76px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:rgba(7,23,25,.97);border-bottom:1px solid var(--street);padding:8px var(--pad) 24px;transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+  .nav-links.open{opacity:1;transform:none;pointer-events:auto}
+  .nav-links a{padding:14px 0;width:100%;border-bottom:1px solid var(--street);font-size:18px}
+  .nav-links .btn{margin-top:18px;border:0;width:auto;padding:12px 22px}
+  .menu-btn{display:inline-flex}
+}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 72px;overflow:hidden}
+.city{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.city .streets path{stroke:var(--street);stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke}
+.route-base{fill:none;stroke:var(--lilac);stroke-width:2;opacity:.25;vector-effect:non-scaling-stroke}
+.route-flow{fill:none;stroke:var(--lilac);stroke-width:3;stroke-linecap:round;stroke-dasharray:10 12;filter:drop-shadow(0 0 6px var(--lilac));animation:flow 1.4s linear infinite;vector-effect:non-scaling-stroke}
+.pin-ring{fill:none;stroke:var(--lilac);stroke-width:2;animation:pulse 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.pin-label{font-family:var(--mono);font-size:13px;letter-spacing:.16em;fill:var(--dim)}
+.note{font-family:var(--script);font-size:48px;fill:var(--mint)}
+.note-write{animation:write 1.6s cubic-bezier(.65,0,.35,1) 2.6s both}
+.twinkle{fill:var(--lilac);filter:drop-shadow(0 0 6px var(--lilac));animation:twinkle 3.2s ease-in-out infinite}
+.hero .wrap{position:relative;z-index:2}
+.hero::after{content:"";position:absolute;z-index:1;left:-10%;bottom:-10%;width:65%;height:55%;background:radial-gradient(closest-side,rgba(7,23,25,.92),rgba(7,23,25,.6) 55%,rgba(7,23,25,0));pointer-events:none}
+.hero-meta{display:flex;justify-content:space-between;gap:16px;margin-bottom:clamp(20px,4vw,48px)}
+.headline{margin:0;font-weight:400;line-height:1}
+.headline .l1{display:block;overflow:hidden;padding-bottom:.04em}
+.headline .l1 span{display:inline-block;font-family:var(--display);font-weight:200;font-size:clamp(64px,11.6vw,186px);letter-spacing:-.045em;animation:rise 1.3s cubic-bezier(.16,1,.3,1) both}
+.headline .l2{display:flex;align-items:center;gap:clamp(16px,2.5vw,40px);margin-left:clamp(40px,12vw,200px);margin-top:clamp(-30px,-1.5vw,-10px)}
+.sign{font-family:var(--script);font-size:clamp(108px,15.6vw,250px);line-height:1.2;color:#f1ecff;white-space:nowrap;animation:neonOn 2.4s linear .6s both,hum 4s ease-in-out 3s infinite}
+.switch{width:clamp(76px,10vw,160px);height:auto;flex:none;margin-top:clamp(20px,3vw,56px);animation:switchGlow 3.8s ease-in-out 2s infinite both;overflow:visible}
+.switch .knob{animation:knob 1s cubic-bezier(.34,1.56,.64,1) 2.2s both}
+.hero-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:40px;align-items:end;margin-top:clamp(16px,3vw,40px)}
+.hero-lede{margin:0;max-width:500px;font-size:clamp(18px,1.6vw,22px);font-weight:300;color:var(--mist);line-height:1.5}
+.hero-lede .script{font-size:2.3em;line-height:.5}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.price-card{background:var(--card);border:1px solid var(--river);border-radius:26px;padding:26px 28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;backdrop-filter:blur(6px)}
+.price-card div{display:flex;flex-direction:column;gap:4px}
+.price-card b{font-family:var(--display);font-weight:300;font-size:clamp(19px,1.7vw,24px);letter-spacing:-.03em;white-space:nowrap}
+.price-card .mono{font-size:10.5px}
+@media (max-width: 900px){
+  .hero-foot{grid-template-columns:1fr}
+  .hero-meta .hide-sm{display:none}
+}
+@media (max-width: 520px){
+  .price-card{grid-template-columns:1fr 1fr;padding:22px}
+  .price-card div:last-child{grid-column:span 2}
+  .headline .l2{margin-left:14px;gap:12px}
+  .sign{font-size:88px}
+  .switch{width:58px;margin-top:22px}
+}
+
+/* ticker */
+.ticker{border-top:1px solid var(--street);border-bottom:1px solid var(--street);overflow:hidden;height:64px;display:flex;align-items:center;background:var(--night)}
+.ticker-track{display:flex;align-items:center;gap:44px;white-space:nowrap;padding-left:44px;animation:tick 36s linear infinite;font-family:var(--display);font-weight:300;font-size:21px;color:var(--dim)}
+.ticker-track .dot{width:8px;height:8px;border-radius:50%;background:var(--lilac);box-shadow:0 0 8px var(--lilac),0 0 18px rgba(155,123,255,.6);flex:none}
+
+/* sections */
+section{position:relative}
+.section{padding:clamp(88px,11vw,160px) 0}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--lilac);box-shadow:0 0 8px var(--lilac)}
+.h2{font-family:var(--display);font-weight:200;font-size:clamp(38px,5.4vw,84px);line-height:1.08;letter-spacing:-.045em;margin:0;max-width:1100px}
+.h2 .script{font-size:1.8em;line-height:1;display:inline-block;transform:translateY(.06em);padding:0 .06em}
+.lead{font-size:clamp(18px,1.5vw,21px);font-weight:300;color:var(--mist);max-width:620px;margin:26px 0 0}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* problem */
+.truths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street)}
+.truth{padding:32px 32px 0 0}
+.truth + .truth{padding-left:32px;border-left:1px solid var(--street)}
+.truth .num{font-family:var(--mono);font-size:12px;color:var(--lilac);letter-spacing:.16em}
+.truth h3{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:-.03em;line-height:1.2;margin:16px 0 12px}
+.truth p{margin:0;color:var(--sage);font-size:17px}
+@media (max-width: 860px){.truths{grid-template-columns:1fr}.truth,.truth + .truth{padding:28px 0;border-left:0;border-bottom:1px solid var(--street)}}
+
+/* work: stacked cards */
+.work-head{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.stack{margin-top:clamp(48px,6vw,80px);position:relative}
+.scard{position:sticky;top:calc(100px + var(--i) * 22px);height:min(680px,calc(100svh - 140px));margin-bottom:56px;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(24px,3vw,48px);padding:clamp(24px,3vw,44px);border-radius:32px;background:linear-gradient(160deg,#0d272a,#081b1d 60%);border:1px solid var(--river);box-shadow:0 -30px 60px rgba(0,0,0,.35);transform-origin:50% 0;transform:scale(var(--s,1));overflow:hidden;transition:border-color .6s,box-shadow .6s}
+.scard::before{content:"";position:absolute;inset:0;background:var(--night);opacity:var(--cover,0);pointer-events:none;z-index:5;border-radius:inherit}
+.scard.on{border-color:rgba(195,176,255,.45);box-shadow:0 -30px 60px rgba(0,0,0,.35),0 0 50px rgba(155,123,255,.12)}
+.scard-info{display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0}
+.scard-top{display:flex;justify-content:space-between;align-items:center}
+.mini-sw{width:44px;height:25px;overflow:visible}
+.mini-sw rect{fill:var(--deep);transition:fill .5s}
+.mini-sw circle{fill:var(--dim);transition:transform .6s cubic-bezier(.34,1.56,.64,1),fill .5s}
+.scard.on .mini-sw rect{fill:var(--lilac)}
+.scard.on .mini-sw circle{transform:translateX(34px);fill:var(--night)}
+.scard.on .mini-sw{filter:drop-shadow(0 0 6px var(--lilac)) drop-shadow(0 0 16px rgba(155,123,255,.6))}
+.loc{display:inline-flex;align-items:center;gap:10px;color:var(--lilac)}
+.loc i{width:8px;height:8px;border-radius:50%;background:var(--lilac);box-shadow:0 0 8px var(--lilac),0 0 18px rgba(155,123,255,.6)}
+.scard h3{margin:16px 0 14px;font-family:var(--display);font-weight:300;font-size:clamp(30px,3.4vw,52px);letter-spacing:-.045em;line-height:1.02}
+.scard p{margin:0;color:var(--sage);font-size:17px;max-width:420px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{border:1px solid var(--river);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--mist)}
+.scard .btn{align-self:flex-start}
+.scard-prev{position:relative;min-width:0;align-self:center}
+.frame{border-radius:18px;overflow:hidden;border:1px solid var(--river);background:#061416;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.frame .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--street)}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--river)}
+.frame .bar span{margin-left:10px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.screen{position:relative;aspect-ratio:16/10;overflow:hidden;background:#061416}
+.screen img,.ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+.screen iframe,.ph iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .8s}
+.screen iframe.ready,.ph iframe.ready{opacity:1}
+.ph{position:absolute;right:-6px;bottom:-34px;width:24%;aspect-ratio:9/19.5;border-radius:26px;padding:6px;background:linear-gradient(160deg,#1b4a4d,#0b2124);border:1px solid var(--river);box-shadow:-20px 30px 60px rgba(0,0,0,.6);overflow:hidden}
+.ph img,.ph iframe{border-radius:20px}
+.ph > *{border-radius:20px}
+.ph.live{overflow:hidden}
+.ph.live iframe{left:6px;top:6px}
+/* switched-off previews: duotone night until the card switches on */
+.screen::after,.ph::after{content:"";position:absolute;inset:0;background:var(--deep);mix-blend-mode:color;opacity:1;transition:opacity 1.1s;pointer-events:none;border-radius:inherit}
+.screen img,.screen iframe,.ph img,.ph iframe{filter:brightness(.62) contrast(1.05);transition:filter 1.1s,opacity .8s}
+.scard.on .screen::after,.scard.on .ph::after{opacity:0}
+.scard.on .screen img,.scard.on .screen iframe,.scard.on .ph img,.scard.on .ph iframe{filter:none}
+@media (max-width: 960px){
+  .scard{position:relative;top:auto;height:auto;grid-template-columns:1fr;margin-bottom:22px;transform:none}
+  .scard::before{display:none}
+  .ph{width:26%;bottom:-18px;right:-4px;border-radius:18px;padding:4px}
+  .scard-prev{margin-bottom:18px}
+}
+
+/* included */
+.included{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street);border-left:1px solid var(--street)}
+.inc{padding:30px 28px 34px;border-right:1px solid var(--street);border-bottom:1px solid var(--street);min-height:230px;display:flex;flex-direction:column;gap:14px;transition:background .3s}
+.inc:hover{background:rgba(22,64,67,.35)}
+.inc svg{transition:filter .35s}
+.inc:hover svg{filter:drop-shadow(0 0 8px #c3b0ff) drop-shadow(0 0 20px rgba(155,123,255,.8))}
+.inc svg{width:34px;height:34px;stroke:var(--lilac);fill:none;stroke-width:1.5;filter:drop-shadow(0 0 6px rgba(195,176,255,.5))}
+.inc h3{margin:0;font-family:var(--display);font-weight:300;font-size:20px;letter-spacing:-.02em;line-height:1.25}
+.inc p{margin:0;color:var(--sage);font-size:16px}
+@media (max-width: 1100px){.included{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width: 600px){.included{grid-template-columns:1fr}.inc{min-height:0}}
+
+/* how: vertical route */
+.how{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,100px);align-items:start}
+.how-intro{position:sticky;top:120px}
+.stops{position:relative;padding-left:60px}
+.stop-list{list-style:none;margin:0;padding:0}
+.stops-line{position:absolute;left:14px;top:8px;bottom:8px;width:3px}
+.stops-line .base{position:absolute;inset:0;background:var(--lilac);opacity:.18;border-radius:3px}
+.stops-line .fill{position:absolute;left:0;right:0;top:0;height:var(--p,0%);background:var(--lilac);border-radius:3px;box-shadow:0 0 10px var(--lilac),0 0 24px rgba(155,123,255,.6)}
+.stop{position:relative;padding:0 0 64px}
+.stop:last-child{padding-bottom:0}
+.stop .dot{position:absolute;left:-54px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--night);border:2px solid var(--river);transition:all .5s}
+.stop.lit .dot{background:var(--lilac);border-color:var(--lilac);box-shadow:0 0 12px var(--lilac),0 0 28px rgba(155,123,255,.7)}
+.stop .mono{display:block;margin-bottom:10px}
+.stop h3{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.035em;line-height:1.15}
+.stop p{margin:12px 0 0;color:var(--sage);max-width:480px}
+.stop .script{font-size:2.1em;line-height:.6}
+@media (max-width: 900px){.how{grid-template-columns:1fr}.how-intro{position:static}}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:clamp(48px,6vw,80px)}
+.plan{border-radius:28px;padding:clamp(28px,3.4vw,44px);background:var(--card);border:1px solid var(--river);display:flex;flex-direction:column;gap:22px}
+.plan{transition:border-color .4s,box-shadow .4s}
+.plan:hover{border-color:rgba(195,176,255,.6);box-shadow:0 0 50px rgba(155,123,255,.18)}
+.plan.hot{background:linear-gradient(180deg,rgba(195,176,255,.1),rgba(13,37,40,.86) 55%);border-color:rgba(195,176,255,.55);box-shadow:0 0 50px rgba(155,123,255,.12)}
+.plan .amount{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.plan .amount b{font-family:var(--display);font-weight:200;font-size:clamp(56px,6vw,92px);letter-spacing:-.06em;line-height:1}
+.plan .amount span{color:var(--sage)}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.plan li{display:flex;gap:14px;align-items:flex-start;color:var(--mist);font-size:17px}
+.plan li:hover::before{box-shadow:var(--neon-box)}
+.plan li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--lilac);box-shadow:0 0 8px var(--lilac)}
+.plan .btn{align-self:flex-start;margin-top:auto}
+.extras{margin-top:22px;border:1px solid var(--street);border-radius:22px;padding:8px 28px}
+.extras div{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--street);font-size:16px;color:var(--mist)}
+.extras div:last-child{border-bottom:0}
+.extras span:last-child{color:var(--sage);text-align:right}
+@media (max-width: 860px){.plans{grid-template-columns:1fr}}
+
+
+/* SJ preview, drawn live in HTML (photo from the SJ site) */
+.sjm{container-type:inline-size;background:#16120e}
+.sjm-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(22,18,14,.96) 0%,rgba(22,18,14,.72) 45%,rgba(22,18,14,.12) 100%),linear-gradient(to top,#16120e 2%,transparent 40%),url(https://sj-rhythm-academy.lovable.app/assets/zildjian-stage-CRLsrddG.jpg) 62% 30%/cover,radial-gradient(80% 90% at 75% 40%,#5a3a1c,#16120e 70%)}
+.ph .sjm-bg{background:linear-gradient(to top,#16120e 30%,rgba(22,18,14,.35) 70%),url(https://sj-rhythm-academy.lovable.app/assets/zildjian-stage-CRLsrddG.jpg) 70% 30%/cover,radial-gradient(80% 60% at 60% 30%,#5a3a1c,#16120e 70%)}
+.sjm-nav{position:absolute;left:4cqw;right:4cqw;top:3cqw;display:flex;align-items:center;justify-content:space-between;color:#f5efe6;font-family:'Playfair Display',Georgia,serif;font-size:1.6cqw}
+.sjm-logo{display:flex;align-items:center;gap:1cqw}
+.sjm-logo i{width:3.2cqw;height:3.2cqw;border-radius:50%;border:1px solid #f0b545;color:#f0b545;display:grid;place-items:center;font-size:1.3cqw}
+.sjm-links{font-family:var(--body);font-size:1.1cqw;color:#b9ad9c}
+.sjm-btn{background:linear-gradient(135deg,#f5c25a,#b07a3a);color:#16120e;border-radius:99px;padding:.9cqw 1.8cqw;font-family:var(--body);font-weight:600;font-size:1.1cqw}
+.sjm-body{position:absolute;left:4cqw;right:4cqw;bottom:9cqw;display:flex;flex-direction:column;gap:2cqw;color:#f5efe6}
+.sjm-top{font-family:var(--mono);font-size:1cqw;letter-spacing:.18em;text-transform:uppercase;color:#f0b545}
+.sjm-h{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:6.4cqw;line-height:1}
+.sjm-h em{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:#e9a23b}
+.sjm-p{font-size:1.4cqw;max-width:42cqw;color:#d9cfc1;font-weight:300}
+.sjm-ctas{display:flex;gap:1.2cqw;font-family:var(--body);font-size:1.2cqw}
+.sjm-ctas b{background:linear-gradient(135deg,#f5c25a,#b07a3a);color:#16120e;border-radius:99px;padding:1cqw 2cqw;font-weight:600}
+.sjm-ctas u{text-decoration:none;border:1px solid #4a3f33;border-radius:99px;padding:1cqw 2cqw;color:#f5efe6}
+.sjm-beat{position:absolute;right:4cqw;bottom:6cqw;display:flex;align-items:flex-end;gap:.5cqw;height:6cqw}
+.sjm-beat i{width:.55cqw;border-radius:2px;background:#f0b545;box-shadow:0 0 .8cqw rgba(240,181,69,.8);height:100%;transform-origin:bottom;animation:sjbar .652s ease-in-out infinite}
+.sjm-beat i:nth-child(2n){animation-delay:-.163s}.sjm-beat i:nth-child(3n){animation-delay:-.326s}.sjm-beat i:nth-child(4n){animation-delay:-.489s}
+@keyframes sjbar{0%,100%{transform:scaleY(.25);opacity:.5}12%{transform:scaleY(1);opacity:1}}
+.ph.sjm .sjm-nav{top:7cqw;left:7cqw;right:7cqw;font-size:6cqw}
+.ph.sjm .sjm-logo i{width:12cqw;height:12cqw;font-size:5cqw}
+.ph.sjm .sjm-btn{font-size:4.6cqw;padding:2.4cqw 5cqw}
+.ph.sjm .sjm-body{left:7cqw;right:7cqw;bottom:10cqw;gap:5cqw}
+.ph.sjm .sjm-top{font-size:3.6cqw}
+.ph.sjm .sjm-h{font-size:13cqw}
+.ph.sjm .sjm-ctas{font-size:4.6cqw}
+.ph.sjm .sjm-ctas b{padding:3.6cqw 6cqw}
+.sjm > *{filter:brightness(.62);transition:filter 1.1s}
+.scard.on .sjm > *{filter:none}
+
+
+/* Mjojo preview, drawn in HTML (photo from mjojo.co.za) */
+.mjm{container-type:inline-size;background:#0B0910;font-family:'Bricolage Grotesque','Arial Narrow',system-ui,sans-serif}
+.mjm-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,9,16,.92) 0%,rgba(11,9,16,.55) 50%,rgba(11,9,16,.2) 100%),linear-gradient(to top,#0B0910 3%,transparent 45%),url(https://mjojo.co.za/img/hero.jpg) 60% 25%/cover,radial-gradient(60% 80% at 50% 30%,#3b2a1c,#0B0910 70%)}
+.ph .mjm-bg{background:linear-gradient(to top,#0B0910 35%,rgba(11,9,16,.3) 75%),url(https://mjojo.co.za/img/hero.jpg) 50% 20%/cover,radial-gradient(70% 50% at 50% 25%,#3b2a1c,#0B0910 70%)}
+.mjm-nav{position:absolute;left:50%;top:2.6cqw;transform:translateX(-50%);display:flex;align-items:center;gap:2cqw;padding:.8cqw .9cqw .8cqw 1.8cqw;border:1px solid rgba(240,234,255,.18);border-radius:99px;background:rgba(20,16,28,.7);white-space:nowrap}
+.mjm-word{font-weight:800;font-size:1.7cqw;letter-spacing:.02em}
+.mjm-links{font-size:1.05cqw;color:#c9c2da}
+.mjm-btn{background:#FFD62E;color:#17120a;border-radius:99px;padding:.7cqw 1.4cqw;font-weight:600;font-size:1.05cqw}
+.mjm-body{position:absolute;left:5cqw;right:5cqw;bottom:6cqw;display:flex;flex-direction:column;gap:1.8cqw;color:#F3EFFA}
+.mjm-top{display:flex;align-items:center;gap:.8cqw;font-family:var(--mono);font-size:.95cqw;letter-spacing:.14em;text-transform:uppercase;color:#d8d0ea}
+.mjm-top i{width:.7cqw;height:.7cqw;border-radius:50%;background:#FFD62E}
+.mjm-h{font-weight:700;font-size:8.6cqw;line-height:.95;letter-spacing:-.04em}
+.mjm-m b{font-weight:800}
+.mjm-h em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.mjm-p{font-size:1.45cqw;max-width:46cqw;color:#d8d0ea;font-family:var(--body)}
+.mjm-ctas{display:flex;gap:1.2cqw;font-size:1.2cqw}
+.mjm-ctas b{background:#FFD62E;color:#17120a;border-radius:99px;padding:1cqw 2cqw;font-weight:600}
+.mjm-ctas u{text-decoration:none;border:1px solid rgba(240,234,255,.25);border-radius:99px;padding:1cqw 2cqw}
+.ph.mjm .mjm-nav{top:6cqw;left:7cqw;right:7cqw;transform:none;justify-content:space-between;padding:2.4cqw 2.4cqw 2.4cqw 5cqw}
+.ph.mjm .mjm-word{font-size:6.4cqw}
+.ph.mjm .mjm-btn{font-size:4.4cqw;padding:2.2cqw 4.4cqw}
+.ph.mjm .mjm-body{left:7cqw;right:7cqw;bottom:10cqw;gap:5cqw}
+.ph.mjm .mjm-top{font-size:3.4cqw}.ph.mjm .mjm-top i{width:2.4cqw;height:2.4cqw}
+.ph.mjm .mjm-h{font-size:17cqw}
+.ph.mjm .mjm-ctas{font-size:4.6cqw}.ph.mjm .mjm-ctas b{padding:3.6cqw 6cqw}
+.mjm > *{filter:brightness(.62);transition:filter 1.1s}
+.scard.on .mjm > *{filter:none}
+
+/* monthly explainer */
+.monthly{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,5vw,80px);border-top:1px solid var(--street);padding-top:clamp(48px,6vw,80px)}
+.m-head .lead{margin-top:22px}
+.per-day{display:flex;align-items:baseline;gap:14px;margin-top:30px}
+.per-day b{font-family:var(--display);font-weight:200;font-size:clamp(40px,4vw,60px);letter-spacing:-.05em;color:var(--lilac);text-shadow:0 0 18px rgba(155,123,255,.5)}
+.m-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--street);border-left:1px solid var(--street)}
+.m-item{padding:24px 24px 26px;border-right:1px solid var(--street);border-bottom:1px solid var(--street);transition:background .3s}
+.m-item:hover{background:rgba(22,64,67,.35)}
+.m-item .mono{color:var(--lilac)}
+.m-item h3{margin:10px 0 8px;font-family:var(--display);font-weight:300;font-size:20px;letter-spacing:-.02em}
+.m-item p{margin:0;color:var(--sage);font-size:16px}
+@media (max-width: 960px){.monthly{grid-template-columns:1fr}}
+@media (max-width: 560px){.m-grid{grid-template-columns:1fr}}
+
+/* refer */
+.refer{border-radius:32px;border:1px solid rgba(195,176,255,.45);padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center;background:radial-gradient(120% 140% at 100% 0%,rgba(155,123,255,.22),rgba(7,23,25,0) 55%),var(--night-2);overflow:hidden;position:relative}
+.refer{transition:box-shadow .5s,border-color .5s}
+.refer:hover{border-color:rgba(195,176,255,.75);box-shadow:0 0 60px rgba(155,123,255,.2)}
+.refer .big{font-family:var(--script);font-size:clamp(120px,15vw,230px);line-height:.8;color:#f1ecff;animation:hum 4s ease-in-out infinite;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 44px var(--lilac-deep),0 0 100px rgba(155,123,255,.7)}
+@media (max-width: 860px){.refer{grid-template-columns:1fr}}
+
+/* faq */
+.faq{margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--street)}
+.faq details{border-bottom:1px solid var(--street)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;font-family:var(--display);font-weight:300;font-size:clamp(19px,1.8vw,24px);letter-spacing:-.025em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .tg{flex:none;width:46px;height:26px;border-radius:13px;background:var(--deep);position:relative;transition:background .3s,box-shadow .3s}
+.faq summary .tg::after{content:"";position:absolute;left:4px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--dim);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s}
+.faq details[open] .tg{background:var(--lilac);box-shadow:0 0 14px rgba(195,176,255,.6)}
+.faq summary:hover .tg{box-shadow:var(--neon-box)}
+.faq summary:hover{color:#fff}
+.faq details[open] .tg::after{transform:translateX(20px);background:var(--night)}
+.faq details p{margin:0 0 28px;max-width:760px;color:var(--sage)}
+
+/* final */
+.final{text-align:center;padding:clamp(100px,14vw,200px) 0 clamp(80px,10vw,140px);overflow:hidden}
+.final .sign{display:block;font-size:clamp(70px,17vw,280px);line-height:1.1;animation:hum 4s ease-in-out infinite;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 44px var(--lilac-deep),0 0 110px rgba(155,123,255,.7)}
+.final .h2{margin:0 auto}
+.final .hero-actions{justify-content:center}
+.final .btn{font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px}
+
+/* footer */
+footer{border-top:1px solid var(--street);padding:48px 0 40px}
+.foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.foot-links{display:flex;gap:28px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.foot-links a{text-decoration:none;color:var(--mist)}
+.foot-links a:hover{color:var(--lilac);text-shadow:var(--neon-text)}
+.foot-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px}
+
+/* wa float */
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:40;width:58px;height:58px;border-radius:50%;background:var(--lilac);display:grid;place-items:center;box-shadow:0 0 22px rgba(155,123,255,.6);transition:transform .25s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;transform:scale(.6);pointer-events:none}
+.wa-float.show{opacity:1;transform:none;pointer-events:auto}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:28px;height:28px;fill:var(--night)}
+
+@keyframes flow{to{stroke-dashoffset:-44}}
+@keyframes pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(4.4);opacity:0}}
+@keyframes write{from{clip-path:inset(-40% 100% -40% 0)}to{clip-path:inset(-40% -10% -40% 0)}}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes neonOn{0%,30%{opacity:.12;text-shadow:none}33%{opacity:1;text-shadow:0 0 8px #c3b0ff,0 0 30px #9b7bff}36%{opacity:.2;text-shadow:none}44%{opacity:1}55%,100%{opacity:1;text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 100px rgba(155,123,255,.7)}}
+@keyframes hum{0%,100%{text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 100px rgba(155,123,255,.7)}50%{text-shadow:0 0 4px #fff,0 0 12px #c3b0ff,0 0 30px #9b7bff,0 0 64px rgba(155,123,255,.5)}}
+@keyframes switchGlow{0%,100%{filter:drop-shadow(0 0 10px #c3b0ff) drop-shadow(0 0 36px rgba(155,123,255,.6))}50%{filter:drop-shadow(0 0 6px #c3b0ff) drop-shadow(0 0 20px rgba(155,123,255,.45))}}
+@keyframes knob{from{transform:translateX(-32px)}to{transform:none}}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav logo-off" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Digital Switch home">
+      <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
+      <span><span class="w1">Digital</span><span class="w2">Switch</span></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#included">What you get</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#refer">Refer &amp; earn</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary wa-link" href="#">Get your site</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <svg class="city" viewBox="0 0 1600 1100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="streets">
+      <path d="M-20 180 L1620 120"/><path d="M-20 330 L1620 300"/><path d="M-20 520 L1620 470"/><path d="M-20 700 L1620 690"/><path d="M-20 880 L1620 840"/><path d="M-20 1040 L1620 1010"/>
+      <path d="M140 -20 L210 1120"/><path d="M380 -20 L420 1120"/><path d="M620 -20 L600 1120"/><path d="M860 -20 L900 1120"/><path d="M1110 -20 L1080 1120"/><path d="M1340 -20 L1390 1120"/>
+    </g>
+    <path class="route-base" d="M-20 980 C 400 700, 900 760, 1620 260"/>
+    <path class="route-flow" d="M-20 980 C 400 700, 900 760, 1620 260"/>
+    <circle cx="205" cy="172" r="3" class="twinkle"/><circle cx="1356" cy="297" r="3" class="twinkle" style="animation-delay:2.2s"/><circle cx="893" cy="689" r="3" class="twinkle" style="animation-delay:1.7s"/><circle cx="1105" cy="470" r="3" class="twinkle" style="animation-delay:.4s"/>
+    <circle cx="175" cy="874" r="6" fill="#c3b0ff"/><circle class="pin-ring" cx="175" cy="874" r="6"/>
+    <circle cx="1410" cy="394" r="6" fill="#c3b0ff"/><circle class="pin-ring" cx="1410" cy="394" r="6" style="animation-delay:1.2s"/>
+    <text class="pin-label" x="195" y="900">SOWETO</text>
+    <text class="pin-label" x="1428" y="416">SANDTON</text>
+    <text class="note note-write" x="1230" y="350" transform="rotate(-8 1230 350)">your shop, here</text>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-meta mono"><span>Websites for Joburg businesses</span><span class="hide-sm">26.2041° S · 28.0473° E</span><span class="hide-sm">Soweto to Sandton</span></div>
+    <h1 class="headline">
+      <span class="l1"><span>Digital</span></span>
+      <span class="l2"><span class="sign">Switch</span>
+        <svg class="switch" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle class="knob" cx="56" cy="22" r="15" fill="#071719"/></svg>
+      </span>
+    </h1>
+    <div class="hero-foot">
+      <div>
+        <p class="hero-lede">From Soweto to Sandton, the city never switches off. Animated, phone-first websites for Joburg's hustlers, built to be found at <span class="script">2am</span>.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary wa-link" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>Get your site</a>
+          <a class="btn btn-ghost" href="#work">See the work</a>
+        </div>
+      </div>
+      <div class="price-card">
+        <div><span class="mono">Setup</span><b>R2,999</b></div>
+        <div><span class="mono">Monthly</span><b>R199</b></div>
+        <div><span class="mono">Live in</span><b>24 hours</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack">
+  <span>Salons</span><span class="dot"></span><span>Plumbers</span><span class="dot"></span><span>Roofers</span><span class="dot"></span><span>Mechanics</span><span class="dot"></span><span>Caterers</span><span class="dot"></span><span>Barbers</span><span class="dot"></span><span>Builders</span><span class="dot"></span><span>Tutors</span><span class="dot"></span><span>Cleaners</span><span class="dot"></span><span>Photographers</span><span class="dot"></span>
+</div></div>
+
+<!-- PROBLEM -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">The problem</div>
+    <h2 class="h2 reveal">Right now, someone in Joburg is searching for exactly what you do. <span class="script">Can they find you?</span></h2>
+    <div class="truths">
+      <div class="truth reveal"><span class="num">01</span><h3>They search on their phone</h3><p>Most people look for a plumber, a salon or a mechanic on the phone in their pocket, often after hours. Your website has to work there first.</p></div>
+      <div class="truth reveal"><span class="num">02</span><h3>If you're not there, someone else is</h3><p>When your business doesn't show up, the customer doesn't wait. They call the next name on the list.</p></div>
+      <div class="truth reveal"><span class="num">03</span><h3>A social page isn't enough</h3><p>Your own website, on your own address, with tap-to-call and WhatsApp buttons, makes you look established and easy to book.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section" id="work" style="padding-top:0">
+  <div class="wrap">
+    <div class="work-head">
+      <div>
+        <div class="eyebrow mono reveal">The work</div>
+        <h2 class="h2 reveal">Websites that <span class="script">move</span>.</h2>
+      </div>
+      <p class="lead reveal" style="margin:0;max-width:440px">Every site is custom, animated and built for phones first. These are live, so open them on your phone.</p>
+    </div>
+
+    <div class="stack" id="stack">
+      <article class="scard" style="--i:0">
+        <div class="scard-info">
+          <div class="scard-top"><span class="mono">01 / 04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div>
+          <div>
+            <span class="loc mono"><i></i>Johannesburg South</span>
+            <h3>Highveld Roofworks</h3>
+            <p>Roofing, waterproofing and gutters. A storm-season hero, a free-quote form and tap-to-call on every screen.</p>
+            <div class="tags"><span>Roofing</span><span>Quote form</span><span>Tap to call</span></div>
+          </div>
+          <a class="btn btn-ghost" href="/local/demo-roofer/" target="_blank" rel="noopener">View live site ↗</a>
+        </div>
+        <div class="scard-prev">
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>highveld-roofworks.co.za</span></div><div class="screen"><img src="ds/assets/highveld-desktop.jpg" width="2400" height="1500" alt="Highveld Roofworks website on desktop" loading="lazy"></div></div>
+          <div class="ph"><img src="ds/assets/highveld-phone.jpg" width="1170" height="2532" alt="Highveld Roofworks website on a phone" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="scard" style="--i:1">
+        <div class="scard-info">
+          <div class="scard-top"><span class="mono">02 / 04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div>
+          <div>
+            <span class="loc mono"><i></i>Alexandra, Johannesburg</span>
+            <h3>Kasi Lobby</h3>
+            <p>Three gaming hubs in Alex. The whole site plays like a retro video game: it boots up, you press start, and every section is a level, with sound, coins and hidden easter eggs.</p>
+            <div class="tags"><span>Gaming hubs</span><span>Rentals</span><span>Three locations</span></div>
+          </div>
+          <a class="btn btn-ghost" href="/clients/kasi-lobby/" target="_blank" rel="noopener">Press start ↗</a>
+        </div>
+        <div class="scard-prev">
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>kasilobby.co.za</span></div><div class="screen"><img src="ds/assets/kasi-desktop.jpg" width="2400" height="1500" alt="Kasi Lobby website on desktop: a retro game title screen with a pixel KASI LOBBY logo and a main menu" loading="lazy"></div></div>
+          <div class="ph"><img src="ds/assets/kasi-phone.jpg" width="1170" height="2532" alt="Kasi Lobby website on a phone" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="scard" style="--i:2">
+        <div class="scard-info">
+          <div class="scard-top"><span class="mono">03 / 04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div>
+          <div>
+            <span class="loc mono"><i></i>Soweto, Johannesburg</span>
+            <h3>Mjojo Finance Play</h3>
+            <p>Financial literacy taught through theatre, music and play. A bold, colourful site with case studies, programme pricing and bookings, live at mjojo.co.za.</p>
+            <div class="tags"><span>Education</span><span>Case studies</span><span>Bookings</span></div>
+          </div>
+          <a class="btn btn-ghost" href="https://mjojo.co.za" target="_blank" rel="noopener">Visit mjojo.co.za ↗</a>
+        </div>
+        <div class="scard-prev">
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>mjojo.co.za</span></div><div class="screen mjm" role="img" aria-label="Mjojo Finance Play website on desktop: a performer on stage behind the colourful Mjojo Finance Play headline">
+            <div class="mjm-bg"></div>
+            <div class="mjm-nav"><span class="mjm-word"><b style="color:#3A86E0">M</b><b style="color:#FFD62E">J</b><b style="color:#F0393A">O</b><b style="color:#2BBD6B">J</b><b style="color:#3A86E0">O</b></span><span class="mjm-links">Our work&nbsp;&nbsp; How we teach&nbsp;&nbsp; What we offer&nbsp;&nbsp; Team</span><span class="mjm-btn">Work with us</span></div>
+            <div class="mjm-body"><span class="mjm-top"><i></i>Financial literacy education · Johannesburg, South Africa</span><span class="mjm-h"><span class="mjm-m"><b style="color:#3A86E0">M</b><b style="color:#FFD62E">j</b><b style="color:#F0393A">o</b><b style="color:#2BBD6B">j</b><b style="color:#3A86E0">o</b></span><br>Finance <em>Play</em></span><span class="mjm-p">We teach money through theatre, music, storytelling and play. In English, isiZulu and Sesotho.</span><span class="mjm-ctas"><b>See our work →</b><u>Work with us</u></span></div>
+          </div></div>
+          <div class="ph mjm" role="img" aria-label="Mjojo Finance Play website on a phone">
+            <div class="mjm-bg"></div>
+            <div class="mjm-nav"><span class="mjm-word"><b style="color:#3A86E0">M</b><b style="color:#FFD62E">J</b><b style="color:#F0393A">O</b><b style="color:#2BBD6B">J</b><b style="color:#3A86E0">O</b></span><span class="mjm-btn">Menu</span></div>
+            <div class="mjm-body"><span class="mjm-top"><i></i>Johannesburg</span><span class="mjm-h"><span class="mjm-m"><b style="color:#3A86E0">M</b><b style="color:#FFD62E">j</b><b style="color:#F0393A">o</b><b style="color:#2BBD6B">j</b><b style="color:#3A86E0">o</b></span><br>Finance <em>Play</em></span><span class="mjm-ctas"><b>See our work →</b></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="scard" style="--i:3">
+        <div class="scard-info">
+          <div class="scard-top"><span class="mono">04 / 04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div>
+          <div>
+            <span class="loc mono"><i></i>Johannesburg &amp; Mpumalanga</span>
+            <h3>SJ Rhythm Academy</h3>
+            <p>Premium private drum lessons with a DW Drums and Zildjian endorsed artist. Gold on black, with lessons for every level, a career story, a gallery and bookings.</p>
+            <div class="tags"><span>Music school</span><span>Bookings</span><span>Gallery</span></div>
+          </div>
+          <a class="btn btn-ghost" href="https://sj-rhythm-academy.lovable.app/" target="_blank" rel="noopener">Visit the site ↗</a>
+        </div>
+        <div class="scard-prev">
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>sj-rhythm-academy.lovable.app</span></div><div class="screen sjm" role="img" aria-label="SJ Rhythm Academy website on desktop: dark and gold, with the headline From first beat to world-stage performance">
+            <div class="sjm-bg"></div>
+            <div class="sjm-nav"><span class="sjm-logo"><i>SJ</i>Rhythm Academy</span><span class="sjm-links">Home&nbsp;&nbsp; About&nbsp;&nbsp; Lessons&nbsp;&nbsp; Career&nbsp;&nbsp; Gallery&nbsp;&nbsp; Testimonials&nbsp;&nbsp; Contact</span><span class="sjm-btn">Book a Lesson</span></div>
+            <div class="sjm-body"><span class="sjm-top">Premium private drum lessons by SJ Rhythm Academy</span><span class="sjm-h">From first beat<br>to <em>world-stage</em><br>performance.</span><span class="sjm-p">Premium private drum lessons with Sipho SJ Malinga, DW Drums &amp; Zildjian endorsed artist with 26+ years on the world's biggest stages.</span><span class="sjm-ctas"><b>Book Your First Lesson</b><u>Explore Lessons</u></span></div>
+          </div></div>
+          <div class="ph sjm" role="img" aria-label="SJ Rhythm Academy website on a phone">
+            <div class="sjm-bg"></div>
+            <div class="sjm-nav"><span class="sjm-logo"><i>SJ</i></span><span class="sjm-btn">Book</span></div>
+            <div class="sjm-body"><span class="sjm-top">Sipho SJ Malinga</span><span class="sjm-h">From first beat to <em>world-stage</em> performance.</span><span class="sjm-ctas"><b>Book your first lesson</b></span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section class="section" id="included" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">What you get</div>
+    <h2 class="h2 reveal">Everything to get you found. <span class="script">No hidden extras.</span></h2>
+    <div class="included">
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/></svg><h3>Built for phones first</h3><p>Fast to load, easy to read and simple to use on any phone.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M4 16c4-8 8-8 12 0s8 8 12 0"/><circle cx="16" cy="16" r="2"/></svg><h3>Animated and custom</h3><p>Designed for your business, with motion that makes people stop scrolling.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M6 6h6l2 6-3 2a14 14 0 0 0 7 7l2-3 6 2v6a2 2 0 0 1-2 2A22 22 0 0 1 4 8a2 2 0 0 1 2-2Z"/></svg><h3>Tap to call and WhatsApp</h3><p>Customers reach you in one tap, plus a quote form and a map.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c4 4 4 20 0 24M16 4c-4 4-4 20 0 24"/></svg><h3>Your own web address</h3><p>Connected to your own domain, so you look established.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"/><path d="m21 21 7 7"/></svg><h3>Set up on Google</h3><p>Ready for people searching for your service in your area.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M16 3 5 7v8c0 7 5 12 11 14 6-2 11-7 11-14V7Z"/></svg><h3>Hosting and security</h3><p>We keep it online, secure and up to date every month.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M5 9h22M5 16h22M5 23h14"/></svg><h3>Monthly changes</h3><p>One batch of updates every month: text, photos, prices, branding.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M5 26V16M12 26V9M19 26v-7M26 26V5"/></svg><h3>A monthly report</h3><p>A short note on your visitors and enquiries, based on what's actually measured.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section" id="how" style="padding-top:0">
+  <div class="wrap how">
+    <div class="how-intro">
+      <div class="eyebrow mono reveal">How it works</div>
+      <h2 class="h2 reveal">From hello to <span class="script">live</span> in a day.</h2>
+      <p class="lead reveal">No meetings needed unless you want one. It all happens on WhatsApp.</p>
+    </div>
+    <div class="stops" id="stops">
+      <div class="stops-line" aria-hidden="true"><span class="base"></span><span class="fill" id="stopsFill"></span></div>
+      <ol class="stop-list">
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 01</span><h3>Say go</h3><p>Message us on WhatsApp. Tell us about your business, or reply "yes" to a site we've already built for you.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 02</span><h3>Pay the setup</h3><p>You get a secure card or EFT link for R2,999. The 24-hour clock starts when payment clears.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 03</span><h3>Send what you like</h3><p>Your logo, photos, services and areas. It's optional: the site goes live either way.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 04</span><h3>You're <span class="script glow">switched on</span></h3><p>Live on your own web address within 24 hours. Changes once a month, fixes any time.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">Pricing</div>
+    <h2 class="h2 reveal">One price to start. <span class="script">One small monthly fee.</span></h2>
+    <div class="plans">
+      <div class="plan hot reveal">
+        <span class="mono">Setup, once</span>
+        <div class="amount"><b>R2,999</b><span>once-off</span></div>
+        <ul>
+          <li>Your website, finished with your logo, photos and details</li>
+          <li>Built for phones first: tap to call, quote form, fast loading</li>
+          <li>Connected to your own web address</li>
+          <li>Set up on Google so people searching can find you</li>
+          <li>Live within 24 hours of payment</li>
+        </ul>
+        <a class="btn btn-primary wa-link" href="#">Get your site</a>
+      </div>
+      <div class="plan reveal">
+        <span class="mono">Monthly service</span>
+        <div class="amount"><b>R199</b><span>/ month</span></div>
+        <ul>
+          <li>Hosting and security</li>
+          <li>One batch of changes every month (text, photos, prices, branding)</li>
+          <li>Fixes whenever something breaks, at no extra cost</li>
+          <li>Enquiries sent straight to your email and WhatsApp</li>
+          <li>A short monthly report: visitors and enquiries</li>
+          <li>Month to month. Cancel any time, no contract</li>
+        </ul>
+        <a class="btn btn-ghost" href="#monthly">What the R199 covers ↓</a>
+      </div>
+    </div>
+    <div class="extras reveal">
+      <div><span>Integrations: online booking, payments, chat, CRM</span><span>Quoted separately</span></div>
+      <div><span>Extra changes beyond the monthly batch</span><span>Quoted separately, usually small</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MONTHLY -->
+<section class="section" id="monthly" style="padding-top:0">
+  <div class="wrap">
+    <div class="monthly reveal">
+      <div class="m-head">
+        <div class="eyebrow mono">The monthly fee, explained</div>
+        <h2 class="h2" style="font-size:clamp(34px,4.4vw,64px)">What your R199 <span class="script">actually</span> pays for.</h2>
+        <p class="lead">A website isn't a once-off thing. It has to be hosted, its address renewed, kept secure and kept up to date. Skip those and it quietly breaks or disappears. The monthly fee covers all of it, so you never have to think about it.</p>
+        <div class="per-day"><b>About R6.60</b><span class="mono">a day</span></div>
+      </div>
+      <div class="m-grid">
+        <div class="m-item"><span class="mono">01</span><h3>Hosting</h3><p>Your site stays online day and night on fast, secure servers. No hosting means no website.</p></div>
+        <div class="m-item"><span class="mono">02</span><h3>Your web address</h3><p>We renew your .co.za every year, so it never lapses and nobody else can take it.</p></div>
+        <div class="m-item"><span class="mono">03</span><h3>Security</h3><p>The padlock certificate, backups and updates that keep your site safe and trusted by Google.</p></div>
+        <div class="m-item"><span class="mono">04</span><h3>Monthly changes</h3><p>New prices, photos, specials or hours. Send them once a month and we update the site.</p></div>
+        <div class="m-item"><span class="mono">05</span><h3>Fixes, free</h3><p>If anything on your site breaks, we fix it at no extra cost.</p></div>
+        <div class="m-item"><span class="mono">06</span><h3>Every enquiry, delivered</h3><p>Messages from your site go straight to your WhatsApp and email.</p></div>
+        <div class="m-item"><span class="mono">07</span><h3>A monthly report</h3><p>How many people visited and how many got in touch, so you can see it working.</p></div>
+        <div class="m-item"><span class="mono">08</span><h3>A real person</h3><p>Questions answered on WhatsApp by the people who built your site. Cancel any time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFER -->
+<section class="section" id="refer" style="padding-top:0">
+  <div class="wrap">
+    <div class="refer reveal">
+      <div>
+        <div class="eyebrow mono">Referral programme</div>
+        <h2 class="h2" style="font-size:clamp(34px,4.4vw,64px)">Know a business that needs a website? Bring them in and earn</h2>
+        <p class="lead">For every client you bring who signs up and pays in full. One payment, no limit on how many you bring.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/refer/" target="_blank" rel="noopener">How referrals work ↗</a>
+          <a class="btn btn-ghost" href="https://wa.me/27761293926?text=Hi%20Digital%20Switch%2C%20I%27m%20in!%20Please%20send%20me%20the%20referral%20details." target="_blank" rel="noopener">I'm in</a>
+        </div>
+      </div>
+      <div class="big" aria-label="R750">R750</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">Good questions</div>
+    <h2 class="h2 reveal">Before you <span class="script">switch</span>.</h2>
+    <div class="faq reveal">
+      <details><summary>Who owns the web address?<span class="tg" aria-hidden="true"></span></summary><p>If you already own your domain, it stays yours and we just connect it. If we buy one for you, we manage it while the service runs.</p></details>
+      <details><summary>Do you need my passwords?<span class="tg" aria-hidden="true"></span></summary><p>No. We never need your email, social media or other account logins.</p></details>
+      <details><summary>What do you publish about my business?<span class="tg" aria-hidden="true"></span></summary><p>Only what you supply or approve. We don't invent reviews, licences or claims.</p></details>
+      <details><summary>Can I cancel?<span class="tg" aria-hidden="true"></span></summary><p>Yes, any time, with no notice period. The service runs to the end of the month you paid for.</p></details>
+      <details><summary>What if a payment fails?<span class="tg" aria-hidden="true"></span></summary><p>You get a notice and 7 days to sort it out. The site stays up during that time.</p></details>
+      <details><summary>How do I pay?<span class="tg" aria-hidden="true"></span></summary><p>A secure card or EFT link for the setup, then a monthly debit order. No cash. Full details are in our <a href="/terms/" target="_blank" rel="noopener" style="color:var(--lilac)">client terms</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap">
+    <span class="sign" aria-hidden="true">Switch on</span>
+    <h2 class="h2 reveal" style="font-size:clamp(28px,3.4vw,48px);max-width:760px">Your business, found at any hour, live by this time tomorrow.</h2>
+    <div class="hero-actions reveal" style="margin-top:36px">
+      <a class="btn btn-primary wa-link" href="#">WhatsApp 076 129 3926</a>
+      <a class="btn btn-ghost" href="mailto:digitalswitch28@gmail.com">digitalswitch28@gmail.com</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#top" aria-label="Digital Switch home">
+        <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
+        <span><span class="w1">Digital</span><span class="w2">Switch</span></span>
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#refer">Refer &amp; earn</a><a href="/terms/" target="_blank" rel="noopener">Terms</a><a class="wa-link" href="#">WhatsApp</a>
+      </nav>
+    </div>
+    <div class="foot-base mono"><span>Lenasia, Johannesburg, South Africa</span><span>Websites that move</span></div>
+  </div>
+</footer>
+
+<a class="wa-float wa-link" id="waFloat" href="#" aria-label="Chat to Digital Switch on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg></a>
+
+<script>
+(function(){
+  var WA = 'https://wa.me/27761293926?text=' + encodeURIComponent("Hi Digital Switch, I'd like a website for my business.");
+  document.querySelectorAll('.wa-link').forEach(function(a){ a.href = WA; a.target = '_blank'; a.rel = 'noopener'; });
+
+  // ticker: duplicate once for a seamless loop
+  var t = document.getElementById('tickerTrack'); t.innerHTML += t.innerHTML;
+
+  // nav state + floating WhatsApp
+  var nav = document.getElementById('nav'), wa = document.getElementById('waFloat'), ticking = false;
+  function onScroll(){
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 24);
+    wa.classList.toggle('show', y > window.innerHeight * 0.8);
+    updateStops();
+    updateStack();
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+
+  // mobile menu
+  var btn = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
+  btn.addEventListener('click', function(){ var o = links.classList.toggle('open'); btn.setAttribute('aria-expanded', o); btn.textContent = o ? 'Close' : 'Menu'; });
+  links.addEventListener('click', function(e){ if(e.target.closest('a')){ links.classList.remove('open'); btn.setAttribute('aria-expanded', false); btn.textContent = 'Menu'; } });
+
+
+  // nav logo: switched off while the hero headline is on screen, switches on after
+  var headline = document.querySelector('.headline'), w2 = document.querySelector('.nav .logo .w2');
+  new IntersectionObserver(function(es){
+    var vis = es[0].isIntersecting, wasOff = nav.classList.contains('logo-off');
+    nav.classList.toggle('logo-off', vis);
+    if(!vis && wasOff){ w2.classList.remove('flick'); void w2.offsetWidth; w2.classList.add('flick'); }
+  }, {threshold:0}).observe(headline);
+
+  // work stack: cards switch on as they arrive, covered cards scale back
+  var cards = [].slice.call(document.querySelectorAll('.scard'));
+  function loadLive(card){
+    card.querySelectorAll('iframe[data-src]').forEach(function(f){
+      f.width = f.dataset.w; f.height = f.dataset.h; f.style.width = f.dataset.w + 'px'; f.style.height = f.dataset.h + 'px';
+      fit(f); f.onload = function(){ f.classList.add('ready'); }; f.src = f.dataset.src; f.removeAttribute('data-src');
+    });
+  }
+  function fit(f){ var box = f.parentElement, inset = box.classList.contains('ph') ? 12 : 0; f.style.transform = 'scale(' + ((box.clientWidth - inset) / f.dataset.w) + ')'; }
+  window.addEventListener('resize', function(){ document.querySelectorAll('.scard iframe').forEach(fit); });
+  cards.forEach(function(c){ c.addEventListener('mouseenter', function(){ c.classList.add('on'); loadLive(c); }); });
+  function updateStack(){
+    var vh = window.innerHeight, sticky = window.innerWidth > 960;
+    cards.forEach(function(c, i){
+      var r = c.getBoundingClientRect();
+      if(r.top < vh * 0.55){ if(!c.classList.contains('on')){ c.classList.add('on'); loadLive(c); } }
+      if(!sticky){ c.style.removeProperty('--s'); c.style.removeProperty('--cover'); return; }
+      var next = cards[i + 1];
+      if(!next){ return; }
+      var nr = next.getBoundingClientRect(), p = Math.max(0, Math.min(1, 1 - (nr.top - r.top) / r.height));
+      c.style.setProperty('--s', (1 - p * 0.05).toFixed(4));
+      c.style.setProperty('--cover', (p * 0.55).toFixed(3));
+    });
+  }
+
+  // reveals
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -10% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el, i){ el.style.transitionDelay = ((i % 4) * 80) + 'ms'; io.observe(el); });
+
+  // route through "How it works": fill line + light stops as you scroll
+  var stops = document.getElementById('stops'), fill = document.getElementById('stopsFill'), items = stops.querySelectorAll('.stop');
+  function updateStops(){
+    var r = stops.getBoundingClientRect(), mid = window.innerHeight * 0.6;
+    var p = Math.max(0, Math.min(1, (mid - r.top) / r.height));
+    fill.style.setProperty('--p', (p * 100).toFixed(1) + '%');
+    items.forEach(function(it){ it.classList.toggle('lit', it.getBoundingClientRect().top + 16 < mid); });
+  }
+  onScroll();
+})();
+</script>
+</body>
+</html>
