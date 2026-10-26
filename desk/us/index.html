@@ -1,0 +1,489 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>DS Call Desk US</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one phone-width column; sticky tab bar; a call queue of cards that open into a call log. Jozi-after-dark brand, single dark look. */
+:root{
+  --night:#071719;--panel:#0b2124;--card:#0d2629;--street:#123336;--river:#1b4a4d;--deep:#164043;
+  --lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;
+  --hot:#ff9d7a;--warm:#ffd27a;--cold:#8fc4ff;--ok:#7ee0b0;--no:#ff9a9a;--wa:#1faa59;--on-wa:#fff;
+  --display:'Unbounded',system-ui,sans-serif;--script:'Ballet','Snell Roundhand',cursive;--body:'Inter Tight',system-ui,-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --neon:0 0 14px rgba(195,176,255,.6),0 0 34px rgba(155,123,255,.35);
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--night)}
+a{color:var(--lilac)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 120px}
+header{padding-block:22px 4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header svg{width:40px;height:23px;filter:drop-shadow(0 0 6px rgba(195,176,255,.8));flex:none}
+h1{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(26px,6vw,40px);letter-spacing:-.04em;line-height:1.1;text-wrap:balance}
+h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.5em;line-height:.6;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
+.market{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--night);background:var(--lilac);border-radius:999px;padding:4px 10px}
+.sub{color:var(--sage);margin:6px 0 14px;max-width:62ch}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.chip-info{display:inline-flex;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--river);border-radius:12px;padding:8px 12px;font-size:14px;color:var(--mist)}
+.chip-info b{color:var(--mint);font-variant-numeric:tabular-nums}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--dim);flex:none}
+.dot.g{background:var(--ok);box-shadow:0 0 8px var(--ok)}.dot.y{background:var(--warm)}.dot.r{background:var(--no)}
+.me input{width:130px}
+input,textarea,select{font:inherit;color:var(--mint);background:var(--night);border:1px solid var(--river);border-radius:10px;padding:9px 11px;min-width:0}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--lilac);outline-offset:1px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;padding-block:10px;background:var(--night);border-bottom:1px solid var(--street);margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
+nav.tabs button{flex:none;background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:8px 15px;font-weight:500;font-size:14px;cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac);box-shadow:var(--neon)}
+section{display:none}section.on{display:block}
+h2{font-family:var(--display);font-weight:300;font-size:22px;letter-spacing:-.03em;margin:4px 0 6px;text-wrap:balance}
+h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1.6em;line-height:.6}
+.lead{color:var(--sage);margin:0 0 14px;max-width:64ch}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+.stats div{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 8px;text-align:center;min-width:0}
+.stats b{display:block;font-family:var(--display);font-weight:200;font-size:24px;color:var(--lilac);font-variant-numeric:tabular-nums}
+.stats span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.filters button{background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.filters button.on{background:var(--deep);border-color:var(--lilac);color:var(--mint)}
+.filters button i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:4px}
+.search{width:100%;margin-bottom:12px}
+.relog{border:1px dashed var(--lilac);border-radius:16px;padding:12px 14px;margin-bottom:14px;background:rgba(195,176,255,.05)}
+.relog p{margin:0 0 6px;color:var(--mist);font-size:15px}
+.relog .btn{margin-top:4px}
+.card{background:var(--card);border:1px solid var(--river);border-radius:16px;margin:8px 0;overflow:hidden}
+.card.due{border-color:var(--warm)}
+.card.s-sold{border-color:var(--ok)}
+.card.closed{opacity:.6}
+.head{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;background:none;border:0}
+.head h3{margin:0;font-size:16px;font-weight:600;line-height:1.3;min-width:0}
+.head .meta{grid-column:1;font-family:var(--mono);font-size:11.5px;color:var(--dim);min-width:0;overflow-wrap:anywhere}
+.head .why{grid-column:1/-1;font-size:13.5px;color:var(--sage);min-width:0}
+.head .last{grid-column:1/-1;font-size:13.5px;color:var(--mist);border-left:2px solid var(--river);padding-left:8px;min-width:0;overflow-wrap:anywhere}
+.badges{display:flex;gap:5px;align-items:flex-start;justify-content:flex-end;flex-wrap:wrap;grid-row:1/span 2;grid-column:2}
+.badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--river);border-radius:999px;padding:3px 8px;color:var(--mist);white-space:nowrap}
+.badge.s-interested,.badge.s-sent{color:var(--night);background:var(--lilac);border-color:var(--lilac)}
+.badge.s-sold{color:var(--night);background:var(--ok);border-color:var(--ok)}
+.badge.s-callback{color:var(--warm);border-color:var(--warm)}
+.badge.s-noanswer,.badge.s-voicemail{color:var(--sage)}
+.badge.s-notnow,.badge.s-dnc,.badge.s-wrong{color:var(--no);border-color:var(--no)}
+.badge.i-hot{color:var(--night);background:var(--hot);border-color:var(--hot)}
+.badge.i-warm{color:var(--night);background:var(--warm);border-color:var(--warm)}
+.badge.i-cold{color:var(--cold);border-color:var(--cold)}
+.badge.i-none{color:var(--dim)}
+.badge.site{color:var(--lilac);border-color:var(--lilac)}
+.body{border-top:1px solid var(--street);padding:12px 14px 14px;display:grid;gap:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.num{font-family:var(--mono);font-size:17px;color:var(--mint);user-select:all;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;padding:9px 15px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:1px solid var(--river);background:transparent;color:var(--mint);white-space:nowrap}
+.btn:hover{border-color:var(--lilac)}
+.btn.p{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:var(--on-wa)}
+.btn.sm{padding:6px 11px;font-size:13px}
+.lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.pick{display:flex;gap:6px;flex-wrap:wrap}
+.pick button{background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:6px 11px;font-size:13px;cursor:pointer}
+.pick button.on{background:var(--lilac);border-color:var(--lilac);color:var(--night)}
+.pick.int button[data-v="hot"].on{background:var(--hot);border-color:var(--hot)}
+.pick.int button[data-v="warm"].on{background:var(--warm);border-color:var(--warm)}
+.pick.int button[data-v="cold"].on{background:var(--cold);border-color:var(--cold)}
+.pick.int button[data-v="none"].on{background:var(--dim);border-color:var(--dim)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid2 > *{min-width:0}
+.grid2 input{width:100%}
+textarea{width:100%;min-height:64px;resize:vertical}
+.hist{font-size:13.5px;color:var(--mist);display:grid;gap:4px}
+.hist div{border-left:2px solid var(--river);padding-left:8px;overflow-wrap:anywhere}
+.hist time{font-family:var(--mono);font-size:11px;color:var(--dim);margin-right:6px}
+.more{display:flex;justify-content:center;margin-top:10px}
+.empty{color:var(--sage);text-align:center;padding:24px 8px;border:1px dashed var(--river);border-radius:16px}
+.script h3{margin:16px 0 4px;font-size:12px;color:var(--lilac);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.say{background:var(--panel);border:1px solid var(--street);border-radius:12px;padding:12px;margin:6px 0;font-size:16px;max-width:66ch}
+.say b{color:#fff}
+.tip{color:var(--sage);font-size:14.5px;margin:6px 0;max-width:66ch}
+details{background:var(--card);border:1px solid var(--river);border-radius:14px;margin:8px 0;padding:0 14px}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ ";color:var(--lilac)}
+details[open] summary::before{content:"– "}
+details p{color:var(--mist);margin:0 0 12px}
+.panel{background:var(--card);border:1px solid var(--river);border-radius:16px;padding:14px;margin:10px 0}
+.panel h3{margin:0 0 10px;font-size:15px;font-weight:600}
+.bars{display:grid;gap:7px}
+.brow{display:grid;grid-template-columns:minmax(0,9.5em) 1fr 2.6em;gap:8px;align-items:center;font-size:14px}
+.brow span{color:var(--mist);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .track{height:10px;background:var(--street);border-radius:5px;overflow:hidden}
+.brow .fill{height:100%;background:var(--lilac);border-radius:5px}
+.brow b{font-family:var(--mono);font-size:12px;color:var(--mint);text-align:right;font-variant-numeric:tabular-nums}
+.ins{display:grid;gap:8px}
+.ins div{border-left:3px solid var(--lilac);padding:6px 10px;background:rgba(195,176,255,.05);border-radius:0 10px 10px 0;color:var(--mist);font-size:15px}
+.feed{display:grid;gap:8px;font-size:14px}
+.feed div{color:var(--mist);overflow-wrap:anywhere}
+.feed b{color:var(--mint)}
+.muted{color:var(--dim);font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);background:var(--lilac);color:var(--night);font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;box-shadow:var(--neon);transition:transform .3s;z-index:50;max-width:calc(100% - 32px)}
+.toast.show{transform:translate(-50%,0)}
+.sync{font-family:var(--mono);font-size:11px;color:var(--dim)}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style></head><body>
+
+<div class="wrap">
+<header>
+  <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
+  <h1>Call <em>desk</em></h1><span class="market">US</span>
+</header>
+<p class="sub">Washington and Oregon roofers with no website, built sites first. New sites appear here as the system builds them. Log each call with how interested they were and what they said, and the desk learns what works.</p>
+<div class="bar">
+  <span class="chip-info" id="clock"><span class="dot" id="clockDot"></span><span id="clockTxt">…</span></span>
+  <span class="chip-info me"><label for="myName">You</label><input id="myName" placeholder="First name" autocomplete="given-name"></span>
+  <span class="chip-info"><a href="/desk/">Local</a> · <a href="/desk/us/">US</a> · <a href="/desk/launch/">Setup</a></span>
+  <span class="sync" id="sync">Connecting…</span>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-t="calls">Calls</button>
+  <button role="tab" aria-selected="false" data-t="script">Script</button>
+  <button role="tab" aria-selected="false" data-t="insights">What they're saying</button>
+</nav>
+
+<section id="calls" class="on">
+  <div class="stats" id="stats"></div>
+  <div id="relog"></div>
+  <div class="filters" id="filters"></div>
+  <input class="search" id="q" type="search" placeholder="Search by business, area or note">
+  <div id="list"></div>
+  <div class="more"><button class="btn" id="moreBtn" hidden>Show more</button></div>
+</section>
+
+<section id="script" class="script">
+
+<h2>US <em>script</em></h2>
+<p class="lead">Roofers in Washington and Oregon who have no website. You're calling cold, so the first ten seconds decide it. Be short, friendly and specific to them. Calls are 9 hours behind you: their 8am is your 5pm.</p>
+<h3>Opening (they have a site built)</h3>
+<div class="say">Hi, is this <b>[owner first name]</b>? It's <b class="nm">[your name]</b> with Digital Switch. Quick one: I build websites for roofers, and I <b>already built one for [Business]</b>. Can I text you the link so you can take a look?</div>
+<h3>Opening (no site built yet)</h3>
+<div class="say">Hi, is this <b>[owner first name]</b>? It's <b class="nm">[your name]</b> with Digital Switch. I build websites for roofers. I noticed <b>[Business]</b> doesn't have one yet. If I built you a free preview, would you take a look? <b>What's the best email</b> to send it to?</div>
+<p class="tip">Put their email in <b>Email they gave</b>. That's how a preview gets built and sent.</p>
+<h3>New businesses (licensed this year)</h3>
+<div class="say">Congrats on getting licensed this year. Most new roofing companies lose jobs because customers Google them and find nothing. I'd like to fix that for you.</div>
+<h3>Find out what they think</h3>
+<div class="say">How are you getting jobs right now? <b>What would a website need to do</b> for it to be worth it to you?</div>
+<p class="tip">Listen, and log their answer in their words. This is the data that tells us how to pitch.</p>
+<h3>The offer, only after they're interested</h3>
+<div class="say">It's <b>$499 to set up</b>: your own web address, set up on Google, and <b>live within 24 hours</b>. Then <b>$49 a month</b> for hosting, changes and support. No contract, cancel any time. And you see the site before you pay anything.</div>
+<h3>Close</h3>
+<div class="say">Want me to text you the link now so you can look tonight, and we get it live this week?</div>
+<p class="tip">Only text people who said yes on the call. Use <b>Copy text for after they say yes</b> on their card.</p>
+<h3>Voicemail (keep it under 20 seconds)</h3>
+<div class="say">Hi <b>[name]</b>, it's <b class="nm">[your name]</b> with Digital Switch. I built a website for <b>[Business]</b> and I'd love you to see it. Call or text me back at <b>[your US number]</b>. Thanks!</div>
+<h3>If they say…</h3>
+<details><summary>"How much?" (early)</summary><p>"$499 to set up and $49 a month, and you see it before you pay. Can I send it so you can judge for yourself?" Tag <b>Asked the price</b>.</p></details>
+<details><summary>"I get my work from word of mouth."</summary><p>"Perfect, so do most roofers. When someone gets your name, they Google you before they call. This makes sure they find you and trust you." Tag <b>Word of mouth</b>.</p></details>
+<details><summary>"I'm too busy right now."</summary><p>"Totally get it. When's a better time, tomorrow morning or afternoon?" Set a call-back. Tag <b>Busy</b>.</p></details>
+<details><summary>"Where are you calling from?"</summary><p>"I run Digital Switch, a small web studio. I work remotely with roofers across Washington and Oregon. Here's my work: digitalswitch.co.za." Tag <b>Trust</b>.</p></details>
+<details><summary>"Take me off your list."</summary><p>"Of course, sorry to bother you." Log <b>Don't contact</b> straight away. Never call or text that number again.</p></details>
+
+</section>
+
+<section id="insights">
+  <h2>What they're <em>saying</em></h2>
+  <p class="lead">Built from every call you log here: who picks up, how interested they are, and what's holding them back. The more calls you log with an interest level and tags, the sharper this gets.</p>
+  <div id="insightBody"></div>
+  <div class="panel">
+    <h3>Send this to Claude</h3>
+    <p class="muted" style="margin:0 0 10px">Copies a summary of every logged call and note. Paste it into our chat when you want me to rework the script, the order or the offer.</p>
+    <button class="btn p sm" id="copySum">Copy summary</button>
+  </div>
+</section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+var CFG = {
+ market:'us', marketLabel:'US', endpoint:'https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec', tz:'America/Los_Angeles', clockLabel:'Pacific time', hours:[8,18], days:['Mon','Tue','Wed','Thu','Fri','Sat'],
+ outcomes:[['noanswer','No answer'],['voicemail','Left voicemail'],['spoke','Spoke, sending info'],['sent','Sent the link'],['callback','Call back'],['interested','Interested'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
+ tags:[['asked-price','Asked the price'],['liked','Liked the idea'],['price','Price'],['wom','Word of mouth'],['gmaps','Google Maps is enough'],['has-site','Has a website'],['busy','Busy, call back'],['not-dm','Not the owner'],['trust','Trust / where are you from?'],['gave-email','Gave email'],['spanish','Prefers Spanish'],['too-new','Too new / not ready']],
+ extraViews:[['site','Site built']],
+ segments:[['Site built',function(l){return !!l.site}],['No site yet',function(l){return !l.site}],['New business',function(l){return l.kind==='new'}],['Older business',function(l){return l.kind!=='new'}],['Washington',function(l){return /, WA$/.test(l.city)}],['Oregon',function(l){return /, OR$/.test(l.city)}]],
+ lowPickup:'Leave a short voicemail on the first try and call back at a different time of day. Early morning (7 to 9am their time) usually catches roofers before they get on site.',
+ advice:{price:'Say "you see it before you pay" before the number, and put the $49 a month next to the cost of one lost job.',
+   'has-site':'Ask what their current site brings in. Pitch the phone-first rebuild on their same address.',
+   wom:'Use the "they Google you before they call" line early.',
+   gmaps:'Agree that Maps is great, then point out that a website is what Google shows when people search "roofer near me" beyond the map pin, and it holds a quote form.',
+   busy:'Book a specific time on the spot. Early morning their time works best for roofers.',
+   'not-dm':'Get the owner\'s name and best time, and set a call-back.',
+   trust:'Lead with the site already built and "you pay nothing until you\'ve seen it". Text the link only after they say yes.',
+   'gave-email':'These go into the email flow. Send me the summary and I\'ll get previews built for them.',
+   spanish:'Several owners may prefer Spanish. Tell me and I can write a Spanish opener and site copy.',
+   'too-new':'Offer to call back in a month, and note when.',
+   'asked-price':'They\'re interested. Answer straight, then close.',
+   liked:'Go to the offer and ask to text the link.'}
+};
+var LEADS = [];
+var KEY='dsd-'+CFG.market+'-';
+var $=function(s){return document.querySelector(s)}, $$=function(s){return [].slice.call(document.querySelectorAll(s))};
+function lsGet(k,d){try{var v=localStorage.getItem(KEY+k);return v===null?d:v}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(KEY+k,v)}catch(e){}}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('show')},1800)}
+function me(){return ($('#myName').value||'').trim()||'[your name]'}
+var BYID={};
+function setLeads(arr){LEADS=arr||[];BYID={};LEADS.forEach(function(l,i){l.ix=i;BYID[l.id]=l})}
+try{setLeads(JSON.parse(lsGet('leads','[]')))}catch(e){}
+
+var OUTCOMES=CFG.outcomes, OUT={}; OUTCOMES.forEach(function(o){OUT[o[0]]=o[1]});
+var INTEREST=[['hot','Hot'],['warm','Warm'],['cold','Cold'],['none','No interest']], INT={}; INTEREST.forEach(function(o){INT[o[0]]=o[1]});
+var TAGS=CFG.tags, TAG={}; TAGS.forEach(function(o){TAG[o[0]]=o[1]});
+var REACHED={sent:1,interested:1,callback:1,sold:1,notnow:1,dnc:1,spoke:1};
+var CLOSED={sold:1,notnow:1,dnc:1,wrong:1,nowa:1};
+
+var state={}; try{state=JSON.parse(lsGet('state','{}'))}catch(e){}
+var view=lsGet('view','next'), open={}, drafts={}, shown=25, loaded=false;
+var queue=[]; try{queue=JSON.parse(lsGet('queue','[]'))}catch(e){}
+var DESK_KEY=''; try{var mk=location.search.match(/[?&]k=([^&]+)/); if(mk){localStorage.setItem('ds-desk-key',decodeURIComponent(mk[1])); history.replaceState(null,'',location.pathname+location.hash)} DESK_KEY=localStorage.getItem('ds-desk-key')||''}catch(e){}
+
+/* ---------- name + tabs ---------- */
+try{$('#myName').value=localStorage.getItem('ds-name')||''}catch(e){}
+$('#myName').addEventListener('change',function(){try{localStorage.setItem('ds-name',this.value.trim())}catch(e){} render(); fillNames(); toast('Saved')});
+function go(t){$$('nav.tabs button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.t===t))});$$('section').forEach(function(s){s.classList.toggle('on',s.id===t)}); if(t==='insights')renderInsights();}
+$$('nav.tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.t)})});
+function fillNames(){$$('.nm').forEach(function(e){e.textContent=me()})}
+fillNames();
+
+/* ---------- their clock ---------- */
+function hourIn(tz,d){return Number(new Intl.DateTimeFormat('en-US',{hour:'numeric',hourCycle:'h23',timeZone:tz}).format(d||new Date()))}
+function dayIn(tz,d){return new Intl.DateTimeFormat('en-US',{weekday:'short',timeZone:tz}).format(d||new Date())}
+function clock(){
+  var now=new Date(), h=hourIn(CFG.tz,now), wd=dayIn(CFG.tz,now);
+  var t=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:CFG.tz}).format(now);
+  var open=CFG.days.indexOf(wd)>-1 && h>=CFG.hours[0] && h<CFG.hours[1];
+  var edge=open && (h===CFG.hours[0] || h>=CFG.hours[1]-1);
+  $('#clockDot').className='dot '+(open?(edge?'y':'g'):'r');
+  $('#clockTxt').innerHTML=CFG.clockLabel+' <b>'+t+'</b> · '+(open?(edge?'okay to call, edge of the day':'good time to call'):'outside business hours');
+}
+clock(); setInterval(clock,30000);
+
+/* ---------- lead state helpers ---------- */
+function st(l){return state[l.id]||{}}
+function status(l){return st(l).status||'call'}
+function isDue(l){var s=st(l);return s.callback && new Date(s.callback).getTime()<=Date.now()+30*60000 && !CLOSED[s.status]}
+function hoursSince(s){return s.lastAt?(Date.now()-s.lastAt)/3600000:1e9}
+function rank(l){
+  var s=st(l), x=status(l);
+  if(isDue(l)) return [0,new Date(s.callback).getTime()];
+  if(x==='call') return [l.b1?9:1, l.ix];
+  if(x==='interested'||x==='sent'||x==='spoke') return hoursSince(s)>=20?[2,s.lastAt]:[6,s.lastAt];
+  if(x==='callback') return [5,s.callback?new Date(s.callback).getTime():s.lastAt];
+  if(x==='noanswer'||x==='voicemail') return ((s.attempts||0)<3 && hoursSince(s)>=3)?[3,(s.attempts||0)*1e13+s.lastAt]:[7,s.lastAt];
+  return [8,s.lastAt||0];
+}
+function inView(l,v){
+  var s=st(l), x=status(l);
+  if(v==='next') return !CLOSED[x] && !l.b1 && rank(l)[0]<=3 || (l.b1 && x!=='call' && rank(l)[0]<=3);
+  if(v==='due') return isDue(l)||(x==='callback'&&!CLOSED[x]);
+  if(v==='warm') return (s.interest==='hot'||s.interest==='warm')&&!CLOSED[x];
+  if(v==='fresh') return x==='call';
+  if(v==='site') return !!l.site && !CLOSED[x];
+  if(v==='closed') return !!CLOSED[x];
+  return true;
+}
+var VIEWS=[['next','Up next'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
+
+/* ---------- render list ---------- */
+function fmtWhen(ts){if(!ts)return '';var d=new Date(ts);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
+function render(){
+  var c={called:0,reached:0,warm:0,sold:0};
+  LEADS.forEach(function(l){var s=st(l);if(s.attempts)c.called++;if(REACHED[s.status]||s.reached)c.reached++;if((s.interest==='hot'||s.interest==='warm')&&!CLOSED[s.status])c.warm++;if(s.status==='sold')c.sold++});
+  $('#stats').innerHTML='<div><b>'+c.called+'</b><span>Called</span></div><div><b>'+c.reached+'</b><span>Spoke to</span></div><div><b>'+c.warm+'</b><span>Hot & warm</span></div><div><b>'+c.sold+'</b><span>Sold</span></div>';
+  // re-log banner (local first 10 only)
+  var b1=LEADS.filter(function(l){return l.b1 && !st(l).attempts});
+  $('#relog').innerHTML=b1.length?'<div class="relog"><p><b>Your first '+b1.length+' calls aren\'t in here yet.</b> The old desk saved them on your phone only, where I can\'t read them. Open each one and log what happened, with an interest level and tags. It takes about two minutes and starts the feedback data with real calls.</p><button class="btn sm p" id="showB1">Log my first '+b1.length+' calls</button></div>':'';
+  if(b1.length) $('#showB1').onclick=function(){view='b1';shown=25;render()};
+  var views=VIEWS.slice(); if(view==='b1') views.unshift(['b1','First 10']);
+  $('#filters').innerHTML=views.map(function(v){var n=v[0]==='b1'?b1.length:LEADS.filter(function(l){return inView(l,v[0])}).length;return '<button data-v="'+v[0]+'" class="'+(view===v[0]?'on':'')+'">'+v[1]+'<i>'+n+'</i></button>'}).join('');
+  var q=($('#q').value||'').toLowerCase().trim();
+  var list=LEADS.filter(function(l){ if(view==='b1') return l.b1 && !st(l).attempts; return inView(l,view)});
+  if(q) list=LEADS.filter(function(l){return (l.name+' '+(l.area||l.city)+' '+(st(l).note||'')+' '+(l.owner||'')).toLowerCase().indexOf(q)>-1});
+  list.sort(function(a,b){var ra=rank(a),rb=rank(b);return ra[0]-rb[0]||ra[1]-rb[1]});
+  if(view==='closed'||view==='all') list.sort(function(a,b){return a.ix-b.ix});
+  if(!LEADS.length){$('#moreBtn').hidden=true; if(loaded)$('#list').innerHTML='<div class="empty">No leads on this list yet.</div>'; return}
+  $('#list').innerHTML=list.length?list.slice(0,shown).map(card).join(''):'<div class="empty">'+(view==='next'?'Nothing due right now. Check Call-backs or Hot & warm, or come back later for second tries.':'Nobody here yet.')+'</div>';
+  $('#moreBtn').hidden=list.length<=shown;
+}
+function card(l){
+  var s=st(l), x=status(l), isOpen=!!open[l.id];
+  var meta=CFG.market==='za'?(esc(l.area)+' · '+local(l)+(l.mobile?'':' · landline')+' · '+(l.web==='no'?'no website':l.web==='ads'?'runs ads':'has a website')):(esc(l.city)+' · '+esc(l.phone)+(l.rating?' · ★'+esc(l.rating):''));
+  var why=CFG.market==='us'?whyUS(l):'';
+  var badges='<span class="badge s-'+x+'">'+(x==='call'?'To call':esc(OUT[x]||x))+'</span>'+(s.interest?'<span class="badge i-'+s.interest+'">'+INT[s.interest]+'</span>':'')+(CFG.market==='us'&&l.site?'<span class="badge site">Site built</span>':'');
+  var last=s.note?'<div class="last">'+esc(s.note.length>140?s.note.slice(0,140)+'…':s.note)+'</div>':'';
+  var due=isDue(l)?'<div class="why" style="color:var(--warm)">Call back now · '+fmtWhen(new Date(s.callback).getTime())+'</div>':(s.callback&&x==='callback'?'<div class="why">Call back '+fmtWhen(new Date(s.callback).getTime())+'</div>':'');
+  return '<article class="card'+(isDue(l)?' due':'')+(CLOSED[x]?' closed':'')+' s-'+x+'" data-id="'+esc(l.id)+'">'+
+    '<button class="head" data-toggle aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="badges">'+badges+'</div><div class="meta">'+meta+'</div>'+(why?'<div class="why">'+why+'</div>':'')+due+last+'</button>'+
+    (isOpen?body(l):'')+'</article>';
+}
+function local(l){return l.num.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
+function whyUS(l){
+  var t=l.kind==='new'?'New business (licensed '+l.lic+')':l.kind==='bademail'?'Our email didn\'t reach them':l.kind==='bounced'?'Email bounced':l.kind==='emailed'?'Emailed, no reply':'Never contacted';
+  return t+(l.owner?' · ask for <b>'+esc(l.owner)+'</b>':'');
+}
+function body(l){
+  var s=st(l), d=drafts[l.id]||(drafts[l.id]={o:'',i:s.interest||'',t:(s.tags||[]).slice(),n:'',cb:s.callback||'',email:s.email||'',spoke:s.spoke||''});
+  var acts='<div class="row"><span class="num">'+(CFG.market==='za'?local(l):esc(l.phone))+'</span><button class="btn sm" data-copy="'+esc(CFG.market==='za'?local(l):l.phone)+'">Copy</button><a class="btn p sm" href="tel:+'+l.num+'">Call</a>'+(l.site?'<a class="btn sm" href="'+esc(l.site)+'" target="_blank" rel="noopener">Their site ↗</a>':'')+'</div>';
+  if(CFG.market==='za' && l.mobile) acts+='<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFirst(l)))+'">1 · First message</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgLink(l)))+'">2 · Send the link</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">3 · Follow-up</a></div>';
+  if(CFG.market==='us') acts+='<div class="row"><button class="btn sm" data-copytext="'+esc(usText(l))+'">Copy text for after they say yes</button></div>';
+  var pick=function(arr,cur,key,cls){return '<div class="pick '+(cls||'')+'" data-pick="'+key+'">'+arr.map(function(o){var on=Array.isArray(cur)?cur.indexOf(o[0])>-1:cur===o[0];return '<button type="button" data-v="'+o[0]+'" class="'+(on?'on':'')+'">'+esc(o[1])+'</button>'}).join('')+'</div>'};
+  var hist=(s.log||[]).slice().reverse().slice(0,6).map(function(e){return '<div><time>'+fmtWhen(e.at)+'</time>'+esc(OUT[e.o]||e.o)+(e.i?' · '+INT[e.i]:'')+(e.t&&e.t.length?' · '+e.t.map(function(t){return TAG[t]||t}).join(', '):'')+(e.n?'<br>'+esc(e.n):'')+'</div>'}).join('');
+  return '<div class="body">'+acts+
+    '<div><div class="lbl">What happened on this call</div>'+pick(OUTCOMES,d.o,'o')+'</div>'+
+    '<div><div class="lbl">How interested</div>'+pick(INTEREST,d.i,'i','int')+'</div>'+
+    '<div><div class="lbl">What you heard (tap all that apply)</div>'+pick(TAGS,d.t,'t')+'</div>'+
+    '<div class="grid2"><div><div class="lbl"><label for="sp-'+esc(l.id)+'">Spoke to</label></div><input id="sp-'+esc(l.id)+'" data-f="spoke" value="'+esc(d.spoke)+'" placeholder="Name, role"></div><div><div class="lbl"><label for="cb-'+esc(l.id)+'">Call back at (your time)</label></div><input id="cb-'+esc(l.id)+'" type="datetime-local" data-f="cb" value="'+esc(d.cb)+'"></div>'+
+    (CFG.market==='us'?'<div style="grid-column:1/-1"><div class="lbl"><label for="em-'+esc(l.id)+'">Email they gave</label></div><input id="em-'+esc(l.id)+'" type="email" data-f="email" value="'+esc(d.email)+'" placeholder="name@business.com"></div>':'')+'</div>'+
+    '<div><div class="lbl"><label for="nt-'+esc(l.id)+'">Notes, in their words if you can</label></div><textarea id="nt-'+esc(l.id)+'" data-f="n" placeholder="What did they say? What would make it a yes?">'+esc(d.n)+'</textarea></div>'+
+    '<div class="row"><button class="btn p" data-save>Log this call</button><span class="muted">'+(s.attempts?(s.attempts+' call'+(s.attempts>1?'s':'')+' so far'):'First call')+'</span></div>'+
+    (hist?'<div><div class="lbl">History</div><div class="hist">'+hist+'</div></div>':'')+'</div>';
+}
+function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
+function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch, a web design studio in Joburg. I made a free website for '+l.name+'. May I send you the link so that you can see?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
+function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. It can be live on your own web address within 24 hours: R2,999 to set up, then R199 a month. Let me know what you think!'}
+function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+l.site+'\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
+function usText(l){return l.site?('Hi'+(l.owner?' '+l.owner.split(' ')[0]:'')+', it\'s '+me()+' from Digital Switch. Here\'s the site I built for '+l.name+': '+l.site+' . It can be live on your own web address within 24 hours: $499 to set up, then $49 a month, no contract.'):('Hi'+(l.owner?' '+l.owner.split(' ')[0]:'')+', it\'s '+me()+' from Digital Switch, thanks for the chat. Here\'s some of my work: https://digitalswitch.co.za . I\'ll build a free preview for '+l.name+' and send it over.')}
+
+/* ---------- interactions ---------- */
+$('#filters').addEventListener('click',function(e){var b=e.target.closest('[data-v]');if(!b)return;view=b.dataset.v;shown=25;if(view!=='b1')lsSet('view',view);render()});
+$('#q').addEventListener('input',function(){shown=25;render()});
+$('#moreBtn').addEventListener('click',function(){shown+=25;render()});
+function copy(v){(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){toast('Copied')},function(){var ta=document.createElement('textarea');ta.value=v;document.body.append(ta);ta.select();try{document.execCommand('copy');toast('Copied')}catch(e){toast('Select and copy it by hand')}ta.remove()})}
+$('#list').addEventListener('click',function(e){
+  var c=e.target.closest('[data-id]'); if(!c) return; var id=c.dataset.id, l=BYID[id];
+  if(e.target.closest('[data-toggle]')){open[id]=!open[id];render();return}
+  var cp=e.target.closest('[data-copy]'); if(cp){copy(cp.dataset.copy);return}
+  var ct=e.target.closest('[data-copytext]'); if(ct){copy(usText(l));return}
+  var pb=e.target.closest('[data-pick] button');
+  if(pb){var key=pb.parentNode.dataset.pick, v=pb.dataset.v, d=drafts[id];
+    if(key==='t'){var i=d.t.indexOf(v);if(i>-1)d.t.splice(i,1);else d.t.push(v);pb.classList.toggle('on')}
+    else{d[key]=d[key]===v?'':v;$$('[data-id="'+cssq(id)+'"] [data-pick="'+key+'"] button').forEach(function(b){b.classList.toggle('on',b.dataset.v===d[key])})}
+    if(key==='o'&&v==='callback'&&!d.cb){var inp=c.querySelector('[data-f="cb"]');if(inp)inp.focus()}
+    return}
+  if(e.target.closest('[data-save]')) logCall(id);
+});
+function cssq(s){return window.CSS&&CSS.escape?CSS.escape(s):s.replace(/"/g,'\\"')}
+$('#list').addEventListener('input',function(e){var f=e.target.dataset.f;if(!f)return;var id=e.target.closest('[data-id]').dataset.id;drafts[id][f]=e.target.value});
+
+function logCall(id){
+  var d=drafts[id], l=BYID[id];
+  if(!d.o){toast('Tap what happened on this call first');return}
+  if(d.o==='callback'&&!d.cb){toast('Add a call-back time');return}
+  var s=Object.assign({},st(l)), now=Date.now();
+  var entry={at:now,o:d.o,i:d.i||'',t:d.t.slice(),n:d.n.trim(),hr:new Date().getHours(),theirHr:hourIn(CFG.tz)};
+  s.log=(s.log||[]).concat([entry]).slice(-30);
+  s.attempts=(s.attempts||0)+1; s.lastAt=now; s.status=d.o; if(REACHED[d.o]) s.reached=true;
+  if(d.i) s.interest=d.i; s.tags=d.t.slice();
+  if(d.n.trim()) s.note=d.n.trim();
+  s.callback=d.o==='callback'?d.cb:(d.cb&&d.o!=='noanswer'&&d.o!=='voicemail'?d.cb:'');
+  if(d.spoke) s.spoke=d.spoke.trim(); if(d.email) s.email=d.email.trim();
+  s.name=l.name; s.by=me();
+  save(id,s,entry); delete drafts[id]; open[id]=false; render();
+  toast(d.o==='noanswer'||d.o==='voicemail'?'Logged. It comes back in a few hours for another try':'Logged');
+}
+function save(id,s,entry){
+  state[id]=s; lsSet('state',JSON.stringify(state));
+  queue=queue.filter(function(q){return q.id!==id||q.entry}); queue.push({id:id,s:s,entry:entry||null}); lsSet('queue',JSON.stringify(queue));
+  flush();
+}
+function syncLabel(){var n=queue.length;$('#sync').textContent=!DESK_KEY?'Not connected':n?(n+' waiting to save'):(loaded?'All saved':'Loading…')}
+var flushing=false;
+function flush(){
+  if(flushing||!queue.length||!DESK_KEY){syncLabel();return} flushing=true; syncLabel();
+  var batch=queue.slice();
+  Promise.all(batch.map(function(q){var b=new URLSearchParams();b.set('kind','desk');b.set('key',DESK_KEY);b.set('market',CFG.market);b.set('id',q.id);b.set('state',JSON.stringify(q.s));if(q.entry)b.set('entry',JSON.stringify(q.entry));
+    return fetch(CFG.endpoint,{method:'POST',mode:'no-cors',body:b}).catch(function(){})}))
+  .then(function(){setTimeout(function(){flushing=false;load(true)},2500)});
+}
+function load(verify){
+  if(!DESK_KEY){renderKey();return}
+  return fetch(CFG.endpoint+'?desk='+CFG.market+'&key='+encodeURIComponent(DESK_KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
+    if(!j.ok){ if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
+    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads));
+    var remote=j.state||{};
+    queue=queue.filter(function(q){var r=remote[q.id];return !(r&&(r.lastAt||0)>=(q.s.lastAt||0))});
+    lsSet('queue',JSON.stringify(queue));
+    var pend={}; queue.forEach(function(q){pend[q.id]=q.s});
+    var ns={}; Object.keys(remote).forEach(function(id){ns[id]=remote[id]}); Object.keys(pend).forEach(function(id){ns[id]=pend[id]});
+    state=ns; lsSet('state',JSON.stringify(state)); loaded=true;
+    var typing=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.body');
+    if(!typing) render();
+    if($('#insights').classList.contains('on')) renderInsights();
+    syncLabel();
+    if(queue.length&&!verify) flush();
+  }).catch(function(){$('#sync').textContent='Offline. Your calls are kept on this device and save when you\'re back.'})
+}
+function renderKey(){
+  $('#list').innerHTML='<div class="panel"><h3>Connect this device</h3><p class="muted" style="margin:0 0 10px">Open the desk link Claude gave you once on each device, or paste the desk key here.</p><div class="row"><input id="keyIn" placeholder="Desk key" style="flex:1"><button class="btn p sm" id="keyBtn">Connect</button></div></div>';
+  $('#keyBtn').onclick=function(){var v=$('#keyIn').value.trim();if(!v)return;try{localStorage.setItem('ds-desk-key',v)}catch(e){}DESK_KEY=v;$('#list').innerHTML='<div class="empty">Loading leads…</div>';load()};
+  syncLabel();
+}
+
+/* ---------- insights ---------- */
+function allCalls(){var out=[];Object.keys(state).forEach(function(id){(state[id].log||[]).forEach(function(e){out.push(Object.assign({id:id},e))})});return out.sort(function(a,b){return a.at-b.at})}
+function bars(rows,max){max=max||Math.max.apply(null,rows.map(function(r){return r[1]}).concat([1]));return '<div class="bars">'+rows.map(function(r){return '<div class="brow"><span title="'+esc(r[0])+'">'+esc(r[0])+'</span><div class="track"><div class="fill" style="width:'+Math.round(r[1]/max*100)+'%;'+(r[2]?'background:'+r[2]:'')+'"></div></div><b>'+esc(r[3]!=null?r[3]:r[1])+'</b></div>'}).join('')+'</div>'}
+function pct(a,b){return b?Math.round(a/b*100):0}
+function renderInsights(){
+  var calls=allCalls(), leads=Object.keys(state).map(function(id){return Object.assign({id:id,lead:BYID[id]},state[id])}).filter(function(s){return s.lead&&s.attempts});
+  if(!calls.length){$('#insightBody').innerHTML='<div class="empty">No calls logged yet. Log your first call on the Calls tab: tap what happened, how interested they were and what you heard. This page fills in from there.</div>';return}
+  var reached=calls.filter(function(c){return REACHED[c.o]}), noans=calls.filter(function(c){return c.o==='noanswer'||c.o==='voicemail'});
+  var spokeLeads=leads.filter(function(s){return s.reached});
+  var h='<div class="stats"><div><b>'+calls.length+'</b><span>Calls logged</span></div><div><b>'+pct(reached.length,calls.length)+'%</b><span>Picked up</span></div><div><b>'+pct(spokeLeads.filter(function(s){return s.interest==='hot'||s.interest==='warm'}).length,spokeLeads.length)+'%</b><span>Warm or hot</span></div><div><b>'+leads.filter(function(s){return s.status==='sold'}).length+'</b><span>Sold</span></div></div>';
+  // interest
+  var ic={hot:0,warm:0,cold:0,none:0,unset:0}; spokeLeads.forEach(function(s){ic[s.interest||'unset']++});
+  var col={hot:'var(--hot)',warm:'var(--warm)',cold:'var(--cold)',none:'var(--dim)',unset:'var(--river)'};
+  h+='<div class="panel"><h3>Interest, people you spoke to ('+spokeLeads.length+')</h3>'+bars([['Hot',ic.hot,col.hot],['Warm',ic.warm,col.warm],['Cold',ic.cold,col.cold],['No interest',ic.none,col.none]].concat(ic.unset?[['Not rated',ic.unset,col.unset]]:[]))+'</div>';
+  // tags
+  var tc={}; spokeLeads.forEach(function(s){(s.tags||[]).forEach(function(t){tc[t]=(tc[t]||0)+1})});
+  var tr=Object.keys(tc).sort(function(a,b){return tc[b]-tc[a]}).map(function(t){return [TAG[t]||t,tc[t]]});
+  h+='<div class="panel"><h3>What you\'re hearing</h3>'+(tr.length?bars(tr):'<p class="muted" style="margin:0">Tap tags when you log a call and the most common objections and signals show up here.</p>')+'</div>';
+  // time of day (your time)
+  var hb={}; calls.forEach(function(c){var k=CFG.market==='us'?c.theirHr:c.hr; if(k==null)return; var b=hb[k]||(hb[k]={n:0,r:0}); b.n++; if(REACHED[c.o])b.r++});
+  var hk=Object.keys(hb).map(Number).sort(function(a,b){return a-b});
+  h+='<div class="panel"><h3>Pick-up rate by hour ('+(CFG.market==='us'?'their time':'your time')+')</h3>'+(hk.length?bars(hk.map(function(k){return [(k<10?'0':'')+k+':00',pct(hb[k].r,hb[k].n),'var(--lilac)',pct(hb[k].r,hb[k].n)+'% of '+hb[k].n]}),100):'')+'</div>';
+  // segments
+  var seg=CFG.segments.map(function(sg){var ls=leads.filter(function(s){return sg[1](s.lead)}), sp=ls.filter(function(s){return s.reached}), wm=sp.filter(function(s){return s.interest==='hot'||s.interest==='warm'});return [sg[0],ls.length,sp.length,wm.length]}).filter(function(r){return r[1]});
+  if(seg.length) h+='<div class="panel"><h3>Which leads respond</h3>'+bars(seg.map(function(r){return [r[0],pct(r[3],r[2]),'var(--ok)',pct(r[3],r[2])+'%']}),100)+'<p class="muted" style="margin:8px 0 0">Share of people you spoke to who were warm or hot. '+seg.map(function(r){return esc(r[0])+': spoke to '+r[2]+' of '+r[1]+' called'}).join(' · ')+'</p></div>';
+  // insights
+  var tips=[];
+  var top=tr[0];
+  if(top&&top[1]>=2){var key=Object.keys(TAG).filter(function(k){return TAG[k]===top[0]})[0]; if(CFG.advice[key]) tips.push('<b>Most common: '+esc(top[0])+'</b> ('+top[1]+'). '+CFG.advice[key])}
+  if(calls.length>=8&&pct(reached.length,calls.length)<35) tips.push('Only '+pct(reached.length,calls.length)+'% pick up. '+CFG.lowPickup);
+  var bestH=hk.filter(function(k){return hb[k].n>=3}).sort(function(a,b){return pct(hb[b].r,hb[b].n)-pct(hb[a].r,hb[a].n)})[0];
+  if(bestH!=null) tips.push('Your best hour so far is around '+(bestH<10?'0':'')+bestH+':00 ('+(CFG.market==='us'?'their time':'your time')+'), with '+pct(hb[bestH].r,hb[bestH].n)+'% picking up. Stack your calls there.');
+  var warmOpen=leads.filter(function(s){return (s.interest==='hot'||s.interest==='warm')&&!CLOSED[s.status]});
+  if(warmOpen.length) tips.push('<b>'+warmOpen.length+' warm or hot lead'+(warmOpen.length>1?'s':'')+' still open</b>: '+warmOpen.slice(0,5).map(function(s){return esc(s.lead.name)}).join(', ')+'. Call these before new numbers.');
+  if(spokeLeads.length>=3&&ic.unset>=spokeLeads.length/2) tips.push('Half the people you spoke to have no interest level. Rate every conversation, even a quick no, so the patterns are real.');
+  if(!tips.length) tips.push('Keep logging. After about ten conversations with interest levels and tags, this section starts pointing out patterns.');
+  h+='<div class="panel"><h3>What this means for the next calls</h3><div class="ins">'+tips.map(function(t){return '<div>'+t+'</div>'}).join('')+'</div></div>';
+  // notes feed
+  var notes=calls.filter(function(c){return c.n}).slice(-12).reverse();
+  if(notes.length) h+='<div class="panel"><h3>Latest notes</h3><div class="feed">'+notes.map(function(c){var l=BYID[c.id];return '<div><b>'+esc(l?l.name:c.id)+'</b> <span class="muted">'+fmtWhen(c.at)+' · '+esc(OUT[c.o]||c.o)+(c.i?' · '+INT[c.i]:'')+'</span><br>'+esc(c.n)+'</div>'}).join('')+'</div></div>';
+  $('#insightBody').innerHTML=h;
+}
+$('#copySum').addEventListener('click',function(){
+  var lines=['Digital Switch call desk ('+CFG.marketLabel+'), copied '+new Date().toLocaleString('en-GB')];
+  Object.keys(state).forEach(function(id){var s=state[id],l=BYID[id];if(!l||!s.attempts)return;
+    lines.push('\n'+l.name+' ('+(l.area||l.city)+') | status: '+(OUT[s.status]||s.status)+' | interest: '+(INT[s.interest]||'not rated')+' | tags: '+((s.tags||[]).map(function(t){return TAG[t]||t}).join(', ')||'none')+' | calls: '+s.attempts);
+    (s.log||[]).forEach(function(e){lines.push('  - '+new Date(e.at).toLocaleString('en-GB')+': '+(OUT[e.o]||e.o)+(e.n?' | '+e.n:''))})});
+  copy(lines.join('\n'));
+});
+
+/* ---------- start ---------- */
+render(); syncLabel();
+if(!LEADS.length&&DESK_KEY) $('#list').innerHTML='<div class="empty">Loading leads…</div>';
+load();
+setInterval(function(){if(document.visibilityState==='visible')load()},90000);
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')load()});
+window.addEventListener('online',flush);
+})();
+</script>
+</body></html>
