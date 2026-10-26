@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#071719">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<title>DS Launch Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--night:#071719;--panel:#0b2124;--card:#0d2629;--street:#123336;--river:#1b4a4d;--deep:#164043;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;--ok:#7ee0b0;--warn:#ffd27a;--no:#ff9a9a;
+  --display:'Unbounded',system-ui,sans-serif;--script:'Ballet',cursive;--body:'Inter Tight',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+  --neon:0 0 14px rgba(195,176,255,.7),0 0 36px rgba(155,123,255,.45);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--night:#071719}}
+:root[data-theme="dark"]{--night:#071719}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--lilac)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 120px}
+header{padding:26px 0 8px;display:flex;align-items:center;gap:14px}
+header svg{width:44px;height:25px;filter:drop-shadow(0 0 6px rgba(195,176,255,.8))}
+h1{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(28px,6vw,44px);letter-spacing:-.04em;line-height:1.05}
+h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.6em;line-height:.6;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
+.sub{color:var(--sage);margin:8px 0 18px}
+.me{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--river);border-radius:16px;padding:12px 14px;margin-bottom:16px;flex-wrap:wrap}
+.me label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+input,textarea,select{font:inherit;color:var(--mint);background:var(--night);border:1px solid var(--river);border-radius:10px;padding:10px 12px}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--lilac);outline-offset:1px}
+.me input{flex:1;min-width:160px}
+nav.tabs{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px;padding:10px 0;background:var(--night);border-bottom:1px solid var(--street);margin-bottom:22px;scrollbar-width:none}
+nav.tabs button{flex:none;background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:9px 16px;font:500 14px var(--body);cursor:pointer;transition:all .25s}
+nav.tabs button[aria-selected="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac);box-shadow:var(--neon)}
+nav.tabs button:hover{border-color:var(--lilac);box-shadow:var(--neon)}
+section{display:none}section.on{display:block}
+h2{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:-.03em;margin:6px 0 6px}
+h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1.7em;line-height:.6}
+.lead{color:var(--sage);margin:0 0 18px}
+.step{background:var(--card);border:1px solid var(--river);border-radius:18px;padding:16px 16px 16px 56px;margin:12px 0;position:relative;transition:border-color .3s,opacity .3s}
+.step.done{opacity:.6;border-color:var(--deep)}
+.step .chk{position:absolute;left:14px;top:16px;width:30px;height:18px;border-radius:9px;background:var(--deep);border:0;cursor:pointer;padding:0}
+.step .chk::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--dim);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s}
+.step.done .chk{background:var(--lilac);box-shadow:0 0 10px rgba(195,176,255,.7)}
+.step.done .chk::after{transform:translateX(12px);background:var(--night)}
+.step h3{margin:0 0 6px;font-size:17px;font-weight:600}
+.step p,.step li{color:var(--mist);margin:4px 0}
+.step ol,.step ul{margin:6px 0;padding-left:20px}
+.path{font-family:var(--mono);font-size:12.5px;color:var(--lilac);background:rgba(195,176,255,.08);border-radius:6px;padding:2px 6px}
+.copy{position:relative;background:var(--night);border:1px solid var(--street);border-radius:12px;padding:12px 12px 12px 12px;margin:8px 0;white-space:pre-wrap;font-size:15px;color:var(--mint)}
+.copy .k{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:10px 16px;font:600 14px var(--body);text-decoration:none;cursor:pointer;border:1px solid var(--river);background:transparent;color:var(--mint);transition:all .25s;white-space:nowrap}
+.btn:hover{border-color:var(--lilac);box-shadow:var(--neon)}
+.btn.p{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
+.btn.wa{background:#1faa59;border-color:#1faa59;color:#fff}
+.btn.sm{padding:7px 12px;font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:10px}
+.imgs a{display:block;border:1px solid var(--river);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--mist);font-size:12px}
+.imgs img{display:block;width:100%;height:110px;object-fit:cover;background:var(--panel)}
+.imgs span{display:block;padding:7px 9px}
+.note{border-left:3px solid var(--lilac);padding:8px 12px;background:rgba(195,176,255,.06);border-radius:0 10px 10px 0;color:var(--mist);margin:12px 0;font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 16px}
+.stats div{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px;text-align:center}
+.stats b{display:block;font-family:var(--display);font-weight:200;font-size:26px;color:var(--lilac)}
+.stats span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.lead-card{background:var(--card);border:1px solid var(--river);border-radius:18px;padding:14px;margin:10px 0;transition:border-color .3s}
+.lead-card.s-sold{border-color:var(--ok);box-shadow:0 0 24px rgba(126,224,176,.15)}
+.lead-card.s-interested{border-color:var(--lilac)}
+.lead-card.s-dnc,.lead-card.s-notnow{opacity:.55}
+.lc-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.lc-top h3{margin:0;font-size:17px}
+.lc-top .meta{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:2px}
+.badge{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--river);border-radius:999px;padding:4px 9px;color:var(--mist);white-space:nowrap}
+.badge.s-sold{color:var(--night);background:var(--ok);border-color:var(--ok)}
+.badge.s-interested,.badge.s-sent{color:var(--night);background:var(--lilac);border-color:var(--lilac)}
+.badge.s-noanswer{color:var(--warn);border-color:var(--warn)}
+.badge.s-dnc,.badge.s-notnow{color:var(--no);border-color:var(--no)}
+.status-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.status-row button{background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:6px 10px;font:500 12.5px var(--body);cursor:pointer}
+.status-row button.on{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
+.lead-card textarea{width:100%;margin-top:8px;min-height:40px;font-size:14px}
+.script h3{margin:14px 0 4px;font-size:15px;color:var(--lilac);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.say{background:var(--night);border:1px solid var(--street);border-radius:12px;padding:12px;margin:6px 0;font-size:16px}
+.say b{color:#fff}
+details{background:var(--card);border:1px solid var(--river);border-radius:14px;margin:8px 0;padding:0 14px}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ ";color:var(--lilac)}
+details[open] summary::before{content:"– "}
+details p{color:var(--mist);margin:0 0 12px}
+.pt{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 12px;margin:8px 0}
+.pt select{padding:6px 8px;font-size:13px}
+.addp{display:flex;gap:8px;margin-top:10px}
+.addp input{flex:1;min-width:0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120%);background:var(--lilac);color:var(--night);font:600 14px var(--body);padding:10px 18px;border-radius:999px;box-shadow:var(--neon);transition:transform .35s;z-index:50}
+.toast.show{transform:translate(-50%,0)}
+.sync{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.06em}
+.hide{display:none!important}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.step{padding-left:50px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
+  <h1>Launch <em>desk</em></h1>
+</header>
+<p class="sub">Set up WhatsApp, test that everything works, call your first 10 roofers, then launch referrals. Tick each step as you go.</p>
+
+<div class="me"><label for="myName">Your name</label><input id="myName" placeholder="Your first name" autocomplete="given-name"><button class="btn p sm" id="saveName">Save</button><span class="sync" id="sync"></span></div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-t="wa">1 · WhatsApp</button>
+  <button role="tab" aria-selected="false" data-t="test">2 · Test it</button>
+  <button role="tab" aria-selected="false" data-t="calls">3 · Calls</button>
+  <button role="tab" aria-selected="false" data-t="script">Script</button>
+  <button role="tab" aria-selected="false" data-t="refer">4 · Referrals</button>
+</nav>
+
+<!-- 1 WHATSAPP -->
+<section id="wa" class="on">
+  <h2>Set up <em>WhatsApp</em></h2>
+  <p class="lead">About 30 minutes, on the phone with 076 129 3926 in WhatsApp Business. Menus: on Android tap <span class="path">⋮ → Business tools</span>; on iPhone tap <span class="path">Settings → Business tools</span>.</p>
+
+  <div class="step" data-s="wa1"><button class="chk" aria-label="Mark done"></button>
+    <h3>Save the images to your phone</h3>
+    <p>Tap an image to download it. On iPhone, if it opens instead, press and hold it and choose <b>Save to Photos</b>. They're all high resolution.</p>
+    <div class="imgs">
+      <a href="/brand/whatsapp/wa-profile-photo.jpg" download="wa-profile-photo.jpg"><img src="/brand/whatsapp/wa-profile-photo.jpg" alt="Profile photo: the glowing lilac switch"><span>Profile photo</span></a>
+      <a href="/brand/whatsapp/wa-cover.jpg" download="wa-cover.jpg"><img src="/brand/whatsapp/wa-cover.jpg" alt="Cover photo: the Digital Switch homepage"><span>Cover photo</span></a>
+      <a href="/brand/whatsapp/wa-catalog-website.jpg" download="wa-catalog-website.jpg"><img src="/brand/whatsapp/wa-catalog-website.jpg" alt="Catalogue image: Your website, R2,999"><span>Catalogue: website</span></a>
+      <a href="/brand/whatsapp/wa-catalog-care-plan.jpg" download="wa-catalog-care-plan.jpg"><img src="/brand/whatsapp/wa-catalog-care-plan.jpg" alt="Catalogue image: Monthly care, R199"><span>Catalogue: care plan</span></a>
+      <a href="/brand/whatsapp/wa-status-referral.jpg" download="wa-status-referral.jpg"><img src="/brand/whatsapp/wa-status-referral.jpg" alt="Status: Earn R750 for every client you bring"><span>Referral Status</span></a>
+    </div>
+  </div>
+
+  <div class="step" data-s="wa2"><button class="chk" aria-label="Mark done"></button>
+    <h3>Business profile</h3>
+    <p><span class="path">Business tools → Business profile</span>. Set the photo and cover, then fill in:</p>
+    <div class="copy"><span class="k">Name</span>Digital Switch</div>
+    <div class="copy"><span class="k">Category</span>Internet company (or Advertising/Marketing)</div>
+    <div class="copy" data-copy><span class="k">Description</span>Animated, phone-first websites for South African businesses. R2,999 once-off, live on your own web address within 24 hours. Then R199 a month for hosting, your address, updates and support. See our work: digitalswitch.co.za</div>
+    <div class="copy"><span class="k">Address</span>Lenasia, Johannesburg (or set "Service area: Gauteng")</div>
+    <div class="copy"><span class="k">Hours</span>Mon to Sat, 08:00 to 18:00</div>
+    <div class="copy" data-copy><span class="k">Email</span>digitalswitch28@gmail.com</div>
+    <div class="copy" data-copy><span class="k">Website</span>https://digitalswitch.co.za</div>
+  </div>
+
+  <div class="step" data-s="wa3"><button class="chk" aria-label="Mark done"></button>
+    <h3>Catalogue: 2 items</h3>
+    <p><span class="path">Business tools → Catalogue → Add new item</span>. Use the catalogue images.</p>
+    <div class="copy"><span class="k">Item 1 · name / price</span>Custom website · R2,999</div>
+    <div class="copy" data-copy><span class="k">Item 1 · description</span>An animated, phone-first website for your business, built for you and live on your own .co.za address within 24 hours. Includes tap-to-call, WhatsApp and map buttons, a quote form and Google set-up.</div>
+    <div class="copy" data-copy><span class="k">Item 1 · link</span>https://digitalswitch.co.za</div>
+    <div class="copy"><span class="k">Item 2 · name / price</span>Monthly care plan · R199</div>
+    <div class="copy" data-copy><span class="k">Item 2 · description</span>Hosting and security, your web address renewed, one batch of changes every month, free fixes, enquiries straight to your WhatsApp and a monthly report. Month to month, cancel any time.</div>
+  </div>
+
+  <div class="step" data-s="wa4"><button class="chk" aria-label="Mark done"></button>
+    <h3>Greeting message</h3>
+    <p><span class="path">Business tools → Greeting message</span> → on. Recipients: everyone not in your address book.</p>
+    <div class="copy" data-copy><span class="k">Greeting</span>Hi! Thanks for messaging Digital Switch. We build animated websites for local businesses: R2,999 once-off, live in 24 hours. Tell us your business name and what you do, and we'll show you what your site could look like.</div>
+  </div>
+
+  <div class="step" data-s="wa5"><button class="chk" aria-label="Mark done"></button>
+    <h3>Away message</h3>
+    <p><span class="path">Business tools → Away message</span> → on → Schedule: outside of business hours.</p>
+    <div class="copy" data-copy><span class="k">Away</span>Thanks for your message! We're offline right now and will reply first thing in the morning. In the meantime, see our work at digitalswitch.co.za</div>
+  </div>
+
+  <div class="step" data-s="wa6"><button class="chk" aria-label="Mark done"></button>
+    <h3>Quick replies</h3>
+    <p><span class="path">Business tools → Quick replies → +</span>. Add the shortcut and the message. In any chat, type <b>/</b> to use them.</p>
+    <div id="quick"></div>
+  </div>
+
+  <div class="step" data-s="wa7"><button class="chk" aria-label="Mark done"></button>
+    <h3>Labels</h3>
+    <p>Long-press a chat → label icon → New label. Create these so you can see your pipeline at a glance:</p>
+    <p><span class="path">New lead</span> <span class="path">Site sent</span> <span class="path">Interested</span> <span class="path">Paid</span> <span class="path">Referral partner</span></p>
+  </div>
+
+  <div class="step" data-s="wa8"><button class="chk" aria-label="Mark done"></button>
+    <h3>Decide how clients pay</h3>
+    <p>Have this ready before your first call, so a "yes" can pay the same day:</p>
+    <ul><li>A card payment link from Yoco or PayFast for R2,999 (both have free sign-up), or</li><li>Your EFT bank details, ready to paste.</li></ul>
+    <p>Then edit the <b>/pay</b> quick reply to include the link or the bank details.</p>
+  </div>
+  <div class="row"><button class="btn p" data-go="test">Next: test it →</button></div>
+</section>
+
+<!-- 2 TEST -->
+<section id="test">
+  <h2>Test the <em>system</em></h2>
+  <p class="lead">Five minutes. Use your personal phone as "the client" and the business phone as you.</p>
+  <div class="step" data-s="t1"><button class="chk" aria-label="Mark done"></button><h3>Message the business</h3><p>From your personal WhatsApp, send "hi" to 076 129 3926. The greeting should arrive straight away.</p><div class="row"><a class="btn wa sm" href="https://wa.me/27761293926?text=hi" target="_blank" rel="noopener">Send "hi" to DS</a></div></div>
+  <div class="step" data-s="t2"><button class="chk" aria-label="Mark done"></button><h3>Try a quick reply</h3><p>On the business phone, open that chat, type <b>/price</b> and send it. Check it reads well on your personal phone.</p></div>
+  <div class="step" data-s="t3"><button class="chk" aria-label="Mark done"></button><h3>Open the sites on your phone</h3><p>Check the website and one roofer's site load properly.</p><div class="row"><a class="btn sm" href="https://digitalswitch.co.za" target="_blank" rel="noopener">digitalswitch.co.za</a><a class="btn sm" href="https://digitalswitch.co.za/local/za-jozi-roofing-experts-johannesburg/" target="_blank" rel="noopener">Jozi Roofing Experts site</a></div></div>
+  <div class="step" data-s="t4"><button class="chk" aria-label="Mark done"></button><h3>Check the call and WhatsApp buttons</h3><p>In the Calls tab, tap <b>Call</b> on lead 1 and cancel before it rings. Then tap <b>WhatsApp: after call</b> and check the message fills in with your name and their link. Don't send it yet.</p><p class="note">If your phone has both WhatsApp and WhatsApp Business, it may ask which to use. Always pick <b>WhatsApp Business</b>, so every lead lands on the DS number.</p></div>
+  <div class="step" data-s="t5"><button class="chk" aria-label="Mark done"></button><h3>Test payment</h3><p>Pay yourself a small amount (say R10) through your payment link, or confirm your EFT details are right. Then you know a "yes" can pay today.</p></div>
+  <div class="row"><button class="btn p" data-go="calls">All working? Go to calls →</button></div>
+</section>
+
+<!-- 3 CALLS -->
+<section id="calls">
+  <h2>Today's <em>calls</em></h2>
+  <p class="lead">Every roofer below already has a website built for them. Call first, then send their site on WhatsApp while you're on the line, or straight after. Status saves as you tap.</p>
+  <div class="stats" id="stats"></div>
+  <div class="row" style="margin-bottom:6px"><button class="btn sm" id="toggleAll">Show all 54 roofers</button><button class="btn sm" data-go="script">Open the script</button></div>
+  <div id="leadList"></div>
+  <p class="note">Keep it one-to-one and personal. If someone says no or asks you not to contact them, tap "Don't contact" and leave it there. Landline numbers (starting 010 to 012) can't get WhatsApp, so call those and offer to send the link to a cellphone.</p>
+</section>
+
+<!-- SCRIPT -->
+<section id="script" class="script">
+  <h2>The <em>script</em></h2>
+  <p class="lead">Short, friendly, and about them. The site does the selling. Your job is to get them to look at it.</p>
+  <h3>1 · Open (10 seconds)</h3>
+  <div class="say">Hi, is this <b>[Business]</b>? My name is <b class="nm">[your name]</b> from Digital Switch. I'll be quick: I came across your business on Google and saw you don't have a website, so <b>I built one for you</b>. Can I send it to you on WhatsApp so you can see it?</div>
+  <h3>2 · Send it while they're on the line</h3>
+  <div class="say">Great, I'm sending it now. It's a link, just open it on your phone. <b>[Tap "WhatsApp: after call"]</b> Have a scroll and tell me what you think.</div>
+  <p class="lead" style="margin-top:6px">If they're busy: "No problem, I'll send it now and call you back at [time]. Which is better, this afternoon or tomorrow morning?"</p>
+  <h3>3 · The offer (only after they've looked)</h3>
+  <div class="say">It's yours for <b>R2,999 once-off</b>. We put it on your own web address, set you up on Google, and it's <b>live within 24 hours</b>. After that it's R199 a month for hosting, your address, changes and support. No contract.</div>
+  <h3>4 · Close</h3>
+  <div class="say">Shall I send you the payment link so we can have it live by tomorrow?</div>
+  <p class="lead" style="margin-top:6px">If yes: send <b>/pay</b>, then <b>/details</b> to collect their logo, photos and service areas. Label the chat <span class="path">Paid</span> once the money is in.</p>
+
+  <h3>If they say…</h3>
+  <details><summary>"It's too expensive."</summary><p>"I hear you. Most web designers charge R8,000 to R15,000 for a custom site. This is R2,999 once-off and already built for you. One extra roofing job pays for it many times over."</p></details>
+  <details><summary>"I get my work from word of mouth."</summary><p>"That's the best kind of work. When someone recommends you, the first thing they do is Google you. This makes sure they find you, see your work and can call you in one tap, instead of finding the next roofer."</p></details>
+  <details><summary>"I have a Facebook page."</summary><p>"Keep it! This works with it. A website on your own address shows up on Google, looks established, and you own it. We can link your Facebook page from it."</p></details>
+  <details><summary>"Send me info, I'll think about it."</summary><p>"Of course, it's on your WhatsApp now. What would you want to see changed for it to be a yes? I can tweak it today." Then follow up tomorrow with the follow-up message.</p></details>
+  <details><summary>"Is this a scam? Who are you?"</summary><p>"Fair question. We're Digital Switch, based in Lenasia. You don't pay anything until you've seen your site and are happy with it. Our work is at digitalswitch.co.za, and I'm on WhatsApp at 076 129 3926."</p></details>
+  <details><summary>"Not interested."</summary><p>"No problem at all, thanks for your time. Have a good day." Tap "Not now" and move on. No pushing.</p></details>
+  <div class="row"><button class="btn p" data-go="calls">← Back to calls</button></div>
+</section>
+
+<!-- 4 REFERRALS -->
+<section id="refer">
+  <h2>Launch <em>referrals</em></h2>
+  <p class="lead">Every day you wait is a day nobody's selling for you. Do these four now, then go back to calls.</p>
+  <div class="step" data-s="r1"><button class="chk" aria-label="Mark done"></button>
+    <h3>Post the Status</h3>
+    <p>Post the referral image on the DS WhatsApp Status <b>and</b> your personal one, with this caption:</p>
+    <div class="copy" data-copy><span class="k">Caption</span>Know a business that needs a website? Bring them to Digital Switch and earn R750 when they sign up. No limit. Reply "I'm in" and I'll send you everything. digitalswitch.co.za/refer</div>
+    <div class="row"><a class="btn sm" href="/brand/whatsapp/wa-status-referral.jpg" download="wa-status-referral.jpg">Download the Status image</a></div>
+  </div>
+  <div class="step" data-s="r2"><button class="chk" aria-label="Mark done"></button>
+    <h3>Message your 10 to 20 best-connected people</h3>
+    <p>Think: people who know lots of business owners, like hairdressers, church and community leaders, taxi and spaza owners, friends in sales, family who run businesses. Send it one by one, not as a broadcast.</p>
+    <div class="copy" data-copy id="referMsg"><span class="k">Message</span></div>
+    <div class="row"><a class="btn wa sm" id="referShare" target="_blank" rel="noopener">Send on WhatsApp</a></div>
+  </div>
+  <div class="step" data-s="r3"><button class="chk" aria-label="Mark done"></button>
+    <h3>When someone says "I'm in"</h3>
+    <p>Send them this, then label the chat <span class="path">Referral partner</span>:</p>
+    <div class="copy" data-copy id="partnerMsg"><span class="k">Reply</span></div>
+  </div>
+  <div class="step" data-s="r4"><button class="chk" aria-label="Mark done"></button>
+    <h3>Track who you've told</h3>
+    <p>Add each person as you message them. First names only is fine.</p>
+    <div id="partners"></div>
+    <div class="addp"><input id="pName" placeholder="Name"><button class="btn p sm" id="pAdd">Add</button></div>
+  </div>
+  <div class="row"><button class="btn p" data-go="calls">Done: back to calls →</button></div>
+</section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+var LEADS = [{"id": "jozi-roofing-experts-johannesburg", "name": "Jozi Roofing Experts", "area": "Johannesburg", "num": "27719759898", "mobile": true, "today": true}, {"id": "jake-the-roof-man-johannesburg", "name": "Jake The Roof Man", "area": "Johannesburg", "num": "27634988943", "mobile": true, "today": true}, {"id": "hashtag-roofing-johannesburg", "name": "Hashtag Roofing", "area": "Johannesburg", "num": "27747532022", "mobile": true, "today": true}, {"id": "sfiso-roof-repair-professional-johannesburg", "name": "Sfiso Roof Repair Professional", "area": "Johannesburg", "num": "27699653162", "mobile": true, "today": true}, {"id": "pj-roof-repairs-johannesburg", "name": "PJ Roof Repairs", "area": "Johannesburg", "num": "27826893669", "mobile": true, "today": true}, {"id": "johannesburg-roofing-johannesburg", "name": "Johannesburg Roofing", "area": "Johannesburg", "num": "27715455541", "mobile": true, "today": true}, {"id": "radiant-roofing-johannesburg", "name": "Radiant Roofing", "area": "Johannesburg", "num": "27642152141", "mobile": true, "today": true}, {"id": "reliable-roofing-and-projects-johannesburg", "name": "Reliable Roofing And Projects", "area": "Johannesburg", "num": "27640514523", "mobile": true, "today": true}, {"id": "spencer-roofing-johannesburg", "name": "Spencer Roofing", "area": "Johannesburg", "num": "27640908035", "mobile": true, "today": true}, {"id": "sk-roofing-maintenance-johannesburg", "name": "SK Roofing & Maintenance", "area": "Johannesburg", "num": "27768898971", "mobile": true, "today": true}, {"id": "7-24-roofing-services-randburg-johannesburg", "name": "7:24 Roofing Services Randburg", "area": "Johannesburg", "num": "27602105903", "mobile": true, "today": false}, {"id": "affordable-roofing-and-waterproofing-johannesburg", "name": "Affordable Roofing and Waterproofing", "area": "Johannesburg", "num": "27822683015", "mobile": true, "today": false}, {"id": "affordable-waterproofing-and-roof-repairs-randfontein", "name": "Affordable waterproofing and roof repairs", "area": "Randfontein", "num": "27832521425", "mobile": true, "today": false}, {"id": "alekwa-constructions-johannesburg", "name": "Alekwa constructions", "area": "Johannesburg", "num": "27735286801", "mobile": true, "today": false}, {"id": "damp-stop-johannesburg", "name": "Damp Stop", "area": "Johannesburg", "num": "27792801131", "mobile": true, "today": false}, {"id": "delta-thatch-johannesburg", "name": "Delta thatch", "area": "Johannesburg", "num": "27732898248", "mobile": true, "today": false}, {"id": "dvg-roofing-solutions-steve-tshwete", "name": "DVG Roofing Solutions", "area": "Steve Tshwete", "num": "27711649944", "mobile": true, "today": false}, {"id": "fix-a-roof-pty-roofing-service-johannesburg", "name": "Fix A Roof (Pty) Roofing Service", "area": "Johannesburg", "num": "27722575482", "mobile": true, "today": false}, {"id": "krools-projects-pty-ltd-johannesburg", "name": "Krools Projects Pty Ltd", "area": "Johannesburg", "num": "27846651673", "mobile": true, "today": false}, {"id": "mews-waterproofing-johannesburg-johannesburg", "name": "Mews Waterproofing Johannesburg", "area": "Johannesburg", "num": "27793404116", "mobile": true, "today": false}, {"id": "onyx-roofers-pty-ltd-ekurhuleni", "name": "ONYX ROOFERS PTY LTD", "area": "Ekurhuleni", "num": "27793352769", "mobile": true, "today": false}, {"id": "peaceful-home-roof-experts-gauteng-johannesburg", "name": "Peaceful Home Roof Experts Gauteng", "area": "Johannesburg", "num": "27623939246", "mobile": true, "today": false}, {"id": "ricoshay-roofing-solutions-ekurhuleni", "name": "Ricoshay Roofing Solutions", "area": "Ekurhuleni", "num": "27764340288", "mobile": true, "today": false}, {"id": "rm-construction-and-maintenance-johannesburg", "name": "RM Construction and Maintenance", "area": "Johannesburg", "num": "27619552969", "mobile": true, "today": false}, {"id": "roof-birds-pty-ltd-johannesburg", "name": "Roof Birds (Pty) Ltd", "area": "Johannesburg", "num": "27606863411", "mobile": true, "today": false}, {"id": "roof-coatings-johannesburg", "name": "ROOF COATINGS", "area": "Johannesburg", "num": "27659364329", "mobile": true, "today": false}, {"id": "rosebank-and-sandton-roofing-johannesburg", "name": "Rosebank and Sandton Roofing", "area": "Johannesburg", "num": "27607398081", "mobile": true, "today": false}, {"id": "rr-roof-waterproofing-pretoria", "name": "RR Roof Waterproofing", "area": "Pretoria", "num": "27817323052", "mobile": true, "today": false}, {"id": "sandown-roofing-cc-johannesburg", "name": "Sandown Roofing Cc", "area": "Johannesburg", "num": "27832509766", "mobile": true, "today": false}, {"id": "spthatch-pty-ltd-johannesburg", "name": "SpThatch PTY LTD", "area": "Johannesburg", "num": "27717499636", "mobile": true, "today": false}, {"id": "ss-roofer-pretoria", "name": "SS Roofer", "area": "Pretoria", "num": "27810437088", "mobile": true, "today": false}, {"id": "supreme-roof-waterproofing-company-johannesburg", "name": "Supreme Roof Waterproofing Company", "area": "Johannesburg", "num": "27678173343", "mobile": true, "today": false}, {"id": "thatch-roof-repair-johannesburg", "name": "THATCH ROOF REPAIR", "area": "Johannesburg", "num": "27820939676", "mobile": true, "today": false}, {"id": "the-roofing-co-johannesburg", "name": "The Roofing Co", "area": "Johannesburg", "num": "27664839123", "mobile": true, "today": false}, {"id": "the-roofing-guys-pty-ltd-ekurhuleni", "name": "The Roofing Guys Pty Ltd", "area": "Ekurhuleni", "num": "27794865498", "mobile": true, "today": false}, {"id": "vee-thatch-pty-ltd-johannesburg", "name": "Vee Thatch Pty Ltd", "area": "Johannesburg", "num": "27724451633", "mobile": true, "today": false}, {"id": "vhangoni-steel-professions-johannesburg", "name": "Vhangoni Steel Professions", "area": "Johannesburg", "num": "27727546196", "mobile": true, "today": false}, {"id": "all-roofing-johannesburg", "name": "All Roofing", "area": "Johannesburg", "num": "27118878555", "mobile": false, "today": false}, {"id": "global-roofing-solutions-pty-ltd-johannesburg", "name": "Global Roofing Solutions (Pty) Ltd", "area": "Johannesburg", "num": "27118982900", "mobile": false, "today": false}, {"id": "jbc-roof-cover-pty-ltd-johannesburg", "name": "JBC ROOF COVER (PTY) LTD", "area": "Johannesburg", "num": "27117606051", "mobile": false, "today": false}, {"id": "maintenance-aid-johannesburg", "name": "Maintenance Aid", "area": "Johannesburg", "num": "27114401649", "mobile": false, "today": false}, {"id": "mkhwanazi-roofleaks-pty-ltd-johannesburg", "name": "Mkhwanazi Roofleaks Pty Ltd", "area": "Johannesburg", "num": "27119821004", "mobile": false, "today": false}, {"id": "peche-roofing-specialists-johannesburg", "name": "Peche Roofing Specialists", "area": "Johannesburg", "num": "27117087411", "mobile": false, "today": false}, {"id": "prominent-roofing-waterproofing-service-johannesburg", "name": "Prominent Roofing - Waterproofing Service", "area": "Johannesburg", "num": "27107860312", "mobile": false, "today": false}, {"id": "prompt-roofing-johannesburg", "name": "Prompt Roofing", "area": "Johannesburg", "num": "27113922809", "mobile": false, "today": false}, {"id": "quality-fix-roofing-pty-ltd-johannesburg", "name": "Quality Fix Roofing (Pty) Ltd", "area": "Johannesburg", "num": "27116080066", "mobile": false, "today": false}, {"id": "rockstar-roofing-johannesburg", "name": "Rockstar Roofing", "area": "Johannesburg", "num": "27126530026", "mobile": false, "today": false}, {"id": "roof-experts-ekurhuleni", "name": "Roof Experts", "area": "Ekurhuleni", "num": "27119070757", "mobile": false, "today": false}, {"id": "roof-improvers-ekurhuleni", "name": "Roof Improvers", "area": "Ekurhuleni", "num": "27118696081", "mobile": false, "today": false}, {"id": "roof-surgeon-ekurhuleni", "name": "Roof Surgeon", "area": "Ekurhuleni", "num": "27118683243", "mobile": false, "today": false}, {"id": "roofrefurb-johannesburg", "name": "Roofrefurb", "area": "Johannesburg", "num": "27114851782", "mobile": false, "today": false}, {"id": "sa-waterproofing-pty-ltd-johannesburg", "name": "SA WATERPROOFING (Pty) LTD", "area": "Johannesburg", "num": "27117868888", "mobile": false, "today": false}, {"id": "universal-roofing-johannesburg", "name": "UNIVERSAL ROOFING", "area": "Johannesburg", "num": "27117087474", "mobile": false, "today": false}, {"id": "wetlock-roofing-johannesburg", "name": "Wetlock Roofing", "area": "Johannesburg", "num": "27116728217", "mobile": false, "today": false}];
+var SITE = 'https://digitalswitch.co.za/local/za-';
+var $ = function(s){return document.querySelector(s)}, $$ = function(s){return [].slice.call(document.querySelectorAll(s))};
+function lsGet(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('show')},1600)}
+function me(){return ($('#myName').value||'').trim()||'[your name]'}
+function local(n){return n.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
+
+/* name */
+$('#myName').value = lsGet('ds-name','');
+function saveName(){lsSet('ds-name',$('#myName').value.trim());renderText();renderLeads();toast($('#myName').value.trim()?'Saved: '+$('#myName').value.trim():'Name cleared')}
+$('#saveName').addEventListener('click',saveName);
+$('#myName').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();saveName();this.blur()}});
+$('#myName').addEventListener('change',saveName);
+
+/* tabs */
+function go(t){$$('nav.tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});$$('section').forEach(function(s){s.classList.toggle('on',s.id===t)});lsSet('ds-tab',t);window.scrollTo({top:0,behavior:'smooth'})}
+$$('nav.tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.t)})});
+$$('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go)})});
+go(lsGet('ds-tab','wa'));
+
+/* checklist (per-phone convenience) */
+var done = {}; try{done=JSON.parse(lsGet('ds-steps','{}'))}catch(e){}
+$$('.step').forEach(function(s){ if(done[s.dataset.s]) s.classList.add('done'); s.querySelector('.chk').addEventListener('click',function(){ s.classList.toggle('done'); done[s.dataset.s]=s.classList.contains('done'); lsSet('ds-steps',JSON.stringify(done)); }); });
+
+/* copy buttons */
+function addCopy(el){ if(el.querySelector('.cp')) return; var b=document.createElement('button'); b.className='btn sm cp'; b.textContent='Copy'; b.style.cssText='position:absolute;right:8px;top:8px'; b.addEventListener('click',function(){ var txt=el.cloneNode(true); txt.querySelectorAll('.k,.cp').forEach(function(x){x.remove()}); var v=txt.textContent.trim(); (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){toast('Copied')},function(){ var ta=document.createElement('textarea'); ta.value=v; document.body.append(ta); ta.select(); try{document.execCommand('copy');toast('Copied')}catch(e){} ta.remove(); }); }); el.append(b); el.style.paddingRight='70px'; }
+
+/* quick replies */
+var QUICK = [
+ ['/price','Our websites are R2,999 once-off. That includes the design, your own web address, Google set-up, and it\'s live within 24 hours. After that it\'s R199 a month for hosting, your address, changes and support. No contract.'],
+ ['/included','Your website comes with: a custom animated design, built for phones first, tap-to-call and WhatsApp buttons, a map and a quote form, your own .co.za address, and Google set-up.'],
+ ['/monthly','The R199 a month covers hosting and security, renewing your web address every year, one batch of changes every month, free fixes if anything breaks, enquiries sent straight to your WhatsApp, and a monthly report. You can cancel any time.'],
+ ['/howlong','Once payment is in, your site is live within 24 hours. You can send your logo and photos any time, it goes live either way.'],
+ ['/pay','Great! Here\'s how to pay the R2,999 setup: [paste your payment link or bank details]. As soon as it clears, the 24-hour clock starts.'],
+ ['/details','To finish your site, please send: 1) your logo, 2) a few photos of your work, 3) the services you offer, 4) the areas you cover, 5) your best number for calls. If you don\'t have some of these, no stress, we\'ll go live with what you have.'],
+ ['/work','Here are some of the sites we\'ve built: digitalswitch.co.za'],
+ ['/refer','Know another business that needs a website? Send them our way and earn R750 when they sign up: digitalswitch.co.za/refer']
+];
+$('#quick').innerHTML = QUICK.map(function(q){return '<div class="copy" data-copy><span class="k">Shortcut '+q[0]+'</span>'+q[1]+'</div>'}).join('');
+
+/* referral texts */
+function renderText(){
+  var m='Hey! It\'s '+me()+'. I\'ve started Digital Switch, we build animated websites for small businesses. I\'m running a referral programme: bring me a business that signs up and I pay you R750, with no limit on how many. Everything\'s here: https://digitalswitch.co.za/refer\n\nReply "I\'m in" and I\'ll send you what you need.';
+  $('#referMsg').innerHTML='<span class="k">Message</span>'+m.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  $('#referShare').href='https://wa.me/?text='+encodeURIComponent(m);
+  var p='Welcome aboard! Here\'s how it works:\n\n1. Find a business owner who needs a website.\n2. WhatsApp me their business name before you start, so it\'s registered to you.\n3. Show them our work (digitalswitch.co.za) and the price: R2,999 once-off, R199 a month.\n4. When they\'re ready, connect us. I handle the rest.\n5. You get R750 once they\'ve paid in full.\n\nMessages you can send them, the price sheet and the rules are all here: https://digitalswitch.co.za/refer';
+  $('#partnerMsg').innerHTML='<span class="k">Reply</span>'+p;
+  $$('.nm').forEach(function(e){e.textContent=me()});
+  $$('[data-copy]').forEach(addCopy);
+}
+renderText();
+
+/* ---------- leads: status stored in the artifact database ---------- */
+var STATUSES=[['call','To call'],['noanswer','No answer'],['sent','Site sent'],['interested','Interested'],['sold','Sold'],['notnow','Not now'],['dnc','Don\'t contact']];
+var state={}; var db=null; var showAll=false; var pendingRender=false;
+try{state=JSON.parse(lsGet('ds-leads','{}'))}catch(e){}
+$('#toggleAll').addEventListener('click',function(){showAll=!showAll;this.textContent=showAll?'Show today\'s 10':'Show all 54 roofers';renderLeads()});
+function msgAfter(l){return 'Hi, it\'s '+me()+' from Digital Switch, as promised. Here\'s the website I built for '+l.name+': '+SITE+l.id+'/\n\nHave a look on your phone. It can be live on your own web address within 24 hours.'}
+function msgMissed(l){return 'Hi, it\'s '+me()+' from Digital Switch. I tried calling you just now. I built a website for '+l.name+' and would love you to see it: '+SITE+l.id+'/\n\nIt\'s R2,999 once-off and can be live on your own web address within 24 hours. Shall I set it up for you?'}
+function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+SITE+l.id+'/\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
+function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function renderLeads(){
+  var list=LEADS.filter(function(l){return showAll||l.today});
+  $('#leadList').innerHTML=list.map(function(l,i){
+    var st=(state[l.id]&&state[l.id].status)||'call', note=(state[l.id]&&state[l.id].note)||'';
+    var lab=STATUSES.filter(function(s){return s[0]===st})[0][1];
+    return '<article class="lead-card s-'+st+'" data-id="'+l.id+'">'+
+      '<div class="lc-top"><div><h3>'+(l.today?(LEADS.indexOf(l)+1)+'. ':'')+esc(l.name)+'</h3><div class="meta">'+esc(l.area)+' · '+local(l.num)+(l.mobile?'':' · landline')+'</div></div><span class="badge s-'+st+'">'+lab+'</span></div>'+
+      '<div class="row"><a class="btn p sm" href="tel:+'+l.num+'">Call</a><a class="btn sm" href="'+SITE+l.id+'/" target="_blank" rel="noopener">Their site ↗</a>'+
+      (l.mobile?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgAfter(l)))+'">WhatsApp: after call</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgMissed(l)))+'">WhatsApp: no answer</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">WhatsApp: follow-up</a>':'')+'</div>'+
+      '<div class="status-row">'+STATUSES.map(function(s){return '<button data-st="'+s[0]+'" class="'+(s[0]===st?'on':'')+'">'+s[1]+'</button>'}).join('')+'</div>'+
+      '<textarea placeholder="Notes: who you spoke to, call-back time…" data-note>'+esc(note)+'</textarea></article>';
+  }).join('');
+  var c={called:0,sent:0,interested:0,sold:0};
+  LEADS.forEach(function(l){var s=state[l.id]&&state[l.id].status;if(s&&s!=='call')c.called++;if(s==='sent'||s==='interested'||s==='sold')c.sent++;if(s==='interested')c.interested++;if(s==='sold')c.sold++});
+  $('#stats').innerHTML='<div><b>'+c.called+'</b><span>Contacted</span></div><div><b>'+c.sent+'</b><span>Site sent</span></div><div><b>'+c.interested+'</b><span>Interested</span></div><div><b>'+c.sold+'</b><span>Sold</span></div>';
+}
+function save(id,patch){
+  state[id]=Object.assign({},state[id]||{},patch,{at:Date.now()}); lsSet('ds-leads',JSON.stringify(state)); renderLeads();
+  if(db){ db.doc('leads/'+id).set(state[id]).catch(function(){ $('#sync').textContent='Not saved online, kept on this phone'; }); }
+}
+$('#leadList').addEventListener('click',function(e){var b=e.target.closest('[data-st]');if(!b)return;var id=b.closest('[data-id]').dataset.id;save(id,{status:b.dataset.st});toast('Saved')});
+var noteT={};
+$('#leadList').addEventListener('input',function(e){if(!e.target.matches('[data-note]'))return;var id=e.target.closest('[data-id]').dataset.id,v=e.target.value;clearTimeout(noteT[id]);noteT[id]=setTimeout(function(){state[id]=Object.assign({},state[id]||{},{note:v,at:Date.now()});lsSet('ds-leads',JSON.stringify(state));if(db)db.doc('leads/'+id).set(state[id]).catch(function(){})},700)});
+$('#leadList').addEventListener('focusout',function(e){ if(e.target.matches('[data-note]')&&pendingRender){ pendingRender=false; setTimeout(renderLeads,50); } });
+renderLeads();
+
+/* ---------- referral partners ---------- */
+var partners={}; try{partners=JSON.parse(lsGet('ds-partners','{}'))}catch(e){}
+var PST=[['told','Told'],['in','I\'m in'],['briefed','Sent the details'],['lead','Brought a lead'],['paid','Paid R750']];
+function renderPartners(){
+  var ids=Object.keys(partners).sort(function(a,b){return (partners[a].at||0)-(partners[b].at||0)});
+  $('#partners').innerHTML=ids.length?ids.map(function(id){var p=partners[id];return '<div class="pt" data-p="'+id+'"><span>'+esc(p.name)+'</span><select>'+PST.map(function(s){return '<option value="'+s[0]+'"'+(p.status===s[0]?' selected':'')+'>'+s[1]+'</option>'}).join('')+'</select><button class="btn sm" data-del>✕</button></div>'}).join(''):'<p class="lead" style="margin:6px 0">Nobody yet. Add the first person you message.</p>';
+}
+function savePartner(id,p){ if(p){partners[id]=p}else{delete partners[id]} lsSet('ds-partners',JSON.stringify(partners)); renderPartners(); if(db){ var r=db.doc('partners/'+id); (p?r.set(p):r.delete()).catch(function(){}); } }
+$('#pAdd').addEventListener('click',function(){var n=$('#pName').value.trim();if(!n)return;var id='p'+Date.now().toString(36);savePartner(id,{name:n,status:'told',at:Date.now()});$('#pName').value='';toast('Added')});
+$('#pName').addEventListener('keydown',function(e){if(e.key==='Enter')$('#pAdd').click()});
+$('#partners').addEventListener('change',function(e){var id=e.target.closest('[data-p]').dataset.p;savePartner(id,Object.assign({},partners[id],{status:e.target.value}))});
+$('#partners').addEventListener('click',function(e){if(!e.target.matches('[data-del]'))return;var id=e.target.closest('[data-p]').dataset.p;savePartner(id,null);toast('Removed')});
+renderPartners();
+
+/* connect the shared database when this view can use it */
+function connect(tries){ if(!(window.claude&&window.claude.use)){ if(tries<6){ setTimeout(function(){connect(tries+1)},500) } else { $('#sync').textContent='Saving on this phone only' } return; } window.claude.use('db').then(function(d){
+  if(!d){ $('#sync').textContent='Saving on this phone only'; return; }
+  db=d; $('#sync').textContent='Saving online';
+  db.collection('leads').onSnapshot(function(snap){ snap.docs.forEach(function(doc){ if(doc.exists) state[doc.id]=doc.data(); }); lsSet('ds-leads',JSON.stringify(state)); if(document.activeElement&&document.activeElement.matches&&document.activeElement.matches('[data-note]')){ pendingRender=true; } else { renderLeads(); } },function(){ $('#sync').textContent='Saving on this phone only'; });
+  db.collection('partners').onSnapshot(function(snap){ var p={}; snap.docs.forEach(function(doc){ if(doc.exists) p[doc.id]=doc.data(); }); if(snap.size||!Object.keys(partners).length){ partners=p; lsSet('ds-partners',JSON.stringify(partners)); renderPartners(); } },function(){});
+}); }
+connect(0);
+})();
+</script>
+</body>
+</html>
