@@ -143,7 +143,7 @@ details p{color:var(--mist);margin:0 0 12px}
     <div class="copy"><span class="k">Name</span>Digital Switch</div>
     <div class="copy"><span class="k">Category</span>Internet company (or Advertising/Marketing)</div>
     <div class="copy" data-copy><span class="k">Description</span>Animated, phone-first websites for South African businesses. R2,999 once-off, live on your own web address within 24 hours. Then R199 a month for hosting, your address, updates and support. See our work: digitalswitch.co.za</div>
-    <div class="copy"><span class="k">Address</span>Lenasia, Johannesburg (or set "Service area: Gauteng")</div>
+    <div class="copy"><span class="k">Address</span>Johannesburg (set it as a service area: Gauteng)</div>
     <div class="copy"><span class="k">Hours</span>Mon to Sat, 08:00 to 18:00</div>
     <div class="copy" data-copy><span class="k">Email</span>digitalswitch28@gmail.com</div>
     <div class="copy" data-copy><span class="k">Website</span>https://digitalswitch.co.za</div>
@@ -219,7 +219,7 @@ details p{color:var(--mist);margin:0 0 12px}
   <h2>The <em>script</em></h2>
   <p class="lead">Short, friendly, and about them. The site does the selling. Your job is to get them to look at it.</p>
   <h3>1 · Open (10 seconds)</h3>
-  <div class="say">Hi, is this <b>[Business]</b>? My name is <b class="nm">[your name]</b> from Digital Switch. I'll be quick: I came across your business on Google and saw you don't have a website, so <b>I built one for you</b>. Can I send it to you on WhatsApp so you can see it?</div>
+  <div class="say">Hi, is this <b>[Business]</b>? My name is <b class="nm">[your name]</b> from Digital Switch, we're a web design studio in Joburg. I'll be quick: I came across your business on Google and saw you don't have a website, so <b>I built one for you</b>. Can I send it to you on WhatsApp so you can see it?</div>
   <h3>2 · Send it while they're on the line</h3>
   <div class="say">Great, I'm sending it now. It's a link, just open it on your phone. <b>[Tap "WhatsApp: after call"]</b> Have a scroll and tell me what you think.</div>
   <p class="lead" style="margin-top:6px">If they're busy: "No problem, I'll send it now and call you back at [time]. Which is better, this afternoon or tomorrow morning?"</p>
@@ -234,7 +234,7 @@ details p{color:var(--mist);margin:0 0 12px}
   <details><summary>"I get my work from word of mouth."</summary><p>"That's the best kind of work. When someone recommends you, the first thing they do is Google you. This makes sure they find you, see your work and can call you in one tap, instead of finding the next roofer."</p></details>
   <details><summary>"I have a Facebook page."</summary><p>"Keep it! This works with it. A website on your own address shows up on Google, looks established, and you own it. We can link your Facebook page from it."</p></details>
   <details><summary>"Send me info, I'll think about it."</summary><p>"Of course, it's on your WhatsApp now. What would you want to see changed for it to be a yes? I can tweak it today." Then follow up tomorrow with the follow-up message.</p></details>
-  <details><summary>"Is this a scam? Who are you?"</summary><p>"Fair question. We're Digital Switch, based in Lenasia. You don't pay anything until you've seen your site and are happy with it. Our work is at digitalswitch.co.za, and I'm on WhatsApp at 076 129 3926."</p></details>
+  <details><summary>"Is this a scam? Who are you?"</summary><p>"Fair question. We're Digital Switch, a web design studio in Johannesburg. You don't pay anything until you've seen your site and are happy with it. Our work is at digitalswitch.co.za, and I'm on WhatsApp at 076 129 3926."</p></details>
   <details><summary>"Not interested."</summary><p>"No problem at all, thanks for your time. Have a good day." Tap "Not now" and move on. No pushing.</p></details>
   <div class="row"><button class="btn p" data-go="calls">← Back to calls</button></div>
 </section>
@@ -333,7 +333,7 @@ var state={}; var db=null; var showAll=false; var pendingRender=false;
 try{state=JSON.parse(lsGet('ds-leads','{}'))}catch(e){}
 $('#toggleAll').addEventListener('click',function(){showAll=!showAll;this.textContent=showAll?'Show today\'s 10':'Show all 54 roofers';renderLeads()});
 function msgAfter(l){return 'Hi, it\'s '+me()+' from Digital Switch, as promised. Here\'s the website I built for '+l.name+': '+SITE+l.id+'/\n\nHave a look on your phone. It can be live on your own web address within 24 hours.'}
-function msgMissed(l){return 'Hi, it\'s '+me()+' from Digital Switch. I tried calling you just now. I built a website for '+l.name+' and would love you to see it: '+SITE+l.id+'/\n\nIt\'s R2,999 once-off and can be live on your own web address within 24 hours. Shall I set it up for you?'}
+function msgMissed(l){return 'Hi, it\'s '+me()+' from Digital Switch, a web design studio in Joburg. I tried calling you just now. I built a website for '+l.name+' and would love you to see it: '+SITE+l.id+'/\n\nIt\'s R2,999 once-off and can be live on your own web address within 24 hours. Shall I set it up for you?'}
 function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+SITE+l.id+'/\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
 function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
