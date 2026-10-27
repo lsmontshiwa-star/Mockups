@@ -174,6 +174,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--lilac)}
 <h1>Flip the <span class="script">switch.</span></h1>
 <p class="lead">You have already seen the site I built for <span id="bname">your business</span>. Here is everything about getting it live: what is included, what it costs and what happens next. No calls needed.</p>
 <div class="ctas"><a class="btn btn-primary" id="go1" href="https://wa.me/27761293926?text=Yes!%20I%27d%20like%20to%20go%20ahead%20with%20the%20website%20for%20YOURBIZ.">Say yes on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="#price">See the price</a></div>
+<p class="mono" style="margin-top:22px"><a href="../#work" style="color:var(--lilac);text-decoration:none">See our other work &rarr;</a></p>
 </div>
 <div class="stage" id="stage">
 <div class="browser"><div class="bar"><i></i><i></i><i></i><span class="url" id="url"><b>yourbusiness</b>.co.za</span></div>
@@ -218,7 +219,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--lilac)}
 <section class="final"><div class="wrap rv">
 <h2>Ready when <span class="script">you are.</span></h2>
 <p class="lead">Say "yes" on WhatsApp and I will send a secure payment link. Your site is live within 24 hours of payment.</p>
-<div class="ctas"><a class="btn btn-primary" id="go2" href="https://wa.me/27761293926?text=Yes!%20I%27d%20like%20to%20go%20ahead%20with%20the%20website%20for%20YOURBIZ.">Say yes on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div class="ctas"><a class="btn btn-primary" id="go2" href="https://wa.me/27761293926?text=Yes!%20I%27d%20like%20to%20go%20ahead%20with%20the%20website%20for%20YOURBIZ.">Say yes on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="../#work">See our other work</a></div>
 </div></section>
 <footer><div class="wrap"><span class="mono">Digital Switch &middot; Web design studio, Johannesburg</span><span class="mono"><a href="../terms/">Terms</a> &middot; <a href="mailto:digitalswitch28@gmail.com">digitalswitch28@gmail.com</a></span></div></footer>
 <script>
@@ -226,7 +227,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--lilac)}
 var q=new URLSearchParams(location.search),b=(q.get('b')||'').slice(0,60),u=q.get('u')||'',s=q.get('s')||'';
 function esc(t){return t.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 if(b){document.getElementById('bname').textContent=b;document.getElementById('kicker').innerHTML='Your website offer &middot; <b>'+esc(b)+'</b>';
- var slug=b.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'').slice(0,26);document.getElementById('url').innerHTML='<b>'+slug+'</b>'+".co.za";
+ var slug=(q.get('d')||'').toLowerCase().replace(/[^a-z0-9-]+/g,'').slice(0,40)||b.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'').slice(0,26);document.getElementById('url').innerHTML='<b>'+slug+'</b>'+".co.za";
  ['go1','go2'].forEach(function(id){var a=document.getElementById(id);a.href=a.href.replace('YOURBIZ',encodeURIComponent(b))});}
 ['go1','go2'].forEach(function(id){var a=document.getElementById(id);a.href=a.href.replace('YOURBIZ',encodeURIComponent('my business'))});
 // 27 Oct 2026: a tap on "Say yes" is also recorded in the DS system (Clients tab + alert), so no yes gets lost. WhatsApp still opens as before.
