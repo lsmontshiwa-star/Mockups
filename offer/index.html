@@ -187,7 +187,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--lilac)}
 <div class="sec-head rv"><h2>One price to start.<br>One small <span class="script">monthly.</span></h2><p class="lead">No contract. No surprise bills. You can see the site before you pay anything.</p></div>
 <div class="price">
 <div class="card rv"><span class="mono">Setup, once</span><div class="amt"><span class="cur">$</span>499</div><p class="sub">Paid once, before work starts.</p>
-<ul class="ticks"><li style="--i:0">The site I built for you, finished with your logo, photos and details</li><li style="--i:1">Built for phones first: tap to call, quote form, fast loading</li><li style="--i:2">Connected to your own web address</li><li style="--i:3">Set up on Google so people searching can find you</li><li style="--i:4">Live within 24 hours of payment</li></ul></div>
+<ul class="ticks"><li style="--i:0">The site I built for you, finished with your logo, photos and details</li><li style="--i:1">Built for phones first: tap to call, quote form, fast loading</li><li style="--i:2">Connected to your own web address</li><li style="--i:3">Linked from your Google Maps listing</li><li style="--i:4">Live within 24 hours of payment</li></ul></div>
 <div class="card glow rv"><span class="tag">Then</span><span class="mono">Monthly service</span><div class="amt"><span class="cur">$</span>49<small>/ month</small></div><p class="sub">Month to month. Cancel any time.</p>
 <ul class="ticks"><li style="--i:0">Hosting and security</li><li style="--i:1">One batch of changes every month</li><li style="--i:2">Fixes whenever something breaks, free</li><li style="--i:3">Website enquiries sent straight to your email</li><li style="--i:4">A short monthly report: visitors and enquiries</li></ul></div>
 </div>
@@ -229,6 +229,8 @@ if(b){document.getElementById('bname').textContent=b;document.getElementById('ki
  var slug=b.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'').slice(0,26);document.getElementById('url').innerHTML='<b>'+slug+'</b>'+".com";
  ['go1','go2'].forEach(function(id){var a=document.getElementById(id);a.href=a.href.replace('YOURBIZ',encodeURIComponent(b))});}
 ['go1','go2'].forEach(function(id){var a=document.getElementById(id);a.href=a.href.replace('YOURBIZ',encodeURIComponent('my business'))});
+// 27 Oct 2026: a tap on "Reply go" is also recorded in the DS system (Clients tab + alert). The email still opens as before.
+['go1','go2'].forEach(function(id){var a=document.getElementById(id);if(a)a.addEventListener('click',function(){try{var f=new FormData();f.append('kind','accept');f.append('market','us');f.append('business',b||'(no name on link)');f.append('preview',u);if(navigator.sendBeacon)navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec',f);}catch(e){}})});
 if(/^https:\/\//.test(s)){var im=document.getElementById('shot');var t=new Image();t.onload=function(){im.src=s};t.src=s;}
 var st=document.getElementById('stage'),sw=document.getElementById('sw'),hero=document.getElementById('hero'),hint=document.getElementById('hint'),touched=false;
 function set(on){st.classList.toggle('on',on);hero.classList.toggle('off',!on);sw.setAttribute('aria-checked',on);sw.setAttribute('aria-label',on?'Turn your website off':'Turn your website on');}
