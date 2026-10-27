@@ -1,0 +1,20 @@
+{
+  "_read_me": "ONE place for the SA offer. Change a price or line here, push, and the GitHub Action rebuilds every lead's offer image and link. The offer page and the Launch Desk read this file live.",
+  "setup": 2999,
+  "monthly": 199,
+  "golive": "24 hours",
+  "whatsapp": "27761293926",
+  "whatsapp_display": "076 129 3926",
+  "card_includes": [
+    "<b>The site you saw</b>, finished with your logo &amp; photos",
+    "Tap to call, <b>WhatsApp button</b> &amp; quote form",
+    "Your own <b>.co.za</b>, linked from Google Maps",
+    "Hosting, fixes &amp; <b>monthly changes</b> included",
+    "<b>Live within 24 hours</b> of payment. No contract"
+  ],
+  "card_tagline": "your roofs, here",
+  "message": "Hi, thanks for the chat earlier 🙌 Here's your offer for {name}, all in one place 👇\n{link}\n\nWant to see what else we've built? digitalswitch.co.za\n\nAny questions, or anything you'd want changed, just tell me. Happy to work it out with you 🤝",
+  "leads": {
+    "peaceful-home-roof-experts-gauteng-johannesburg": { "domain": "peacefulhomeroofs" }
+  }
+}

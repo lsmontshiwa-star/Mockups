@@ -187,9 +187,9 @@ footer a{text-decoration:none}footer a:hover{color:var(--lilac)}
 <section id="price"><div class="wrap">
 <div class="sec-head rv"><h2>One price to start.<br>One small <span class="script">monthly.</span></h2><p class="lead">No contract. No surprise bills. You can see the site before you pay anything.</p></div>
 <div class="price">
-<div class="card rv"><span class="mono">Setup, once</span><div class="amt"><span class="cur">R</span>2 999</div><p class="sub">Paid once, before work starts.</p>
+<div class="card rv"><span class="mono">Setup, once</span><div class="amt"><span class="cur">R</span><span id="o-setup">2 999</span></div><p class="sub">Paid once, before work starts.</p>
 <ul class="ticks"><li style="--i:0">The site I built for you, finished with your logo, photos and details</li><li style="--i:1">Built for phones first: tap to call, WhatsApp button, quote form</li><li style="--i:2">Connected to your own web address</li><li style="--i:3">Linked from your Google Maps listing</li><li style="--i:4">Live within 24 hours of payment</li></ul></div>
-<div class="card glow rv"><span class="tag">Then</span><span class="mono">Monthly service</span><div class="amt"><span class="cur">R</span>199<small>/ month</small></div><p class="sub">Month to month. Cancel any time.</p>
+<div class="card glow rv"><span class="tag">Then</span><span class="mono">Monthly service</span><div class="amt"><span class="cur">R</span><span id="o-monthly">199</span><small>/ month</small></div><p class="sub">Month to month. Cancel any time.</p>
 <ul class="ticks"><li style="--i:0">Hosting and security</li><li style="--i:1">One batch of changes every month</li><li style="--i:2">Fixes whenever something breaks, free</li><li style="--i:3">Website enquiries sent to your email and WhatsApp</li><li style="--i:4">A short monthly report: visitors and enquiries</li></ul></div>
 </div>
 <div class="extras rv">
@@ -241,4 +241,11 @@ setTimeout(function(){if(!touched){set(true);hint.textContent='That is your site
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='route')e.target.classList.add('go');io.unobserve(e.target)}})},{threshold:.25});
 document.querySelectorAll('.rv,.card,#route').forEach(function(el){io.observe(el)});
 })();
+
+/* Prices come from offer.json (the one settings file for SA offers). The numbers in the HTML are the fallback. */
+fetch('/offer-za/offer.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(o){
+ function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+ if(o.setup)document.getElementById('o-setup').textContent=fmt(o.setup);
+ if(o.monthly)document.getElementById('o-monthly').textContent=fmt(o.monthly);
+}).catch(function(){});
 </script></body></html>

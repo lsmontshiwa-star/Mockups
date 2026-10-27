@@ -1,0 +1,77 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Offer image template. Filled by tools/build_offers.py from offer-za/offer.json. Rendered at 720x900, 3x = 2160x2700. -->
+<link href="https://fonts.googleapis.com/css2?family=Unbounded&family=Ballet&family=Inter+Tight&family=IBM+Plex+Mono" rel="stylesheet">
+<style>
+:root{--night:#071719;--panel:#0b2124;--street:#123336;--river:#1b4a4d;--teal:#164043;--lilac:#C3B0FF;--glow:#9B7BFF;--mint:#DDF5EC;--mist:#B6D3CC;--dim:#6F9993}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:720px;height:900px;background:var(--night);overflow:hidden}
+body{font-family:'Inter Tight',sans-serif;color:var(--mint);position:relative}
+.grid{position:absolute;inset:0;pointer-events:none}
+.wrap{position:absolute;inset:0;padding:44px 48px 40px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{height:58px;margin-left:-8px}
+.mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase;font-size:10.5px;color:var(--dim)}
+.prep{margin-top:44px}
+.client{font-family:'Unbounded',sans-serif;font-weight:300;font-size:25px;line-height:1.2;margin-top:10px;max-width:390px;color:var(--mint)}
+.client.long{font-size:21px}.client.xlong{font-size:18px}
+.head{margin-top:26px;position:relative;width:400px}
+.head .a{font-family:'Unbounded';font-weight:200;font-size:44px;line-height:1;color:var(--mint)}
+.head .b{font-family:'Ballet',cursive;font-size:84px;line-height:.9;color:#fff;display:block;margin:4px 0 0 18px;
+  text-shadow:0 0 6px rgba(195,176,255,.9),0 0 18px rgba(155,123,255,.75),0 0 42px rgba(155,123,255,.5)}
+.phone{position:absolute;right:46px;top:150px;width:222px;height:448px;border-radius:34px;background:var(--teal);padding:9px;
+  box-shadow:0 0 0 1px rgba(195,176,255,.25),0 30px 60px rgba(0,0,0,.5),0 0 70px rgba(155,123,255,.18)}
+.phone .scr{width:100%;height:100%;border-radius:26px;overflow:hidden;background:#111}
+.phone img{width:100%;display:block}
+.tag{position:absolute;right:30px;top:612px;width:254px;text-align:center;font-family:'Ballet';font-size:30px;color:var(--lilac);
+  text-shadow:0 0 12px rgba(155,123,255,.6);transform:rotate(-4deg)}
+.price{position:absolute;left:48px;top:430px}
+.price .num{font-family:'Unbounded';font-weight:200;font-size:68px;line-height:1;color:var(--lilac);letter-spacing:-.01em;
+  text-shadow:0 0 22px rgba(155,123,255,.45)}
+.price .row{display:flex;gap:22px;align-items:baseline;margin-top:10px}
+.price .mo{font-family:'Unbounded';font-weight:300;font-size:22px;color:var(--mint)}
+.price .mo small{font-size:13px;color:var(--mist);font-weight:300}
+.list{position:absolute;left:48px;top:572px;width:340px;list-style:none}
+.list li{font-size:14.5px;line-height:1.35;color:var(--mist);padding:7px 0 7px 26px;position:relative;border-top:1px solid rgba(111,153,147,.22)}
+.list li:last-child{border-bottom:1px solid rgba(111,153,147,.22)}
+.list li::before{content:"";position:absolute;left:2px;top:13px;width:12px;height:7px;border-radius:4px;background:var(--lilac);box-shadow:0 0 8px var(--glow)}
+.list b{color:var(--mint);font-weight:500}
+.cta{position:absolute;left:48px;right:48px;bottom:40px;display:flex;gap:12px}
+.btn{flex:1;border-radius:16px;padding:14px 16px;border:1px solid rgba(195,176,255,.35);background:rgba(11,33,36,.85)}
+.btn.primary{background:var(--lilac);border-color:var(--lilac);box-shadow:0 0 24px rgba(155,123,255,.45)}
+.btn .k{font-family:'IBM Plex Mono';font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.btn.primary .k{color:#3a2c78}
+.btn .v{font-family:'Unbounded';font-weight:300;font-size:15px;margin-top:5px;color:var(--mint)}
+.btn.primary .v{color:var(--night);font-weight:400}
+</style></head><body>
+<svg class="grid" viewBox="0 0 720 900" preserveAspectRatio="none">
+  <g stroke="#123336" stroke-width="1.2" fill="none">
+    <path d="M-10 118 L730 96"/><path d="M-10 402 L730 380"/><path d="M-10 690 L730 672"/>
+    <path d="M128 -10 L138 910"/><path d="M462 -10 L452 910"/><path d="M660 -10 L668 910"/>
+  </g>
+  <path d="M-10 778 C 200 774, 420 760, 520 744 S 660 718, 730 706" stroke="#C3B0FF" stroke-opacity=".55" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+  <g fill="#C3B0FF"><circle cx="400" cy="758" r="4"/><circle cx="400" cy="758" r="10" fill-opacity=".18"/></g>
+  <g fill="#DDF5EC" fill-opacity=".5"><circle cx="602" cy="74" r="1.4"/><circle cx="410" cy="130" r="1.1"/><circle cx="560" cy="700" r="1.2"/><circle cx="90" cy="520" r="1"/><circle cx="700" cy="300" r="1.3"/></g>
+</svg>
+<div class="wrap">
+  <div class="top">
+    <img class="logo" src="/brand/ds-logo-on-dark.png" alt="">
+    <span class="mono">Website offer</span>
+  </div>
+  <div class="prep mono">Prepared for</div>
+  <div class="client {{size}}">{{name}}</div>
+  <div class="head"><span class="a">Your site is</span><span class="b">ready</span></div>
+  <div class="price">
+    <div class="mono" style="margin-bottom:12px">One price to start</div>
+    <div class="num">R{{setup}}</div>
+    <div class="row"><span class="mono" style="color:var(--mist)">once-off</span><span class="mo">+ R{{monthly}} <small>/ month</small></span></div>
+  </div>
+  <ul class="list">{{includes}}</ul>
+  <div class="phone"><div class="scr"><img src="{{shot}}" alt=""></div></div>
+  <div class="tag">{{tagline}}</div>
+  <div class="cta">
+    <div class="btn"><div class="k">See our other work</div><div class="v">digitalswitch.co.za</div></div>
+    <div class="btn primary"><div class="k">Yes, or questions? WhatsApp</div><div class="v">Let's talk · {{wa}}</div></div>
+  </div>
+</div>
+</body></html>

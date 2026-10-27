@@ -338,6 +338,24 @@ function msgAfter(l){return 'Here it is: '+SITE+l.id+'/\n\nHave a look on your p
 function msgMissed(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch, a web design studio in Joburg. I made a free website for '+l.name+'. May I send you the link so that you can see?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
 function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+SITE+l.id+'/\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
 function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
+/* ---------- offers (27 Oct 2026): links + images are made automatically for every lead by tools/build_offers.py;
+   wording and prices come from /offer-za/offer.json. Buttons only show once a lead is marked Interested. ---------- */
+var OFFER=null, OFFER_URL='https://digitalswitch.co.za/offer-za/';
+fetch('/offer-za/offer.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(o){OFFER=o;renderLeads()}).catch(function(){});
+function offerLink(l){return OFFER_URL+l.id+'/'}
+function msgOffer(l){var t=(OFFER&&OFFER.message)||"Hi, thanks for the chat earlier 🙌 Here's your offer for {name}, all in one place 👇\n{link}\n\nAny questions, or anything you'd want changed, just tell me. Happy to work it out with you 🤝";
+  return t.split('{name}').join(l.name).split('{link}').join(offerLink(l))}
+function shareOfferImage(l,btn){
+  var src='/offer-za/'+l.id+'/offer.jpg', name=l.name.replace(/[^A-Za-z0-9]+/g,'-')+'-Website-Offer.jpg';
+  function download(){var a=document.createElement('a');a.href=src;a.download=name;document.body.appendChild(a);a.click();a.remove();toast('Image downloaded')}
+  if(!(navigator.share&&navigator.canShare)){download();return}
+  btn.textContent='Preparing…';
+  fetch(src).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){
+    var f=new File([b],name,{type:'image/jpeg'});
+    if(!navigator.canShare({files:[f]})){download();return}
+    return navigator.share({files:[f],text:msgOffer(l)});
+  }).catch(function(e){if(!e||e.name!=='AbortError')download()}).then(function(){btn.textContent='Offer image + message'});
+}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
 function renderLeads(){
   var list=LEADS.filter(function(l){return showAll||l.today});
@@ -348,6 +366,10 @@ function renderLeads(){
       '<div class="lc-top"><div><h3>'+(l.today?(LEADS.indexOf(l)+1)+'. ':'')+esc(l.name)+'</h3><div class="meta">'+esc(l.area)+' · '+local(l.num)+(l.mobile?'':' · landline')+'</div></div><span class="badge s-'+st+'">'+lab+'</span></div>'+
       '<div class="row"><a class="btn p sm" href="tel:+'+l.num+'">Call</a><a class="btn sm" href="'+SITE+l.id+'/" target="_blank" rel="noopener">Their site ↗</a>'+
       (l.mobile?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgMissed(l)))+'">1 · First message</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgAfter(l)))+'">2 · Send the link</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">3 · Follow-up (only if they said yes)</a>':'')+'</div>'+
+      (st==='interested'?'<div class="row offer-row"><span class="mono" style="width:100%;color:var(--lilac)">Offer</span>'+
+        (l.mobile?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgOffer(l)))+'">4 · Send the offer</a>':'')+
+        '<button class="btn sm" data-offer-img>Offer image + message</button><a class="btn sm" href="'+offerLink(l)+'" target="_blank" rel="noopener">Their offer page ↗</a></div>'
+        :(st==='sent'?'<p class="meta" style="margin:6px 0 0">Spoke to them and they\'re keen? Tap <b>Interested</b> to unlock the offer.</p>':''))+
       '<div class="status-row">'+STATUSES.map(function(s){return '<button data-st="'+s[0]+'" class="'+(s[0]===st?'on':'')+'">'+s[1]+'</button>'}).join('')+'</div>'+
       '<textarea placeholder="Notes: who you spoke to, call-back time…" data-note>'+esc(note)+'</textarea></article>';
   }).join('');
@@ -372,7 +394,7 @@ function save(id,patch){
   if(patch.status)hubLead(id,true);
   if(db){ db.doc('leads/'+id).set(state[id]).catch(function(){ $('#sync').textContent='Not saved online, kept on this phone'; }); }
 }
-$('#leadList').addEventListener('click',function(e){var b=e.target.closest('[data-st]');if(!b)return;var id=b.closest('[data-id]').dataset.id;save(id,{status:b.dataset.st});toast('Saved')});
+$('#leadList').addEventListener('click',function(e){var ob=e.target.closest('[data-offer-img]');if(ob){var oid=ob.closest('[data-id]').dataset.id;shareOfferImage(LEADS.filter(function(x){return x.id===oid})[0],ob);return}var b=e.target.closest('[data-st]');if(!b)return;var id=b.closest('[data-id]').dataset.id;save(id,{status:b.dataset.st});toast('Saved')});
 var noteT={};
 $('#leadList').addEventListener('input',function(e){if(!e.target.matches('[data-note]'))return;var id=e.target.closest('[data-id]').dataset.id,v=e.target.value;clearTimeout(noteT[id]);noteT[id]=setTimeout(function(){state[id]=Object.assign({},state[id]||{},{note:v,at:Date.now()});lsSet('ds-leads',JSON.stringify(state));hubLead(id,false);if(db)db.doc('leads/'+id).set(state[id]).catch(function(){})},700)});
 $('#leadList').addEventListener('focusout',function(e){ if(e.target.matches('[data-note]')&&pendingRender){ pendingRender=false; setTimeout(renderLeads,50); } });

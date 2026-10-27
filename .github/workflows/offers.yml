@@ -1,0 +1,43 @@
+name: Build SA offers
+# Makes each SA lead's offer link, WhatsApp preview and branded offer image (offer-za/<id>/).
+# Runs when a lead demo site, the offer settings (offer-za/offer.json) or the offer image design changes.
+# Only leads whose inputs changed are rebuilt. "Run workflow" on the Actions tab forces a full rebuild.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'local/za-*/**'
+      - 'offer-za/offer.json'
+      - 'tools/build_offers.py'
+      - 'tools/offer-card.html'
+      - '.github/workflows/offers.yml'
+  workflow_dispatch:
+    inputs:
+      all:
+        description: 'Rebuild every lead (not just changed ones)'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: build-offers
+  cancel-in-progress: false
+jobs:
+  offers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright pillow && python -m playwright install --with-deps chromium
+      - run: python tools/build_offers.py ${{ inputs.all && '--all' || '' }}
+      - name: Commit new offers
+        run: |
+          git add -A offer-za
+          if git diff --cached --quiet; then echo "Nothing changed"; exit 0; fi
+          git config user.name "ds-bot"; git config user.email "ds-bot@users.noreply.github.com"
+          git commit -m "Build SA offers"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push && exit 0; sleep 5; done
+          exit 1
