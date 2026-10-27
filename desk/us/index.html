@@ -160,24 +160,30 @@ details p{color:var(--mist);margin:0 0 12px}
 <section id="script" class="script">
 
 <h2>US <em>script</em></h2>
-<p class="lead">Roofers in Washington and Oregon who have no website. You're calling cold, so the first ten seconds decide it. Be short, friendly and specific to them. Calls are 9 hours behind you: their 8am is your 5pm.</p>
-<h3>Opening (they have a site built)</h3>
-<div class="say">Hi, is this <b>[owner first name]</b>? It's <b class="nm">[your name]</b> with Digital Switch. Quick one: I build websites for roofers, and I <b>already built one for [Business]</b>. Can I text you the link so you can take a look?</div>
-<h3>Opening (no site built yet)</h3>
-<div class="say">Hi, is this <b>[owner first name]</b>? It's <b class="nm">[your name]</b> with Digital Switch. I build websites for roofers. I noticed <b>[Business]</b> doesn't have one yet. If I built you a free preview, would you take a look? <b>What's the best email</b> to send it to?</div>
-<p class="tip">Put their email in <b>Email they gave</b>. That's how a preview gets built and sent.</p>
-<h3>New businesses (licensed this year)</h3>
-<div class="say">Congrats on getting licensed this year. Most new roofing companies lose jobs because customers Google them and find nothing. I'd like to fix that for you.</div>
-<h3>Find out what they think</h3>
+<p class="lead">Roofers in Washington and Oregon. You're calling cold, so the first ten seconds decide it. <b>Short lines, then pause and let them answer.</b> Calls are 9 hours behind you.</p>
+<p class="tip"><b>When to call (their time):</b> 8:00–11:30am and 2:00–5:00pm = <b>17:00–20:30</b> and <b>23:00–02:00</b> your time. <b>Never 12:00–2:00pm their time</b>: it's lunch, and everyone is short with you (tested 27 Oct, 13 calls).</p>
+<h3>Opening: one line at a time, pause after each</h3>
+<div class="say">1. Hi, is this <b>[Business]</b>?</div>
+<p class="tip">Pause. Let them answer. If it's the wrong company, apologise and end the call.</p>
+<div class="say">2. This is <b class="nm">[your name]</b> with Digital Switch. I found your number on Google.</div>
+<p class="tip">Pause again. Saying where you got the number stops the "who is this?" reaction.</p>
+<div class="say">3. I build websites for roofers, and I actually <b>put one together for you</b>. Can I text or email you the link?</div>
+<p class="tip">No site built yet? Line 3 becomes: "Would you like me to put one together for you to look at? What's the best email?" Put it in <b>Email they gave</b>.</p>
+<h3>Getting to the owner</h3>
+<div class="say">Are you the owner? … No problem. When's a good time to catch them?</div>
+<p class="tip"><b>Ask for "the owner", never a name.</b> Owner names come from licence records, and a normal customer wouldn't know them, so using one sounds like a scam. Receptionists were helpful when asked this way.</p>
+<h3>Don't say</h3>
+<p class="tip">"You don't have a website on Google Maps" (it got an instant shut-down). Don't stack lots of details into one breath. Save specifics, like "your phone rang for 90 seconds", for when they're already talking to you.</p>
+<h3>Once they're talking</h3>
 <div class="say">How are you getting jobs right now? <b>What would a website need to do</b> for it to be worth it to you?</div>
 <p class="tip">Listen, and log their answer in their words. This is the data that tells us how to pitch.</p>
 <h3>The offer, only after they're interested</h3>
-<div class="say">It's <b>$499 to set up</b>: your own web address, set up on Google, and <b>live within 24 hours</b>. Then <b>$49 a month</b> for hosting, changes and support. No contract, cancel any time. And you see the site before you pay anything.</div>
+<div class="say">It's <b>$499 to set up</b>: your own web address, linked from your Google listing, and <b>live within 24 hours</b>. Then <b>$49 a month</b> for hosting, changes and support. No contract, cancel any time. And you see the site before you pay anything.</div>
 <h3>Close</h3>
 <div class="say">Want me to text you the link now so you can look tonight, and we get it live this week?</div>
 <p class="tip">Only text people who said yes on the call. Use <b>Copy text for after they say yes</b> on their card.</p>
 <h3>Voicemail (keep it under 20 seconds)</h3>
-<div class="say">Hi <b>[name]</b>, it's <b class="nm">[your name]</b> with Digital Switch. I built a website for <b>[Business]</b> and I'd love you to see it. Call or text me back at <b>[your US number]</b>. Thanks!</div>
+<div class="say">Hi, it's <b class="nm">[your name]</b> with Digital Switch. I built a website for <b>[Business]</b> and I'd love you to see it. Call or text me back at <b>[your US number]</b>. Thanks!</div>
 <h3>If they say…</h3>
 <details><summary>"How much?" (early)</summary><p>"$499 to set up and $49 a month, and you see it before you pay. Can I send it so you can judge for yourself?" Tag <b>Asked the price</b>.</p></details>
 <details><summary>"I get my work from word of mouth."</summary><p>"Perfect, so do most roofers. When someone gets your name, they Google you before they call. This makes sure they find you and trust you." Tag <b>Word of mouth</b>.</p></details>
@@ -203,7 +209,7 @@ details p{color:var(--mist);margin:0 0 12px}
 <script>
 (function(){
 var CFG = {
- market:'us', marketLabel:'US', endpoint:'https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec', tz:'America/Los_Angeles', clockLabel:'Pacific time', hours:[8,18], days:['Mon','Tue','Wed','Thu','Fri','Sat'],
+ market:'us', marketLabel:'US', endpoint:'https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec', tz:'America/Los_Angeles', clockLabel:'Pacific time', hours:[8,17], lunch:[12,14], days:['Mon','Tue','Wed','Thu','Fri','Sat'],
  outcomes:[['noanswer','No answer'],['voicemail','Left voicemail'],['spoke','Spoke, sending info'],['sent','Sent the link'],['callback','Call back'],['interested','Interested'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
  tags:[['asked-price','Asked the price'],['liked','Liked the idea'],['price','Price'],['wom','Word of mouth'],['gmaps','Google Maps is enough'],['has-site','Has a website'],['busy','Busy, call back'],['not-dm','Not the owner'],['trust','Trust / where are you from?'],['gave-email','Gave email'],['spanish','Prefers Spanish'],['too-new','Too new / not ready']],
  extraViews:[['site','Site built']],
@@ -260,9 +266,10 @@ function clock(){
   var now=new Date(), h=hourIn(CFG.tz,now), wd=dayIn(CFG.tz,now);
   var t=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:CFG.tz}).format(now);
   var open=CFG.days.indexOf(wd)>-1 && h>=CFG.hours[0] && h<CFG.hours[1];
-  var edge=open && (h===CFG.hours[0] || h>=CFG.hours[1]-1);
-  $('#clockDot').className='dot '+(open?(edge?'y':'g'):'r');
-  $('#clockTxt').innerHTML=CFG.clockLabel+' <b>'+t+'</b> · '+(open?(edge?'okay to call, edge of the day':'good time to call'):'outside business hours');
+  var lunch=open && CFG.lunch && h>=CFG.lunch[0] && h<CFG.lunch[1];
+  var edge=open && !lunch && (h===CFG.hours[0] || h>=CFG.hours[1]-1);
+  $('#clockDot').className='dot '+(lunch?'r':open?(edge?'y':'g'):'r');
+  $('#clockTxt').innerHTML=CFG.clockLabel+' <b>'+t+'</b> · '+(lunch?'their lunch break: <b>don\'t call</b> until 2pm their time':open?(edge?'okay to call, edge of the day':'good time to call'):'outside business hours');
 }
 clock(); setInterval(clock,30000);
 
@@ -327,7 +334,7 @@ function card(l){
 function local(l){return l.num.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
 function whyUS(l){
   var t=l.kind==='new'?'New business (licensed '+l.lic+')':l.kind==='bademail'?'Our email didn\'t reach them':l.kind==='bounced'?'Email bounced':l.kind==='emailed'?'Emailed, no reply':'Never contacted';
-  return t+(l.owner?' · ask for <b>'+esc(l.owner)+'</b>':'');
+  return t+' · ask for <b>the owner</b>';
 }
 function body(l){
   var s=st(l), d=drafts[l.id]||(drafts[l.id]={o:'',i:s.interest||'',t:(s.tags||[]).slice(),n:'',cb:s.callback||'',email:s.email||'',spoke:s.spoke||''});
@@ -350,7 +357,7 @@ function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
 function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch, a web design studio in Joburg. I made a free website for '+l.name+'. May I send you the link so that you can see?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
 function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. It can be live on your own web address within 24 hours: R2,999 to set up, then R199 a month. Let me know what you think!'}
 function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+l.site+'\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
-function usText(l){return l.site?('Hi'+(l.owner?' '+l.owner.split(' ')[0]:'')+', it\'s '+me()+' from Digital Switch. Here\'s the site I built for '+l.name+': '+l.site+' . It can be live on your own web address within 24 hours: $499 to set up, then $49 a month, no contract.'):('Hi'+(l.owner?' '+l.owner.split(' ')[0]:'')+', it\'s '+me()+' from Digital Switch, thanks for the chat. Here\'s some of my work: https://digitalswitch.co.za . I\'ll build a free preview for '+l.name+' and send it over.')}
+function usText(l){return l.site?('Hi, it\'s '+me()+' from Digital Switch. Here\'s the site I built for '+l.name+': '+l.site+' . It can be live on your own web address within 24 hours: $499 to set up, then $49 a month, no contract.'):('Hi, it\'s '+me()+' from Digital Switch, thanks for the chat. Here\'s some of my work: https://digitalswitch.co.za . I\'ll build a free preview for '+l.name+' and send it over.')}
 
 /* ---------- interactions ---------- */
 $('#filters').addEventListener('click',function(e){var b=e.target.closest('[data-v]');if(!b)return;view=b.dataset.v;shown=25;if(view!=='b1')lsSet('view',view);render()});
