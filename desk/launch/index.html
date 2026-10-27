@@ -355,13 +355,26 @@ function renderLeads(){
   LEADS.forEach(function(l){var s=state[l.id]&&state[l.id].status;if(s&&s!=='call')c.called++;if(s==='sent'||s==='interested'||s==='sold')c.sent++;if(s==='interested')c.interested++;if(s==='sold')c.sold++});
   $('#stats').innerHTML='<div><b>'+c.called+'</b><span>Contacted</span></div><div><b>'+c.sent+'</b><span>Site sent</span></div><div><b>'+c.interested+'</b><span>Interested</span></div><div><b>'+c.sold+'</b><span>Sold</span></div>';
 }
+/* 27 Oct 2026: also send to the DS sheet (Desk / Desk Calls / Referrers tabs), using the desk key that
+   "Link my phone" on the main desk saved on this phone. Without the key it keeps working on the phone only. */
+var DS_EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
+function deskKey(){return lsGet('ds-desk-key','')}
+function hubSend(fields){var k=deskKey();if(!k)return false;try{var f=new FormData();f.append('key',k);Object.keys(fields).forEach(function(n){f.append(n,fields[n])});fetch(DS_EP,{method:'POST',mode:'no-cors',body:f}).catch(function(){});return true}catch(e){return false}}
+function hubLead(id,logCall){var l=LEADS.filter(function(x){return x.id===id})[0],s=state[id]||{};if(!l)return;
+  var st={name:l.name,status:s.status||'',note:s.note||'',by:me()+' (setup desk)'};
+  hubSend({kind:'desk',market:'za',id:'launch-'+id,state:JSON.stringify(st),entry:logCall&&s.status&&s.status!=='call'?JSON.stringify({o:s.status,n:s.note||'',at:s.at||Date.now()}):'null'});}
+function hubSyncAll(){if(!deskKey()||lsGet('ds-hub-synced','')==='1')return;
+  Object.keys(state).forEach(function(id){hubLead(id,true)});
+  Object.keys(partners).forEach(function(id){hubSend({kind:'partner',id:id,state:JSON.stringify(partners[id])})});
+  lsSet('ds-hub-synced','1');}
 function save(id,patch){
   state[id]=Object.assign({},state[id]||{},patch,{at:Date.now()}); lsSet('ds-leads',JSON.stringify(state)); renderLeads();
+  if(patch.status)hubLead(id,true);
   if(db){ db.doc('leads/'+id).set(state[id]).catch(function(){ $('#sync').textContent='Not saved online, kept on this phone'; }); }
 }
 $('#leadList').addEventListener('click',function(e){var b=e.target.closest('[data-st]');if(!b)return;var id=b.closest('[data-id]').dataset.id;save(id,{status:b.dataset.st});toast('Saved')});
 var noteT={};
-$('#leadList').addEventListener('input',function(e){if(!e.target.matches('[data-note]'))return;var id=e.target.closest('[data-id]').dataset.id,v=e.target.value;clearTimeout(noteT[id]);noteT[id]=setTimeout(function(){state[id]=Object.assign({},state[id]||{},{note:v,at:Date.now()});lsSet('ds-leads',JSON.stringify(state));if(db)db.doc('leads/'+id).set(state[id]).catch(function(){})},700)});
+$('#leadList').addEventListener('input',function(e){if(!e.target.matches('[data-note]'))return;var id=e.target.closest('[data-id]').dataset.id,v=e.target.value;clearTimeout(noteT[id]);noteT[id]=setTimeout(function(){state[id]=Object.assign({},state[id]||{},{note:v,at:Date.now()});lsSet('ds-leads',JSON.stringify(state));hubLead(id,false);if(db)db.doc('leads/'+id).set(state[id]).catch(function(){})},700)});
 $('#leadList').addEventListener('focusout',function(e){ if(e.target.matches('[data-note]')&&pendingRender){ pendingRender=false; setTimeout(renderLeads,50); } });
 renderLeads();
 
@@ -372,18 +385,20 @@ function renderPartners(){
   var ids=Object.keys(partners).sort(function(a,b){return (partners[a].at||0)-(partners[b].at||0)});
   $('#partners').innerHTML=ids.length?ids.map(function(id){var p=partners[id];return '<div class="pt" data-p="'+id+'"><span>'+esc(p.name)+'</span><select>'+PST.map(function(s){return '<option value="'+s[0]+'"'+(p.status===s[0]?' selected':'')+'>'+s[1]+'</option>'}).join('')+'</select><button class="btn sm" data-del>✕</button></div>'}).join(''):'<p class="lead" style="margin:6px 0">Nobody yet. Add the first person you message.</p>';
 }
-function savePartner(id,p){ if(p){partners[id]=p}else{delete partners[id]} lsSet('ds-partners',JSON.stringify(partners)); renderPartners(); if(db){ var r=db.doc('partners/'+id); (p?r.set(p):r.delete()).catch(function(){}); } }
+function savePartner(id,p){ if(p){partners[id]=p}else{delete partners[id]} lsSet('ds-partners',JSON.stringify(partners)); renderPartners(); hubSend(p?{kind:'partner',id:id,state:JSON.stringify(p)}:{kind:'partner',id:id,deleted:'1',state:'{}'}); if(db){ var r=db.doc('partners/'+id); (p?r.set(p):r.delete()).catch(function(){}); } }
 $('#pAdd').addEventListener('click',function(){var n=$('#pName').value.trim();if(!n)return;var id='p'+Date.now().toString(36);savePartner(id,{name:n,status:'told',at:Date.now()});$('#pName').value='';toast('Added')});
 $('#pName').addEventListener('keydown',function(e){if(e.key==='Enter')$('#pAdd').click()});
 $('#partners').addEventListener('change',function(e){var id=e.target.closest('[data-p]').dataset.p;savePartner(id,Object.assign({},partners[id],{status:e.target.value}))});
 $('#partners').addEventListener('click',function(e){if(!e.target.matches('[data-del]'))return;var id=e.target.closest('[data-p]').dataset.p;savePartner(id,null);toast('Removed')});
 renderPartners();
+hubSyncAll(); /* one-time catch-up: everything already saved on this phone goes to the sheet */
+(function(){var el=$('#sync');if(el&&!deskKey())el.textContent='Saving on this phone only. Open the main desk and tap "Link my phone" to save to the sheet.';})();
 
 /* connect the shared database when this view can use it */
-function connect(tries){ if(!(window.claude&&window.claude.use)){ if(tries<6){ setTimeout(function(){connect(tries+1)},500) } else { $('#sync').textContent='Saving on this phone only' } return; } window.claude.use('db').then(function(d){
-  if(!d){ $('#sync').textContent='Saving on this phone only'; return; }
+function connect(tries){ if(!(window.claude&&window.claude.use)){ if(tries<6){ setTimeout(function(){connect(tries+1)},500) } else { $('#sync').textContent=(deskKey()?'Saving to the DS sheet':'Saving on this phone only. Open the main desk and tap "Link my phone" to save to the sheet.') } return; } window.claude.use('db').then(function(d){
+  if(!d){ $('#sync').textContent=(deskKey()?'Saving to the DS sheet':'Saving on this phone only. Open the main desk and tap "Link my phone" to save to the sheet.'); return; }
   db=d; $('#sync').textContent='Saving online';
-  db.collection('leads').onSnapshot(function(snap){ snap.docs.forEach(function(doc){ if(doc.exists) state[doc.id]=doc.data(); }); lsSet('ds-leads',JSON.stringify(state)); if(document.activeElement&&document.activeElement.matches&&document.activeElement.matches('[data-note]')){ pendingRender=true; } else { renderLeads(); } },function(){ $('#sync').textContent='Saving on this phone only'; });
+  db.collection('leads').onSnapshot(function(snap){ snap.docs.forEach(function(doc){ if(doc.exists) state[doc.id]=doc.data(); }); lsSet('ds-leads',JSON.stringify(state)); if(document.activeElement&&document.activeElement.matches&&document.activeElement.matches('[data-note]')){ pendingRender=true; } else { renderLeads(); } },function(){ $('#sync').textContent=(deskKey()?'Saving to the DS sheet':'Saving on this phone only. Open the main desk and tap "Link my phone" to save to the sheet.'); });
   db.collection('partners').onSnapshot(function(snap){ var p={}; snap.docs.forEach(function(doc){ if(doc.exists) p[doc.id]=doc.data(); }); if(snap.size||!Object.keys(partners).length){ partners=p; lsSet('ds-partners',JSON.stringify(partners)); renderPartners(); } },function(){});
 }); }
 connect(0);
