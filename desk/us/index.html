@@ -486,4 +486,43 @@ document.addEventListener('visibilitychange',function(){if(document.visibilitySt
 window.addEventListener('online',flush);
 })();
 </script>
+<div id="lpWrap" style="position:fixed;inset:0;z-index:90;background:rgba(3,10,11,.82);display:none;place-items:center;padding:16px">
+  <div style="background:#0b2124;border:1px solid #1b4a4d;border-radius:20px;padding:20px;max-width:380px;width:100%;color:#ddf5ec;font-family:inherit">
+    <h3 style="margin:0 0 6px;font-size:18px">Link another device</h3>
+    <p id="lpMsg" style="margin:0 0 12px;color:#b6d3cc;font-size:14px;line-height:1.5">Scan this with your phone's camera, or send the link to yourself. Open it once and your phone shows the same desk, saved to the same sheet.</p>
+    <div id="lpQr" style="background:#fff;border-radius:12px;padding:12px;width:220px;height:220px;margin:0 auto 12px;display:grid;place-items:center;color:#071719;font-size:13px">Making QR code…</div>
+    <input id="lpLink" readonly style="width:100%;font-size:12px;margin-bottom:10px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="lpCopy" type="button" style="background:#c3b0ff;color:#071719;border-color:#c3b0ff">Copy link</button>
+      <a class="btn" id="lpWa" target="_blank" rel="noopener" style="background:#1faa59;border-color:#1faa59;color:#fff">WhatsApp it to me</a>
+      <button class="btn" id="lpClose" type="button">Close</button>
+    </div>
+    <p style="margin:12px 0 0;color:#6f9993;font-size:12px;line-height:1.5">This link opens your call data. Only send it to your own devices.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var bar=document.querySelector('.bar'); if(!bar) return;
+  var b=document.createElement('button'); b.type='button'; b.className='btn'; b.id='linkPhone'; b.textContent='Link my phone'; b.style.cssText='padding:6px 12px;font-size:13px';
+  bar.appendChild(b);
+  var wrap=document.getElementById('lpWrap'), qrDone=false;
+  function key(){try{return localStorage.getItem('ds-desk-key')||''}catch(e){return ''}}
+  b.addEventListener('click',function(){
+    var k=key();
+    if(!k){ alertMsg(); return; }
+    var link=location.origin+location.pathname+'?k='+encodeURIComponent(k);
+    document.getElementById('lpLink').value=link;
+    document.getElementById('lpWa').href='https://wa.me/?text='+encodeURIComponent('My DS call desk: '+link);
+    wrap.style.display='grid';
+    if(!qrDone){ var s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      s.onload=function(){ var el=document.getElementById('lpQr'); el.innerHTML=''; new QRCode(el,{text:link,width:196,height:196,correctLevel:QRCode.CorrectLevel.M}); qrDone=true; };
+      s.onerror=function(){ document.getElementById('lpQr').textContent='Couldn’t load the QR code. Use Copy link or WhatsApp instead.'; };
+      document.head.appendChild(s); }
+  });
+  function alertMsg(){ document.getElementById('lpMsg').textContent='This device isn’t connected yet. Open the desk on the device that is (your laptop) and tap “Link my phone” there.'; document.getElementById('lpQr').style.display='none'; document.getElementById('lpLink').style.display='none'; document.getElementById('lpCopy').style.display='none'; document.getElementById('lpWa').style.display='none'; wrap.style.display='grid'; }
+  document.getElementById('lpCopy').addEventListener('click',function(){ var i=document.getElementById('lpLink'); i.select(); (navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.reject()).then(function(){ document.getElementById('lpCopy').textContent='Copied'; },function(){ try{document.execCommand('copy'); document.getElementById('lpCopy').textContent='Copied';}catch(e){} }); });
+  document.getElementById('lpClose').addEventListener('click',function(){ wrap.style.display='none'; });
+  wrap.addEventListener('click',function(e){ if(e.target===wrap) wrap.style.display='none'; });
+})();
+</script>
 </body></html>
