@@ -1,0 +1,21 @@
+# digitalswitch.co.za
+# Only the Digital Switch homepage and referral page are for search engines.
+# Lead mockups, demos, client copies and internal tools are blocked here by folder,
+# so new pages added by the pipeline are covered automatically.
+User-agent: *
+Disallow: /leads/
+Disallow: /local/
+Disallow: /demos/
+Disallow: /clients/
+Disallow: /templates/
+Disallow: /offer/
+Disallow: /offer-za/
+Disallow: /desk/
+Disallow: /update/
+Disallow: /start/
+Disallow: /tools/
+Disallow: /brand/*.zip
+Allow: /local/assets/
+Allow: /ds/assets/
+
+Sitemap: https://digitalswitch.co.za/sitemap.xml
