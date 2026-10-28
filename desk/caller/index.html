@@ -1,0 +1,191 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>DS Caller Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one phone-width column. Script on top, then the caller's own list of businesses; each card opens into big outcome buttons. Neon route brand, dark only. */
+:root{
+  --night:#071719;--panel:#0b2124;--card:#0d2629;--street:#123336;--river:#1b4a4d;--deep:#164043;
+  --lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;
+  --ok:#7ee0b0;--warm:#ffd27a;--no:#ff9a9a;
+  --display:'Unbounded',system-ui,sans-serif;--script:'Ballet','Snell Roundhand',cursive;--body:'Inter Tight',system-ui,-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--lilac)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-right,0px)) 120px max(16px,env(safe-area-inset-left,0px))}
+h1{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(26px,7vw,36px);letter-spacing:-.04em;line-height:1.15}
+h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.5em;line-height:.6;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
+.sub{color:var(--sage);margin:8px 0 16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.stats div{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 6px;text-align:center}
+.stats b{display:block;font-family:var(--display);font-weight:200;font-size:26px;color:var(--lilac);font-variant-numeric:tabular-nums}
+.stats span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+details.script{background:var(--panel);border:1px solid var(--lilac);border-radius:16px;padding:4px 14px;margin-bottom:16px;box-shadow:0 0 22px rgba(155,123,255,.18)}
+details.script summary{cursor:pointer;padding:10px 0;font-weight:600;list-style:none}
+details.script summary::after{content:" ▾";color:var(--lilac)}
+.say{background:var(--night);border-left:3px solid var(--lilac);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:16px}
+.tip{color:var(--sage);font-size:14px;margin:4px 0 10px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:8px 14px;font-size:14px}
+.tabs button[aria-pressed="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
+.tabs i{font-style:normal;font-family:var(--mono);font-size:11px;margin-left:4px;opacity:.75}
+.card{background:var(--card);border:1px solid var(--river);border-radius:16px;margin:10px 0;overflow:hidden}
+.card.due{border-color:var(--warm)}
+.card.done{opacity:.65}
+.head{display:block;width:100%;text-align:left;background:none;border:0;padding:14px}
+.head h3{margin:0;font-size:17px;font-weight:600}
+.meta{color:var(--sage);font-size:14px;margin-top:2px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--river);border-radius:999px;padding:2px 8px;margin-top:6px;color:var(--mist)}
+.badge.agreed{background:var(--ok);border-color:var(--ok);color:var(--night)}
+.badge.due{border-color:var(--warm);color:var(--warm)}
+.body{padding:0 14px 16px;border-top:1px solid var(--street)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 16px;border-radius:12px;border:1px solid var(--river);background:var(--panel);color:var(--mint);text-decoration:none;font-weight:500}
+.btn.call{background:var(--lilac);color:var(--night);border-color:var(--lilac);font-weight:600;flex:1;box-shadow:0 0 18px rgba(155,123,255,.45)}
+.num{font-family:var(--mono);font-size:18px;letter-spacing:.04em}
+.outs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.outs button{min-height:52px;border-radius:12px;border:1px solid var(--river);background:var(--panel);color:var(--mint);font-weight:500;padding:8px}
+.outs button.big{grid-column:1/-1;background:#123a2b;border-color:var(--ok);font-weight:600}
+.outs button[aria-pressed="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
+.outs button.big[aria-pressed="true"]{background:var(--ok);color:var(--night)}
+label{display:block;font-size:14px;color:var(--sage);margin:10px 0 4px}
+input,textarea{width:100%;font:inherit;color:var(--mint);background:var(--night);border:1px solid var(--river);border-radius:10px;padding:10px 12px}
+textarea{min-height:70px;resize:vertical}
+.save{width:100%;margin-top:14px;min-height:52px;border-radius:12px;border:0;background:var(--lilac);color:var(--night);font-weight:600;font-size:17px}
+.save:disabled{opacity:.4}
+.empty{color:var(--sage);text-align:center;padding:30px 10px}
+.status{position:fixed;left:0;right:0;bottom:0;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:var(--panel);border-top:1px solid var(--river);font-size:14px;color:var(--mist);text-align:center}
+.toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:var(--lilac);color:var(--night);padding:10px 16px;border-radius:999px;font-weight:600;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="wrap">
+  <h1>Caller <em>desk</em></h1>
+  <p class="sub" id="hello">Digital Switch · local calls</p>
+
+  <div id="gate" hidden>
+    <p class="sub">This desk needs your personal link from Lethabo. Open that link once on this phone and you're in.</p>
+  </div>
+
+  <div id="app" hidden>
+    <div class="stats"><div><b id="sCalls">0</b><span>Calls today</span></div><div><b id="sAgreed">0</b><span>Agreed today</span></div><div><b id="sLeft">0</b><span>Left to call</span></div></div>
+
+    <details class="script" open>
+      <summary>What to say</summary>
+      <div class="say">1. Hi, is this <b>[business name]</b>?</div>
+      <p class="tip">Wait for them to answer. Wrong business? Say sorry, tap <b>Wrong number</b>.</p>
+      <div class="say">2. My name is <b class="nm">[your name]</b>, I'm calling from Digital Switch, a web design studio in Joburg. We found you on Google.</div>
+      <p class="tip">Pause. Let them answer.</p>
+      <div class="say">3. We actually built a free website for <b>[business name]</b>. Can we send it to you on WhatsApp so you can have a look?</div>
+      <p class="tip">If yes: "Is this the best WhatsApp number?" Then: "Thank you! You'll get it on WhatsApp shortly." Tap <b>Agreed to see it</b>.</p>
+      <p class="tip"><b>"How much is it?"</b> "Have a look first. The price comes with the link, and there's no obligation."<br><b>"Who are you?"</b> "Digital Switch, a web design studio in Joburg. You can see our work at digitalswitch.co.za."<br><b>"Not interested"</b> Thank them and end politely. Never push.</p>
+    </details>
+
+    <div class="tabs" role="group" aria-label="Which list">
+      <button data-v="todo" aria-pressed="true">To call<i id="nTodo">0</i></button>
+      <button data-v="done" aria-pressed="false">Done<i id="nDone">0</i></button>
+    </div>
+    <div id="list"><div class="empty">Loading your list…</div></div>
+  </div>
+</div>
+<div class="status" id="sync">Connecting…</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(function(){
+var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
+var OUT=[['agreed','Agreed to see it: send on WhatsApp',1],['noanswer','No answer'],['callback','Call back later'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't call again"]];
+var LABEL={}; OUT.forEach(function(o){LABEL[o[0]]=o[1]});
+var DONE={agreed:1,notnow:1,wrong:1,dnc:1};
+var $=function(q){return document.querySelector(q)};
+function ls(k,v){try{if(v===undefined)return localStorage.getItem('dsc-'+k);localStorage.setItem('dsc-'+k,v)}catch(e){return null}}
+function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('show')},1700)}
+
+var KEY=''; var m=location.search.match(/[?&]k=([^&]+)/);
+if(m){ls('key',decodeURIComponent(m[1]));history.replaceState(null,'',location.pathname)}
+KEY=ls('key')||'';
+var LEADS=[], state={}, ME='', view='todo', open='', draft={};
+var queue=[]; try{queue=JSON.parse(ls('queue')||'[]')}catch(e){}
+try{state=JSON.parse(ls('state')||'{}')}catch(e){}
+
+function today(ts){return ts&&new Date(ts).toDateString()===new Date().toDateString()}
+function stOf(l){return state[l.id]||{}}
+function isDue(s){return s.status==='callback'&&s.callback&&new Date(s.callback).getTime()<=Date.now()+30*60000}
+function isTodo(l){var s=stOf(l);if(DONE[s.status])return false;if(s.status==='noanswer'&&(s.attempts||0)>=3)return false;if(s.status==='callback'&&!isDue(s))return false;return true}
+
+function render(){
+  var calls=0,agreed=0;
+  LEADS.forEach(function(l){var s=stOf(l);(s.log||[]).forEach(function(e){if(today(e.at)){calls++;if(e.o==='agreed')agreed++}})});
+  var todo=LEADS.filter(isTodo), done=LEADS.filter(function(l){return !isTodo(l)});
+  todo.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.attempts||0)-(sb.attempts||0)||(sa.lastAt||0)-(sb.lastAt||0)});
+  done.sort(function(a,b){return (stOf(b).lastAt||0)-(stOf(a).lastAt||0)});
+  $('#sCalls').textContent=calls;$('#sAgreed').textContent=agreed;$('#sLeft').textContent=todo.length;
+  $('#nTodo').textContent=todo.length;$('#nDone').textContent=done.length;
+  var list=view==='todo'?todo:done;
+  $('#list').innerHTML=list.length?list.map(card).join(''):'<div class="empty">'+(view==='todo'?'Nothing left to call right now. Lethabo adds more businesses to your list automatically.':'Nothing logged yet.')+'</div>';
+  document.querySelectorAll('.nm').forEach(function(e){e.textContent=ME||'[your name]'});
+}
+function phoneShow(n){return n.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
+function card(l){
+  var s=stOf(l), isOpen=open===l.id, due=isDue(s);
+  var b=s.status?'<span class="badge '+(s.status==='agreed'?'agreed':due?'due':'')+'">'+esc(due?'Call back now':LABEL[s.status]||s.status)+'</span>':'';
+  return '<article class="card'+(due?' due':'')+(DONE[s.status]?' done':'')+'" data-id="'+esc(l.id)+'"><button class="head" data-open aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="meta">'+esc(l.area||'')+' · '+phoneShow(l.num||'')+((s.attempts||0)?' · tried '+s.attempts+'×':'')+'</div>'+b+'</button>'+(isOpen?body(l):'')+'</article>';
+}
+function body(l){
+  var s=stOf(l), d=draft[l.id]||(draft[l.id]={o:'',spoke:s.spoke||'',wa:s.wa||'',cb:'',n:''});
+  return '<div class="body"><div class="row"><span class="num">'+phoneShow(l.num||'')+'</span><a class="btn call" href="tel:+'+esc(l.num)+'">Call</a></div>'+
+    (l.site?'<div class="row"><a class="btn" href="'+esc(l.site)+'" target="_blank" rel="noopener">See the site we built ↗</a></div>':'')+
+    '<div class="outs">'+OUT.map(function(o){return '<button class="'+(o[2]?'big':'')+'" data-o="'+o[0]+'" aria-pressed="'+(d.o===o[0])+'">'+o[1]+'</button>'}).join('')+'</div>'+
+    (d.o==='callback'?'<label for="cb-'+esc(l.id)+'">When to call back</label><input type="datetime-local" id="cb-'+esc(l.id)+'" data-f="cb" value="'+esc(d.cb)+'">':'')+
+    (d.o==='agreed'?'<label for="wa-'+esc(l.id)+'">WhatsApp number, if different from the one you called</label><input inputmode="tel" id="wa-'+esc(l.id)+'" data-f="wa" placeholder="e.g. 082 123 4567" value="'+esc(d.wa)+'">':'')+
+    '<label for="sp-'+esc(l.id)+'">Who you spoke to</label><input id="sp-'+esc(l.id)+'" data-f="spoke" placeholder="Name, if they gave it" value="'+esc(d.spoke)+'">'+
+    '<label for="n-'+esc(l.id)+'">Notes</label><textarea id="n-'+esc(l.id)+'" data-f="n" placeholder="Anything Lethabo should know">'+esc(d.n)+'</textarea>'+
+    '<button class="save" data-save'+(d.o?'':' disabled')+'>Save</button></div>';
+}
+
+document.addEventListener('click',function(e){
+  var t=e.target;
+  var tab=t.closest('.tabs button'); if(tab){view=tab.dataset.v;document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===tab)});render();return}
+  var c=t.closest('.card'); if(!c)return; var id=c.dataset.id, l=LEADS.filter(function(x){return x.id===id})[0]; if(!l)return;
+  if(t.closest('[data-open]')){open=open===id?'':id;render();return}
+  var ob=t.closest('[data-o]'); if(ob){draft[id].o=ob.dataset.o;render();return}
+  if(t.closest('[data-save]')){
+    var d=draft[id]; if(!d.o)return;
+    if(d.o==='callback'&&!d.cb){toast('Pick a call-back time');return}
+    var s=JSON.parse(JSON.stringify(stOf(l))), now=Date.now();
+    s.log=(s.log||[]).concat([{at:now,o:d.o,n:d.n,i:'',t:[]}]); s.attempts=(s.attempts||0)+1; s.lastAt=now; s.status=d.o; s.name=l.name;
+    if(d.o==='agreed'||d.o==='notnow'||d.o==='callback') s.reached=true;
+    s.callback=d.o==='callback'?d.cb:''; if(d.spoke)s.spoke=d.spoke; if(d.wa)s.wa=d.wa; if(d.n)s.note=d.n; s.by=ME;
+    state[id]=s; ls('state',JSON.stringify(state));
+    queue.push({id:id,s:s,e:{o:d.o,n:d.n,at:now,i:'',t:[]}}); ls('queue',JSON.stringify(queue));
+    delete draft[id]; open=''; render(); toast(d.o==='agreed'?'Saved. Lethabo will send it on WhatsApp':'Saved'); flush();
+  }
+});
+document.addEventListener('input',function(e){var f=e.target.dataset&&e.target.dataset.f; if(!f)return; var id=e.target.closest('.card').dataset.id; draft[id][f]=e.target.value});
+
+var flushing=false;
+function syncLabel(){$('#sync').textContent=queue.length?(queue.length+' waiting to save (they will save when you have signal)'):'All saved'}
+function flush(){
+  if(flushing||!queue.length){syncLabel();return} flushing=true; $('#sync').textContent='Saving…';
+  var q=queue[0], b=new URLSearchParams(); b.set('kind','desk');b.set('key',KEY);b.set('market','za');b.set('id',q.id);b.set('state',JSON.stringify(q.s));b.set('entry',JSON.stringify(q.e));
+  fetch(EP,{method:'POST',mode:'no-cors',body:b}).then(function(){queue.shift();ls('queue',JSON.stringify(queue));flushing=false;flush()}).catch(function(){flushing=false;syncLabel()});
+}
+setInterval(flush,20000); window.addEventListener('online',flush);
+
+function load(){
+  fetch(EP+'?desk=za&key='+encodeURIComponent(KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
+    if(!j.ok){ if(j.error==='key'){ls('key','');$('#app').hidden=true;$('#gate').hidden=false;$('#sync').textContent='Not connected'} return }
+    ME=(j.who&&j.who.name)||''; $('#hello').textContent='Hi '+(ME||'there')+' · your own list of Joburg businesses. Nobody else calls these.';
+    LEADS=j.leads||[];
+    Object.keys(j.state||{}).forEach(function(id){var srv=j.state[id], loc=state[id]; if(!loc||(srv.lastAt||0)>=(loc.lastAt||0))state[id]=srv});
+    ls('state',JSON.stringify(state)); render(); syncLabel(); flush();
+  }).catch(function(){$('#sync').textContent='No connection. Calls you log are kept on this phone.'; render()});
+}
+if(!KEY){$('#gate').hidden=false;$('#sync').textContent='Not connected'}
+else {$('#app').hidden=false; load(); setInterval(function(){if(!open)load()},5*60000)}
+})();
+</script>
+</body></html>

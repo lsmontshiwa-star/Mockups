@@ -65,6 +65,8 @@ h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1
 .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--river);border-radius:999px;padding:3px 8px;color:var(--mist);white-space:nowrap}
 .badge.s-interested,.badge.s-sent{color:var(--night);background:var(--lilac);border-color:var(--lilac)}
 .badge.s-sold{color:var(--night);background:var(--ok);border-color:var(--ok)}
+.badge.s-agreed{color:var(--night);background:var(--warm);border-color:var(--warm)}
+.card.s-agreed{border-color:var(--warm)}
 .badge.s-callback{color:var(--warm);border-color:var(--warm)}
 .badge.s-noanswer,.badge.s-voicemail{color:var(--sage)}
 .badge.s-notnow,.badge.s-dnc,.badge.s-wrong{color:var(--no);border-color:var(--no)}
@@ -203,9 +205,9 @@ details p{color:var(--mist);margin:0 0 12px}
 (function(){
 var CFG = {
  market:'za', marketLabel:'Local', endpoint:'https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec', tz:'Africa/Johannesburg', clockLabel:'Joburg', hours:[8,17], days:['Mon','Tue','Wed','Thu','Fri','Sat'],
- outcomes:[['noanswer','No answer'],['nowa','No reply on WhatsApp'],['sent','Site sent'],['callback','Call back'],['interested','Interested'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
+ outcomes:[['noanswer','No answer'],['nowa','No reply on WhatsApp'],['agreed','Agreed to see: send on WhatsApp'],['sent','Site sent'],['callback','Call back'],['interested','Interested'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
  tags:[['liked','Liked the design'],['asked-price','Asked the price'],['price','Price'],['has-site','Has a website'],['provider','Happy with current provider'],['gmaps','Google Maps is enough'],['wom','Word of mouth'],['facebook','Facebook is enough'],['busy','Busy, call back'],['not-dm','Not the decision maker'],['trust','Trust / is this a scam?'],['changes','Wants changes'],['seen','Already looked at it']],
- extraViews:[],
+ extraViews:[['tosend','To send']],
  segments:[['No website',function(l){return l.web==='no'}],['Has a website',function(l){return l.web!=='no'}],['Cellphone',function(l){return l.mobile}],['Landline',function(l){return !l.mobile}]],
  lowPickup:'Lean on WhatsApp first and call only people who replied, and try landlines between 8 and 10 in the morning.',
  advice:{price:'Lead with what it costs per month (R199) and the one-extra-job line before the setup fee, and remind them it\'s already built.',
@@ -237,7 +239,7 @@ try{setLeads(JSON.parse(lsGet('leads','[]')))}catch(e){}
 var OUTCOMES=CFG.outcomes, OUT={}; OUTCOMES.forEach(function(o){OUT[o[0]]=o[1]});
 var INTEREST=[['hot','Hot'],['warm','Warm'],['cold','Cold'],['none','No interest']], INT={}; INTEREST.forEach(function(o){INT[o[0]]=o[1]});
 var TAGS=CFG.tags, TAG={}; TAGS.forEach(function(o){TAG[o[0]]=o[1]});
-var REACHED={sent:1,interested:1,callback:1,sold:1,notnow:1,dnc:1,spoke:1};
+var REACHED={agreed:1,sent:1,interested:1,callback:1,sold:1,notnow:1,dnc:1,spoke:1};
 var CLOSED={sold:1,notnow:1,dnc:1,wrong:1,nowa:1};
 
 var state={}; try{state=JSON.parse(lsGet('state','{}'))}catch(e){}
@@ -274,6 +276,7 @@ function hoursSince(s){return s.lastAt?(Date.now()-s.lastAt)/3600000:1e9}
 function rank(l){
   var s=st(l), x=status(l);
   if(isDue(l)) return [0,new Date(s.callback).getTime()];
+  if(x==='agreed') return [0,s.lastAt||0];
   if(x==='call') return [l.b1?9:1, l.ix];
   if(x==='interested'||x==='sent'||x==='spoke') return hoursSince(s)>=20?[2,s.lastAt]:[6,s.lastAt];
   if(x==='callback') return [5,s.callback?new Date(s.callback).getTime():s.lastAt];
@@ -287,6 +290,7 @@ function inView(l,v){
   if(v==='warm') return (s.interest==='hot'||s.interest==='warm')&&!CLOSED[x];
   if(v==='fresh') return x==='call';
   if(v==='site') return !!l.site && !CLOSED[x];
+  if(v==='tosend') return x==='agreed';
   if(v==='closed') return !!CLOSED[x];
   return true;
 }
@@ -316,7 +320,7 @@ function render(){
 function card(l){
   var s=st(l), x=status(l), isOpen=!!open[l.id];
   var meta=CFG.market==='za'?(esc(l.area)+' · '+local(l)+(l.mobile?'':' · landline')+' · '+(l.web==='no'?'no website':l.web==='ads'?'runs ads':'has a website')):(esc(l.city)+' · '+esc(l.phone)+(l.rating?' · ★'+esc(l.rating):''));
-  var why=CFG.market==='us'?whyUS(l):'';
+  var why=CFG.market==='us'?whyUS(l):(s.caller&&s.by?'Called by <b>'+esc(s.by)+'</b>'+(x==='agreed'?' · <b>agreed to see it: send the link</b>':'')+(s.wa?' · WhatsApp '+esc(s.wa):''):'');
   var badges='<span class="badge s-'+x+'">'+(x==='call'?'To call':esc(OUT[x]||x))+'</span>'+(s.interest?'<span class="badge i-'+s.interest+'">'+INT[s.interest]+'</span>':'')+(CFG.market==='us'&&l.site?'<span class="badge site">Site built</span>':'');
   var last=s.note?'<div class="last">'+esc(s.note.length>140?s.note.slice(0,140)+'…':s.note)+'</div>':'';
   var due=isDue(l)?'<div class="why" style="color:var(--warm)">Call back now · '+fmtWhen(new Date(s.callback).getTime())+'</div>':(s.callback&&x==='callback'?'<div class="why">Call back '+fmtWhen(new Date(s.callback).getTime())+'</div>':'');
