@@ -118,7 +118,8 @@ function isTodo(l){var s=stOf(l);if(DONE[s.status])return false;if(s.status==='n
 
 function render(){
   var calls=0,agreed=0;
-  LEADS.forEach(function(l){var s=stOf(l);(s.log||[]).forEach(function(e){if(today(e.at)){calls++;if(e.o==='agreed')agreed++}})});
+  // Count every call logged today on this phone, including businesses later taken off the list (e.g. parked because they already have a website)
+  Object.keys(state).forEach(function(id){(state[id].log||[]).forEach(function(e){if(today(e.at)){calls++;if(e.o==='agreed')agreed++}})});
   var todo=LEADS.filter(isTodo), done=LEADS.filter(function(l){return !isTodo(l)});
   todo.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.attempts||0)-(sb.attempts||0)||(sa.lastAt||0)-(sb.lastAt||0)});
   done.sort(function(a,b){return (stOf(b).lastAt||0)-(stOf(a).lastAt||0)});
