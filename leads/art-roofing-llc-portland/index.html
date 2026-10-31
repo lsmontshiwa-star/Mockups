@@ -584,5 +584,6 @@ document.getElementById('qform').addEventListener('submit',function(e){
 addEventListener('load',function(){ScrollTrigger.refresh()});
 })();
 </script>
+<script id="ds-view">(function(){try{if(localStorage.getItem("ds-desk-key")||localStorage.getItem("dsc-key")||sessionStorage.getItem("dsv"))return}catch(e){}setTimeout(function(){try{sessionStorage.setItem("dsv","1")}catch(e){}if(!navigator.sendBeacon)return;var f=new FormData();f.append("kind","view");f.append("path",location.pathname);f.append("q",location.search.slice(0,150));f.append("ref",(document.referrer||"").slice(0,150));f.append("m",/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?"phone":"computer");navigator.sendBeacon("https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec",f)},4000)})();</script>
 </body>
 </html>
