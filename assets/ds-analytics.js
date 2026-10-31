@@ -1,7 +1,7 @@
 /* Digital Switch site analytics (31 Oct 2026). Cloudflare Web Analytics: cookie-free, no consent banner.
    Turned on by putting the site token below; until then this file does nothing. Skips Lethabo's and callers' devices. */
 (function(){
-  var TOKEN = '';
+  var TOKEN = '91510ca2f7fa444fa391a211427bcab1';
   if (!TOKEN) return;
   try { if (localStorage.getItem('ds-desk-key') || localStorage.getItem('dsc-key')) return; } catch (e) {}
   var s = document.createElement('script');
