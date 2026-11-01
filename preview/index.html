@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!doctype html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Free Website Preview | Digital Switch</title>
 <meta name="description" content="See your new website before you pay. Tell us your business name and we'll build a free preview within 24 hours. Digital Switch, a web design studio in Johannesburg.">
 <meta property="og:title" content="See your new website before you pay">
@@ -22,7 +22,7 @@ a{color:var(--lilac)}
 header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
 header img{height:34px;width:auto}
 header a.back{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--mist);text-decoration:none}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start;padding:24px 0 56px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start;padding:24px 0 110px}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--lilac)}
 h1{font-family:var(--display);font-weight:200;font-size:clamp(36px,5.6vw,68px);line-height:1.04;letter-spacing:-.04em;margin:14px 0 18px;text-wrap:balance}
 h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.35em;line-height:.8;text-shadow:0 0 8px #fff,0 0 22px var(--lilac),0 0 48px var(--glow);animation:flick 6s infinite}
@@ -64,16 +64,66 @@ h3.sec em{font-family:var(--script);font-style:normal;color:var(--lilac);font-si
 .step h4{margin:8px 0 6px;font-size:18px}
 .step p{margin:0;color:var(--mist);font-size:15px}
 footer{padding:40px 0 60px;color:var(--dim);font-size:14px;border-top:1px solid var(--street);margin-top:30px}
+
+/* ---- glow + motion layer (1 Nov): first page many people see, so the signature effects show immediately ---- */
+:root{--neon:0 0 8px rgba(195,176,255,.9),0 0 22px rgba(155,123,255,.75),0 0 44px rgba(155,123,255,.45)}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(27,74,77,.22) 1px,transparent 1px) 0 0/64px 64px,linear-gradient(90deg,rgba(27,74,77,.22) 1px,transparent 1px) 0 0/64px 64px;animation:drift 18s linear infinite;mask-image:radial-gradient(70% 60% at 60% 30%,#000,transparent)}
+@keyframes drift{to{background-position:0 64px,64px 0}}
+.star{position:fixed;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 8px var(--lilac),0 0 16px var(--glow);animation:tw 4s ease-in-out infinite;z-index:-1}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1.3)}}
+.eyebrow,.tile span,.step i,.small a,footer a,header a.back{color:var(--lilac);text-shadow:var(--neon)}
+header a.back{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid rgba(195,176,255,.55);border-radius:999px;box-shadow:0 0 14px rgba(155,123,255,.45),inset 0 0 10px rgba(155,123,255,.15);transition:box-shadow .3s,transform .3s}
+header a.back:hover{box-shadow:0 0 26px rgba(155,123,255,.8),inset 0 0 14px rgba(155,123,255,.3);transform:translateY(-2px)}
+header img{height:40px;filter:drop-shadow(0 0 10px rgba(155,123,255,.55))}
+h3.sec em,h1 em{text-shadow:var(--neon)}
+.ticks li::before{animation:pulse 2.4s ease-in-out infinite}
+.ticks li:nth-child(2)::before{animation-delay:.4s}.ticks li:nth-child(3)::before{animation-delay:.8s}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--glow)}50%{box-shadow:0 0 22px var(--lilac),0 0 40px var(--glow)}}
+.wa{position:relative;box-shadow:0 0 18px rgba(31,170,89,.7),0 0 40px rgba(31,170,89,.35);transition:transform .25s,box-shadow .25s}
+.wa:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(31,170,89,.95),0 0 60px rgba(31,170,89,.5)}
+.wa::after{content:"";position:absolute;inset:-4px;border-radius:inherit;border:2px solid rgba(31,170,89,.8);animation:ring 2.6s ease-out infinite;pointer-events:none}
+@keyframes ring{0%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.18)}}
+form{animation:frame 4s ease-in-out infinite}
+@keyframes frame{0%,100%{box-shadow:0 0 30px rgba(155,123,255,.18);border-color:rgba(195,176,255,.4)}50%{box-shadow:0 0 60px rgba(155,123,255,.42);border-color:rgba(195,176,255,.85)}}
+button.go{position:relative;overflow:hidden;animation:gobreath 2.8s ease-in-out infinite}
+@keyframes gobreath{0%,100%{box-shadow:0 0 22px rgba(155,123,255,.6)}50%{box-shadow:0 0 44px rgba(195,176,255,.95),0 0 80px rgba(155,123,255,.5)}}
+button.go::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);animation:sheen 3.2s ease-in-out infinite}
+@keyframes sheen{0%,55%{left:-60%}100%{left:130%}}
+.switch{display:inline-flex;vertical-align:middle;width:64px;height:34px;border-radius:34px;background:var(--panel);border:2px solid var(--river);position:relative;margin-left:10px;animation:swbg 5s infinite}
+.switch i{position:absolute;top:4px;left:5px;width:22px;height:22px;border-radius:50%;background:var(--dim);animation:knob 5s infinite}
+@keyframes knob{0%,12%{transform:none;background:var(--dim)}20%,100%{transform:translateX(28px);background:var(--night)}}
+@keyframes swbg{0%,12%{background:var(--panel);box-shadow:none;border-color:var(--river)}20%,100%{background:var(--lilac);border-color:var(--lilac);box-shadow:0 0 18px var(--glow),0 0 40px rgba(155,123,255,.5)}}
+svg.route{position:absolute;left:0;right:0;bottom:-20px;width:100%;height:90px;z-index:-1;pointer-events:none;overflow:visible}
+svg.route path{fill:none;stroke:var(--lilac);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1600;stroke-dashoffset:1600;filter:drop-shadow(0 0 6px var(--glow)) drop-shadow(0 0 14px var(--glow));animation:draw 3.2s .4s cubic-bezier(.65,0,.35,1) forwards}
+svg.route circle{fill:var(--lilac);filter:drop-shadow(0 0 8px var(--glow));opacity:0;animation:pin .4s 3.4s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes pin{to{opacity:1}}
+.hero > div:first-child > *{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero > div:first-child > *:nth-child(2){animation-delay:.12s}.hero > div:first-child > *:nth-child(3){animation-delay:.24s}.hero > div:first-child > *:nth-child(4){animation-delay:.36s}.hero > div:first-child > *:nth-child(5){animation-delay:.48s}
+form{animation:frame 4s ease-in-out infinite,rise .9s .3s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+.tile{box-shadow:0 0 0 rgba(0,0,0,0)}
+.tile.in{animation:float 6s ease-in-out infinite}
+.tile:nth-child(2).in{animation-delay:-2s}.tile:nth-child(3).in{animation-delay:-4s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.tile:hover{animation-play-state:paused}
+.step{transition:border-color .4s,box-shadow .4s}
+.step:hover{border-color:var(--lilac);box-shadow:0 0 28px rgba(155,123,255,.35)}
+
 @media(max-width:860px){.hero{grid-template-columns:1fr;gap:28px}.gal{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}svg.route path{stroke-dashoffset:0}svg.route circle{opacity:1}}
 </style></head><body>
 <div class="bg" aria-hidden="true"></div>
+<span class="star" style="left:12%;top:18%" aria-hidden="true"></span><span class="star" style="left:46%;top:9%;animation-delay:-1.3s" aria-hidden="true"></span><span class="star" style="left:88%;top:26%;animation-delay:-2.1s" aria-hidden="true"></span><span class="star" style="left:70%;top:62%;animation-delay:-.7s" aria-hidden="true"></span><span class="star" style="left:6%;top:74%;animation-delay:-3s" aria-hidden="true"></span><span class="star" style="left:94%;top:84%;animation-delay:-1.8s" aria-hidden="true"></span>
 <div class="wrap">
-<header><a href="/"><img src="/brand/ds-logo-on-dark.png" alt="Digital Switch" width="400" height="122"></a><a class="back" href="/">digitalswitch.co.za</a></header>
+<header><a href="/"><img src="/brand/ds-logo-animated-dark.gif" alt="Digital Switch" width="400" height="122"></a><a class="back" href="/">See our full website ↗</a></header>
 
-<div class="hero">
+<div class="hero" style="position:relative">
+  <svg class="route" viewBox="0 0 1080 90" preserveAspectRatio="none" aria-hidden="true"><circle cx="14" cy="70" r="6" style="animation-delay:.2s"/><path d="M14 70 C200 72 320 30 520 44 S860 80 1066 18"/><circle cx="1066" cy="18" r="6"/></svg>
   <div>
-    <div class="eyebrow">Free website preview · Johannesburg</div>
+    <div class="eyebrow">Free website preview · Johannesburg <span class="switch" aria-hidden="true"><i></i></span></div>
     <h1>See your new website <em>before</em> you pay.</h1>
     <p class="lead">Tell us your business name. We build a preview of your website, animated and made for phones, and send it to your WhatsApp within 24 hours. Like it? It goes live on your own address. Don't? You owe nothing.</p>
     <ul class="ticks">
@@ -116,21 +166,21 @@ footer{padding:40px 0 60px;color:var(--dim);font-size:14px;border-top:1px solid 
 </div>
 
 <section aria-labelledby="g-h">
-  <h3 class="sec" id="g-h">Real sites, <em>live.</em></h3>
+  <h3 class="sec rv" id="g-h">Real sites, <em>live.</em></h3>
   <p class="lead" style="font-size:17px">Open them on your phone. Yours is built the same way, for your trade.</p>
   <div class="gal">
-    <a class="tile" href="/local/demo-roofer/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/highveld-phone.jpg)"><div class="cap"><span>Roofing</span><b>Highveld Roofworks</b></div></a>
-    <a class="tile" href="/clients/kasi-lobby/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/kasi-phone.jpg)"><div class="cap"><span>Gaming &amp; events</span><b>Kasi Lobby</b></div></a>
-    <a class="tile" href="https://mjojo.co.za" target="_blank" rel="noopener" style="background-image:linear-gradient(to top,#0B0910 30%,rgba(11,9,16,.2) 75%),url(https://mjojo.co.za/img/hero.jpg);background-position:50% 20%"><div class="cap"><span>Education &amp; theatre</span><b>Mjojo Finance Play</b></div></a>
+    <a class="tile rv" href="/local/demo-roofer/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/highveld-phone.jpg)"><div class="cap"><span>Roofing</span><b>Highveld Roofworks</b></div></a>
+    <a class="tile rv" href="/clients/kasi-lobby/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/kasi-phone.jpg)"><div class="cap"><span>Gaming &amp; events</span><b>Kasi Lobby</b></div></a>
+    <a class="tile rv" href="https://mjojo.co.za" target="_blank" rel="noopener" style="background-image:linear-gradient(to top,#0B0910 30%,rgba(11,9,16,.2) 75%),url(https://mjojo.co.za/img/hero.jpg);background-position:50% 20%"><div class="cap"><span>Education &amp; theatre</span><b>Mjojo Finance Play</b></div></a>
   </div>
 </section>
 
 <section aria-labelledby="h-h">
-  <h3 class="sec" id="h-h">How it <em>works</em></h3>
+  <h3 class="sec rv" id="h-h">How it <em>works</em></h3>
   <div class="steps">
-    <div class="step"><i>01</i><h4>You ask</h4><p>Fill in the form or WhatsApp us your business name.</p></div>
-    <div class="step"><i>02</i><h4>We build your preview</h4><p>Within 24 hours on weekdays, sent to your WhatsApp. Open it, tap the buttons, show your family.</p></div>
-    <div class="step"><i>03</i><h4>You decide</h4><p>Love it? It's live on your own web address within 24 hours of payment. Not for you? No problem, nothing owed.</p></div>
+    <div class="step rv"><i>01</i><h4>You ask</h4><p>Fill in the form or WhatsApp us your business name.</p></div>
+    <div class="step rv"><i>02</i><h4>We build your preview</h4><p>Within 24 hours on weekdays, sent to your WhatsApp. Open it, tap the buttons, show your family.</p></div>
+    <div class="step rv"><i>03</i><h4>You decide</h4><p>Love it? It's live on your own web address within 24 hours of payment. Not for you? No problem, nothing owed.</p></div>
   </div>
 </section>
 
@@ -138,6 +188,9 @@ footer{padding:40px 0 60px;color:var(--dim);font-size:14px;border-top:1px solid 
 </div>
 <script>
 (function(){
+document.documentElement.classList.remove('no-js');
+var io=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting){var el=e.target;setTimeout(function(){el.classList.add('in')},(el.classList.contains('tile')||el.classList.contains('step'))?Array.prototype.indexOf.call(el.parentNode.children,el)*120:0);io.unobserve(el)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
 var t0=Date.now(), $=function(id){return document.getElementById(id)};
 var src=(new URLSearchParams(location.search).get('utm_source')||new URLSearchParams(location.search).get('src')||(document.referrer?document.referrer.replace(/^https?:\/\//,'').split('/')[0]:'direct')).slice(0,60);
