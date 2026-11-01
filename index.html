@@ -406,6 +406,56 @@ footer{border-top:1px solid var(--street);padding:48px 0 40px}
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
 }
+
+/* ===== FREE PREVIEW ===== */
+.pv{position:relative;overflow:hidden;border-top:1px solid var(--street);border-bottom:1px solid var(--street);background:radial-gradient(900px 500px at 85% 10%,rgba(155,123,255,.16),transparent 60%),radial-gradient(700px 420px at 0% 100%,rgba(195,176,255,.08),transparent 60%)}
+.pv-route{position:absolute;inset:auto 0 0 0;width:100%;height:160px;pointer-events:none;opacity:.8}
+.pv-route path{fill:none;stroke:var(--lilac);stroke-width:2;stroke-linecap:round;stroke-dasharray:6 14;filter:drop-shadow(0 0 6px rgba(155,123,255,.8));animation:pvDash 6s linear infinite}
+@keyframes pvDash{to{stroke-dashoffset:-400}}
+.pv-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,80px);align-items:start;position:relative}
+.pv .h2{font-size:clamp(36px,4.8vw,72px)}
+.pv .script,.pv .eyebrow{text-shadow:0 0 14px rgba(155,123,255,.75),0 0 32px rgba(155,123,255,.35)}
+.pv .eyebrow{color:var(--lilac)}
+.pv-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(195,176,255,.5);border-radius:999px;padding:6px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac);box-shadow:0 0 18px rgba(155,123,255,.35);animation:pvBreath 3.2s ease-in-out infinite}
+.pv-badge i{width:8px;height:8px;border-radius:50%;background:var(--lilac);box-shadow:0 0 10px var(--lilac)}
+.pv-ticks{list-style:none;padding:0;margin:28px 0 30px;display:grid;gap:14px}
+.pv-ticks li{position:relative;padding-left:34px;color:var(--mist);font-size:17px;line-height:1.5}
+.pv-ticks li:before{content:"";position:absolute;left:0;top:3px;width:20px;height:20px;border-radius:50%;background:var(--lilac);box-shadow:0 0 12px rgba(155,123,255,.8);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3L15 6.5' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude}
+.pv-steps{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 28px}
+.pv-steps span{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);border:1px solid var(--street);border-radius:999px;padding:8px 14px}
+.pv-steps b{color:var(--lilac);margin-right:6px;text-shadow:0 0 10px rgba(155,123,255,.7)}
+.pv-wa{position:relative;border-color:#25D366!important;color:var(--mint)!important}
+.pv-wa:after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid #25D366;opacity:0;animation:pvRing 2.4s ease-out infinite}
+@keyframes pvRing{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
+.pv-form{position:relative;background:var(--card);border:1px solid rgba(195,176,255,.45);border-radius:22px;padding:clamp(22px,3vw,34px);backdrop-filter:blur(6px);animation:pvBorder 4s ease-in-out infinite}
+@keyframes pvBorder{0%,100%{box-shadow:0 0 0 1px rgba(155,123,255,.15),0 0 28px rgba(155,123,255,.18)}50%{box-shadow:0 0 0 1px rgba(155,123,255,.45),0 0 48px rgba(155,123,255,.38)}}
+.pv-form h3{font-family:var(--display);font-weight:300;font-size:26px;letter-spacing:-.03em;margin:0 0 4px;color:var(--mint)}
+.pv-form .small{color:var(--dim);font-size:13px;margin:0}
+.pv-form label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin:16px 0 6px}
+.pv-form input[type=text],.pv-form input[type=tel],.pv-form input[type=email],.pv-form input:not([type]){width:100%;box-sizing:border-box;background:rgba(7,23,25,.7);border:1px solid var(--river);border-radius:12px;padding:13px 14px;color:var(--mint);font:16px var(--body);transition:border-color .2s,box-shadow .2s}
+.pv-form input:focus{outline:0;border-color:var(--lilac);box-shadow:0 0 0 3px rgba(155,123,255,.25),0 0 18px rgba(155,123,255,.35)}
+.pv-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.pv-form .consent{display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:13.5px;color:var(--mist);line-height:1.45;margin-top:18px;cursor:pointer}
+.pv-form .consent input{margin-top:3px;accent-color:var(--lilac);width:18px;height:18px;flex:none}
+.pv-form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.pv-go{position:relative;overflow:hidden;width:100%;justify-content:center;margin-top:20px;font-size:17px;padding:16px 26px;border:0;cursor:pointer;font-family:var(--body);animation:pvBreath 3.2s ease-in-out infinite}
+.pv-go:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:pvSheen 3.6s ease-in-out infinite}
+@keyframes pvSheen{0%,55%{left:-60%}100%{left:130%}}
+@keyframes pvBreath{0%,100%{box-shadow:0 0 14px rgba(155,123,255,.45)}50%{box-shadow:0 0 34px rgba(155,123,255,.85),0 0 60px rgba(155,123,255,.3)}}
+.pv-msg{min-height:20px;color:#ffb4c0;font-size:14px;margin-top:10px}
+.pv-msg a{color:var(--lilac)}
+.pv-done{display:none;text-align:left}
+.pv-done p{color:var(--mist)}
+.pv-gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(40px,5vw,64px);position:relative}
+.pv-tile{position:relative;display:block;aspect-ratio:9/13;border-radius:18px;overflow:hidden;border:1px solid var(--street);background:#050f10 center top/cover no-repeat;text-decoration:none;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s,border-color .35s}
+.pv-tile:hover{transform:translateY(-6px);border-color:var(--lilac);box-shadow:0 0 30px rgba(155,123,255,.45)}
+.pv-tile .cap{position:absolute;inset:auto 0 0 0;padding:90px 16px 16px;background:linear-gradient(to top,#050f10 0%,#050f10 38%,rgba(5,15,16,.85) 60%,transparent)}
+.pv-tile .cap span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.pv-tile .cap b{display:block;color:var(--mint);font-weight:500;font-size:16px;margin-top:4px}
+.pv-gal-note{grid-column:1/-1;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 4px}
+@media (max-width: 900px){.pv-grid{grid-template-columns:1fr}}
+@media (max-width: 600px){.pv-gal{grid-template-columns:1fr 1fr}.pv-gal .pv-tile:nth-child(4){display:none}.pv-form .row2{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){.pv-route path,.pv-badge,.pv-go,.pv-go:after,.pv-form,.pv-wa:after{animation:none}}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 </head>
@@ -425,7 +475,7 @@ footer{border-top:1px solid var(--street);padding:48px 0 40px}
       <a href="#pricing">Pricing</a>
       <a href="#refer">Refer &amp; earn</a>
       <a href="#faq">FAQ</a>
-      <a href="/preview/">Free preview</a>
+      <a href="#preview">Free preview</a>
       <a class="btn btn-primary wa-link" href="#">Get your site</a>
     </nav>
   </div>
@@ -462,7 +512,7 @@ footer{border-top:1px solid var(--street);padding:48px 0 40px}
         <p class="hero-lede">From Soweto to Sandton, the city never switches off. Animated, phone-first websites for Joburg's hustlers, built to be found at <span class="script">2am</span>.</p>
         <div class="hero-actions">
           <a class="btn btn-primary wa-link" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>Get your site</a>
-          <a class="btn btn-ghost" href="/preview/">See yours free first</a>
+          <a class="btn btn-ghost" href="#preview">See yours free first</a>
         </div>
       </div>
       <div class="price-card">
@@ -477,6 +527,62 @@ footer{border-top:1px solid var(--street);padding:48px 0 40px}
 <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack">
   <span>Salons</span><span class="dot"></span><span>Plumbers</span><span class="dot"></span><span>Roofers</span><span class="dot"></span><span>Mechanics</span><span class="dot"></span><span>Caterers</span><span class="dot"></span><span>Barbers</span><span class="dot"></span><span>Builders</span><span class="dot"></span><span>Tutors</span><span class="dot"></span><span>Cleaners</span><span class="dot"></span><span>Photographers</span><span class="dot"></span>
 </div></div>
+
+<!-- FREE PREVIEW -->
+<section class="section pv" id="preview" aria-labelledby="pv-h">
+  <svg class="pv-route" viewBox="0 0 1600 160" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 140 C 380 40, 820 150, 1620 30"/></svg>
+  <div class="wrap">
+    <div class="pv-grid">
+      <div>
+        <div class="eyebrow mono reveal"><span class="pv-badge"><i></i>Free preview</span></div>
+        <h2 class="h2 reveal" id="pv-h">See your website <span class="script">before</span> you pay.</h2>
+        <ul class="pv-ticks reveal">
+          <li>Tell us your business name. We build a preview of your site, animated and made for phones.</li>
+          <li>It lands on your WhatsApp within 24 hours (weekdays). Open it, tap the buttons, show your family.</li>
+          <li>Like it? It goes live on your own address. Don't? You owe nothing.</li>
+        </ul>
+        <div class="pv-steps reveal"><span><b>01</b>You ask</span><span><b>02</b>We build</span><span><b>03</b>You decide</span></div>
+        <a class="btn btn-ghost pv-wa reveal" id="pvWa" href="https://wa.me/27761293926" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>Or ask on WhatsApp</a>
+      </div>
+
+      <form class="pv-form reveal" id="pvForm" novalidate>
+        <div id="pvAsk">
+          <h3>Get my free preview</h3>
+          <p class="small">Takes 20 seconds. No payment details.</p>
+          <label for="pvBusiness">Business name</label>
+          <input id="pvBusiness" required autocomplete="organization" placeholder="e.g. Thandi's Hair Studio">
+          <div class="row2">
+            <div><label for="pvTrade">What you do</label><input id="pvTrade" list="pvTrades" placeholder="e.g. plumbing"></div>
+            <div><label for="pvArea">Area</label><input id="pvArea" autocomplete="address-level2" placeholder="e.g. Soweto"></div>
+          </div>
+          <datalist id="pvTrades"><option value="Hair salon / barber"><option value="Plumbing"><option value="Roofing"><option value="Catering / food"><option value="Mechanic / auto"><option value="Building / construction"><option value="Cleaning"><option value="Events / decor"><option value="Photography"><option value="Retail / shop"></datalist>
+          <label for="pvNum">WhatsApp number</label>
+          <input id="pvNum" type="tel" required inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567">
+          <label for="pvEmail">Email (optional)</label>
+          <input id="pvEmail" type="email" autocomplete="email">
+          <div class="hp" aria-hidden="true"><label for="pvHp">Leave empty</label><input id="pvHp" tabindex="-1" autocomplete="off"></div>
+          <label class="consent"><input type="checkbox" id="pvConsent" required> <span>Yes, Digital Switch may WhatsApp me my preview and follow up about it. I can reply STOP at any time.</span></label>
+          <button class="btn btn-primary pv-go" type="submit" id="pvGo">Build my preview</button>
+          <div class="pv-msg" id="pvMsg" role="status"></div>
+          <p class="small">Previews are built Monday to Friday. We'll never share your number.</p>
+        </div>
+        <div class="pv-done" id="pvDone">
+          <h3>You're on the list ✨</h3>
+          <p>We'll WhatsApp your preview to <b id="pvDoneNum"></b> within 24 hours (weekdays).</p>
+          <p>Can't wait? Look through our work below, or message us now.</p>
+          <a class="btn btn-ghost pv-wa" id="pvWaDone" href="https://wa.me/27761293926" target="_blank" rel="noopener">WhatsApp us</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="pv-gal">
+      <p class="pv-gal-note reveal">Real sites, live. Yours is built the same way, for your trade.</p>
+      <a class="pv-tile reveal" href="/local/demo-roofer/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/highveld-phone.jpg)"><div class="cap"><span>Roofing</span><b>Highveld Roofworks</b></div></a>
+      <a class="pv-tile reveal" href="/clients/kasi-lobby/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/kasi-hero.jpg)"><div class="cap"><span>Gaming &amp; events</span><b>Kasi Lobby</b></div></a>
+      <a class="pv-tile reveal" href="https://mjojo.co.za" target="_blank" rel="noopener" style="background-image:url(https://mjojo.co.za/img/hero.jpg);background-position:50% 20%"><div class="cap"><span>Education &amp; theatre</span><b>Mjojo Finance Play</b></div></a>
+    </div>
+  </div>
+</section>
 
 <!-- PROBLEM -->
 <section class="section">
@@ -706,7 +812,7 @@ footer{border-top:1px solid var(--street);padding:48px 0 40px}
     <span class="sign" aria-hidden="true">Switch on</span>
     <h2 class="h2 reveal" style="font-size:clamp(28px,3.4vw,48px);max-width:760px">Your business, found at any hour, live by this time tomorrow.</h2>
     <div class="hero-actions reveal" style="margin-top:36px">
-      <a class="btn btn-primary" href="/preview/">Get my free preview</a>
+      <a class="btn btn-primary" href="#preview">Get my free preview</a>
       <a class="btn btn-ghost wa-link" href="#">WhatsApp 076 129 3926</a>
     </div>
   </div>
@@ -802,6 +908,31 @@ footer{border-top:1px solid var(--street);padding:48px 0 40px}
     items.forEach(function(it){ it.classList.toggle('lit', it.getBoundingClientRect().top + 16 < mid); });
   }
   onScroll();
+})();
+</script>
+
+<script>
+(function(){
+var f=document.getElementById('pvForm'); if(!f) return;
+var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
+var t0=Date.now(), $=function(id){return document.getElementById(id)};
+var q=new URLSearchParams(location.search);
+var src=('home'+(q.get('utm_source')||q.get('src')?':'+(q.get('utm_source')||q.get('src')):'')).slice(0,60);
+function wl(){var b=$('pvBusiness').value.trim();return 'https://wa.me/27761293926?text='+encodeURIComponent("Hi Digital Switch, I'd like my free website preview"+(b?' for '+b:'')+'.')}
+$('pvWa').href=wl(); $('pvBusiness').addEventListener('input',function(){$('pvWa').href=wl()});
+f.addEventListener('submit',function(e){
+  e.preventDefault();
+  var b=$('pvBusiness').value.trim(), w=$('pvNum').value.replace(/\D/g,'');
+  if(!b){$('pvMsg').textContent='Please add your business name.';$('pvBusiness').focus();return}
+  if(w.length<9){$('pvMsg').textContent='Please add a WhatsApp number we can send it to.';$('pvNum').focus();return}
+  if(!$('pvConsent').checked){$('pvMsg').textContent='Please tick the box so we may WhatsApp you the preview.';$('pvConsent').focus();return}
+  var fd=new FormData(); fd.append('kind','preview'); fd.append('business',b); fd.append('trade',$('pvTrade').value.trim()); fd.append('area',$('pvArea').value.trim());
+  fd.append('wa',w); fd.append('email',$('pvEmail').value.trim()); fd.append('consent','yes'); fd.append('src',src); fd.append('company_website',$('pvHp').value); fd.append('_t',String(Date.now()-t0)); fd.append('site','home');
+  $('pvGo').disabled=true; $('pvGo').textContent='Sending…';
+  fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){
+    $('pvAsk').style.display='none'; $('pvDone').style.display='block'; $('pvDoneNum').textContent=$('pvNum').value; $('pvWaDone').href=wl();
+  }).catch(function(){ $('pvGo').disabled=false; $('pvGo').textContent='Build my preview'; $('pvMsg').innerHTML='That didn\'t send. Please try again, or <a href="'+wl()+'" target="_blank" rel="noopener">ask on WhatsApp</a>.'; });
+});
 })();
 </script>
 </body>
