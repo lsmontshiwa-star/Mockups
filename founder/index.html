@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lethabo Montshiwe | Founder, Digital Switch and Testimony Tuesday</title>
-<meta name="description" content="Lethabo Montshiwe, 25, Johannesburg. Founder of Digital Switch, which turns AI tools into working systems for small businesses, and of Testimony Tuesday, a weekly faith community.">
+<meta name="description" content="Lethabo Montshiwe, 25, Johannesburg. Founder of Digital Switch, a technology venture developing AI-powered systems for small businesses, and of Testimony Tuesday.">
 <link rel="canonical" href="https://digitalswitch.co.za/founder/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Digital Switch">
 <meta property="og:url" content="https://digitalswitch.co.za/founder/">
 <meta property="og:title" content="Lethabo Montshiwe | Founder, Digital Switch and Testimony Tuesday">
-<meta property="og:description" content="25, Johannesburg. Built an AI pipeline with no funding that has sourced 1,859 businesses and built 170+ websites. Founder of Testimony Tuesday.">
+<meta property="og:description" content="Built Digital Switch's AI system without external funding: 1,859 businesses sourced, 170+ personalised website previews. Founder of Testimony Tuesday.">
 <meta property="og:image" content="https://digitalswitch.co.za/founder/poster.jpg">
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1350">
@@ -99,9 +99,8 @@ main,footer{position:relative;z-index:1}
 /* hero: name and roles left; photo anchored to the hero's bottom-right corner so its cut edges sit on the page edge, then dissolve into the night */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;overflow:hidden}
 .board{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
-.portrait{position:absolute;right:0;bottom:0;width:min(50vw,760px);z-index:1;pointer-events:none}
-.portrait::before{content:"";position:absolute;left:8%;right:-10%;top:12%;bottom:-10%;background:radial-gradient(closest-side,rgba(155,123,255,.32),rgba(155,123,255,.08) 60%,transparent);z-index:-1}
-.portrait img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 99%);mask-image:linear-gradient(180deg,#000 72%,transparent 99%);filter:drop-shadow(-10px 0 30px rgba(155,123,255,.25))}
+.portrait{position:absolute;right:0;bottom:0;width:min(44vw,680px);z-index:1;pointer-events:none}
+.portrait img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 62%,rgba(0,0,0,.6) 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,rgba(0,0,0,.6) 82%,transparent 100%)}
 .hero .wrap{position:relative;z-index:2}
 .hero-meta{display:flex;gap:28px;margin-bottom:clamp(20px,4vw,44px)}
 .headline{margin:0;font-weight:400;line-height:1}
@@ -196,6 +195,11 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   .reveal{opacity:1;transform:none}
 }
 
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{border:1px solid var(--river);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--mist)}
+.tags span.on{border-color:rgba(195,176,255,.55);color:var(--lilac)}
+.vision .after{max-width:62ch}
+#digital-switch .lead + .facts{margin-top:28px}
 /* profile */
 .profile{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,100px);align-items:start}
 .profile .body p{margin:0 0 1.1em;color:var(--mist);font-weight:300;font-size:clamp(18px,1.5vw,21px);max-width:62ch}
@@ -233,6 +237,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a href="#profile">Profile</a>
       <a href="#digital-switch">Digital Switch</a>
+      <a href="#vision">Vision</a>
       <a href="#testimony-tuesday">Testimony Tuesday</a>
       <a class="btn btn-primary" href="#contact">Get in touch</a>
     </nav>
@@ -249,7 +254,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 <main id="top">
 <section class="hero">
   <canvas class="board" id="board" aria-hidden="true"></canvas>
-  <div class="portrait" aria-hidden="true"><img src="/founder/lethabo.webp" alt="" width="1100" height="1090"></div>
+  <div class="portrait" aria-hidden="true"><img src="/founder/lethabo.webp" alt="" width="1100" height="1246"></div>
   <div class="wrap">
     <div class="hero-meta mono"><span>Founder profile</span><span>25</span><span class="hide-sm">Johannesburg, South Africa</span></div>
     <h1 class="headline">
@@ -274,12 +279,11 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   <div class="wrap profile">
     <div>
       <div class="eyebrow mono reveal">Profile</div>
-      <h2 class="h2 reveal">Systems that help people get <span class="script">seen.</span></h2>
+      <h2 class="h2 reveal">Visible, competitive and <span class="script">efficient.</span></h2>
     </div>
     <div class="body reveal">
-      <p>Lethabo Montshiwe is the founder of <strong>Digital Switch</strong>, a Johannesburg technology company that turns AI tools into working systems for small businesses, and the founder of <strong>Testimony Tuesday</strong>, a weekly faith community where people share real stories of breakthrough, healing, provision and hope.</p>
-      <p>Before Digital Switch, she built the brand and partnership systems for Mjojo Finance Play, a theatre-based financial literacy company that works with schools. Seeing skilled businesses stay invisible online, and growth depend on work done by hand, led her to build systems that do that work instead.</p>
-      <p>She is a 25-year-old Black South African woman based in Johannesburg.</p>
+      <p>Lethabo Montshiwe is a 25-year-old Black South African entrepreneur and the founder of <strong>Digital Switch</strong>, a Johannesburg-based technology venture developing AI-powered systems that help small businesses and organisations become more visible, competitive and efficient.</p>
+      <p>The idea for Digital Switch began in 2022, when Lethabo noticed that many businesses and service providers she encountered in everyday life were almost invisible online. She recognised that the problem extended beyond digital visibility: businesses relying on manual processes, disconnected tools and limited capacity were often unable to grow beyond the constraints of their existing operations.</p>
     </div>
   </div>
 </section>
@@ -288,28 +292,44 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 <section class="section" id="digital-switch" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow mono reveal">Digital Switch</div>
-    <h2 class="h2 reveal">An AI pipeline built with <span class="script">no funding.</span></h2>
-    <p class="lead reveal">With no team, Lethabo connected free AI tools into one automated system. It finds businesses that are hard to find online, writes their copy with Google's Gemini AI and builds each one a custom preview website, so owners see their site before they pay.</p>
+    <h2 class="h2 reveal">Built without <span class="script">external funding.</span></h2>
+    <p class="lead reveal">Determined to find better ways of solving these problems, Lethabo taught herself to work with AI tools, APIs and automation platforms. What began as manually identifying businesses on Google Maps evolved into a multi-stage automated system.</p>
+    <div class="engine-grid" id="engineGrid">
+      <div class="cell"><div class="cell-top"><span class="mono">01</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Source</h3><p>Finds businesses that need to be found.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">02</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Research and verify</h3><p>Checks every business against independent sources.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">03</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Qualify</h3><p>Decides which prospects are worth reaching.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Discover contacts</h3><p>Finds the right way to reach the owner.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">05</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Personalise</h3><p>Generates content written for each business.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">06</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Build previews</h3><p>Builds a custom website preview for each one.</p></div>
+    </div>
+    <div class="tags reveal"><span class="on">Scheduled processing</span><span>Checkpointing</span><span>Automated quality checks</span><span>Error recovery</span></div>
     <div class="stat-row reveal">
       <div class="stat"><b data-count="1859">1,859</b><span class="mono">Businesses sourced</span></div>
-      <div class="stat"><b data-count="170" data-suffix="+">170+</b><span class="mono">Custom websites built</span></div>
-      <div class="stat"><b>R0</b><span class="mono">Outside funding</span></div>
-      <div class="stat"><b class="sm">Google Africa Applied AI Lab</b><span class="mono">Applied 2026</span></div>
+      <div class="stat"><b data-count="170" data-suffix="+">170+</b><span class="mono">Website previews generated</span></div>
+      <div class="stat"><b>R0</b><span class="mono">External funding</span></div>
+      <div class="stat"><b class="sm">Hiring young South Africans</b><span class="mono">Commission-based sales roles</span></div>
     </div>
-    <div class="engine-grid" id="engineGrid">
-      <div class="cell"><div class="cell-top"><span class="mono">01</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Find</h3><p>Sources businesses with no website.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">02</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Verify</h3><p>Checks each one with a second, independent search.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">03</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Write</h3><p>Writes personalised copy with Google's Gemini AI.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Build</h3><p>Builds and publishes a custom preview site.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">05</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Reach</h3><p>Prepares the outreach to the owner.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">06</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Recover</h3><p>Runs unattended, checks its own work and recovers when a tool fails.</p></div>
-    </div>
+    <p class="lead reveal">Around the system, Lethabo has built the infrastructure to sell and deliver at scale.</p>
     <div class="facts">
-      <div class="fact reveal"><span class="mono">Clients</span><p>Johannesburg businesses, including Kasi Lobby, a chain of gaming hubs in Alexandra.</p></div>
-      <div class="fact reveal"><span class="mono">Jobs</span><p>Hiring young South Africans into commission-based sales roles.</p></div>
-      <div class="fact reveal"><span class="mono">Next</span><p>Adapting the pipeline to help Mjojo Finance Play reach arts schools across Gauteng.</p></div>
+      <div class="fact reveal"><span class="mono">Website</span><p>digitalswitch.co.za, where any business can request a free preview of its own site.</p></div>
+      <div class="fact reveal"><span class="mono">Sales desks</span><p>Work on phone and laptop and give each sales representative their own leads.</p></div>
+      <div class="fact reveal"><span class="mono">Offers and referrals</span><p>Automatically generated offers for interested businesses, and a referral programme.</p></div>
+      <div class="fact reveal"><span class="mono">Clients</span><p>Automated onboarding, hosting and support. Live sites include Kasi Lobby and Mjojo Finance Play.</p></div>
+      <div class="fact reveal"><span class="mono">Team</span><p>A local sales representative on board, with commission-based sales roles open to young South Africans.</p></div>
+      <div class="fact reveal"><span class="mono">Next</span><p>An adaptable AI orchestration platform that connects the best specialised tools into complete business systems.</p></div>
     </div>
     <div class="links reveal"><a class="btn btn-ghost" href="/">Visit Digital Switch</a></div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="section" id="vision" style="padding-top:0">
+  <div class="wrap">
+    <div class="vision reveal">
+      <div class="eyebrow mono">Her vision</div>
+      <blockquote>African businesses should not be limited by a lack of access to <span class="script">digital capability.</span></blockquote>
+      <p class="after">Her broader vision is to develop Digital Switch into an adaptable AI orchestration platform that identifies the capabilities required to solve a particular problem, discovers the best specialised tools available and connects them into complete, functional business systems, while creating opportunities for more young Africans to participate in the technology-driven economy.</p>
+    </div>
   </div>
 </section>
 
@@ -318,13 +338,8 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   <div class="wrap">
     <div class="tt reveal">
       <div class="eyebrow mono">Testimony Tuesday</div>
-      <h2 class="h2">Real stories of <span class="script">hope,</span> every Tuesday.</h2>
-      <p class="lead">A weekly faith community Lethabo founded, where people share what God has done in their lives: breakthrough, healing, provision and hope. Anyone can join for free, and stories can be shared anonymously.</p>
-      <div class="facts">
-        <div class="fact"><span class="mono">Gatherings</span><p>Online every Tuesday at 7pm, with a WhatsApp community between sessions.</p></div>
-        <div class="fact"><span class="mono">Series</span><p>Faith and finances ("Daughters of Abraham"), marriage and courtship, and praise and prayer.</p></div>
-        <div class="fact"><span class="mono">Podcast</span><p>Expanding into fortnightly episodes of live and new testimonies.</p></div>
-      </div>
+      <h2 class="h2">Real stories of <span class="script">hope.</span></h2>
+      <p class="lead">Beyond technology, Lethabo founded Testimony Tuesday, a platform for people to share personal testimonies, explore scripture-based themes and encourage one another through bi-weekly online gatherings. She is also developing its reach through digital content and podcasting.</p>
       <p class="verse">"And they overcame him by the blood of the Lamb, and by the word of their testimony." <span class="mono">Revelation 12:11</span></p>
       <div class="links">
         <a class="btn btn-ghost" href="https://testimony-tuesday-la-7uiy.bolt.host/" target="_blank" rel="noopener">Testimony Tuesday site</a>
