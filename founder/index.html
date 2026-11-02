@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lethabo Montshiwe | Founder, Digital Switch</title>
-<meta name="description" content="Lethabo Montshiwe, 25, founder of Digital Switch. She turns AI tools into working systems that help small businesses get found, win customers and grow.">
+<title>Lethabo Montshiwe | Founder, Digital Switch and Testimony Tuesday</title>
+<meta name="description" content="Lethabo Montshiwe, 25, Johannesburg. Founder of Digital Switch, which turns AI tools into working systems for small businesses, and of Testimony Tuesday, a weekly faith community.">
 <link rel="canonical" href="https://digitalswitch.co.za/founder/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Digital Switch">
 <meta property="og:url" content="https://digitalswitch.co.za/founder/">
-<meta property="og:title" content="Lethabo Montshiwe | Founder, Digital Switch">
-<meta property="og:description" content="Built an automated AI pipeline that creates websites for businesses, with no funding. Now bringing it home to Joburg.">
+<meta property="og:title" content="Lethabo Montshiwe | Founder, Digital Switch and Testimony Tuesday">
+<meta property="og:description" content="25, Johannesburg. Built an AI pipeline with no funding that has sourced 1,859 businesses and built 170+ websites. Founder of Testimony Tuesday.">
 <meta property="og:image" content="https://digitalswitch.co.za/founder/poster.jpg">
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1350">
@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
 <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Lethabo Montshiwe","jobTitle":"Founder","worksFor":{"@id":"https://digitalswitch.co.za/#business","@type":"ProfessionalService","name":"Digital Switch","url":"https://digitalswitch.co.za/"},"address":{"@type":"PostalAddress","addressLocality":"Johannesburg","addressRegion":"Gauteng","addressCountry":"ZA"},"email":"hello@digitalswitch.co.za","url":"https://digitalswitch.co.za/founder/","sameAs":["https://www.linkedin.com/in/lethabo-montshiwe"]}
+{"@context":"https://schema.org","@type":"Person","name":"Lethabo Montshiwe","jobTitle":"Founder","image":"https://digitalswitch.co.za/founder/lethabo.webp","worksFor":[{"@type":"ProfessionalService","@id":"https://digitalswitch.co.za/#business","name":"Digital Switch","url":"https://digitalswitch.co.za/"},{"@type":"Organization","name":"Testimony Tuesday","url":"https://www.instagram.com/__testimonytuesday"}],"address":{"@type":"PostalAddress","addressLocality":"Johannesburg","addressRegion":"Gauteng","addressCountry":"ZA"},"email":"hello@digitalswitch.co.za","url":"https://digitalswitch.co.za/founder/"}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,40 +95,37 @@ a{color:inherit}
 .sky .star{fill:var(--lilac);filter:drop-shadow(0 0 6px var(--lilac));animation:twinkle 3.2s ease-in-out infinite}
 main,footer{position:relative;z-index:1}
 
-/* hero: switchboard canvas routes light into the switch beside the name */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 72px;overflow:hidden}
+
+/* hero: name and roles left; photo anchored to the hero's bottom-right corner so its cut edges sit on the page edge, then dissolve into the night */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;overflow:hidden}
 .board{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.portrait{position:absolute;right:0;bottom:0;width:min(50vw,760px);z-index:1;pointer-events:none}
+.portrait::before{content:"";position:absolute;left:8%;right:-10%;top:12%;bottom:-10%;background:radial-gradient(closest-side,rgba(155,123,255,.32),rgba(155,123,255,.08) 60%,transparent);z-index:-1}
+.portrait img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 99%);mask-image:linear-gradient(180deg,#000 72%,transparent 99%);filter:drop-shadow(-10px 0 30px rgba(155,123,255,.25))}
 .hero .wrap{position:relative;z-index:2}
-.hero::after{content:"";position:absolute;z-index:1;left:-10%;bottom:-10%;width:65%;height:55%;background:radial-gradient(closest-side,rgba(7,23,25,.92),rgba(7,23,25,.6) 55%,rgba(7,23,25,0));pointer-events:none}
-.hero-meta{display:flex;justify-content:space-between;gap:16px;margin-bottom:clamp(20px,4vw,48px)}
+.hero-meta{display:flex;gap:28px;margin-bottom:clamp(20px,4vw,44px)}
 .headline{margin:0;font-weight:400;line-height:1}
 .headline .l1{display:block;overflow:hidden;padding-bottom:.26em;margin-bottom:-.22em}
-.headline .l1 span{display:inline-block;font-family:var(--display);font-weight:200;font-size:clamp(56px,10.4vw,168px);letter-spacing:-.045em;animation:rise 1.3s cubic-bezier(.16,1,.3,1) both}
-.headline .l2{display:flex;align-items:center;gap:clamp(14px,2.2vw,36px);margin-left:clamp(28px,8vw,140px);margin-top:clamp(-30px,-1.5vw,-10px)}
-.sign{font-family:var(--script);font-size:clamp(84px,13vw,214px);line-height:1.2;color:#f1ecff;white-space:nowrap;animation:neonOn 2.4s linear .6s both,hum 4s ease-in-out 3s infinite}
-.switch{width:clamp(70px,9vw,148px);height:auto;flex:none;margin-top:clamp(20px,3vw,56px);animation:switchGlow 3.8s ease-in-out 2s infinite both;overflow:visible}
+.headline .l1 span{display:inline-block;font-family:var(--display);font-weight:200;font-size:clamp(52px,8vw,128px);letter-spacing:-.045em;animation:rise 1.3s cubic-bezier(.16,1,.3,1) both}
+.headline .l2{display:flex;align-items:center;gap:clamp(12px,1.8vw,28px);margin-left:clamp(20px,5vw,90px);margin-top:clamp(-26px,-1.3vw,-8px)}
+.sign{font-family:var(--script);font-size:clamp(78px,10.4vw,176px);line-height:1.2;color:#f1ecff;white-space:nowrap;animation:neonOn 2.4s linear .6s both,hum 4s ease-in-out 3s infinite}
+.switch{width:clamp(62px,7vw,120px);height:auto;flex:none;margin-top:clamp(18px,2.4vw,44px);animation:switchGlow 3.8s ease-in-out 2s infinite both;overflow:visible}
 .switch .knob{animation:knob 1s cubic-bezier(.34,1.56,.64,1) 2.2s both}
-.hero-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:40px;align-items:end;margin-top:clamp(16px,3vw,40px)}
-.hero-lede{margin:0;max-width:600px;font-size:clamp(18px,1.5vw,21px);font-weight:300;color:var(--mist);line-height:1.5}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.stat-card{background:var(--card);border:1px solid var(--river);border-radius:26px;padding:26px 28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;backdrop-filter:blur(6px)}
-.stat-card div{display:flex;flex-direction:column;gap:4px}
-.stat-card b{font-family:var(--display);font-weight:300;font-size:clamp(19px,1.7vw,26px);letter-spacing:-.03em;white-space:nowrap;font-variant-numeric:tabular-nums}
-.stat-card .mono{font-size:10.5px}
-@media (max-width: 900px){.hero-foot{grid-template-columns:1fr}.hero-meta .hide-sm{display:none}}
+.roles{display:flex;flex-direction:column;gap:10px;margin-top:clamp(18px,2.4vw,32px);max-width:560px}
+.role{display:flex;align-items:baseline;gap:14px;font-family:var(--display);font-weight:300;font-size:clamp(19px,1.8vw,26px);letter-spacing:-.03em}
+.role .mono{color:var(--lilac);min-width:84px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+@media (max-width: 900px){
+  .hero{min-height:0;padding-bottom:0}
+  .portrait{position:relative;width:88vw;margin:28px 0 0 auto}
+  .hero-meta .hide-sm{display:none}
+}
 @media (max-width: 560px){
-  .headline .l2{margin-left:0;gap:10px;flex-wrap:wrap}
+  .headline .l2{margin-left:0;flex-wrap:wrap;gap:10px}
   .sign{font-size:clamp(50px,14.5vw,80px)}
   .switch{width:46px;margin-top:14px}
-  .stat-card{padding:22px;gap:10px}
-  .stat-card b{font-size:19px}
+  .role{flex-direction:column;gap:2px}
 }
-
-/* ticker */
-.ticker{position:relative;z-index:1;overflow:hidden;height:64px;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.ticker-track{display:flex;align-items:center;gap:44px;white-space:nowrap;padding-left:44px;animation:tick 36s linear infinite;font-family:var(--display);font-weight:300;font-size:21px;color:var(--dim)}
-.ticker-track .dot{width:8px;height:8px;border-radius:50%;background:var(--lilac);box-shadow:0 0 8px var(--lilac),0 0 18px rgba(155,123,255,.6);flex:none}
-
 /* sections */
 section{position:relative}
 .section{padding:clamp(88px,11vw,160px) 0}
@@ -139,15 +136,6 @@ section{position:relative}
 .lead{font-size:clamp(18px,1.5vw,21px);font-weight:300;color:var(--mist);max-width:680px;margin:26px 0 0}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none}
-
-/* story: three truths (homepage "problem" pattern) */
-.truths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street)}
-.truth{padding:32px 32px 0 0}
-.truth + .truth{padding-left:32px;border-left:1px solid var(--street)}
-.truth .num{font-family:var(--mono);font-size:12px;color:var(--lilac);letter-spacing:.16em}
-.truth h3{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:-.03em;line-height:1.2;margin:16px 0 12px}
-.truth p{margin:0;color:var(--sage);font-size:17px}
-@media (max-width: 860px){.truths{grid-template-columns:1fr}.truth,.truth + .truth{padding:28px 0;border-left:0;border-bottom:1px solid var(--street)}}
 
 /* engine: six-cell grid (homepage "included" pattern) that switches on in sequence */
 .engine-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street);border-left:1px solid var(--street)}
@@ -171,35 +159,6 @@ section{position:relative}
 .engine-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);margin-top:clamp(40px,5vw,64px);align-items:start}
 .engine-body p{margin:0;color:var(--mist);font-weight:300;font-size:clamp(17px,1.4vw,20px)}
 @media (max-width: 860px){.engine-body{grid-template-columns:1fr}}
-
-/* journey: vertical route (homepage "how" pattern) */
-.how{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,100px);align-items:start}
-.how-intro{position:sticky;top:120px}
-.stops{position:relative;padding-left:60px}
-.stop-list{list-style:none;margin:0;padding:0}
-.stops-line{position:absolute;left:14px;top:8px;bottom:8px;width:3px}
-.stops-line .base{position:absolute;inset:0;background:var(--lilac);opacity:.18;border-radius:3px}
-.stops-line .fill{position:absolute;left:0;right:0;top:0;height:var(--p,0%);background:var(--lilac);border-radius:3px;box-shadow:0 0 10px var(--lilac),0 0 24px rgba(155,123,255,.6)}
-.stop{position:relative;padding:0 0 56px}
-.stop:last-child{padding-bottom:0}
-.stop .dot{position:absolute;left:-54px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--night);border:2px solid var(--river);transition:all .5s}
-.stop.lit .dot{background:var(--lilac);border-color:var(--lilac);box-shadow:0 0 12px var(--lilac),0 0 28px rgba(155,123,255,.7)}
-.stop .mono{display:block;margin-bottom:10px}
-.stop.lit .mono{color:var(--lilac)}
-.stop h3{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(22px,2.2vw,32px);letter-spacing:-.035em;line-height:1.15}
-.stop p{margin:12px 0 0;color:var(--sage);max-width:500px}
-.stop .script{font-size:2em;line-height:.6}
-@media (max-width: 900px){.how{grid-template-columns:1fr}.how-intro{position:static}}
-
-/* challenges: cards (homepage "plans" pattern) */
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:clamp(48px,6vw,80px)}
-.card{border-radius:28px;padding:clamp(28px,3vw,40px);background:var(--card);border:1px solid var(--river);display:flex;flex-direction:column;gap:18px;transition:border-color .4s,box-shadow .4s,transform .4s cubic-bezier(.34,1.56,.64,1)}
-.card:hover{border-color:rgba(195,176,255,.6);box-shadow:0 0 50px rgba(155,123,255,.18);transform:translateY(-4px)}
-.card .from{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-decoration:line-through;text-decoration-color:var(--lilac)}
-.card .to{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(26px,2.6vw,38px);line-height:1.12;letter-spacing:-.045em}
-.card .to .script{font-size:1.5em;line-height:.8}
-.card p{margin:0;color:var(--sage);font-size:16px}
-@media (max-width: 960px){.cards{grid-template-columns:1fr}}
 
 /* vision: glowing panel (homepage "refer" pattern) */
 .vision{border-radius:32px;border:1px solid rgba(195,176,255,.45);padding:clamp(36px,6vw,96px);background:radial-gradient(120% 140% at 100% 0%,rgba(155,123,255,.22),rgba(7,23,25,0) 55%),var(--night-2);overflow:hidden;position:relative;transition:box-shadow .5s,border-color .5s}
@@ -236,6 +195,29 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
 }
+
+/* profile */
+.profile{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,100px);align-items:start}
+.profile .body p{margin:0 0 1.1em;color:var(--mist);font-weight:300;font-size:clamp(18px,1.5vw,21px);max-width:62ch}
+.profile .body strong{color:var(--mint);font-weight:500}
+@media (max-width: 900px){.profile{grid-template-columns:1fr}}
+/* stat row */
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--street);border-bottom:1px solid var(--street);margin-top:clamp(40px,5vw,64px)}
+.stat{padding:28px 24px 28px 0;display:flex;flex-direction:column;gap:10px}
+.stat + .stat{padding-left:24px;border-left:1px solid var(--street)}
+.stat b{font-family:var(--display);font-weight:200;font-size:clamp(40px,4.6vw,68px);line-height:1;letter-spacing:-.05em;color:#f1ecff;text-shadow:0 0 22px rgba(155,123,255,.35);font-variant-numeric:tabular-nums}
+.stat b.sm{font-size:clamp(20px,1.8vw,26px);font-weight:300;letter-spacing:-.03em;line-height:1.2;text-shadow:none}
+@media (max-width: 900px){.stat-row{grid-template-columns:1fr 1fr}.stat:nth-child(3){padding-left:0;border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--street)}}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:22px}
+.fact{border-radius:22px;padding:24px 26px;background:var(--card);border:1px solid var(--river)}
+.fact .mono{color:var(--lilac)}
+.fact p{margin:10px 0 0;color:var(--mist);font-size:16px}
+@media (max-width: 900px){.facts{grid-template-columns:1fr}}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+/* testimony tuesday */
+.tt{border-radius:32px;border:1px solid rgba(195,176,255,.35);padding:clamp(32px,5vw,72px);background:radial-gradient(120% 140% at 0% 0%,rgba(155,123,255,.16),rgba(7,23,25,0) 55%),var(--night-2)}
+.tt .verse{margin-top:28px;font-family:var(--display);font-weight:200;font-size:clamp(20px,2vw,28px);letter-spacing:-.03em;color:var(--mist);max-width:40ch}
+.tt .verse .mono{display:block;margin-top:10px}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 </head>
@@ -249,11 +231,9 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="#story">Story</a>
-      <a href="#engine">The engine</a>
-      <a href="#journey">Journey</a>
-      <a href="#vision">Vision</a>
-      <a href="/">Digital Switch</a>
+      <a href="#profile">Profile</a>
+      <a href="#digital-switch">Digital Switch</a>
+      <a href="#testimony-tuesday">Testimony Tuesday</a>
       <a class="btn btn-primary" href="#contact">Get in touch</a>
     </nav>
   </div>
@@ -269,101 +249,87 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 <main id="top">
 <section class="hero">
   <canvas class="board" id="board" aria-hidden="true"></canvas>
+  <div class="portrait" aria-hidden="true"><img src="/founder/lethabo.webp" alt="" width="1100" height="1090"></div>
   <div class="wrap">
-    <div class="hero-meta mono"><span>Founder · Digital Switch</span><span class="hide-sm">26.2041° S · 28.0473° E</span><span class="hide-sm">Johannesburg, South Africa</span></div>
+    <div class="hero-meta mono"><span>Founder profile</span><span>25</span><span class="hide-sm">Johannesburg, South Africa</span></div>
     <h1 class="headline">
       <span class="l1"><span>Lethabo</span></span>
       <span class="l2"><span class="sign">Montshiwe</span>
         <svg class="switch" id="heroSwitch" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle class="knob" cx="56" cy="22" r="15" fill="#071719"/></svg>
       </span>
     </h1>
-    <div class="hero-foot">
-      <div>
-        <p class="hero-lede">A 25-year-old Black South African woman and the founder of Digital Switch, which turns AI tools into working systems that help small businesses get found, win customers and grow. Its first product: custom, phone-first websites, built and sold by a pipeline she engineered herself.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#engine">See the engine</a>
-          <a class="btn btn-ghost" href="#contact">Get in touch</a>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div><span class="mono">Sourced</span><b data-count="1859">1,859</b></div>
-        <div><span class="mono">Sites built</span><b data-count="170" data-suffix="+">170+</b></div>
-        <div><span class="mono">Funding</span><b>R0</b></div>
-      </div>
+    <div class="roles">
+      <div class="role"><span class="mono">Founder</span>Digital Switch</div>
+      <div class="role"><span class="mono">Founder</span>Testimony Tuesday</div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#profile">Read her profile</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
-<section class="section" id="story">
-  <div class="wrap">
-    <div class="eyebrow mono reveal">Why she started</div>
-    <h2 class="h2 reveal">Real and skilled, but <span class="script">invisible.</span></h2>
-    <div class="truths">
-      <div class="truth reveal"><span class="num">2022</span><h3>The street versus the search</h3><p>At university, she noticed that the businesses she walked past every day barely showed up online, and that it capped how far they could grow.</p></div>
-      <div class="truth reveal"><span class="num">Mjojo Finance Play</span><h3>The same ceiling</h3><p>At Mjojo Finance Play, a theatre-based financial literacy company, she built the brand and partnership systems from scratch. Growth still depended on in-person school visits.</p></div>
-      <div class="truth reveal"><span class="num">The decision</span><h3>Solve it permanently</h3><p>Unemployed and freelancing, she kept solving the same problems by hand. So she set out to solve them permanently.</p></div>
+<!-- PROFILE -->
+<section class="section" id="profile">
+  <div class="wrap profile">
+    <div>
+      <div class="eyebrow mono reveal">Profile</div>
+      <h2 class="h2 reveal">Systems that help people get <span class="script">seen.</span></h2>
+    </div>
+    <div class="body reveal">
+      <p>Lethabo Montshiwe is the founder of <strong>Digital Switch</strong>, a Johannesburg technology company that turns AI tools into working systems for small businesses, and the founder of <strong>Testimony Tuesday</strong>, a weekly faith community where people share real stories of breakthrough, healing, provision and hope.</p>
+      <p>Before Digital Switch, she built the brand and partnership systems for Mjojo Finance Play, a theatre-based financial literacy company that works with schools. Seeing skilled businesses stay invisible online, and growth depend on work done by hand, led her to build systems that do that work instead.</p>
+      <p>She is a 25-year-old Black South African woman based in Johannesburg.</p>
     </div>
   </div>
 </section>
 
-<!-- ENGINE -->
-<section class="section" id="engine" style="padding-top:0">
+<!-- DIGITAL SWITCH -->
+<section class="section" id="digital-switch" style="padding-top:0">
   <div class="wrap">
-    <div class="eyebrow mono reveal">What she built</div>
-    <h2 class="h2 reveal">One pipeline. <span class="script">Zero</span> hand labour.</h2>
-    <p class="lead reveal">Free AI tools, connected into one system that runs unattended, checks its own work and recovers when a tool fails.</p>
+    <div class="eyebrow mono reveal">Digital Switch</div>
+    <h2 class="h2 reveal">An AI pipeline built with <span class="script">no funding.</span></h2>
+    <p class="lead reveal">With no team, Lethabo connected free AI tools into one automated system. It finds businesses that are hard to find online, writes their copy with Google's Gemini AI and builds each one a custom preview website, so owners see their site before they pay.</p>
+    <div class="stat-row reveal">
+      <div class="stat"><b data-count="1859">1,859</b><span class="mono">Businesses sourced</span></div>
+      <div class="stat"><b data-count="170" data-suffix="+">170+</b><span class="mono">Custom websites built</span></div>
+      <div class="stat"><b>R0</b><span class="mono">Outside funding</span></div>
+      <div class="stat"><b class="sm">Google Africa Applied AI Lab</b><span class="mono">Applied 2026</span></div>
+    </div>
     <div class="engine-grid" id="engineGrid">
-      <div class="cell"><div class="cell-top"><span class="mono">01</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Find</h3><p>Sources businesses that need to be found.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">02</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Verify</h3><p>Confirms each one with a second, independent search.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">03</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Write</h3><p>Writes personalised copy using Google's Gemini AI.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Build</h3><p>Creates a custom preview website for each business.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">05</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Publish</h3><p>Puts the site live so the owner can open it.</p></div>
-      <div class="cell"><div class="cell-top"><span class="mono">06</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Reach</h3><p>Prepares the outreach to the owner.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">01</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Find</h3><p>Sources businesses with no website.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">02</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Verify</h3><p>Checks each one with a second, independent search.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">03</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Write</h3><p>Writes personalised copy with Google's Gemini AI.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">04</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Build</h3><p>Builds and publishes a custom preview site.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">05</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Reach</h3><p>Prepares the outreach to the owner.</p></div>
+      <div class="cell"><div class="cell-top"><span class="mono">06</span><svg class="mini-sw" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22"/><circle cx="22" cy="22" r="15"/></svg></div><h3>Recover</h3><p>Runs unattended, checks its own work and recovers when a tool fails.</p></div>
     </div>
+    <div class="facts">
+      <div class="fact reveal"><span class="mono">Clients</span><p>Johannesburg businesses, including Kasi Lobby, a chain of gaming hubs in Alexandra.</p></div>
+      <div class="fact reveal"><span class="mono">Jobs</span><p>Hiring young South Africans into commission-based sales roles.</p></div>
+      <div class="fact reveal"><span class="mono">Next</span><p>Adapting the pipeline to help Mjojo Finance Play reach arts schools across Gauteng.</p></div>
+    </div>
+    <div class="links reveal"><a class="btn btn-ghost" href="/">Visit Digital Switch</a></div>
   </div>
 </section>
 
-<!-- JOURNEY -->
-<section class="section" id="journey" style="padding-top:0">
-  <div class="wrap how">
-    <div class="how-intro">
-      <div class="eyebrow mono reveal">How far it has come</div>
-      <h2 class="h2 reveal">From one street to <span class="script">a system.</span></h2>
-      <p class="lead reveal">Proved abroad first. Now home in Joburg.</p>
-    </div>
-    <div class="stops" id="stops">
-      <div class="stops-line" aria-hidden="true"><span class="base"></span><span class="fill" id="stopsFill"></span></div>
-      <ol class="stop-list">
-        <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">2026</span><h3>Proved on US roofers</h3><p>Nearly 1,900 businesses sourced and over 170 personalised websites built.</p></li>
-        <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Aug 2026</span><h3>Google Africa Applied AI Lab</h3><p>Applied with the vision for what the engine becomes next.</p></li>
-        <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Oct 2026</span><h3>Home to <span class="script">Joburg</span></h3><p>A live website, sales desks, a referral programme and client sites like Kasi Lobby, a chain of gaming hubs in Alexandra.</p></li>
-        <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Now</span><h3>Hiring and adapting</h3><p>Sales roles open to young South Africans, and the same engine adapted to help Mjojo reach arts schools across Gauteng.</p></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- CHALLENGES -->
-<section class="section" style="padding-top:0">
+<!-- TESTIMONY TUESDAY -->
+<section class="section" id="testimony-tuesday" style="padding-top:0">
   <div class="wrap">
-    <div class="eyebrow mono reveal">Challenges</div>
-    <h2 class="h2 reveal">Every wall became <span class="script">a design problem.</span></h2>
-    <div class="cards">
-      <div class="card reveal"><span class="from">No funding</span><p class="to">So she used <span class="script">free</span> tools.</p></div>
-      <div class="card reveal"><span class="from">No team</span><p class="to">So she built <span class="script">software</span> to do the work.</p></div>
-      <div class="card reveal"><span class="from">100+ emails, no replies</span><p class="to">So every business sees <span class="script">its own</span> site first.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- VISION -->
-<section class="section" id="vision" style="padding-top:0">
-  <div class="wrap">
-    <div class="vision reveal">
-      <div class="eyebrow mono">Her vision</div>
-      <blockquote>To make AI practically usable by the African businesses and organisations <span class="script">least equipped</span> to navigate it themselves.</blockquote>
-      <p class="after">When local businesses grow, their communities grow with them.</p>
+    <div class="tt reveal">
+      <div class="eyebrow mono">Testimony Tuesday</div>
+      <h2 class="h2">Real stories of <span class="script">hope,</span> every Tuesday.</h2>
+      <p class="lead">A weekly faith community Lethabo founded, where people share what God has done in their lives: breakthrough, healing, provision and hope. Anyone can join for free, and stories can be shared anonymously.</p>
+      <div class="facts">
+        <div class="fact"><span class="mono">Gatherings</span><p>Online every Tuesday at 7pm, with a WhatsApp community between sessions.</p></div>
+        <div class="fact"><span class="mono">Series</span><p>Faith and finances ("Daughters of Abraham"), marriage and courtship, and praise and prayer.</p></div>
+        <div class="fact"><span class="mono">Podcast</span><p>Expanding into fortnightly episodes of live and new testimonies.</p></div>
+      </div>
+      <p class="verse">"And they overcame him by the blood of the Lamb, and by the word of their testimony." <span class="mono">Revelation 12:11</span></p>
+      <div class="links">
+        <a class="btn btn-ghost" href="https://testimony-tuesday-la-7uiy.bolt.host/" target="_blank" rel="noopener">Testimony Tuesday site</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/__testimonytuesday" target="_blank" rel="noopener">Instagram</a>
+      </div>
     </div>
   </div>
 </section>
@@ -373,7 +339,6 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   <div class="wrap">
     <span class="sign reveal">Let's talk</span>
     <h2 class="h2 reveal">Panels, partnerships and press.</h2>
-    <p class="lead reveal">For speaking, partnerships or interviews.</p>
     <div class="hero-actions reveal">
       <a class="btn btn-primary" href="mailto:hello@digitalswitch.co.za?subject=For%20Lethabo%20Montshiwe">hello@digitalswitch.co.za</a>
       <a class="btn btn-ghost" href="https://wa.me/27761293926?text=Hi%20Lethabo%2C%20I%20found%20your%20founder%20profile." target="_blank" rel="noopener">WhatsApp</a>
@@ -401,27 +366,18 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ticker: duplicate once for a seamless loop
-
-  // mobile menu
   var btn = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
   btn.addEventListener('click', function(){ var o = links.classList.toggle('open'); btn.setAttribute('aria-expanded', o); btn.textContent = o ? 'Close' : 'Menu'; });
   links.addEventListener('click', function(e){ if(e.target.closest('a')){ links.classList.remove('open'); btn.setAttribute('aria-expanded', false); btn.textContent = 'Menu'; } });
-
-  // nav logo switches on once the hero headline leaves the screen (as on the homepage)
   var nav = document.getElementById('nav'), headline = document.querySelector('.headline'), w2 = nav.querySelector('.logo .w2');
   new IntersectionObserver(function(es){
     var vis = es[0].isIntersecting, wasOff = nav.classList.contains('logo-off');
     nav.classList.toggle('logo-off', vis);
     if(!vis && wasOff){ w2.classList.remove('flick'); void w2.offsetWidth; w2.classList.add('flick'); }
   }, {threshold:0}).observe(headline);
-
-  // reveals
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 24); }, {passive:true});
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -10% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el, i){ el.style.transitionDelay = ((i % 4) * 80) + 'ms'; io.observe(el); });
-
-  // stat counters
   function count(el){
     var to = +el.dataset.count, suf = el.dataset.suffix || '';
     var fmt = function(n){ return Math.round(n).toLocaleString('en-ZA').replace(/\s| /g, ',') + suf; };
@@ -430,30 +386,14 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     (function step(now){ var k = Math.min(1, (now - t0) / 1800), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * e); if(k < 1) requestAnimationFrame(step); })(t0);
   }
   var cio = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ count(e.target); cio.unobserve(e.target); } }); }, {threshold:.6});
-  document.querySelectorAll('[data-count]').forEach(function(el){ el.textContent = '0' + (el.dataset.suffix || ''); cio.observe(el); });
-
-  // engine cells switch on one after another
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
   var cells = [].slice.call(document.querySelectorAll('#engineGrid .cell'));
   var gio = new IntersectionObserver(function(es){
     if(!es[0].isIntersecting) return; gio.disconnect();
     cells.forEach(function(c, i){ setTimeout(function(){ c.classList.add('on'); }, reduce ? 0 : i * 380); });
   }, {threshold:.25});
   gio.observe(document.getElementById('engineGrid'));
-
-  // journey route: fill line + light stops as you scroll, nav state
-  var stops = document.getElementById('stops'), fill = document.getElementById('stopsFill'), items = stops.querySelectorAll('.stop'), ticking = false;
-  function onScroll(){
-    nav.classList.toggle('scrolled', window.scrollY > 24);
-    var r = stops.getBoundingClientRect(), mid = window.innerHeight * 0.6;
-    var p = Math.max(0, Math.min(1, (mid - r.top) / r.height));
-    fill.style.setProperty('--p', (p * 100).toFixed(1) + '%');
-    items.forEach(function(it){ it.classList.toggle('lit', it.getBoundingClientRect().top + 16 < mid); });
-    ticking = false;
-  }
-  window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
-  onScroll();
-
-  // hero switchboard: points of light lean toward the pointer and route pulses into the switch beside the name
+  // hero switchboard: points of light route pulses into the switch beside the name
   (function board(){
     var cv = document.getElementById('board'), sw = document.getElementById('heroSwitch'); if(!cv || !sw) return;
     var cx = cv.getContext('2d'), w = 0, h = 0, dpr = 1, nodes = [], pulses = [], hub = {x:0, y:0}, px = -9999, py = -9999, run = true, looping = false, last = performance.now();
@@ -461,7 +401,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     function size(){
       dpr = Math.min(2, window.devicePixelRatio || 1); w = cv.clientWidth; h = cv.clientHeight;
       cv.width = w * dpr; cv.height = h * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); place();
-      var n = Math.round(Math.min(44, Math.max(16, w * h / 28000)));
+      var n = Math.round(Math.min(40, Math.max(14, w * h / 30000)));
       nodes = Array.from({length:n}, function(){ return { x: Math.random() * w, y: Math.random() * h, r: 1 + Math.random() * 1.8, ph: Math.random() * 6.28 }; });
     }
     size(); window.addEventListener('resize', size); setTimeout(place, 2600);
