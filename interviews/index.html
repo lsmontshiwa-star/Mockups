@@ -60,11 +60,28 @@ button.go:disabled{opacity:.6;cursor:wait}
 .done p{color:var(--mist);margin:0 0 10px}
 .done .when{font:500 20px var(--display);color:#f1ecff;text-shadow:var(--neon);margin:10px 0 16px}
 footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid var(--street)}
+/* sprinkle: twinkling stars + soft violet glow */
+.stars{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;box-shadow:0 0 6px var(--lilac),0 0 12px var(--glow);opacity:.2;animation:tw 5s ease-in-out infinite}
+.stars i.b{width:3px;height:3px}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:.95;transform:scale(1.25)}}
+.card{animation:cardglow 6s ease-in-out infinite}
+@keyframes cardglow{0%,100%{box-shadow:0 0 34px rgba(155,123,255,.16)}50%{box-shadow:0 0 54px rgba(155,123,255,.32)}}
+h2{text-shadow:0 0 18px rgba(155,123,255,.35)}
+.fact{transition:border-color .3s,box-shadow .3s}
+.fact:hover{border-color:rgba(195,176,255,.55);box-shadow:0 0 18px rgba(155,123,255,.22)}
+.fact b{text-shadow:0 0 10px rgba(155,123,255,.6)}
+.next{border-left-color:var(--lilac);box-shadow:-6px 0 14px -8px var(--glow)}
+.prep li::marker{color:var(--lilac)}
+.done .when{animation:flick 6s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.4}94%{opacity:1}96%{opacity:.7}}
+button.go:hover{box-shadow:0 0 40px rgba(155,123,255,.85)}
+@media (prefers-reduced-motion:reduce){.stars i,.card,.done .when{animation:none}}
 @media (max-width:860px){.grid{grid-template-columns:1fr;gap:28px}.fact{grid-template-columns:1fr;gap:2px}}
 @media (max-width:380px){.slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
-<div class="bg" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"></div><div class="stars" id="stars" aria-hidden="true"></div>
 <div class="wrap">
 <header><a href="/"><img src="/brand/ds-logo-on-dark.png" alt="Digital Switch" width="400" height="122"></a></header>
 <main class="grid">
@@ -124,10 +141,11 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
     </div>
   </section>
 </main>
-<footer>Digital Switch · a web design studio in Johannesburg · <a href="mailto:hello@digitalswitch.co.za">hello@digitalswitch.co.za</a></footer>
+<footer>Digital Switch · Websites that move · <a href="mailto:hello@digitalswitch.co.za">hello@digitalswitch.co.za</a></footer>
 </div>
 <script>
 (function(){
+(function(){var b=document.getElementById('stars');if(!b)return;var n=window.innerWidth<600?26:44;for(var i=0;i<n;i++){var e=document.createElement('i');if(i%7===0)e.className='b';e.style.left=(Math.random()*100).toFixed(1)+'%';e.style.top=(Math.random()*100).toFixed(1)+'%';e.style.animationDelay=(-Math.random()*5).toFixed(2)+'s';e.style.animationDuration=(4+Math.random()*4).toFixed(2)+'s';b.appendChild(e)}})();
 var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
 var $=function(i){return document.getElementById(i)}, t0=Date.now(), chosen='';
 var DAYNAME={'2026-11-06':'Friday 6 November','2026-11-09':'Monday 9 November'};
