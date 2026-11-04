@@ -86,7 +86,7 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
   <section class="card" aria-labelledby="bk">
     <form id="f" novalidate>
       <h2 id="bk">Choose a time</h2>
-      <p class="sub" id="dayline">Monday 9 November · each slot is 20 minutes</p>
+      <p class="sub" id="dayline">Monday 9 November · a slot every 30 minutes</p>
       <div class="slots" id="slots" role="group" aria-label="Interview times"><div class="loading">Loading times…</div></div>
       <details id="none"><summary>None of these times work for me</summary>
         <label for="other">When are you free on Monday? <small>(we'll email you a time)</small></label>
@@ -131,7 +131,7 @@ function msg(t,err){$('msg').textContent=t;$('msg').className='msg'+(err?' err':
 function draw(j){
   var box=$('slots'); box.innerHTML='';
   if(j.closed){box.innerHTML='<div class="loading">Bookings are closed. Please email hello@digitalswitch.co.za.</div>';$('go').disabled=true;return}
-  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day]+' · each slot is 20 minutes';
+  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day]+' · a slot every 30 minutes';
   var free=0;
   j.slots.forEach(function(s){
     var b=document.createElement('button'); b.type='button'; b.className='slot'; b.textContent=s;
