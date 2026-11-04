@@ -77,11 +77,12 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
       <div class="fact"><b>Where</b><span>Google Meet. The link comes in your confirmation email.</span></div>
       <div class="fact"><b>How long</b><span>15 to 20 minutes, including a short role-play</span></div>
     </div>
-    <h2>Before your interview</h2>
+    <h2>Things to think about</h2>
     <ul class="prep">
-      <li>Have a look at <a href="/">digitalswitch.co.za</a> so you know what we offer.</li>
-      <li>Think about any sales, phone or customer service experience you'd like to share.</li>
-      <li>We'll do a short role-play where you introduce Digital Switch to a business owner.</li>
+      <li>Have a look at <a href="/">digitalswitch.co.za</a> to get a feel for what we offer.</li>
+      <li>Whether you'd enjoy speaking to South African or US businesses more.</li>
+      <li>Roughly how many hours a week you'd like to put in.</li>
+      <li>There's a short role-play where you introduce Digital Switch to a business owner, so it may help to think about how you'd open.</li>
     </ul>
     <h2>If you're selected</h2>
     <div class="next">
@@ -95,10 +96,6 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
       <h2 id="bk">Choose a time</h2>
       <p class="sub" id="dayline">Monday 9 November · a slot every 30 minutes</p>
       <div class="slots" id="slots" role="group" aria-label="Interview times"><div class="loading">Loading times…</div></div>
-      <details id="none"><summary>None of these times work for me</summary>
-        <label for="other">When are you free on Monday? <small>(we'll email you a time)</small></label>
-        <input id="other" name="other" maxlength="200" placeholder="e.g. after 18:00, or 07:30">
-      </details>
 
       <label for="name">Full name</label>
       <input id="name" name="name" autocomplete="name" required maxlength="80">
@@ -113,8 +110,8 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
         <option>US businesses (afternoons and evenings, SA time)</option>
         <option>Either</option>
       </select>
-      <label for="experience">Any sales, phone or customer service experience? <small>(one or two lines is fine)</small></label>
-      <textarea id="experience" name="experience" maxlength="400"></textarea>
+      <label for="other">Anything you'd like us to know? <small>(optional)</small></label>
+      <textarea id="other" name="other" maxlength="400"></textarea>
       <div class="hp" aria-hidden="true"><label>Website<input id="company_website" name="company_website" tabindex="-1" autocomplete="off"></label></div>
       <button class="go" id="go" type="submit">Book my interview</button>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
@@ -122,7 +119,7 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
     <div class="done" id="done" role="status" aria-live="polite">
       <h2>You're booked</h2>
       <div class="when" id="when"></div>
-      <p>We've emailed you the Google Meet link and what to prepare. If you can't see it, check your spam folder.</p>
+      <p>We've emailed you the details. If you can't see it, check your spam folder.</p>
       <p>Need to change your time? Book again with the same email and your booking moves.</p>
     </div>
   </section>
@@ -149,7 +146,6 @@ function draw(j){
     box.appendChild(b);
   });
   if(chosen&&j.taken.indexOf(chosen)>-1)chosen='';
-  if(!free){$('none').open=true}
 }
 function load(){
   return fetch(EP+'?interviews=1&t='+Date.now()).then(function(r){return r.json()}).then(function(j){if(j&&j.slots)draw(j);else throw 0})
@@ -165,17 +161,17 @@ function poll(ref,tries){
 $('f').addEventListener('submit',function(e){
   e.preventDefault();
   var name=$('name').value.trim(), email=$('email').value.trim(), other=$('other').value.trim();
-  if(!chosen&&!other){msg('Choose a time, or tell us when you’re free.',true);return}
+  if(!chosen&&!other){msg('Please choose a time.',true);return}
   if(!name){msg('Please add your name.',true);$('name').focus();return}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg('Please check your email address.',true);$('email').focus();return}
   var ref='iv'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   var fd=new FormData();
   [['kind','interview'],['site','interview'],['ref',ref],['slot',chosen],['other',other],['name',name],['email',email],['wa',$('wa').value.trim()],
-   ['market',$('market').value],['experience',$('experience').value.trim()],['company_website',$('company_website').value],['_t',String(Date.now()-t0)]]
+   ['market',$('market').value],['company_website',$('company_website').value],['_t',String(Date.now()-t0)]]
    .forEach(function(p){fd.append(p[0],p[1])});
   $('go').disabled=true; msg('Booking…');
   fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){return poll(ref,8)}).then(function(j){
-    if(j&&j.ok){$('f').style.display='none';$('when').textContent=j.when||'We’ll email you a time';$('done').style.display='block';return}
+    if(j&&j.ok){$('f').style.display='none';$('when').textContent=j.when||'Thanks, we’ve received your note';$('done').style.display='block';return}
     $('go').disabled=false;
     if(j&&j.error==='taken'){msg('Someone just took that time. Please pick another.',true);chosen='';load();return}
     if(j&&j.error==='closed'){msg('Bookings are closed. Please email hello@digitalswitch.co.za.',true);return}
