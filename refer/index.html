@@ -167,6 +167,7 @@ mark.ph{background:rgba(195,176,255,.16);color:var(--rust-hi);padding:0 .2em;bor
 .price-card:hover{border-color:var(--rust);box-shadow:0 0 50px rgba(155,123,255,.18)}
 .price-card.main .label{color:#3c6563}
 .price-amt{font-family:var(--serif);font-weight:200;letter-spacing:-.06em;font-size:clamp(60px,8vw,96px);line-height:.9;font-variant-numeric:tabular-nums}
+.price-amt.w{font-size:clamp(40px,5vw,60px)}
 .price-amt small{font-family:var(--mono);font-size:14px;letter-spacing:.08em;color:inherit;opacity:.75}
 .price-card p{font-size:16px}
 .price-card:not(.main) p{color:var(--stone-hi)}
@@ -295,7 +296,7 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
         <div class="big-num" aria-label="R750"><span aria-hidden="true">R</span><span id="countUp" aria-hidden="true">750</span></div>
         <div class="big-cap">
           <p style="font-size:22px">Once-off, for every website sale you close.</p>
-          <p style="color:var(--stone-hi)">That's 25% of the R2,999 build fee. There is no cap: bring one client or twenty.</p>
+          <p style="color:var(--stone-hi)">There is no cap: bring one client or twenty.</p>
         </div>
       </div>
       <form class="calc" id="calc" aria-label="Earnings calculator">
@@ -321,8 +322,8 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
         <article class="step"><span class="step-n">1</span><div><h3>Find the business</h3><p>Someone you know who needs a website, or a better one than they have.</p></div></article>
         <article class="step"><span class="step-n">2</span><div><h3>Show them and win them over</h3><p>Share the demo, explain what they get and what it costs, and answer their questions using this page.</p></div></article>
         <article class="step"><span class="step-n">3</span><div><h3>Bring them when they're ready to buy</h3><p>Not just a name or a number: someone who has said "yes, I want this." Send them to us on WhatsApp with their name and business, or start a group chat with all three of us.</p></div></article>
-        <article class="step"><span class="step-n">4</span><div><h3>Digital Switch signs them up</h3><p>We go through the agreement with them and they pay R2,999.</p></div></article>
-        <article class="step"><span class="step-n">5</span><div><h3>You get paid R750</h3><p>Within 7 days of their full R2,999 clearing, by EFT to your bank account.</p></div></article>
+        <article class="step"><span class="step-n">4</span><div><h3>Digital Switch signs them up</h3><p>We send them a quote, go through the agreement and they pay the setup fee.</p></div></article>
+        <article class="step"><span class="step-n">5</span><div><h3>You get paid R750</h3><p>Within 7 days of their full setup payment clearing, by EFT to your bank account.</p></div></article>
       </div>
     </div>
   </section>
@@ -335,7 +336,7 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
       </div>
       <div class="rules">
         <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>R750 per client, paid once.</strong><span>It's for the website sale only.</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Paid after the full R2,999 is in.</strong><span>If a client doesn't pay, or the sale is refunded, no reward is due.</span></div></div>
+        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Paid after their full setup payment is in.</strong><span>If a client doesn't pay, or the sale is refunded, no reward is due.</span></div></div>
         <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Ready-to-buy clients only.</strong><span>We pay for clients, not contacts. A name or "you should call my uncle" doesn't qualify.</span></div></div>
         <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Tell us who you're working on.</strong><span>WhatsApp us the business name when you start. If two people approach the same business, the first to tell us gets the reward.</span></div></div>
         <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Stick to what's included.</strong><span>Only promise what's in the package below. For anything extra, say "let me check with Digital Switch."</span></div></div>
@@ -369,18 +370,18 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
   <section class="sec" aria-labelledby="priceH">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">Price sheet</span>
-        <h2 id="priceH">One clear price. <em>No surprises.</em></h2>
+        <span class="label">What they get</span>
+        <h2 id="priceH">One clear offer. <em>Quoted for them.</em></h2>
       </div>
       <div class="price">
         <div class="price-card main">
-          <span class="label">Website · once-off</span>
-          <div class="price-amt">R2,999</div>
+          <span class="label">Built once</span>
+          <div class="price-amt w">The website</div>
           <p>Design and build of a custom, animated website for their business.</p>
         </div>
         <div class="price-card">
-          <span class="label">Monthly care plan</span>
-          <div class="price-amt">R199<small> /month</small></div>
+          <span class="label">Looked after</span>
+          <div class="price-amt w">Monthly care</div>
           <p>Hosting, their own .co.za address, security certificate, keeping the site live, and small updates.</p>
         </div>
       </div>
@@ -452,16 +453,16 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
         <li><strong>Open warm.</strong><span>Ask about their business before you pitch.</span></li>
         <li><strong>Show the demo.</strong><span>Hand them your phone and let them scroll. Watch their reaction.</span></li>
         <li><strong>Make it theirs.</strong><span>"Imagine this with your photos, your prices, your name on it."</span></li>
-        <li><strong>Say the price with confidence.</strong><span>R2,999 once-off, R199 a month. Don't apologise for it.</span></li>
+        <li><strong>Leave the price to us.</strong><span>"Digital Switch quotes for your business after you've seen your preview."</span></li>
         <li><strong>Ask for the yes.</strong><span>"Shall I connect you with Digital Switch so they can get started?"</span></li>
       </ol>
 
       <h3 class="sub-h">When they say…</h3>
       <div>
         <details><summary>"I already have Facebook or Instagram."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Keep them! A website makes you look established, shows up on Google and sends people to your WhatsApp. Social media is rented. Your website is yours."</p></div></details>
-        <details><summary>"It's too expensive."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Agencies charge R5,000 to R15,000 for a custom site. This one is animated and made for your industry. One or two new customers pay for it."</p></div></details>
+        <details><summary>"It's too expensive."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"You'll see the site before you pay anything, and you get a quote for your business. It's animated and made for your industry. One or two new customers pay for it."</p></div></details>
         <details><summary>"I don't need a website."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"When someone hears about you, the first thing they do is Google you. What do they find right now?"</p></div></details>
-        <details><summary>"Why R199 a month?"<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"It covers hosting, your .co.za address, security and small updates. That's less than R7 a day to stay online."</p></div></details>
+        <details><summary>"Why is there a monthly fee?"<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"It covers hosting, your own web address, security and small updates, so the site never goes down and you never have to think about it."</p></div></details>
         <details><summary>"Let me think about it."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Of course. What's holding you back? I'll get you an answer."</p><p style="margin-top:12px">Then follow up in 2 to 3 days.</p></div></details>
         <details><summary>"Can it take bookings or sell online?"<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Let me check with Digital Switch. That's quoted separately."</p></div></details>
       </div>
@@ -469,7 +470,7 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
       <h3 class="sub-h">Before you hand them over</h3>
       <div class="check" id="checklist">
         <label><input type="checkbox" id="c1"> They've seen the demo</label>
-        <label><input type="checkbox" id="c2"> They know the price: R2,999 once-off plus R199 a month</label>
+        <label><input type="checkbox" id="c2"> They know Digital Switch will send them a quote</label>
         <label><input type="checkbox" id="c3"> They know what's included and what isn't</label>
         <label><input type="checkbox" id="c4"> They've said yes and are ready to sign and pay</label>
         <label><input type="checkbox" id="c5"> They're happy for you to share their number</label>
@@ -485,8 +486,8 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
         <h2 id="faqH">The usual <em>questions.</em></h2>
       </div>
       <details><summary>Do I need to know anything about websites?<span class="pm" aria-hidden="true"></span></summary><div class="ans">No. Show the demo and use the messages on this page. Send anything technical to Digital Switch.</div></details>
-      <details><summary>When do I get paid?<span class="pm" aria-hidden="true"></span></summary><div class="ans">Within 7 days of the client's full R2,999 clearing, by EFT to your bank account.</div></details>
-      <details><summary>Do I earn on the R199 monthly fee?<span class="pm" aria-hidden="true"></span></summary><div class="ans">No. The R750 is a once-off payment per website sale.</div></details>
+      <details><summary>When do I get paid?<span class="pm" aria-hidden="true"></span></summary><div class="ans">Within 7 days of the client's full setup payment clearing, by EFT to your bank account.</div></details>
+      <details><summary>Do I earn on the monthly care fee?<span class="pm" aria-hidden="true"></span></summary><div class="ans">No. The R750 is a once-off payment per website sale.</div></details>
       <details><summary>What if I just give you a name?<span class="pm" aria-hidden="true"></span></summary><div class="ans">We only pay for clients who are ready to sign and pay. A name alone doesn't qualify, so have the conversation first.</div></details>
       <details><summary>What if someone else is talking to the same business?<span class="pm" aria-hidden="true"></span></summary><div class="ans">Tell us the business name when you start. The first person to tell us gets the reward.</div></details>
       <details><summary>Can the client ask for anything?<span class="pm" aria-hidden="true"></span></summary><div class="ans">They get everything under "What's included." For anything else, say "let me check with Digital Switch."</div></details>
@@ -507,7 +508,7 @@ details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em
     <div class="wrap"><div class="giant" id="giant" aria-hidden="true">Switch</div></div>
     <div class="wrap foot">
       <span class="label">Digital Switch · Websites that move</span>
-      <span class="label">R2,999 once-off · R199/month · R750 per client</span>
+      <span class="label">R750 per client you bring</span>
     </div>
   </section>
 </main>
@@ -568,9 +569,9 @@ const MSGS = [
   { id: "close", tab: "Opener: close friend", note: "For a business owner you know well.",
     text: "Hey [Name]! Random question: have you ever thought about getting a proper website for [business name]? My friend runs Digital Switch and they build these animated, modern sites. Have a look: {demoLink}. Honestly, it looks like something a big company would have. Would something like that work for you?" },
   { id: "less", tab: "Opener: acquaintance", note: "For someone you know less well.",
-    text: "Hi [Name], it's [your name], [how you know them]. I'm working with Digital Switch, who build high-end animated websites for small businesses. I thought of [business name] straight away. Here's an example: {demoLink}. It's R2,999 once-off, designed for your type of business. Happy to tell you more if you're interested." },
-  { id: "price", tab: "When they ask the price", note: "Say the price with confidence.",
-    text: "It's R2,999 once-off for the design and build, then R199 a month for hosting, your own .co.za address and small updates. Most agencies charge R5,000 to R15,000 for a custom site, and this one is animated and built for your industry." },
+    text: "Hi [Name], it's [your name], [how you know them]. I'm working with Digital Switch, who build high-end animated websites for small businesses. I thought of [business name] straight away. Here's an example: {demoLink}. It's designed for your type of business, and they'll show you a free preview before you decide. Happy to tell you more if you're interested." },
+  { id: "price", tab: "When they ask the price", note: "Leave the exact price to Digital Switch.",
+    text: "Digital Switch quotes for each business, based on what you need. You'll see a free preview of your site first, so there's nothing to pay unless you love it. There's also a small monthly fee for hosting, your own web address, security and updates." },
   { id: "handover", tab: "Handover", note: "When they've said yes. Tick the checklist below first.",
     text: "Amazing! I'll connect you with {contact} now. They'll send you the agreement and payment details, and your site will be live within a week of getting your logo and photos." }
 ];
