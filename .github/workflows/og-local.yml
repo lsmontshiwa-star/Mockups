@@ -1,0 +1,23 @@
+name: Link-preview pictures for SA lead pages
+on:
+  push:
+    branches: [main]
+    paths: ['local/**/index.html', 'tools/og_local.py']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: og-local
+jobs:
+  og:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install playwright==1.48.0 && python -m playwright install --with-deps chromium
+      - run: python3 tools/og_local.py
+      - run: |
+          if [ -n "$(git status --porcelain local)" ]; then
+            git config user.name "ds-bot"; git config user.email "ds-bot@users.noreply.github.com"
+            git add local && git commit -m "Lead pages: link-preview pictures" && git pull --rebase && git push
+          fi
