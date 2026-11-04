@@ -138,7 +138,7 @@ a{color:inherit}
 /* hero */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 72px;overflow:hidden}
 .city{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.trail{position:absolute;left:0;width:100%;top:100svh;bottom:clamp(200px,24vw,420px);pointer-events:none;overflow:visible}
+.trail{position:absolute;left:0;width:100%;top:100svh;height:calc(100% - 100svh - clamp(300px,30vw,520px));pointer-events:none;overflow:visible}
 .trail path{fill:none;vector-effect:non-scaling-stroke}
 .trail-base{stroke:var(--lilac);stroke-width:1.5;opacity:.07}
 .trail-flow{stroke:var(--lilac);stroke-width:2;stroke-linecap:round;stroke-dasharray:8 14;opacity:.5;animation:flow 1.4s linear infinite}
@@ -455,15 +455,8 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 .pv-msg a{color:var(--lilac)}
 .pv-done{display:none;text-align:left}
 .pv-done p{color:var(--mist)}
-.pv-gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(40px,5vw,64px);position:relative}
-.pv-tile{position:relative;display:block;aspect-ratio:9/13;border-radius:18px;overflow:hidden;border:1px solid var(--street);background:#050f10 center top/cover no-repeat;text-decoration:none;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s,border-color .35s}
-.pv-tile:hover{transform:translateY(-6px);border-color:var(--lilac);box-shadow:0 0 30px rgba(155,123,255,.45)}
-.pv-tile .cap{position:absolute;inset:auto 0 0 0;padding:90px 16px 16px;background:linear-gradient(to top,#050f10 0%,#050f10 38%,rgba(5,15,16,.85) 60%,transparent)}
-.pv-tile .cap span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
-.pv-tile .cap b{display:block;color:var(--mint);font-weight:500;font-size:16px;margin-top:4px}
-.pv-gal-note{grid-column:1/-1;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 4px}
 @media (max-width: 900px){.pv-grid{grid-template-columns:1fr}}
-@media (max-width: 600px){.pv-gal{grid-template-columns:1fr 1fr}.pv-gal .pv-tile:nth-child(4){display:none}.pv-form .row2{grid-template-columns:1fr}}
+@media (max-width: 600px){.pv-form .row2{grid-template-columns:1fr}}
 @media (prefers-reduced-motion: reduce){.pv-route path,.pv-badge,.pv-go,.pv-go:after,.pv-form,.pv-wa:after{animation:none}}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
@@ -586,13 +579,6 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
           <a class="btn btn-ghost pv-wa" id="pvWaDone" href="https://wa.me/27761293926" target="_blank" rel="noopener">WhatsApp us</a>
         </div>
       </form>
-    </div>
-
-    <div class="pv-gal">
-      <p class="pv-gal-note reveal">Real sites, live. Yours is built the same way, for your trade.</p>
-      <a class="pv-tile reveal" href="/local/demo-roofer/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/highveld-phone.jpg)"><div class="cap"><span>Roofing</span><b>Highveld Roofworks</b></div></a>
-      <a class="pv-tile reveal" href="/clients/kasi-lobby/" target="_blank" rel="noopener" style="background-image:url(/ds/assets/kasi-hero.jpg)"><div class="cap"><span>Gaming &amp; events</span><b>Kasi Lobby</b></div></a>
-      <a class="pv-tile reveal" href="https://mjojo.co.za" target="_blank" rel="noopener" style="background-image:url(https://mjojo.co.za/img/hero.jpg);background-position:50% 20%"><div class="cap"><span>Education &amp; theatre</span><b>Mjojo Finance Play</b></div></a>
     </div>
   </div>
 </section>
@@ -950,6 +936,6 @@ f.addEventListener('submit',function(e){
 });
 })();
 </script>
-<script>(function(){var t=document.querySelector(".trail"),f=t&&t.querySelector(".trail-flow");if(!f)return;if(matchMedia("(prefers-reduced-motion: reduce)").matches){f.style.setProperty("--hide","0%");return}var raf=0;function u(){raf=0;var b=t.getBoundingClientRect(),k=(innerHeight*.7-b.top)/b.height;k=Math.max(0,Math.min(1,k));f.style.setProperty("--hide",((1-k)*100).toFixed(2)+"%")}addEventListener("scroll",function(){if(!raf)raf=requestAnimationFrame(u)},{passive:true});addEventListener("resize",u);u()})();</script>
+<script>(function(){var t=document.querySelector(".trail"),f=t&&t.querySelector(".trail-flow");if(!f)return;if(matchMedia("(prefers-reduced-motion: reduce)").matches){f.style.setProperty("--hide","0%");return}var raf=0;function u(){raf=0;var b=t.getBoundingClientRect(),k=(innerHeight*.7-b.top)/b.height;k=Math.max(0,Math.min(1,k));f.style.setProperty("--hide",((1-k)*100).toFixed(2)+"%")}function fit(){var m=t.parentElement.getBoundingClientRect(),e=document.querySelector(".final .h2");if(e){t.style.height=Math.max(0,e.getBoundingClientRect().bottom-t.getBoundingClientRect().top)+"px"}u()}addEventListener("scroll",function(){if(!raf)raf=requestAnimationFrame(u)},{passive:true});addEventListener("resize",fit);addEventListener("load",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})();</script>
 </body>
 </html>
