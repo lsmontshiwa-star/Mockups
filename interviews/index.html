@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Book your interview | Digital Switch</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Book your Digital Switch sales rep interview: Friday 6 November, online.">
+<meta name="description" content="Book your Digital Switch sales rep interview: Monday 9 November, online.">
 <meta property="og:title" content="Book your Digital Switch interview">
-<meta property="og:description" content="Friday 6 November, online. Pick a time that suits you.">
+<meta property="og:description" content="Monday 9 November, online. Pick a time that suits you.">
 <meta property="og:image" content="https://digitalswitch.co.za/brand/ds-header-banner-neon.png">
 <meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,27 +70,26 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
   <section>
     <div class="eyebrow">Sales rep interviews</div>
     <h1>Book your <em>interview</em></h1>
-    <p class="lead">Thanks for applying to Digital Switch. Pick a time on Friday that suits you. It's a relaxed 20-minute video call, so we can get to know you.</p>
+    <p class="lead">Thanks for applying to Digital Switch. Pick a time on Monday that suits you. It's a relaxed 15 to 20-minute video call, so we can get to know you.</p>
     <div class="facts">
-      <div class="fact"><b>When</b><span>Friday 6 November, between 08:00 and 18:00 (SA time)</span></div>
+      <div class="fact"><b>When</b><span>Monday 9 November, between 08:00 and 18:00 (SA time)</span></div>
       <div class="fact"><b>Where</b><span>Google Meet. The link comes in your confirmation email.</span></div>
-      <div class="fact"><b>How long</b><span>About 20 minutes, including a short practice call</span></div>
+      <div class="fact"><b>How long</b><span>15 to 20 minutes, including a short practice call</span></div>
     </div>
     <h2>If you're selected</h2>
     <div class="next">
-      <p><b>Monday 9 November, 10:00–12:00:</b> sales training workshop, online</p>
-      <p><b>Tuesday 10 November, 10:00–12:00:</b> onboarding: your tools, your leads, how you get paid</p>
-      <p>Everyone hears back by Saturday 7 November at 12:00.</p>
+      <p><b>Tuesday 10 November, 10:00–13:00:</b> sales training workshop and onboarding, online: how we sell, your tools, your leads and how you get paid</p>
+      <p>Everyone hears back on Monday 9 November by 20:00.</p>
     </div>
   </section>
 
   <section class="card" aria-labelledby="bk">
     <form id="f" novalidate>
       <h2 id="bk">Choose a time</h2>
-      <p class="sub" id="dayline">Friday 6 November · each slot is 30 minutes</p>
+      <p class="sub" id="dayline">Monday 9 November · each slot is 20 minutes</p>
       <div class="slots" id="slots" role="group" aria-label="Interview times"><div class="loading">Loading times…</div></div>
       <details id="none"><summary>None of these times work for me</summary>
-        <label for="other">When are you free on Friday? <small>(we'll email you a time)</small></label>
+        <label for="other">When are you free on Monday? <small>(we'll email you a time)</small></label>
         <input id="other" name="other" maxlength="200" placeholder="e.g. after 18:00, or 07:30">
       </details>
 
@@ -127,12 +126,12 @@ footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid 
 (function(){
 var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
 var $=function(i){return document.getElementById(i)}, t0=Date.now(), chosen='';
-var DAYNAME={'2026-11-06':'Friday 6 November'};
+var DAYNAME={'2026-11-06':'Friday 6 November','2026-11-09':'Monday 9 November'};
 function msg(t,err){$('msg').textContent=t;$('msg').className='msg'+(err?' err':'')}
 function draw(j){
   var box=$('slots'); box.innerHTML='';
   if(j.closed){box.innerHTML='<div class="loading">Bookings are closed. Please email hello@digitalswitch.co.za.</div>';$('go').disabled=true;return}
-  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day]+' · each slot is 30 minutes';
+  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day]+' · each slot is 20 minutes';
   var free=0;
   j.slots.forEach(function(s){
     var b=document.createElement('button'); b.type='button'; b.className='slot'; b.textContent=s;
