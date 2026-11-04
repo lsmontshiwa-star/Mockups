@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>DS Reps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Lethabo's view of every rep. Alerts on top (yeses waiting, ready to pay), then one card per rep with this week's activity, pipeline and airtime earned, then add-a-rep. Neon route, dark only. */
+:root{--night:#071719;--panel:#0b2124;--card:#0d2629;--street:#123336;--river:#1b4a4d;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;--ok:#7ee0b0;--warm:#ffd27a;--no:#ff9a9a;
+--display:'Unbounded',system-ui,sans-serif;--script:'Ballet',cursive;--body:'Inter Tight',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:16px;line-height:1.5}
+a{color:var(--lilac)} button{font:inherit;cursor:pointer}
+.wrap{max-width:880px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 80px max(16px,env(safe-area-inset-left,0px))}
+h1{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(28px,6vw,40px);letter-spacing:-.04em}
+h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.5em;line-height:.6;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
+h2{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin:28px 0 10px}
+.sub{color:var(--sage);margin:6px 0 0}
+.alert{border:1px solid var(--no);background:rgba(255,154,154,.06);border-radius:14px;padding:12px 14px;margin:8px 0}
+.alert.pay{border-color:var(--ok);background:rgba(126,224,176,.07)}
+.alert b{display:block}
+.alert span{color:var(--mist);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.rep{background:var(--card);border:1px solid var(--river);border-radius:16px;padding:14px}
+.rep.off{opacity:.55}
+.rep h3{margin:0;font-size:18px;font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.rep h3 small{font-family:var(--mono);font-size:11px;color:var(--dim);font-weight:400}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+.nums div{text-align:center;background:var(--panel);border-radius:10px;padding:8px 2px}
+.nums b{display:block;font-family:var(--display);font-weight:200;font-size:20px;color:var(--lilac)}
+.nums span{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.line{font-size:14px;color:var(--mist);margin:4px 0}
+.line.late{color:var(--no)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{display:inline-flex;align-items:center;min-height:40px;padding:8px 14px;border-radius:10px;border:1px solid var(--river);background:var(--panel);color:var(--mint);text-decoration:none;font-size:14px}
+.btn.main{background:var(--lilac);color:var(--night);border-color:var(--lilac);font-weight:600;box-shadow:0 0 16px rgba(155,123,255,.4)}
+.btn.no{color:var(--no);border-color:rgba(255,154,154,.4)}
+.add{background:var(--panel);border:1px solid var(--lilac);border-radius:16px;padding:14px;box-shadow:0 0 22px rgba(155,123,255,.15)}
+.add form{display:flex;gap:8px;flex-wrap:wrap}
+input{flex:1;min-width:180px;font:inherit;color:var(--mint);background:var(--night);border:1px solid var(--river);border-radius:10px;padding:10px 12px}
+.out{margin-top:10px;font-size:14px;color:var(--mist);overflow-wrap:anywhere}
+.empty{color:var(--sage)}
+.gate{color:var(--sage);margin-top:20px}
+.status{color:var(--dim);font-family:var(--mono);font-size:12px;margin-top:24px}
+</style></head><body>
+<div class="wrap">
+  <h1>Your <em>reps</em></h1>
+  <p class="sub" id="sub">Everyone's week at a glance. You only step in when a yes is waiting or someone is ready to pay.</p>
+  <div id="gate" class="gate" hidden>Open this page once with your desk link (…/desk/reps/?k=your DESK_KEY), or open the local desk on this device first.</div>
+  <div id="app" hidden>
+    <h2>Needs you</h2><div id="alerts"></div>
+    <h2>Reps this week</h2><div class="grid" id="reps"></div>
+    <h2>Add a rep</h2>
+    <div class="add"><form id="addf"><input id="rname" placeholder="Rep's full name" autocomplete="off" required><button class="btn main" type="submit">Create their desk link</button></form>
+      <div class="out" id="addout">Creates their private desk link. Send it to them on WhatsApp; they open it once on their phone. New leads are handed to them automatically, 30 at a time.</div></div>
+    <p class="status" id="st"></p>
+  </div>
+</div>
+<script>
+(function(){
+var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
+var $=function(q){return document.querySelector(q)};
+function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+var KEY='',m=location.search.match(/[?&]k=([^&]+)/);
+try{if(m){localStorage.setItem('ds-desk-key',decodeURIComponent(m[1]));history.replaceState(null,'',location.pathname)}KEY=localStorage.getItem('ds-desk-key')||''}catch(e){if(m)KEY=decodeURIComponent(m[1])}
+function ago(t){if(!t)return 'not active yet';var h=(Date.now()-t)/3600000;return h<1?'active in the last hour':h<24?'active '+Math.floor(h)+'h ago':'active '+Math.floor(h/24)+'d ago'}
+function render(j){
+  var al=[];
+  j.reps.forEach(function(r){
+    r.waiting.forEach(function(w){if(w.late)al.push('<div class="alert"><b>Yes waiting '+w.hours+'h: '+esc(w.name)+'</b><span>'+esc(r.name)+' hasn\'t sent their site yet. Give them a nudge.</span></div>')});
+    if(r.pay)al.push('<div class="alert pay"><b>'+r.pay+' ready to pay, closed by '+esc(r.name)+'</b><span>Send the invoice with the payment details from hello@. You also got an email. When it clears, add them to Clients with "Setup paid".</span></div>');
+  });
+  $('#alerts').innerHTML=al.length?al.join(''):'<p class="empty">Nothing waiting on you.</p>';
+  $('#reps').innerHTML=j.reps.length?j.reps.map(function(r){
+    var late=r.waiting.filter(function(w){return w.late}).length;
+    return '<div class="rep'+(r.active?'':' off')+'"><h3>'+esc(r.name)+'<small>'+(r.active?ago(r.last):'removed')+'</small></h3>'+
+      '<div class="nums"><div><b>'+r.week+'</b><span>Actions</span></div><div><b>'+r.yes+'</b><span>Yes now</span></div><div><b>'+(r.sent+r.interested)+'</b><span>Deals</span></div><div><b>'+r.sold+'</b><span>Sold</span></div></div>'+
+      '<p class="line">'+r.held+' untouched leads on their list · '+r.asked+' asked on WhatsApp</p>'+
+      (late?'<p class="line late">'+late+' yes'+(late>1?'es':'')+' waiting over an hour</p>':'')+
+      (j.cfg.on?'<p class="line">Airtime earned this week: <b>R'+r.airtime+'</b> (R'+j.cfg.rand+' per '+j.cfg.every+' actions; next at '+r.nextAt+')</p>':'')+
+      (r.active?'<div class="tools"><button class="btn" data-copy="'+esc(r.link)+'">Copy desk link</button><button class="btn no" data-rm="'+r.n+'" data-nm="'+esc(r.name)+'">Remove</button></div>':'')+'</div>'}).join(''):'<p class="empty">No reps yet. Add one below.</p>';
+  $('#st').textContent=j.pool+' untouched businesses in the pool waiting for a rep · updated '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+function load(){
+  fetch(EP+'?reps=1&key='+encodeURIComponent(KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
+    if(!j.ok){$('#gate').hidden=false;$('#app').hidden=true;return}
+    $('#app').hidden=false;$('#gate').hidden=true;render(j)}).catch(function(){$('#st').textContent='No connection. Retrying…'});
+}
+function post(data){var b=new URLSearchParams();b.set('kind','repadd');b.set('key',KEY);Object.keys(data).forEach(function(k){b.set(k,data[k])});return fetch(EP,{method:'POST',body:b}).then(function(r){return r.json()})}
+$('#addf').addEventListener('submit',function(e){e.preventDefault();var n=$('#rname').value.trim();if(!n)return;$('#addout').textContent='Creating…';
+  post({op:'add',name:n}).then(function(j){if(!j.ok){$('#addout').textContent=j.error==='full'?'All 20 rep slots are in use.':'That didn\'t work. Try again.';return}
+    var msg='Hi '+n.split(' ')[0]+', welcome to Digital Switch. This is your own rep desk: '+j.link+' Open it once on your phone and keep it. Your businesses, messages and follow-ups are all there.';
+    $('#addout').innerHTML='Done. Their desk link: <a href="'+esc(j.link)+'">'+esc(j.link)+'</a><br><a class="btn main" style="margin-top:8px" href="https://wa.me/?text='+encodeURIComponent(msg)+'" target="_blank" rel="noopener">Send it on WhatsApp</a>';
+    $('#rname').value='';load()}).catch(function(){$('#addout').textContent='No connection. Try again.'})});
+document.addEventListener('click',function(e){
+  var c=e.target.closest('[data-copy]');if(c){try{navigator.clipboard.writeText(c.dataset.copy);c.textContent='Copied'}catch(x){prompt('Copy this link',c.dataset.copy)}return}
+  var r=e.target.closest('[data-rm]');if(r){if(!confirm('Remove '+r.dataset.nm+'? Their link stops working and their untouched leads go back to the pool.'))return;
+    post({op:'remove',n:r.dataset.rm}).then(load)}
+});
+if(!KEY){$('#gate').hidden=false}else{load();setInterval(load,120000)}
+})();
+</script>
+</body></html>

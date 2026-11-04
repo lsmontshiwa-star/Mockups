@@ -1,13 +1,13 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>DS Caller Desk</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>DS Rep Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one phone-width column. Script on top, then the caller's own list of businesses; each card opens into big outcome buttons. Neon route brand, dark only. */
+/* Layout: one phone-width column. Rep's week + script on top, then 4 lists: Messages (WhatsApps due now), To call, Deals (closing kit), Done. Each card opens into one-tap actions. Neon route brand, dark only. */
 :root{
   --night:#071719;--panel:#0b2124;--card:#0d2629;--street:#123336;--river:#1b4a4d;--deep:#164043;
   --lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;
-  --ok:#7ee0b0;--warm:#ffd27a;--no:#ff9a9a;
+  --ok:#7ee0b0;--warm:#ffd27a;--no:#ff9a9a;--wa:#25d366;
   --display:'Unbounded',system-ui,sans-serif;--script:'Ballet','Snell Roundhand',cursive;--body:'Inter Tight',system-ui,-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
   color-scheme:dark}
 *{box-sizing:border-box}
@@ -19,38 +19,52 @@ button{font:inherit;color:inherit;cursor:pointer}
 h1{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(26px,7vw,36px);letter-spacing:-.04em;line-height:1.15}
 h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.5em;line-height:.6;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
 .sub{color:var(--sage);margin:8px 0 16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.stats div{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 6px;text-align:center}
-.stats b{display:block;font-family:var(--display);font-weight:200;font-size:26px;color:var(--lilac);font-variant-numeric:tabular-nums}
-.stats span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.stats div{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 4px;text-align:center}
+.stats b{display:block;font-family:var(--display);font-weight:200;font-size:24px;color:var(--lilac);font-variant-numeric:tabular-nums}
+.stats span{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.air{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 14px;margin-bottom:12px;font-size:14px;color:var(--mist)}
+.bar{height:6px;border-radius:99px;background:var(--street);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--lilac);box-shadow:0 0 10px var(--glow)}
 details.script{background:var(--panel);border:1px solid var(--lilac);border-radius:16px;padding:4px 14px;margin-bottom:16px;box-shadow:0 0 22px rgba(155,123,255,.18)}
 details.script summary{cursor:pointer;padding:10px 0;font-weight:600;list-style:none}
 details.script summary::after{content:" ▾";color:var(--lilac)}
 .say{background:var(--night);border-left:3px solid var(--lilac);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:16px}
 .tip{color:var(--sage);font-size:14px;margin:4px 0 10px}
-.tabs{display:flex;gap:6px;margin-bottom:12px}
-.tabs button{background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:8px 14px;font-size:14px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.tabs button{background:transparent;border:1px solid var(--river);color:var(--mist);border-radius:999px;padding:8px 4px;font-size:13.5px;white-space:nowrap}
 .tabs button[aria-pressed="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
-.tabs i{font-style:normal;font-family:var(--mono);font-size:11px;margin-left:4px;opacity:.75}
+.tabs i{font-style:normal;font-family:var(--mono);font-size:11px;margin-left:3px;opacity:.75}
+.tabs .hot{color:var(--warm)}
 .card{background:var(--card);border:1px solid var(--river);border-radius:16px;margin:10px 0;overflow:hidden}
 .card.due{border-color:var(--warm)}
+.card.late{border-color:var(--no);box-shadow:0 0 16px rgba(255,154,154,.25)}
 .card.done{opacity:.65}
 .head{display:block;width:100%;text-align:left;background:none;border:0;padding:14px}
 .head h3{margin:0;font-size:17px;font-weight:600}
 .meta{color:var(--sage);font-size:14px;margin-top:2px}
 .badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--river);border-radius:999px;padding:2px 8px;margin-top:6px;color:var(--mist)}
-.badge.agreed{background:var(--ok);border-color:var(--ok);color:var(--night)}
+.badge.go{background:var(--ok);border-color:var(--ok);color:var(--night)}
 .badge.due{border-color:var(--warm);color:var(--warm)}
+.badge.late{border-color:var(--no);color:var(--no)}
 .body{padding:0 14px 16px;border-top:1px solid var(--street)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 16px;border-radius:12px;border:1px solid var(--river);background:var(--panel);color:var(--mint);text-decoration:none;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 16px;border-radius:12px;border:1px solid var(--river);background:var(--panel);color:var(--mint);text-decoration:none;font-weight:500}
 .btn.call{background:var(--lilac);color:var(--night);border-color:var(--lilac);font-weight:600;flex:1;box-shadow:0 0 18px rgba(155,123,255,.45)}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#04210f;font-weight:600;flex:1;box-shadow:0 0 18px rgba(37,211,102,.35)}
+.btn.sent{flex:1;border-color:var(--ok);color:var(--ok)}
+.msg{background:var(--night);border:1px solid var(--street);border-radius:12px;padding:10px 12px;font-size:15px;white-space:pre-wrap;color:var(--mist);margin:12px 0 0}
+.step{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac);margin-top:14px}
 .num{font-family:var(--mono);font-size:18px;letter-spacing:.04em}
 .outs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
 .outs button{min-height:52px;border-radius:12px;border:1px solid var(--river);background:var(--panel);color:var(--mint);font-weight:500;padding:8px}
 .outs button.big{grid-column:1/-1;background:#123a2b;border-color:var(--ok);font-weight:600}
 .outs button[aria-pressed="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac)}
 .outs button.big[aria-pressed="true"]{background:var(--ok);color:var(--night)}
+.kit{background:var(--panel);border:1px solid var(--river);border-radius:12px;padding:4px 12px;margin:12px 0}
+.kit summary{cursor:pointer;padding:10px 0;font-weight:600}
+.kit p{margin:6px 0 10px;font-size:14.5px;color:var(--mist)}
+.kit b{color:var(--mint)}
 label{display:block;font-size:14px;color:var(--sage);margin:10px 0 4px}
 input,textarea{width:100%;font:inherit;color:var(--mint);background:var(--night);border:1px solid var(--river);border-radius:10px;padding:10px 12px}
 textarea{min-height:70px;resize:vertical}
@@ -58,34 +72,40 @@ textarea{min-height:70px;resize:vertical}
 .save:disabled{opacity:.4}
 .empty{color:var(--sage);text-align:center;padding:30px 10px}
 .status{position:fixed;left:0;right:0;bottom:0;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:var(--panel);border-top:1px solid var(--river);font-size:14px;color:var(--mist);text-align:center}
-.toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:var(--lilac);color:var(--night);padding:10px 16px;border-radius:999px;font-weight:600;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:var(--lilac);color:var(--night);padding:10px 16px;border-radius:999px;font-weight:600;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center}
 .toast.show{opacity:1}
+@media (max-width:380px){.tabs button{font-size:12.5px}.stats b{font-size:20px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <div class="wrap">
-  <h1>Caller <em>desk</em></h1>
-  <p class="sub" id="hello">Digital Switch · local calls</p>
+  <h1>Rep <em>desk</em></h1>
+  <p class="sub" id="hello">Digital Switch · Websites that move</p>
 
   <div id="gate" hidden>
     <p class="sub">This desk needs your personal link from Lethabo. Open that link once on this phone and you're in.</p>
   </div>
 
   <div id="app" hidden>
-    <div class="stats"><div><b id="sCalls">0</b><span>Calls today</span></div><div><b id="sAgreed">0</b><span>Agreed today</span></div><div><b id="sLeft">0</b><span>Left to call</span></div></div>
+    <div class="stats"><div><b id="sToday">0</b><span>Today</span></div><div><b id="sWeek">0</b><span>This week</span></div><div><b id="sYes">0</b><span>Yeses</span></div><div><b id="sDeals">0</b><span>Deals</span></div></div>
+    <div class="air" id="air" hidden></div>
 
-    <details class="script" open>
-      <summary>What to say</summary>
+    <details class="script">
+      <summary>How it works, and what to say</summary>
+      <p class="tip"><b>Your flow:</b> 1) Send the WhatsApp in <b>Messages</b> ("may we send you a preview?"). 2) No reply in a day? It moves to <b>To call</b>. 3) A yes, on WhatsApp or the phone, means you send their site straight away from <b>Messages</b>. 4) Follow up on day 2, 5 and 9 (the desk reminds you). 5) Close it from <b>Deals</b>, then tap <b>Ready to pay</b>. Lethabo sends the invoice and the site goes live.</p>
+      <p class="tip">Every WhatsApp opens on <b>your</b> phone with the message already written. Check it, press send, then tap <b>I sent it</b> here.</p>
       <div class="say">1. Hi, is this <b>[business name]</b>?</div>
       <p class="tip">Wait for them to answer. Wrong business? Say sorry, tap <b>Wrong number</b>.</p>
-      <div class="say">2. My name is <b class="nm">[your name]</b>, I'm calling from Digital Switch, a web design studio in Joburg. We found you on Google.</div>
+      <div class="say">2. My name is <b class="nm">[your name]</b>, I'm calling from Digital Switch. We design websites for businesses, and we found you on Google.</div>
       <p class="tip">Pause. Let them answer.</p>
-      <div class="say">3. We actually built a free website for <b>[business name]</b>. Can we send it to you on WhatsApp so you can have a look?</div>
-      <p class="tip">If yes: "Is this the best WhatsApp number?" Then: "Thank you! You'll get it on WhatsApp shortly." Tap <b>Agreed to see it</b>.</p>
-      <p class="tip"><b>"How much is it?"</b> "Have a look first. The price comes with the link, and there's no obligation."<br><b>"Who are you?"</b> "Digital Switch, a web design studio in Joburg. You can see our work at digitalswitch.co.za."<br><b>"Not interested"</b> Thank them and end politely. Never push.</p>
+      <div class="say">3. We've built a preview of a website for <b>[business name]</b>. Can I send it to you on WhatsApp so you can have a look?</div>
+      <p class="tip">If yes: "Is this the best WhatsApp number?" Tap <b>Said yes</b>, then send the site from <b>Messages</b> right after the call.</p>
+      <p class="tip"><b>"How much is it?"</b> "Have a look first. If you like it, I'll send you a quote. There's no obligation."<br><b>"Who are you?"</b> "Digital Switch. We design websites. You can see our work at digitalswitch.co.za."<br><b>"Not interested"</b> Thank them and end politely. Never push.</p>
     </details>
 
     <div class="tabs" role="group" aria-label="Which list">
-      <button data-v="todo" aria-pressed="true">To call<i id="nTodo">0</i></button>
+      <button data-v="msg" aria-pressed="true">Messages<i id="nMsg">0</i></button>
+      <button data-v="call" aria-pressed="false">To call<i id="nCall">0</i></button>
+      <button data-v="deal" aria-pressed="false">Deals<i id="nDeal">0</i></button>
       <button data-v="done" aria-pressed="false">Done<i id="nDone">0</i></button>
     </div>
     <div id="list"><div class="empty">Loading your list…</div></div>
@@ -96,73 +116,163 @@ textarea{min-height:70px;resize:vertical}
 <script>
 (function(){
 var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
-var OUT=[['agreed','Agreed to see it: send on WhatsApp',1],['noanswer','No answer'],['callback','Call back later'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't call again"]];
-var LABEL={}; OUT.forEach(function(o){LABEL[o[0]]=o[1]});
-var DONE={agreed:1,notnow:1,wrong:1,dnc:1};
+// Outcomes a rep can log. [code, label, big]
+var CALL_OUT=[['agreed','Said yes: send their site',1],['noanswer','No answer'],['callback','Call back later'],['notnow','Not interested'],['notwa','Not on WhatsApp'],['wrong','Wrong number'],['dnc',"Don't contact again"]];
+var REPLY_OUT=[['agreed','They said yes on WhatsApp',1],['noreply','No reply: call them'],['notnow','They said no'],['dnc',"Don't contact again"]];
+var SENT_OUT=[['interested','They replied: interested',1],['callback','Call back later'],['notnow','They said no'],['dnc',"Don't contact again"]];
+var DEAL_OUT=[['pay','Ready to pay: tell Lethabo',1],['interested','Interested, still deciding'],['callback','Call back later'],['notnow','Not now / said no']];
+var LABEL={agreed:'Said yes',asked:'Asked on WhatsApp',sent:'Site sent',interested:'Interested',pay:'Ready to pay',sold:'Sold',noanswer:'No answer',callback:'Call back',notnow:'Not interested',notwa:'Not on WhatsApp',wrong:'Wrong number',dnc:"Don't contact",noreply:'No WhatsApp reply'};
+var DONE={notnow:1,wrong:1,dnc:1,sold:1,notwa:1};
+var DAY=86400000, FU=[2,5,9];
 var $=function(q){return document.querySelector(q)};
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('dsc-'+k);localStorage.setItem('dsc-'+k,v)}catch(e){return null}}
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
-function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('show')},1700)}
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('show')},2200)}
 
 var KEY=''; var m=location.search.match(/[?&]k=([^&]+)/);
 if(m){ls('key',decodeURIComponent(m[1]));history.replaceState(null,'',location.pathname)}
 KEY=ls('key')||'';
-var LEADS=[], state={}, ME='', view='todo', open='', draft={};
+var LEADS=[], state={}, ME='', CFG={}, view='msg', open='', draft={};
 var queue=[]; try{queue=JSON.parse(ls('queue')||'[]')}catch(e){}
 try{state=JSON.parse(ls('state')||'{}')}catch(e){}
 
 function today(ts){return ts&&new Date(ts).toDateString()===new Date().toDateString()}
+function weekStart(){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getTime()}
 function stOf(l){return state[l.id]||{}}
+function first(n){return String(n||'').split(' ')[0]}
 function isDue(s){return s.status==='callback'&&s.callback&&new Date(s.callback).getTime()<=Date.now()+30*60000}
-function isTodo(l){var s=stOf(l);if(DONE[s.status])return false;if(s.status==='noanswer'&&(s.attempts||0)>=3)return false;if(s.status==='callback'&&!isDue(s))return false;return true}
+function waNum(l){var s=stOf(l),w=String(s.wa||'').replace(/\D/g,'');if(w.length>=9)return w.charAt(0)==='0'?'27'+w.slice(1):w;return l.num||''}
+function canWa(l){var s=stOf(l);return !!(String(s.wa||'').replace(/\D/g,'').length>=9||l.mobile)}
+function quoteUrl(l){var mm=String(l.site||'').match(/\/local\/za-([^/]+)\//);return mm?'https://digitalswitch.co.za/offer-za/'+mm[1]+'/':''}
+
+// What the rep should send next on WhatsApp for this lead, or null.
+function nextMsg(l){
+  var s=stOf(l), st=s.status||'', now=Date.now();
+  if(DONE[st]||st==='pay')return null;
+  if(st==='agreed')return {k:'site',late:now-(s.lastAt||now)>3600000};
+  if(st==='sent'){var n=s.fu||0;if(n<3&&now-(s.sentAt||s.lastAt||now)>=FU[n]*DAY)return {k:'fu'+(n+1)};return null}
+  if(st==='asked'&&now-(s.lastAt||now)<DAY)return {k:'wait'};
+  if(!st&&canWa(l))return {k:'ask'};
+  return null;
+}
+function inCall(l){
+  var s=stOf(l), st=s.status||'';
+  if(DONE[st]||st==='pay'||st==='agreed'||st==='sent'||st==='interested')return false;
+  if(st==='callback')return isDue(s);
+  if(st==='noanswer')return (s.attempts||0)<3;
+  if(st==='asked')return Date.now()-(s.lastAt||0)>=DAY;      // no WhatsApp reply in a day: call them
+  if(st==='noreply')return true;
+  if(!st)return !canWa(l);                                   // landline: call first
+  return false;
+}
+function inDeal(l){var st=stOf(l).status;return st==='sent'||st==='interested'||st==='pay'}
+function isDone(l){var s=stOf(l);return !!DONE[s.status]||(s.status==='noanswer'&&(s.attempts||0)>=3)}
+
+function text(k,l){
+  var s=stOf(l), nm=l.name, hi=s.spoke?'Hi '+first(s.spoke):'Hi', me=ME?first(ME):'', sig=me?'\n\n'+me+', Digital Switch':'\n\nDigital Switch';
+  if(k==='ask')return 'Hi, is this '+nm+'? My name is '+(me||'[name]')+' from Digital Switch. We design websites for businesses, and we\'ve built a preview of a website for '+nm+'. May I send you the link so you can have a look? There\'s no obligation.\n\nReply STOP and we won\'t message you again.';
+  if(k==='site')return hi+', as promised, here is the website preview we built for '+nm+':\n'+l.site+'\n\nOpen it on your phone and tap the buttons. If you like it, I\'ll send you a quote to make it live on your own web address.'+sig;
+  if(k==='fu1')return hi+', did you get a chance to look at the website for '+nm+'?\n'+l.site+'\n\nHappy to change anything: colours, photos or wording.'+sig;
+  if(k==='fu2')return hi+', just checking in on the website preview for '+nm+':\n'+l.site+'\n\nShall I send you a quote to make it live?'+sig;
+  if(k==='fu3')return hi+', this is my last message about the website for '+nm+':\n'+l.site+'\n\nIf now isn\'t the right time, no problem. Reply any time if you\'d like it live.'+sig;
+  if(k==='quote')return hi+', here is your quote for the '+nm+' website:\n'+quoteUrl(l)+'\n\nOnce you\'re happy, I\'ll let the team know and they\'ll send the payment details. Your site goes live within 24 hours of payment.'+sig;
+  return '';
+}
+var MSGNAME={wait:'Waiting for their reply',ask:'Ask to send their preview',site:'Send their site now',fu1:'Follow-up 1 (day 2)',fu2:'Follow-up 2 (day 5)',fu3:'Last follow-up (day 9)'};
 
 function render(){
-  var calls=0,agreed=0;
-  // Count every call logged today on this phone, including businesses later taken off the list (e.g. parked because they already have a website)
-  Object.keys(state).forEach(function(id){(state[id].log||[]).forEach(function(e){if(today(e.at)){calls++;if(e.o==='agreed')agreed++}})});
-  var todo=LEADS.filter(isTodo), done=LEADS.filter(function(l){return !isTodo(l)});
-  todo.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.attempts||0)-(sb.attempts||0)||(sa.lastAt||0)-(sb.lastAt||0)});
+  var nT=0,nW=0,ws=weekStart(),yes=0;
+  Object.keys(state).forEach(function(id){(state[id].log||[]).forEach(function(e){if(today(e.at))nT++;if(e.at>=ws)nW++;if(e.at>=ws&&e.o==='agreed')yes++})});
+  var msg=LEADS.filter(nextMsg), call=LEADS.filter(inCall), deal=LEADS.filter(inDeal), done=LEADS.filter(isDone);
+  var pri={site:0,fu1:2,fu2:2,fu3:2,ask:3,wait:4};
+  msg.sort(function(a,b){var x=nextMsg(a),y=nextMsg(b);return pri[x.k]-pri[y.k]||(a.pri||3)-(b.pri||3)});
+  call.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.attempts||0)-(sb.attempts||0)});
+  deal.sort(function(a,b){var o={pay:0,interested:1,sent:2};return o[stOf(a).status]-o[stOf(b).status]});
   done.sort(function(a,b){return (stOf(b).lastAt||0)-(stOf(a).lastAt||0)});
-  $('#sCalls').textContent=calls;$('#sAgreed').textContent=agreed;$('#sLeft').textContent=todo.length;
-  $('#nTodo').textContent=todo.length;$('#nDone').textContent=done.length;
-  var list=view==='todo'?todo:done;
-  $('#list').innerHTML=list.length?list.map(card).join(''):'<div class="empty">'+(view==='todo'?'Nothing left to call right now. Lethabo adds more businesses to your list automatically.':'Nothing logged yet.')+'</div>';
+  $('#sToday').textContent=nT;$('#sWeek').textContent=nW;$('#sYes').textContent=yes;$('#sDeals').textContent=deal.length;
+  $('#nMsg').textContent=msg.length;$('#nCall').textContent=call.length;$('#nDeal').textContent=deal.length;$('#nDone').textContent=done.length;
+  var waiting=msg.filter(function(l){return nextMsg(l).k==='site'}).length; $('#nMsg').className=waiting?'hot':'';
+  if(CFG.airOn){var ev=CFG.airEvery||30,got=Math.floor(nW/ev)*(CFG.airRand||0),left=ev-(nW%ev);
+    $('#air').hidden=false;$('#air').innerHTML='Airtime this week: <b>R'+got+'</b> earned · '+left+' more messages or calls for the next R'+(CFG.airRand||0)+'<div class="bar"><i style="width:'+Math.round((nW%ev)/ev*100)+'%"></i></div>'}
+  var list={msg:msg,call:call,deal:deal,done:done}[view];
+  var empty={msg:'No messages due right now. New businesses arrive on your list automatically.',call:'Nobody to call right now.',deal:'No deals yet. They appear here once a site is sent.',done:'Nothing finished yet.'}[view];
+  $('#list').innerHTML=list.length?list.map(card).join(''):'<div class="empty">'+empty+'</div>';
   document.querySelectorAll('.nm').forEach(function(e){e.textContent=ME||'[your name]'});
 }
-function phoneShow(n){return n.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
+function phoneShow(n){return String(n||'').replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
 function card(l){
-  var s=stOf(l), isOpen=open===l.id, due=isDue(s);
-  var b=s.status?'<span class="badge '+(s.status==='agreed'?'agreed':due?'due':'')+'">'+esc(due?'Call back now':LABEL[s.status]||s.status)+'</span>':'';
-  return '<article class="card'+(due?' due':'')+(DONE[s.status]?' done':'')+'" data-id="'+esc(l.id)+'"><button class="head" data-open aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="meta">'+esc(l.area||'')+' · '+phoneShow(l.num||'')+((s.attempts||0)?' · tried '+s.attempts+'×':'')+'</div>'+b+'</button>'+(isOpen?body(l):'')+'</article>';
+  var s=stOf(l), isOpen=open===l.id, nx=nextMsg(l), due=isDue(s), b='', cls='';
+  if(view==='msg'&&nx){b='<span class="badge '+(nx.k==='site'?(nx.late?'late':'go'):'')+'">'+esc(MSGNAME[nx.k])+(nx.late?': waiting over an hour':'')+'</span>';if(nx.late)cls=' late'}
+  else if(s.status){b='<span class="badge '+(due?'due':s.status==='pay'?'go':'')+'">'+esc(due?'Call back now':s.status==='asked'?'No WhatsApp reply: call':LABEL[s.status]||s.status)+'</span>';if(due)cls=' due'}
+  if(view==='done')cls+=' done';
+  return '<article class="card'+cls+'" data-id="'+esc(l.id)+'"><button class="head" data-open aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="meta">'+esc(l.area||'')+' · '+phoneShow(l.num)+((s.attempts||0)?' · tried '+s.attempts+'×':'')+(s.fu?' · '+s.fu+' follow-up'+(s.fu>1?'s':''):'')+'</div>'+b+'</button>'+(isOpen?body(l,nx):'')+'</article>';
 }
-function body(l){
-  var s=stOf(l), d=draft[l.id]||(draft[l.id]={o:'',spoke:s.spoke||'',wa:s.wa||'',cb:'',n:''});
-  return '<div class="body"><div class="row"><span class="num">'+phoneShow(l.num||'')+'</span><a class="btn call" href="tel:+'+esc(l.num)+'">Call</a></div>'+
-    (l.site?'<div class="row"><a class="btn" href="'+esc(l.site)+'" target="_blank" rel="noopener">See the site we built ↗</a></div>':'')+
-    '<div class="outs">'+OUT.map(function(o){return '<button class="'+(o[2]?'big':'')+'" data-o="'+o[0]+'" aria-pressed="'+(d.o===o[0])+'">'+o[1]+'</button>'}).join('')+'</div>'+
+function outs(list,d){return '<div class="outs">'+list.map(function(o){return '<button class="'+(o[2]?'big':'')+'" data-o="'+o[0]+'" aria-pressed="'+(d.o===o[0])+'">'+o[1]+'</button>'}).join('')+'</div>'}
+function body(l,nx){
+  var s=stOf(l), d=draft[l.id]||(draft[l.id]={o:'',spoke:s.spoke||'',wa:s.wa||'',cb:'',n:''}), h='<div class="body">';
+  if(view==='msg'&&nx&&nx.k==='wait'){h+='<p class="tip">You asked on WhatsApp. When they reply, log it below. No reply by tomorrow and they move to To call.</p>'}
+  else if(view==='msg'&&nx){
+    var t=text(nx.k,l);
+    h+='<div class="step">'+esc(MSGNAME[nx.k])+'</div><div class="msg">'+esc(t)+'</div>'+
+      '<div class="row"><a class="btn wa" data-wa href="https://wa.me/'+esc(waNum(l))+'?text='+encodeURIComponent(t)+'" target="_blank" rel="noopener">Open WhatsApp</a><button class="btn sent" data-sent="'+nx.k+'">I sent it ✓</button></div>';
+    if(nx.k==='site'&&!l.site)h+='<p class="tip">This business has no site link yet. Tell Lethabo.</p>';
+    if(nx.k==='ask')h+='<p class="tip">Prefer to call first? Just call, then log what happened below.</p>';
+  }
+  h+='<div class="row"><span class="num">'+phoneShow(l.num)+'</span><a class="btn call" href="tel:+'+esc(l.num)+'">Call</a>'+(canWa(l)?'<a class="btn" href="https://wa.me/'+esc(waNum(l))+'" target="_blank" rel="noopener">Chat</a>':'')+'</div>';
+  if(l.site)h+='<div class="row"><a class="btn" href="'+esc(l.site)+'" target="_blank" rel="noopener">Their site ↗</a>'+(view==='deal'&&quoteUrl(l)?'<a class="btn" href="'+esc(quoteUrl(l))+'" target="_blank" rel="noopener">Their quote ↗</a>':'')+'</div>';
+  if(view==='deal')h+=kit(l);
+  var list=view==='deal'?DEAL_OUT:(nx&&nx.k==='wait')?REPLY_OUT:(view==='msg'&&nx&&nx.k!=='ask')?SENT_OUT:(s.status==='asked'||s.status==='noreply')?[['agreed','Said yes: send their site',1]].concat(CALL_OUT.slice(1)):CALL_OUT;
+  h+='<div class="step">What happened?</div>'+outs(list,d)+
     (d.o==='callback'?'<label for="cb-'+esc(l.id)+'">When to call back</label><input type="datetime-local" id="cb-'+esc(l.id)+'" data-f="cb" value="'+esc(d.cb)+'">':'')+
-    (d.o==='agreed'?'<label for="wa-'+esc(l.id)+'">WhatsApp number, if different from the one you called</label><input inputmode="tel" id="wa-'+esc(l.id)+'" data-f="wa" placeholder="e.g. 082 123 4567" value="'+esc(d.wa)+'">':'')+
+    (d.o==='agreed'?'<label for="wa-'+esc(l.id)+'">WhatsApp number, if different</label><input inputmode="tel" id="wa-'+esc(l.id)+'" data-f="wa" placeholder="e.g. 082 123 4567" value="'+esc(d.wa)+'">':'')+
     '<label for="sp-'+esc(l.id)+'">Who you spoke to</label><input id="sp-'+esc(l.id)+'" data-f="spoke" placeholder="Name, if they gave it" value="'+esc(d.spoke)+'">'+
-    '<label for="n-'+esc(l.id)+'">Notes</label><textarea id="n-'+esc(l.id)+'" data-f="n" placeholder="Anything Lethabo should know">'+esc(d.n)+'</textarea>'+
+    '<label for="n-'+esc(l.id)+'">Notes</label><textarea id="n-'+esc(l.id)+'" data-f="n" placeholder="What they said, what they want changed">'+esc(d.n)+'</textarea>'+
     '<button class="save" data-save'+(d.o?'':' disabled')+'>Save</button></div>';
+  return h;
+}
+function kit(l){
+  var q=quoteUrl(l), t=text('quote',l);
+  return '<details class="kit"><summary>Closing kit</summary>'+
+    (q?'<p><b>Send the quote</b></p><div class="row"><a class="btn wa" href="https://wa.me/'+esc(waNum(l))+'?text='+encodeURIComponent(t)+'" target="_blank" rel="noopener">Send quote on WhatsApp</a></div>':'')+
+    '<p><b>Price:</b> R'+(CFG.setup||2999).toLocaleString('en-ZA')+' once, then R'+(CFG.monthly||199)+' a month. No contract. Live within 24 hours of payment.</p>'+
+    '<p><b>"I\'m already on Google Maps / Facebook."</b> "That\'s great, it\'s how we found you. A website is where those people land: your work, your services, and one tap to call or WhatsApp you. It also helps you show up when people search your name."</p>'+
+    '<p><b>"It\'s too expensive."</b> "It\'s a once-off setup and then a small monthly fee that covers hosting, changes and keeping it online. One extra job usually pays for it."</p>'+
+    '<p><b>"Let me think about it."</b> "Of course. What\'s the main thing you\'d want to be sure of?" Answer it, then agree a day to follow up and log a call-back.</p>'+
+    '<p><b>"Can you change something?"</b> "Yes, changes are included. Tell me what you\'d like and it\'s updated before it goes live." Put it in Notes.</p>'+
+    '<p><b>"How do I pay?"</b> "I\'ll mark you as ready now, and Digital Switch sends you the invoice with the payment details." Then tap <b>Ready to pay</b>.</p>'+
+    '<p><b>"Who are you?"</b> "Digital Switch. We design websites. You can see our work at digitalswitch.co.za."</p></details>';
 }
 
+function log(l,o,extra,msg){
+  var s=JSON.parse(JSON.stringify(stOf(l))), now=Date.now();
+  s.log=(s.log||[]).concat([{at:now,o:o,n:(extra&&extra.n)||'',i:'',t:[]}]); s.lastAt=now; s.name=l.name; s.by=ME;
+  Object.keys(extra||{}).forEach(function(k){if(k!=='n')s[k]=extra[k]});
+  state[l.id]=s; ls('state',JSON.stringify(state));
+  queue.push({id:l.id,s:s,e:{o:o,n:(extra&&extra.n)||'',at:now,i:'',t:[]}}); ls('queue',JSON.stringify(queue));
+  open=''; render(); toast(msg||'Saved'); flush();
+}
 document.addEventListener('click',function(e){
   var t=e.target;
-  var tab=t.closest('.tabs button'); if(tab){view=tab.dataset.v;document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===tab)});render();return}
+  var tab=t.closest('.tabs button'); if(tab){view=tab.dataset.v;open='';document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===tab)});render();return}
   var c=t.closest('.card'); if(!c)return; var id=c.dataset.id, l=LEADS.filter(function(x){return x.id===id})[0]; if(!l)return;
   if(t.closest('[data-open]')){open=open===id?'':id;render();return}
+  var sb=t.closest('[data-sent]'); if(sb){
+    var k=sb.dataset.sent, s=stOf(l);
+    if(k==='ask')log(l,'asked',{status:'asked'},'Logged. If they don\'t reply by tomorrow, they move to To call.');
+    else if(k==='site')log(l,'sent',{status:'sent',sentAt:Date.now(),fu:0,reached:true},'Site sent. Follow-ups will come up on day 2, 5 and 9.');
+    else log(l,'fu',{status:'sent',fu:(s.fu||0)+1},'Follow-up logged.');
+    return}
   var ob=t.closest('[data-o]'); if(ob){draft[id].o=ob.dataset.o;render();return}
   if(t.closest('[data-save]')){
     var d=draft[id]; if(!d.o)return;
     if(d.o==='callback'&&!d.cb){toast('Pick a call-back time');return}
-    var s=JSON.parse(JSON.stringify(stOf(l))), now=Date.now();
-    s.log=(s.log||[]).concat([{at:now,o:d.o,n:d.n,i:'',t:[]}]); s.attempts=(s.attempts||0)+1; s.lastAt=now; s.status=d.o; s.name=l.name;
-    if(d.o==='agreed'||d.o==='notnow'||d.o==='callback') s.reached=true;
-    s.callback=d.o==='callback'?d.cb:''; if(d.spoke)s.spoke=d.spoke; if(d.wa)s.wa=d.wa; if(d.n)s.note=d.n; s.by=ME;
-    state[id]=s; ls('state',JSON.stringify(state));
-    queue.push({id:id,s:s,e:{o:d.o,n:d.n,at:now,i:'',t:[]}}); ls('queue',JSON.stringify(queue));
-    delete draft[id]; open=''; render(); toast(d.o==='agreed'?'Saved. Lethabo will send it on WhatsApp':'Saved'); flush();
+    var s2=stOf(l), x={n:d.n,status:d.o==='noreply'?'noreply':d.o};
+    if(d.o==='noanswer')x.attempts=(s2.attempts||0)+1;
+    if(['agreed','notnow','callback','interested','pay'].indexOf(d.o)>-1)x.reached=true;
+    x.callback=d.o==='callback'?d.cb:''; if(d.spoke)x.spoke=d.spoke; if(d.wa)x.wa=d.wa; if(d.n)x.note=d.n;
+    delete draft[id];
+    log(l,d.o,x,d.o==='agreed'?'Saved. Now send their site: it\'s at the top of Messages.':d.o==='pay'?'Lethabo has been told. She sends the invoice.':'Saved');
+    if(d.o==='agreed'){view='msg';document.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v==='msg')});open=id;render()}
   }
 });
 document.addEventListener('input',function(e){var f=e.target.dataset&&e.target.dataset.f; if(!f)return; var id=e.target.closest('.card').dataset.id; draft[id][f]=e.target.value});
@@ -179,11 +289,12 @@ setInterval(flush,20000); window.addEventListener('online',flush);
 function load(){
   fetch(EP+'?desk=za&key='+encodeURIComponent(KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
     if(!j.ok){ if(j.error==='key'){ls('key','');$('#app').hidden=true;$('#gate').hidden=false;$('#sync').textContent='Not connected'} return }
-    ME=(j.who&&j.who.name)||''; $('#hello').textContent='Hi '+(ME||'there')+' · your own list of Joburg businesses. Nobody else calls these.';
+    ME=(j.who&&j.who.name)||''; CFG=j.cfg||{};
+    $('#hello').textContent='Hi '+(ME?first(ME):'there')+' · your own list of businesses. Nobody else contacts these.';
     LEADS=j.leads||[];
     Object.keys(j.state||{}).forEach(function(id){var srv=j.state[id], loc=state[id]; if(!loc||(srv.lastAt||0)>=(loc.lastAt||0))state[id]=srv});
     ls('state',JSON.stringify(state)); render(); syncLabel(); flush();
-  }).catch(function(){$('#sync').textContent='No connection. Calls you log are kept on this phone.'; render()});
+  }).catch(function(){$('#sync').textContent='No connection. What you log is kept on this phone.'; render()});
 }
 if(!KEY){$('#gate').hidden=false;$('#sync').textContent='Not connected'}
 else {$('#app').hidden=false; load(); setInterval(function(){if(!open)load()},5*60000)}
