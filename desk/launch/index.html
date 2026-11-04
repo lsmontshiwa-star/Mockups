@@ -133,7 +133,7 @@ details p{color:var(--mist);margin:0 0 12px}
       <a href="/brand/whatsapp/wa-cover.jpg" download="wa-cover.jpg"><img src="/brand/whatsapp/wa-cover.jpg" alt="Cover photo: the Digital Switch homepage"><span>Cover photo</span></a>
       <a href="/brand/whatsapp/wa-catalog-website.jpg" download="wa-catalog-website.jpg"><img src="/brand/whatsapp/wa-catalog-website.jpg" alt="Catalogue image: Your website, R2,999"><span>Catalogue: website</span></a>
       <a href="/brand/whatsapp/wa-catalog-care-plan.jpg" download="wa-catalog-care-plan.jpg"><img src="/brand/whatsapp/wa-catalog-care-plan.jpg" alt="Catalogue image: Monthly care, R199"><span>Catalogue: care plan</span></a>
-      <a href="/brand/whatsapp/wa-status-referral.jpg" download="wa-status-referral.jpg"><img src="/brand/whatsapp/wa-status-referral.jpg" alt="Status: Earn R750 for every client you bring"><span>Referral Status</span></a>
+      <a href="/brand/whatsapp/wa-status-referral.jpg" download="wa-status-referral.jpg"><img src="/brand/whatsapp/wa-status-referral.jpg" alt="Status: Earn R500 for every business you send that buys"><span>Referral Status</span></a>
     </div>
   </div>
 
@@ -248,7 +248,7 @@ details p{color:var(--mist);margin:0 0 12px}
   <div class="step" data-s="r1"><button class="chk" aria-label="Mark done"></button>
     <h3>Post the Status</h3>
     <p>Post the referral image on the DS WhatsApp Status <b>and</b> your personal one, with this caption:</p>
-    <div class="copy" data-copy><span class="k">Caption</span>Know a business that needs a website? Bring them to Digital Switch and earn R750 when they sign up. No limit. Reply "I'm in" and I'll send you everything. digitalswitch.co.za/refer</div>
+    <div class="copy" data-copy><span class="k">Caption</span>Know a business that needs a website? Send me its name. We follow up, and if they buy, you get R500. No limit. digitalswitch.co.za/refer</div>
     <div class="row"><a class="btn sm" href="/brand/whatsapp/wa-status-referral.jpg" download="wa-status-referral.jpg">Download the Status image</a></div>
   </div>
   <div class="step" data-s="r2"><button class="chk" aria-label="Mark done"></button>
@@ -313,16 +313,16 @@ var QUICK = [
  ['/pay','Great! Here\'s how to pay the R2,999 setup: [paste your payment link or bank details]. As soon as it clears, the 24-hour clock starts.'],
  ['/details','To finish your site, please send: 1) your logo, 2) a few photos of your work, 3) the services you offer, 4) the areas you cover, 5) your best number for calls. If you don\'t have some of these, no stress, we\'ll go live with what you have.'],
  ['/work','Here are some of the sites we\'ve built: digitalswitch.co.za'],
- ['/refer','Know another business that needs a website? Send them our way and earn R750 when they sign up: digitalswitch.co.za/refer']
+ ['/refer','Know another business that needs a website? Send us its name and earn R500 if they buy: digitalswitch.co.za/refer']
 ];
 $('#quick').innerHTML = QUICK.map(function(q){return '<div class="copy" data-copy><span class="k">Shortcut '+q[0]+'</span>'+q[1]+'</div>'}).join('');
 
 /* referral texts */
 function renderText(){
-  var m='Hey! It\'s '+me()+'. I\'ve started Digital Switch, we build animated websites for small businesses. I\'m running a referral programme: bring me a business that signs up and I pay you R750, with no limit on how many. Everything\'s here: https://digitalswitch.co.za/refer\n\nReply "I\'m in" and I\'ll send you what you need.';
+  var m='Hey! It\'s '+me()+'. I\'ve started Digital Switch, we build animated websites for small businesses. I\'m running a referral programme: send me the name of any business that needs a website. I follow up, and if they buy, I pay you R500, with no limit. Everything\'s here: https://digitalswitch.co.za/refer';
   $('#referMsg').innerHTML='<span class="k">Message</span>'+m.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   $('#referShare').href='https://wa.me/?text='+encodeURIComponent(m);
-  var p='Welcome aboard! Here\'s how it works:\n\n1. Find a business owner who needs a website.\n2. WhatsApp me their business name before you start, so it\'s registered to you.\n3. Show them our work (digitalswitch.co.za) and the price: R2,999 to set up, then R199 a month.\n4. When they\'re ready, connect us. I handle the rest.\n5. You get R750 once they\'ve paid in full.\n\nMessages you can send them, the price sheet and the rules are all here: https://digitalswitch.co.za/refer';
+  var p='Welcome aboard! Here\'s how it works:\n\n1. WhatsApp me the name and area of any business that needs a website (and their number if you have it).\n2. I contact them and show them a preview of their site.\n3. If they buy, you get R500 once their payment clears.\n\nNo selling needed and no limit. Details: https://digitalswitch.co.za/refer';
   $('#partnerMsg').innerHTML='<span class="k">Reply</span>'+p;
   $$('.nm').forEach(function(e){e.textContent=me()});
   $$('[data-copy]').forEach(addCopy);
@@ -402,7 +402,7 @@ renderLeads();
 
 /* ---------- referral partners ---------- */
 var partners={}; try{partners=JSON.parse(lsGet('ds-partners','{}'))}catch(e){}
-var PST=[['told','Told'],['in','I\'m in'],['briefed','Sent the details'],['lead','Brought a lead'],['paid','Paid R750']];
+var PST=[['told','Told'],['in','I\'m in'],['briefed','Sent the details'],['lead','Sent a business'],['paid','Paid R500']];
 function renderPartners(){
   var ids=Object.keys(partners).sort(function(a,b){return (partners[a].at||0)-(partners[b].at||0)});
   $('#partners').innerHTML=ids.length?ids.map(function(id){var p=partners[id];return '<div class="pt" data-p="'+id+'"><span>'+esc(p.name)+'</span><select>'+PST.map(function(s){return '<option value="'+s[0]+'"'+(p.status===s[0]?' selected':'')+'>'+s[1]+'</option>'}).join('')+'</select><button class="btn sm" data-del>✕</button></div>'}).join(''):'<p class="lead" style="margin:6px 0">Nobody yet. Add the first person you message.</p>';

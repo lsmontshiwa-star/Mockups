@@ -2,748 +2,337 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Digital Switch Referrals</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refer a business, earn R500 | Digital Switch</title>
+<meta name="description" content="Know a business that needs a website? Send its name to Digital Switch on WhatsApp. We follow up, and if they buy, you earn R500.">
 <link rel="canonical" href="https://digitalswitch.co.za/refer/">
-<meta name="description" content="Earn R750 for every client you bring to Digital Switch. Animated, high-end websites for South African businesses.">
-<meta property="og:title" content="Earn R750 for every client you bring">
-<meta property="og:description" content="The Digital Switch referral programme: how it works, the price sheet and messages ready to send.">
-<meta property="og:image" content="/brand/ds-header-banner-neon.png">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Digital Switch">
+<meta property="og:url" content="https://digitalswitch.co.za/refer/">
+<meta property="og:title" content="Know a business that needs a website? Earn R500.">
+<meta property="og:description" content="Send us the name on WhatsApp. We follow up. If they buy, you get R500. No limit.">
+<meta property="og:image" content="https://digitalswitch.co.za/brand/ds-header-banner-neon.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23071719%22/%3E%3Crect%20x%3D%229%22%20y%3D%2219%22%20width%3D%2246%22%20height%3D%2226%22%20rx%3D%2213%22%20fill%3D%22%23c3b0ff%22/%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%2232%22%20r%3D%229%22%20fill%3D%22%23071719%22/%3E%3C/svg%3E">
+<meta name="theme-color" content="#071719">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
 <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300;500&family=Inter+Tight:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one dark editorial scroll, the brand's own world. Sections separated by hairlines, a sticky nav, one hero moment (rippling roof-ridge lines + letter rise). */
+
+/* Same system as the homepage (ds/index.html): night street-grid sky, neon script, wide editorial layout. */
 :root{
-  --ink:#071719; --ink-2:#0b2124; --bone:#ddf5ec; --stone:#6f9993; --stone-hi:#b6d3cc;
-  --rust:#c3b0ff; --rust-hi:#c3b0ff; --violet:#6a4fe0; --line:rgba(221,245,236,.12); --line-2:rgba(221,245,236,.24);
-  --serif:'Unbounded',system-ui,sans-serif;
-  --script:'Ballet',cursive;
-  --sans:'Inter Tight',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+  color-scheme: dark;
+  --night:#071719; --night-2:#0b2124; --card:rgba(13,37,40,.86);
+  --street:#123336; --river:#1b4a4d; --deep:#164043;
+  --lilac:#c3b0ff; --lilac-deep:#9b7bff; --mint:#ddf5ec; --mist:#b6d3cc; --sage:#9cc0b9; --dim:#6f9993;
+  --pad: clamp(20px, 4vw, 64px);
+  --display:'Unbounded', system-ui, sans-serif; --script:'Ballet', cursive;
+  --body:'Inter Tight', system-ui, sans-serif; --mono:'IBM Plex Mono', ui-monospace, monospace;
   --neon-text:0 0 8px rgba(195,176,255,.95),0 0 22px rgba(155,123,255,.75),0 0 48px rgba(155,123,255,.45);
   --neon-box:0 0 14px rgba(195,176,255,.7),0 0 36px rgba(155,123,255,.45),0 0 80px rgba(155,123,255,.2);
-  --ease:cubic-bezier(.76,0,.24,1);
-  --gut:max(16px, env(safe-area-inset-left, 0px));
-  --gut-r:max(16px, env(safe-area-inset-right, 0px));
-  color-scheme:dark;
 }
-*{box-sizing:border-box}
-html{background:var(--ink)}
-body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:70;opacity:.035;transform:translateZ(0);
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
-::selection{background:var(--rust);color:var(--ink)}
-a{color:var(--rust-hi)}
-a:hover{color:#e4dbff;text-shadow:var(--neon-text)}
-:focus-visible{outline:2px solid var(--rust-hi);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut-r)}
-.label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
-h1,h2,h3{font-weight:500;text-wrap:balance;margin:0}
-h2{font-family:var(--serif);font-weight:200;font-size:clamp(38px,5.4vw,72px);line-height:1.08;letter-spacing:-.045em}
-h2 em,h1 em{font-family:var(--script);font-style:normal;font-weight:400;color:var(--rust);font-size:1.75em;line-height:1;letter-spacing:0;display:inline-block;transform:translateY(.08em);padding:0 .06em;text-shadow:0 0 18px rgba(155,123,255,.45);transition:text-shadow .35s,color .35s}
-h2 em:hover,h1 em:hover{color:#e4dbff;text-shadow:var(--neon-text)}
-p{margin:0}
-.lede{font-size:clamp(18px,2vw,21px);color:var(--stone-hi);max-width:60ch}
-section{border-top:1px solid var(--line)}
-.sec{padding-block:clamp(72px,10vw,128px)}
-.sec-head{display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(40px,6vw,64px)}
-.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;cursor:pointer;border:1px solid var(--line-2);background:transparent;color:var(--bone);transition:background .3s var(--ease),color .3s var(--ease),border-color .3s,box-shadow .3s,transform .3s}
-.btn:hover{color:var(--bone)}
-.btn-solid{background:var(--rust);border-color:var(--rust);color:var(--ink)}
-.btn-solid:hover{box-shadow:var(--neon-box);transform:translateY(-2px)}
-.btn:not(.btn-solid):hover{border-color:var(--rust);box-shadow:var(--neon-box);text-shadow:0 0 10px rgba(195,176,255,.8)}
-mark.ph{background:rgba(195,176,255,.16);color:var(--rust-hi);padding:0 .2em;border-radius:3px}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:18px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.script{font-family:var(--script);font-weight:400;color:var(--lilac);letter-spacing:0;text-transform:none;transition:text-shadow .35s,color .35s}
+.script:hover{color:#e4dbff;text-shadow:var(--neon-text)}
 
-/* nav */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(7,23,25,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
-.nav-logo{display:block;line-height:0;color:inherit}
-.nav-logo{line-height:1;text-decoration:none}
-.dsl{display:flex;align-items:center;gap:12px}
-.dsl svg{width:44px;height:25px;filter:drop-shadow(0 0 6px rgba(195,176,255,.7));animation:dsglow 4s ease-in-out 1.5s infinite}
-.dsl .dsk{animation:dsknob2 .9s cubic-bezier(.34,1.56,.64,1) .3s both}
-.dsl .w1{font-family:var(--serif);font-weight:200;font-size:21px;letter-spacing:-.03em;color:var(--bone)}
-.dsl .w2{font-family:var(--script);font-size:38px;line-height:.6;color:#f1ecff;margin-left:2px;animation:neonOn 1.8s linear .5s both}
-@keyframes dsknob2{from{transform:translateX(-34px)}to{transform:none}}
-@keyframes dsglow{0%,100%{filter:drop-shadow(0 0 6px rgba(195,176,255,.7))}50%{filter:drop-shadow(0 0 12px #c3b0ff) drop-shadow(0 0 26px rgba(155,123,255,.6))}}
-@keyframes neonOn{0%,30%{opacity:.15;text-shadow:none}33%{opacity:1;text-shadow:0 0 8px #c3b0ff}36%{opacity:.25;text-shadow:none}44%,100%{opacity:1;text-shadow:0 0 6px #fff,0 0 14px #c3b0ff,0 0 30px #9b7bff}}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone-hi);text-decoration:none}
-.nav-links a:not(.btn):hover{color:var(--rust);text-shadow:var(--neon-text)}
-.nav .btn{min-height:44px;padding:0 18px;font-size:12px}
-.nav-links a.btn-solid,.nav-links a.btn-solid:hover{color:var(--ink);text-shadow:none}
-@media (max-width:860px){.nav-links a.hide-m{display:none}}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;font-weight:500;font-size:16px;text-decoration:none;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,background .25s,border-color .25s;white-space:nowrap}
+.btn-primary{background:var(--lilac);color:var(--night)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--neon-box)}
+.btn-ghost{border:1px solid var(--river);color:var(--mint)}
+.btn-ghost:hover{border-color:var(--lilac);color:#fff;transform:translateY(-2px);box-shadow:var(--neon-box),inset 0 0 14px rgba(195,176,255,.18);text-shadow:0 0 10px rgba(195,176,255,.8)}
+.btn svg{width:18px;height:18px}
 
-/* logo animation */
-.ds .tr{stroke-dasharray:236;stroke-dashoffset:236;animation:dsdraw .9s var(--ease) .1s forwards}
-.ds .fl{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);animation:dsfill .55s var(--ease) .78s forwards,dsflickfill 7s ease-in-out 5s infinite}
-.ds .kn{transform:translateX(-34px);opacity:0;animation:dsknob .7s cubic-bezier(.34,1.56,.64,1) .7s forwards}
-.ds .kn circle{animation:dsflick 7s ease-in-out 5s infinite}
-.ds .l{opacity:0;transform:translateY(34px);animation:dsrise .8s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes dsdraw{to{stroke-dashoffset:0}}
-@keyframes dsfill{to{transform:scaleX(1)}}
-@keyframes dsknob{0%{opacity:1}100%{opacity:1;transform:none}}
-@keyframes dsrise{to{opacity:1;transform:none}}
-@keyframes dsflick{0%,86%,100%{transform:none}90%,93%{transform:translateX(-34px)}}
-@keyframes dsflickfill{0%,86%,100%{transform:scaleX(1)}90%,93%{transform:scaleX(0)}}
+/* nav (matches homepage) */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(7,23,25,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--street)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo svg{width:44px;height:25px;filter:drop-shadow(0 0 6px rgba(195,176,255,.7));overflow:visible;transition:filter .5s .35s}
+.logo svg rect{transition:fill .45s .3s}
+.logo svg circle{transition:transform .6s cubic-bezier(.34,1.56,.64,1) .25s}
+.nav .logo{transition:opacity .45s,transform .45s}
+.nav.logo-off .logo{opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .35s,transform .35s}
+.nav.logo-off .logo svg{filter:none;transition-delay:0s}
+.nav.logo-off .logo svg rect{fill:#164043;transition-delay:0s}
+.nav.logo-off .logo svg circle{transform:translateX(-34px);fill:#6f9993;transition-delay:0s}
+.logo .w2.flick{animation:neonOn 1.2s linear both}
+.logo:hover svg{filter:drop-shadow(0 0 10px #c3b0ff) drop-shadow(0 0 26px rgba(155,123,255,.7))}
+.logo .w1{font-family:var(--display);font-weight:200;font-size:21px;letter-spacing:-.03em}
+.logo .w2{font-family:var(--script);font-size:38px;line-height:.6;color:#f1ecff;text-shadow:0 0 6px #fff,0 0 14px var(--lilac),0 0 30px var(--lilac-deep);margin-left:2px;display:inline-block}
+.nav-links{display:flex;align-items:center;gap:30px;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--mist);transition:color .2s}
+.nav-links a:not(.btn):hover,.nav-links a.here{color:var(--lilac);text-shadow:var(--neon-text)}
+.nav .btn{padding:10px 20px;font-size:15px}
+.nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:var(--night)}
+.menu-btn{display:none;background:none;border:1px solid var(--river);color:var(--mint);border-radius:999px;padding:9px 16px;font:500 14px var(--body)}
+@media (max-width: 960px){
+  .nav-links{position:fixed;inset:76px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:rgba(7,23,25,.97);border-bottom:1px solid var(--street);padding:8px var(--pad) 24px;transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+  .nav-links.open{opacity:1;transform:none;pointer-events:auto}
+  .nav-links a{padding:14px 0;width:100%;border-bottom:1px solid var(--street);font-size:18px}
+  .nav-links .btn{margin-top:18px;border:0;width:auto;padding:12px 22px}
+  .menu-btn{display:inline-flex;margin-left:auto}
+}
+
+/* night sky (matches homepage) */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+.sky svg{width:100%;height:100%;display:block}
+.sky .streets path{stroke:var(--street);stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke}
+.sky .star{fill:var(--lilac);filter:drop-shadow(0 0 6px var(--lilac));animation:twinkle 3.2s ease-in-out infinite}
+main,footer{position:relative;z-index:1}
+
 
 /* hero */
-.hero{position:relative;border-top:0;overflow:hidden}
-.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero .wrap{position:relative;padding-block:clamp(64px,10vw,120px) clamp(56px,8vw,96px);display:flex;flex-direction:column;gap:32px}
-.hero h1{font-family:var(--serif);font-weight:200;font-size:clamp(44px,8.4vw,118px);line-height:1;letter-spacing:-.05em;max-width:11ch}
-.hero h1 em{color:#f1ecff;text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 100px rgba(155,123,255,.7)}
-.hero-row{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:space-between}
-.hero-row .lede{flex:1 1 380px;min-width:0}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
-.split-line{overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
-.js-motion #heroTitle{visibility:hidden}
+.hero{position:relative;min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding:130px 0 80px;overflow:hidden}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(40px,6vw,96px);line-height:1.04;letter-spacing:-.045em;max-width:14ch}
+.earn{display:flex;align-items:center;gap:clamp(14px,2vw,30px);margin-top:clamp(6px,1.4vw,18px)}
+.earn .mono{color:var(--lilac)}
+.sign{font-family:var(--script);font-size:clamp(110px,16vw,260px);line-height:1.15;color:#f1ecff;white-space:nowrap;animation:neonOn 2.4s linear .5s both,hum 4s ease-in-out 3s infinite}
+.switch{width:clamp(64px,7vw,120px);height:auto;flex:none;animation:switchGlow 3.8s ease-in-out 2s infinite both;overflow:visible}
+.switch .knob{animation:knob 1s cubic-bezier(.34,1.56,.64,1) 2s both}
+.hero .lead{margin-top:10px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+@media (max-width: 560px){.sign{font-size:clamp(96px,30vw,140px)}.switch{width:54px}}
+/* sections */
+section{position:relative}
+.section{padding:clamp(88px,11vw,160px) 0}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--lilac);box-shadow:0 0 8px var(--lilac)}
+.h2{font-family:var(--display);font-weight:200;font-size:clamp(38px,5.4vw,84px);line-height:1.08;letter-spacing:-.045em;margin:0;max-width:1100px}
+.h2 .script{font-size:1.8em;line-height:1;display:inline-block;transform:translateY(.06em);padding:0 .06em}
+.lead{font-size:clamp(18px,1.5vw,21px);font-weight:300;color:var(--mist);max-width:680px;margin:26px 0 0}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
 
-/* marquee */
-.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:22px;background:var(--ink-2)}
-.marquee-track{display:flex;width:max-content;gap:0;will-change:transform}
-.marquee-track span{font-family:var(--serif);font-weight:200;letter-spacing:-.03em;font-size:clamp(26px,3.6vw,42px);white-space:nowrap;padding-right:48px;color:var(--bone)}
-.marquee-track span b{font-family:var(--mono);font-style:normal;font-weight:400;font-size:.36em;letter-spacing:.2em;color:var(--rust-hi);vertical-align:middle;padding-right:48px;text-shadow:0 0 10px var(--rust)}
+/* engine: six-cell grid (homepage "included" pattern) that switches on in sequence */
+.engine-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street);border-left:1px solid var(--street)}
+.cell{padding:30px 28px 34px;border-right:1px solid var(--street);border-bottom:1px solid var(--street);min-height:220px;display:flex;flex-direction:column;gap:14px;transition:background .5s}
+.cell-top{display:flex;justify-content:space-between;align-items:center}
+.mini-sw{width:44px;height:25px;overflow:visible}
+.mini-sw rect{fill:var(--deep);transition:fill .5s}
+.mini-sw circle{fill:var(--dim);transition:transform .6s cubic-bezier(.34,1.56,.64,1),fill .5s}
+.cell.on{background:rgba(22,64,67,.35)}
+.cell.on .mini-sw rect{fill:var(--lilac)}
+.cell.on .mini-sw circle{transform:translateX(34px);fill:var(--night)}
+.cell.on .mini-sw{filter:drop-shadow(0 0 6px var(--lilac)) drop-shadow(0 0 16px rgba(155,123,255,.6))}
+.cell h3{margin:0;font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:-.03em;line-height:1.2}
+.cell p{margin:0;color:var(--sage);font-size:16px}
+.cell .mono{color:var(--lilac)}
+@media (max-width: 1000px){.engine-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width: 600px){.engine-grid{grid-template-columns:1fr}.cell{min-height:0}}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tags span{border:1px solid var(--river);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--mist)}
+.tags span.on{border-color:rgba(195,176,255,.55);color:var(--lilac);box-shadow:0 0 16px rgba(155,123,255,.25)}
+.engine-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);margin-top:clamp(40px,5vw,64px);align-items:start}
+.engine-body p{margin:0;color:var(--mist);font-weight:300;font-size:clamp(17px,1.4vw,20px)}
+@media (max-width: 860px){.engine-body{grid-template-columns:1fr}}
 
-/* earnings */
-.earn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,6vw,80px);align-items:end}
-.big-num{font-family:var(--script);font-size:clamp(150px,26vw,360px);line-height:.9;color:#f1ecff;letter-spacing:0;text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 110px rgba(155,123,255,.7);font-variant-numeric:tabular-nums}
-.big-cap{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-.calc{transition:border-color .4s,box-shadow .4s;border:1px solid var(--line-2);border-radius:16px;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:24px;background:var(--ink-2)}
-.calc label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
-.calc-count{font-family:var(--sans);font-size:22px;font-variant-numeric:tabular-nums}
-.calc input[type=range]{width:100%;accent-color:var(--rust);height:32px}
-.calc-total{font-family:var(--serif);font-weight:200;letter-spacing:-.05em;color:var(--rust);text-shadow:0 0 18px rgba(155,123,255,.45);font-size:clamp(56px,8vw,92px);line-height:1;font-variant-numeric:tabular-nums}
-.calc:hover{border-color:rgba(195,176,255,.55);box-shadow:0 0 50px rgba(155,123,255,.15)}
-.calc-note{color:var(--stone-hi);font-size:15px}
-@media (max-width:820px){.earn{grid-template-columns:1fr}}
-
-/* steps (stacking cards) */
-.steps{display:flex;flex-direction:column;gap:6vh}
-.step{position:sticky;top:max(92px,12vh);min-height:min(52svh,520px);border-radius:14px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(20px,5vw,64px);align-items:end;transform-origin:center top;color:var(--ink);will-change:transform;box-shadow:0 -12px 40px rgba(0,0,0,.35)}
-.step:nth-child(1){background:#ddf5ec}.step:nth-child(2){background:#cfeee3}.step:nth-child(3){background:#c0e6d9}.step:nth-child(4){background:#b2ddce}
-.step:nth-child(5){background:var(--rust);color:var(--ink);box-shadow:0 -12px 40px rgba(0,0,0,.35),0 0 60px rgba(155,123,255,.35)}
-.step-n{font-family:var(--serif);font-weight:200;font-size:clamp(100px,16vw,220px);line-height:.8;letter-spacing:-.07em;color:var(--violet);align-self:start}
-.step:nth-child(5) .step-n{color:var(--ink)}
-.step h3{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3.4vw,48px);line-height:1.05;letter-spacing:-.045em;margin-bottom:16px}
-.step p{color:#24494a;font-size:18px;max-width:46ch}
-.step:nth-child(5) p{color:#2b2350}
-@media (max-width:820px){.step{grid-template-columns:1fr;min-height:min(46svh,440px);align-items:start}.step-n{font-size:88px}}
-
-/* rules */
-.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
-.rule{display:grid;grid-template-columns:28px minmax(0,1fr);gap:16px;padding-block:22px;border-top:1px solid var(--line)}
-.rule svg{margin-top:4px}
-.rule strong{display:block;font-weight:500;font-size:19px;margin-bottom:4px}
-.rule span{color:var(--stone-hi);font-size:16px}
-@media (max-width:820px){.rules{grid-template-columns:1fr}}
-
-/* statement */
-.statement{font-family:var(--serif);font-weight:200;letter-spacing:-.045em;font-size:clamp(32px,5vw,64px);line-height:1.12;max-width:22ch;text-wrap:balance}
-.statement .w{color:var(--stone);transition:color .2s}
-.statement .w.on{color:var(--bone)}
-.statement > .r{font-family:var(--script);font-size:1.6em;line-height:.8;letter-spacing:0;color:var(--rust)}
-.statement .w.r.on{color:var(--rust);text-shadow:0 0 18px rgba(155,123,255,.5)}
-
-.pitches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:clamp(48px,7vw,80px)}
-.pitch{border-top:2px solid var(--rust);box-shadow:0 -6px 18px -12px var(--rust);padding-top:20px;display:flex;flex-direction:column;gap:12px}
-.pitch q{font-family:var(--serif);font-weight:300;letter-spacing:-.03em;font-size:22px;line-height:1.2;quotes:"\201C" "\201D"}
-.pitch p{color:var(--stone-hi);font-size:15px}
-@media (max-width:980px){.pitches{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.pitches{grid-template-columns:1fr}}
-.demo-call{margin-top:48px;display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;padding:24px clamp(20px,3vw,32px);border:1px dashed var(--line-2);border-radius:14px}
-.demo-call p{flex:1 1 320px;min-width:0}
-
-/* price */
-.price{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.price-card{border:1px solid var(--line-2);border-radius:18px;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:14px}
-.price-card.main{background:var(--bone);color:var(--ink);border-color:var(--bone)}
-.price-card{transition:box-shadow .4s,border-color .4s}
-.price-card:hover{border-color:var(--rust);box-shadow:0 0 50px rgba(155,123,255,.18)}
-.price-card.main .label{color:#3c6563}
-.price-amt{font-family:var(--serif);font-weight:200;letter-spacing:-.06em;font-size:clamp(60px,8vw,96px);line-height:.9;font-variant-numeric:tabular-nums}
-.price-amt.w{font-size:clamp(40px,5vw,60px)}
-.price-amt small{font-family:var(--mono);font-size:14px;letter-spacing:.08em;color:inherit;opacity:.75}
-.price-card p{font-size:16px}
-.price-card:not(.main) p{color:var(--stone-hi)}
-.incl{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:clamp(24px,5vw,64px);margin-top:clamp(40px,6vw,64px)}
-.incl ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column}
-.incl li{padding:14px 0 14px 32px;border-top:1px solid var(--line);position:relative;font-size:16px}
-.incl li::before{content:"";position:absolute;left:0;top:21px;width:16px;height:9px;border-radius:5px;background:var(--rust);box-shadow:0 0 8px var(--rust)}
-.incl .no li{color:var(--stone-hi)}
-.incl .no li::before{background:transparent;border:1.5px solid var(--stone)}
-@media (max-width:820px){.price,.incl{grid-template-columns:1fr}}
-
-/* messages */
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.tab{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--stone-hi);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
-.tab[aria-selected=true]{background:var(--rust);color:var(--ink);border-color:var(--rust);box-shadow:0 0 18px rgba(195,176,255,.5)}
-.tab:hover{border-color:var(--rust);color:var(--bone);box-shadow:var(--neon-box)}
-.msg{border:1px solid var(--line-2);border-radius:18px;background:var(--ink-2);display:grid;grid-template-columns:minmax(0,1fr) 260px}
-.msg-body{padding:clamp(24px,4vw,40px);white-space:pre-line;font-size:17px;line-height:1.7;min-width:0;overflow-wrap:anywhere}
-.msg-side{border-left:1px solid var(--line);padding:clamp(24px,3vw,32px);display:flex;flex-direction:column;gap:16px;justify-content:space-between}
-.msg-side p{color:var(--stone-hi);font-size:15px}
-@media (max-width:820px){.msg{grid-template-columns:1fr}.msg-side{border-left:0;border-top:1px solid var(--line)}}
-
-/* playbook */
-.chips{display:flex;flex-wrap:wrap;gap:10px}
-.chip{padding:10px 18px;border:1px solid var(--line-2);border-radius:999px;font-size:15px;position:relative;overflow:hidden;isolation:isolate;transition:color .35s var(--ease)}
-.chip::before{content:"";position:absolute;inset:0;background:var(--rust);transform:translateY(101%);transition:transform .35s var(--ease);z-index:-1}
-.chip:hover{color:var(--ink);box-shadow:var(--neon-box)}
-.chip:hover::before{transform:none}
-.chip-group{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding-block:18px;border-top:1px solid var(--line);align-items:center}
-@media (max-width:620px){.chip-group{grid-template-columns:1fr}}
-.five{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;counter-reset:f}
-.five li{counter-increment:f;display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--line-2)}
-.five li::before{content:counter(f);font-family:var(--serif);font-weight:200;font-size:44px;line-height:1;color:var(--rust);text-shadow:0 0 14px rgba(155,123,255,.5)}
-.five strong{font-weight:500;font-size:18px}
-.five span{color:var(--stone-hi);font-size:15px}
-@media (max-width:980px){.five{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.five{grid-template-columns:1fr}}
-.sub-h{font-family:var(--serif);font-size:clamp(26px,3.2vw,40px);font-weight:300;letter-spacing:-.04em;margin:clamp(56px,8vw,88px) 0 24px}
-details{border-top:1px solid var(--line)}
-details:last-of-type{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:clamp(18px,2vw,22px);font-weight:500;min-height:44px}
-summary::-webkit-details-marker{display:none}
-summary .pm{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);position:relative;transition:transform .35s var(--ease),background .3s}
-summary .pm::before,summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:var(--bone);transform:translate(-50%,-50%)}
-summary .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .35s var(--ease)}
-details[open] summary .pm{background:var(--rust);border-color:var(--rust);box-shadow:0 0 14px rgba(195,176,255,.6)}
-summary:hover .pm{border-color:var(--rust);box-shadow:var(--neon-box)}
-details[open] summary .pm::before,details[open] summary .pm::after{background:var(--ink)}
-details[open] summary .pm::after{transform:translate(-50%,-50%) rotate(0)}
-details .ans{padding:0 0 24px;color:var(--stone-hi);max-width:68ch;font-size:17px}
-details .ans .say{font-family:var(--serif);font-weight:300;letter-spacing:-.03em;font-size:21px;line-height:1.25;color:var(--bone)}
-.check{display:flex;flex-direction:column}
-.check label{display:flex;gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--line);cursor:pointer;font-size:17px;min-height:44px}
-.check input{appearance:none;-webkit-appearance:none;flex:none;width:44px;height:26px;border-radius:13px;border:1.5px solid var(--stone);position:relative;cursor:pointer;transition:background .3s var(--ease),border-color .3s}
-.check input::after{content:"";position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:var(--stone);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s}
-.check input:checked{background:var(--rust);border-color:var(--rust);box-shadow:0 0 14px rgba(195,176,255,.6)}
-.check input:checked::after{transform:translateX(18px);background:var(--ink)}
-.check-status{margin-top:16px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone)}
-.check-status.ready{color:var(--rust-hi)}
+/* vision: glowing panel (homepage "refer" pattern) */
+.vision{border-radius:32px;border:1px solid rgba(195,176,255,.45);padding:clamp(36px,6vw,96px);background:radial-gradient(120% 140% at 100% 0%,rgba(155,123,255,.22),rgba(7,23,25,0) 55%),var(--night-2);overflow:hidden;position:relative;transition:box-shadow .5s,border-color .5s}
+.vision:hover{border-color:rgba(195,176,255,.75);box-shadow:0 0 60px rgba(155,123,255,.2)}
+.vision blockquote{margin:0;font-family:var(--display);font-weight:200;font-size:clamp(32px,4.8vw,72px);line-height:1.1;letter-spacing:-.045em;max-width:18ch}
+.vision blockquote .script{font-size:1.5em;line-height:.8;color:#f1ecff;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 44px var(--lilac-deep),0 0 100px rgba(155,123,255,.7);animation:hum 4s ease-in-out infinite}
+.vision .after{margin:30px 0 0;color:var(--mist);font-weight:300;font-size:clamp(18px,1.6vw,22px);max-width:40ch}
 
 /* final */
-.final{text-align:left}
-.final-row{display:flex;flex-wrap:wrap;gap:24px;align-items:center;margin-top:40px}
-.contact{font-family:var(--mono);color:var(--rust);font-size:15px;letter-spacing:.06em;user-select:all}
-.giant{font-family:var(--script);font-size:clamp(130px,30vw,420px);line-height:1;color:#f1ecff;letter-spacing:0;text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 110px rgba(155,123,255,.7);overflow:hidden;padding-block:.06em .12em;white-space:nowrap}
-.foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding-block:28px;border-top:1px solid var(--line)}
+.final{text-align:center;padding:clamp(100px,14vw,200px) 0 clamp(80px,10vw,140px);overflow:hidden}
+.final .sign{display:block;font-size:clamp(70px,15vw,250px);line-height:1.1;animation:hum 4s ease-in-out infinite;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 44px var(--lilac-deep),0 0 110px rgba(155,123,255,.7)}
+.final .h2{margin:0 auto}
+.final .lead{margin-left:auto;margin-right:auto}
+.final .hero-actions{justify-content:center}
+.final .btn{font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px}
 
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140%);background:var(--bone);color:var(--ink);font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:14px 22px;border-radius:999px;z-index:80;opacity:0;visibility:hidden;transition:transform .45s var(--ease),opacity .3s,visibility 0s .45s}
-.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .45s var(--ease),opacity .3s,visibility 0s}
+/* footer */
+footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,transparent,var(--street) 20%,var(--street) 80%,transparent) 1;padding:48px 0 40px}
+.foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.foot-links{display:flex;gap:28px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.foot-links a{text-decoration:none;color:var(--mist)}
+.foot-links a:hover{color:var(--lilac);text-shadow:var(--neon-text)}
+.foot-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px}
 
-@media (prefers-reduced-motion:reduce){
-  .ds .tr,.ds .fl,.ds .kn,.ds .kn circle,.ds .l{animation:none!important;opacity:1;transform:none;stroke-dashoffset:0}
-  .step{position:static}
-  *{transition:none!important}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes neonOn{0%,30%{opacity:.12;text-shadow:none}33%{opacity:1;text-shadow:0 0 8px #c3b0ff,0 0 30px #9b7bff}36%{opacity:.2;text-shadow:none}44%{opacity:1}55%,100%{opacity:1;text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 100px rgba(155,123,255,.7)}}
+@keyframes hum{0%,100%{text-shadow:0 0 6px #fff,0 0 16px #c3b0ff,0 0 44px #9b7bff,0 0 100px rgba(155,123,255,.7)}50%{text-shadow:0 0 4px #fff,0 0 12px #c3b0ff,0 0 30px #9b7bff,0 0 64px rgba(155,123,255,.5)}}
+@keyframes switchGlow{0%,100%{filter:drop-shadow(0 0 10px #c3b0ff) drop-shadow(0 0 36px rgba(155,123,255,.6))}50%{filter:drop-shadow(0 0 6px #c3b0ff) drop-shadow(0 0 20px rgba(155,123,255,.45))}}
+@keyframes knob{from{transform:translateX(-32px)}to{transform:none}}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
 }
+
+/* steps */
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:clamp(40px,5vw,64px) 0 0}
+.step{border-radius:26px;padding:clamp(26px,3vw,38px);background:var(--card);border:1px solid var(--river);display:flex;flex-direction:column;gap:14px;transition:border-color .4s,box-shadow .4s}
+.step:hover{border-color:rgba(195,176,255,.6);box-shadow:0 0 50px rgba(155,123,255,.18)}
+.step .num{display:flex;justify-content:space-between;align-items:center}
+.step .num .mono{color:var(--lilac)}
+.step h3{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(22px,2.1vw,30px);letter-spacing:-.035em;line-height:1.15}
+.step p{margin:0;color:var(--sage);font-size:17px}
+.step.last{background:linear-gradient(180deg,rgba(195,176,255,.1),rgba(13,37,40,.86) 55%);border-color:rgba(195,176,255,.55)}
+.step .script{font-size:1.9em;line-height:.6}
+@media (max-width: 900px){.steps{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chips span{border:1px solid var(--river);border-radius:999px;padding:8px 15px;font-size:14px;color:var(--mist)}
+.send{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:start}
+.msg{border-radius:22px;padding:24px 26px;background:var(--card);border:1px solid var(--river);font-family:var(--mono);font-size:14px;line-height:1.8;color:var(--mist);white-space:pre-line}
+.msg b{color:var(--lilac);font-weight:400}
+@media (max-width: 900px){.send{grid-template-columns:1fr}}
+/* faq */
+.faq{margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--street)}
+.faq details{border-bottom:1px solid var(--street)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;font-family:var(--display);font-weight:300;font-size:clamp(18px,1.7vw,23px);letter-spacing:-.025em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .tg{flex:none;width:46px;height:26px;border-radius:13px;background:var(--deep);position:relative;transition:background .3s,box-shadow .3s}
+.faq summary .tg::after{content:"";position:absolute;left:4px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--dim);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s}
+.faq details[open] .tg{background:var(--lilac);box-shadow:0 0 14px rgba(195,176,255,.6)}
+.faq details[open] .tg::after{transform:translateX(20px);background:var(--night)}
+.faq details p{margin:0 0 26px;max-width:760px;color:var(--sage)}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 </head>
 <body>
 
-<script>
-(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(!r){document.documentElement.classList.add("js-motion");setTimeout(function(){var h=document.getElementById("heroTitle");if(h&&getComputedStyle(h).visibility==="hidden"&&!window.SplitText)h.style.visibility="visible";},2500);}})();
-</script>
-
-<nav class="nav" aria-label="Main">
+<header class="nav logo-off" id="nav">
   <div class="wrap">
-    <a href="#top" class="nav-logo" aria-label="Digital Switch, back to top">
-      <span class="dsl" role="img" aria-label="Digital Switch"><svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle class="dsk" cx="56" cy="22" r="15" fill="#071719"/></svg><span class="w1">Digital</span><span class="w2">Switch</span></span>
+    <a class="logo" href="/" aria-label="Digital Switch home">
+      <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
+      <span><span class="w1">Digital</span><span class="w2">Switch</span></span>
     </a>
-    <div class="nav-links">
-      <a href="#how" class="hide-m">How it works</a>
-      <a href="#sell" class="hide-m">What you sell</a>
-      <a href="#messages" class="hide-m">Messages</a>
-      <a href="https://wa.me/27761293926?text=Hi%20Digital%20Switch%2C%20I%27m%20in!%20Please%20send%20me%20the%20referral%20details." class="btn btn-solid" target="_blank" rel="noopener">I'm in</a>
-    </div>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#send">What to send</a>
+      <a href="#rules">Questions</a>
+      <a href="/">Digital Switch</a>
+      <a class="btn btn-primary wa-ref" href="#">Send a business</a>
+    </nav>
   </div>
-</nav>
+</header>
 
+<div class="sky" aria-hidden="true"><svg viewBox="0 0 1600 1100" preserveAspectRatio="xMidYMid slice">
+    <g class="streets">
+      <path d="M-20 180 L1620 120"/><path d="M-20 330 L1620 300"/><path d="M-20 520 L1620 470"/><path d="M-20 700 L1620 690"/><path d="M-20 880 L1620 840"/><path d="M-20 1040 L1620 1010"/>
+      <path d="M140 -20 L210 1120"/><path d="M380 -20 L420 1120"/><path d="M620 -20 L600 1120"/><path d="M860 -20 L900 1120"/><path d="M1110 -20 L1080 1120"/><path d="M1340 -20 L1390 1120"/>
+    </g>
+    <circle cx="205" cy="172" r="3" class="star" style="animation-delay:0s"/><circle cx="1356" cy="297" r="3" class="star" style="animation-delay:2.2s"/><circle cx="893" cy="689" r="3" class="star" style="animation-delay:1.7s"/><circle cx="1105" cy="470" r="3" class="star" style="animation-delay:0.4s"/><circle cx="520" cy="95" r="2" class="star" style="animation-delay:1.1s"/><circle cx="760" cy="410" r="2" class="star" style="animation-delay:2.8s"/><circle cx="1500" cy="760" r="2" class="star" style="animation-delay:0.9s"/><circle cx="80" cy="560" r="2" class="star" style="animation-delay:1.9s"/><circle cx="1230" cy="980" r="2" class="star" style="animation-delay:3.1s"/><circle cx="330" cy="800" r="2" class="star" style="animation-delay:0.2s"/><circle cx="1010" cy="140" r="2" class="star" style="animation-delay:2.5s"/><circle cx="640" cy="1010" r="3" class="star" style="animation-delay:1.4s"/><circle cx="1460" cy="90" r="2" class="star" style="animation-delay:0.7s"/><circle cx="420" cy="330" r="2" class="star" style="animation-delay:3.4s"/><circle cx="1180" cy="610" r="2" class="star" style="animation-delay:1.2s"/><circle cx="60" cy="1000" r="2" class="star" style="animation-delay:2.1s"/>
+</svg></div>
 <main id="top">
-  <header class="hero">
-    <canvas id="ridge" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <span class="label">Digital Switch · Referral programme</span>
-      <h1 id="heroTitle">Earn <em>R750</em> for every client you bring.</h1>
-      <div class="hero-row">
-        <p class="lede">You know business owners who need a website. We build animated, high-end sites that make them look like the biggest name in town. You win them over, we do the paperwork and the build, and you get paid.</p>
-        <div class="hero-ctas">
-          <a href="#how" class="btn btn-solid">See how it works</a>
-          <a href="#messages" class="btn">Get the messages</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track" id="marquee">
-      <span>R750 per client <b>●</b></span><span>Paid within 7 days <b>●</b></span><span>No limit <b>●</b></span><span>Websites that move <b>●</b></span>
-      <span>R750 per client <b>●</b></span><span>Paid within 7 days <b>●</b></span><span>No limit <b>●</b></span><span>Websites that move <b>●</b></span>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow mono">Referral programme</div>
+    <h1 class="headline">Know a business that needs a website?</h1>
+    <div class="earn"><span class="sign">R500</span><svg class="switch" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle class="knob" cx="56" cy="22" r="15" fill="#071719"/></svg></div>
+    <p class="lead">Send us its name on WhatsApp. We do the rest. If they buy a website from us, you get R500. No selling, no limit.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary wa-ref" href="#">Send a business on WhatsApp</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
   </div>
+</section>
 
-  <section class="sec" aria-labelledby="earnH">
-    <div class="wrap earn">
-      <div>
-        <span class="label" id="earnH">What you earn</span>
-        <div class="big-num" aria-label="R750"><span aria-hidden="true">R</span><span id="countUp" aria-hidden="true">750</span></div>
-        <div class="big-cap">
-          <p style="font-size:22px">Once-off, for every website sale you close.</p>
-          <p style="color:var(--stone-hi)">There is no cap: bring one client or twenty.</p>
-        </div>
-      </div>
-      <form class="calc" id="calc" aria-label="Earnings calculator">
-        <label for="clients">How many clients could you bring?</label>
-        <div class="calc-count"><span id="clientsOut">10</span> <span id="clientsWord">clients</span></div>
-        <input type="range" id="clients" min="1" max="20" step="1" value="10">
-        <div>
-          <span class="label">You'd earn</span>
-          <div class="calc-total" id="total">R7,500</div>
-        </div>
-        <p class="calc-note">Think about the salons, caterers, mechanics and photographers in your phone right now.</p>
-      </form>
+<!-- HOW -->
+<section class="section" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">How it works</div>
+    <h2 class="h2 reveal">Three steps. <span class="script">One</span> is yours.</h2>
+    <ol class="steps">
+      <li class="step reveal"><div class="num"><span class="mono">01 · You</span></div><h3>Send us the name</h3><p>WhatsApp us the business name and area, plus a number if you have one. Send one business or ten.</p></li>
+      <li class="step reveal"><div class="num"><span class="mono">02 · Us</span></div><h3>We follow up</h3><p>We contact the business, show them a preview of their own website and handle everything from there.</p></li>
+      <li class="step last reveal"><div class="num"><span class="mono">03 · You</span></div><h3>They buy, you get <span class="script">R500</span></h3><p>Paid to your bank account by EFT within 7 days of their payment clearing.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- WHAT TO SEND -->
+<section class="section" id="send" style="padding-top:0">
+  <div class="wrap send">
+    <div>
+      <div class="eyebrow mono reveal">What to send</div>
+      <h2 class="h2 reveal" style="font-size:clamp(34px,4.4vw,64px)">Any business with <span class="script">no website,</span> or a dated one.</h2>
+      <div class="chips reveal"><span>Salons and barbers</span><span>Plumbers</span><span>Electricians</span><span>Mechanics</span><span>Builders</span><span>Caterers</span><span>Cleaners</span><span>Photographers</span><span>Tutors</span><span>Shops and spaza</span><span>Churches and NGOs</span><span>Anyone with a WhatsApp-only business</span></div>
     </div>
-  </section>
-
-  <section class="sec" id="how" aria-labelledby="howH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">How it works</span>
-        <h2 id="howH">You do the <em>convincing.</em><br>We do the rest.</h2>
-      </div>
-      <div class="steps">
-        <article class="step"><span class="step-n">1</span><div><h3>Find the business</h3><p>Someone you know who needs a website, or a better one than they have.</p></div></article>
-        <article class="step"><span class="step-n">2</span><div><h3>Show them and win them over</h3><p>Share the demo, explain what they get and what it costs, and answer their questions using this page.</p></div></article>
-        <article class="step"><span class="step-n">3</span><div><h3>Bring them when they're ready to buy</h3><p>Not just a name or a number: someone who has said "yes, I want this." Send them to us on WhatsApp with their name and business, or start a group chat with all three of us.</p></div></article>
-        <article class="step"><span class="step-n">4</span><div><h3>Digital Switch signs them up</h3><p>We send them a quote, go through the agreement and they pay the setup fee.</p></div></article>
-        <article class="step"><span class="step-n">5</span><div><h3>You get paid R750</h3><p>Within 7 days of their full setup payment clearing, by EFT to your bank account.</p></div></article>
-      </div>
+    <div class="reveal">
+      <p class="lead" style="margin-top:0">Tap the button and WhatsApp opens with this ready to fill in:</p>
+      <div class="msg" style="margin-top:20px">Hi Digital Switch! I'd like to refer a business that needs a website.
+<b>Business name:</b>
+<b>Area:</b>
+<b>Their number (if you have it):</b>
+<b>My name:</b></div>
+      <div class="hero-actions"><a class="btn btn-primary wa-ref" href="#">Send a business</a></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sec" aria-labelledby="rulesH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">The rules</span>
-        <h2 id="rulesH">Simple, and <em>fair</em> to everyone.</h2>
-      </div>
-      <div class="rules">
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>R750 per client, paid once.</strong><span>It's for the website sale only.</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Paid after their full setup payment is in.</strong><span>If a client doesn't pay, or the sale is refunded, no reward is due.</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Ready-to-buy clients only.</strong><span>We pay for clients, not contacts. A name or "you should call my uncle" doesn't qualify.</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Tell us who you're working on.</strong><span>WhatsApp us the business name when you start. If two people approach the same business, the first to tell us gets the reward.</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Stick to what's included.</strong><span>Only promise what's in the package below. For anything extra, say "let me check with Digital Switch."</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Ask before you share a number.</strong><span>Get the business owner's permission before you pass on their contact details (POPIA).</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>No limit.</strong><span>Every client you bring is another R750.</span></div></div>
-        <div class="rule"><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><rect x=".75" y=".75" width="18.5" height="10.5" rx="5.25" fill="#c3b0ff" stroke="#c3b0ff" stroke-width="1.5"/><circle cx="14" cy="6" r="3.2" fill="#071719"/></svg><div><strong>Tax is your side.</strong><span>Referral rewards are income, so declare them if you need to.</span></div></div>
-      </div>
+<!-- RULES -->
+<section class="section" id="rules" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">Questions</div>
+    <h2 class="h2 reveal">The <span class="script">small</span> print.</h2>
+    <div class="faq reveal">
+      <details><summary>Do I have to sell anything?<span class="tg" aria-hidden="true"></span></summary><p>No. Just send the name. We contact the business and do all the selling ourselves.</p></details>
+      <details><summary>When do I get the R500?<span class="tg" aria-hidden="true"></span></summary><p>Once the business buys a website and their payment clears, we pay you by EFT within 7 days. If they don't buy, nothing is owed either way.</p></details>
+      <details><summary>Is there a limit?<span class="tg" aria-hidden="true"></span></summary><p>No. R500 for every business you send that buys, however many that is.</p></details>
+      <details><summary>What if someone else sends the same business?<span class="tg" aria-hidden="true"></span></summary><p>The first person to send it gets the R500. We'll tell you if a business is already on our list.</p></details>
+      <details><summary>Do I need to tell the business?<span class="tg" aria-hidden="true"></span></summary><p>It helps, but you don't have to. Only share details that are public or that the owner is happy for you to share. We always ask before we message anyone again.</p></details>
+      <details><summary>Will you tell me what happened?<span class="tg" aria-hidden="true"></span></summary><p>Yes. We'll let you know when we've reached out and if they buy.</p></details>
+      <details><summary>Do I pay tax on it?<span class="tg" aria-hidden="true"></span></summary><p>Referral rewards are income, so declare them if you need to.</p></details>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sec" id="sell" aria-labelledby="sellH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label" id="sellH">What you're selling</span>
-      </div>
-      <p class="statement" id="statement">Don't call it a website. Every business owner has seen a basic website. This one <span class="r">moves.</span></p>
-      <div class="pitches">
-        <div class="pitch"><q>It moves.</q><p>Smooth animations as you scroll. It feels like a big brand's site, not a template.</p></div>
-        <div class="pitch"><q>People will assume you paid R20k.</q><p>High-end design at a small-business price.</p></div>
-        <div class="pitch"><q>It brings you customers.</q><p>One tap to WhatsApp you, call you or find you on the map.</p></div>
-        <div class="pitch"><q>Made for your industry.</q><p>A salon site looks like a salon. A caterer's looks like a caterer's.</p></div>
-      </div>
-      <div class="demo-call">
-        <p><strong style="font-weight:500">Always show the demo.</strong> Open it on your phone and hand it over. Let them scroll. Your words just get them to look.</p>
-        <span class="contact" data-fill="demo"></span>
-        <button class="btn" type="button" data-copy-fill="demo">Copy demo link</button>
-      </div>
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap">
+    <span class="sign reveal">R500</span>
+    <h2 class="h2 reveal" style="font-size:clamp(28px,3.4vw,48px);max-width:760px">For every business you send us that buys.</h2>
+    <div class="hero-actions reveal" style="margin-top:36px">
+      <a class="btn btn-primary wa-ref" href="#">Send a business</a>
+      <a class="btn btn-ghost" href="/">See our work</a>
     </div>
-  </section>
-
-  <section class="sec" aria-labelledby="priceH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">What they get</span>
-        <h2 id="priceH">One clear offer. <em>Quoted for them.</em></h2>
-      </div>
-      <div class="price">
-        <div class="price-card main">
-          <span class="label">Built once</span>
-          <div class="price-amt w">The website</div>
-          <p>Design and build of a custom, animated website for their business.</p>
-        </div>
-        <div class="price-card">
-          <span class="label">Looked after</span>
-          <div class="price-amt w">Monthly care</div>
-          <p>Hosting, their own .co.za address, security certificate, keeping the site live, and small updates.</p>
-        </div>
-      </div>
-      <div class="incl">
-        <div>
-          <span class="label">What's included</span>
-          <ul>
-            <li>Custom design for their business and industry, with animations</li>
-            <li>Up to 5 sections or pages, such as Home, About, Services, Gallery and Contact</li>
-            <li>Works beautifully on phones, where most customers will see it</li>
-            <li>WhatsApp, click-to-call and Google Maps buttons</li>
-            <li>Their own web address, like theirbusiness.co.za, paid for by Digital Switch</li>
-            <li>2 rounds of changes before launch</li>
-            <li>Live within 7 days of receiving their logo, photos and details</li>
-            <li>Monthly plan: up to 2 small updates a month, such as new prices, photos or hours</li>
-          </ul>
-        </div>
-        <div class="no">
-          <span class="label">Quoted separately</span>
-          <ul>
-            <li>Online shop or payments</li>
-            <li>Booking systems</li>
-            <li>Logo design</li>
-            <li>Professional photography</li>
-            <li>More than 5 pages</li>
-            <li>Business email addresses</li>
-          </ul>
-          <p style="margin-top:16px;color:var(--stone-hi);font-size:15px">Asked for one of these? Say "let me check with Digital Switch."</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="messages" aria-labelledby="msgH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Messages, ready to send</span>
-        <h2 id="msgH">Copy. Fill the gaps. <em>Send.</em></h2>
-        <p class="lede">Personal messages get far more replies than broadcasts, so send them one person at a time where you can.</p>
-      </div>
-      <div class="tabs" role="tablist" aria-label="Message type" id="tabs"></div>
-      <div class="msg" role="tabpanel" id="msgPanel" aria-live="polite">
-        <div class="msg-body" id="msgBody"></div>
-        <div class="msg-side">
-          <p id="msgNote"></p>
-          <button class="btn btn-solid" type="button" id="copyMsg">Copy message</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" aria-labelledby="closeH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">How to close a sale</span>
-        <h2 id="closeH">Start with people who <em>already trust you.</em></h2>
-        <p class="lede">The easiest sales are business owners you know who get most of their customers from WhatsApp, Instagram or word of mouth. Best signs: no website, a dated one, or only a Facebook page.</p>
-      </div>
-      <div>
-        <div class="chip-group"><span class="label">Beauty</span><div class="chips"><span class="chip">Hair salons</span><span class="chip">Barbers</span><span class="chip">Nail techs</span><span class="chip">Lash and brow studios</span><span class="chip">Spas</span></div></div>
-        <div class="chip-group"><span class="label">Food</span><div class="chips"><span class="chip">Caterers</span><span class="chip">Bakers</span><span class="chip">Home cooks</span><span class="chip">Food trucks</span><span class="chip">Small restaurants</span></div></div>
-        <div class="chip-group"><span class="label">Services</span><div class="chips"><span class="chip">Cleaners</span><span class="chip">Plumbers</span><span class="chip">Electricians</span><span class="chip">Mechanics</span><span class="chip">Builders</span><span class="chip">Painters</span></div></div>
-        <div class="chip-group"><span class="label">Events</span><div class="chips"><span class="chip">Photographers</span><span class="chip">DJs</span><span class="chip">Decor and hire</span><span class="chip">Venues</span></div></div>
-        <div class="chip-group"><span class="label">Professionals</span><div class="chips"><span class="chip">Tutors</span><span class="chip">Personal trainers</span><span class="chip">Consultants</span><span class="chip">Small practices</span></div></div>
-      </div>
-
-      <h3 class="sub-h">Five steps</h3>
-      <ol class="five">
-        <li><strong>Open warm.</strong><span>Ask about their business before you pitch.</span></li>
-        <li><strong>Show the demo.</strong><span>Hand them your phone and let them scroll. Watch their reaction.</span></li>
-        <li><strong>Make it theirs.</strong><span>"Imagine this with your photos, your prices, your name on it."</span></li>
-        <li><strong>Leave the price to us.</strong><span>"Digital Switch quotes for your business after you've seen your preview."</span></li>
-        <li><strong>Ask for the yes.</strong><span>"Shall I connect you with Digital Switch so they can get started?"</span></li>
-      </ol>
-
-      <h3 class="sub-h">When they say…</h3>
-      <div>
-        <details><summary>"I already have Facebook or Instagram."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Keep them! A website makes you look established, shows up on Google and sends people to your WhatsApp. Social media is rented. Your website is yours."</p></div></details>
-        <details><summary>"It's too expensive."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"You'll see the site before you pay anything, and you get a quote for your business. It's animated and made for your industry. One or two new customers pay for it."</p></div></details>
-        <details><summary>"I don't need a website."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"When someone hears about you, the first thing they do is Google you. What do they find right now?"</p></div></details>
-        <details><summary>"Why is there a monthly fee?"<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"It covers hosting, your own web address, security and small updates, so the site never goes down and you never have to think about it."</p></div></details>
-        <details><summary>"Let me think about it."<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Of course. What's holding you back? I'll get you an answer."</p><p style="margin-top:12px">Then follow up in 2 to 3 days.</p></div></details>
-        <details><summary>"Can it take bookings or sell online?"<span class="pm" aria-hidden="true"></span></summary><div class="ans"><p class="say">"Let me check with Digital Switch. That's quoted separately."</p></div></details>
-      </div>
-
-      <h3 class="sub-h">Before you hand them over</h3>
-      <div class="check" id="checklist">
-        <label><input type="checkbox" id="c1"> They've seen the demo</label>
-        <label><input type="checkbox" id="c2"> They know Digital Switch will send them a quote</label>
-        <label><input type="checkbox" id="c3"> They know what's included and what isn't</label>
-        <label><input type="checkbox" id="c4"> They've said yes and are ready to sign and pay</label>
-        <label><input type="checkbox" id="c5"> They're happy for you to share their number</label>
-      </div>
-      <p class="check-status" id="checkStatus">0 of 5 switched on</p>
-    </div>
-  </section>
-
-  <section class="sec" aria-labelledby="faqH">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Questions</span>
-        <h2 id="faqH">The usual <em>questions.</em></h2>
-      </div>
-      <details><summary>Do I need to know anything about websites?<span class="pm" aria-hidden="true"></span></summary><div class="ans">No. Show the demo and use the messages on this page. Send anything technical to Digital Switch.</div></details>
-      <details><summary>When do I get paid?<span class="pm" aria-hidden="true"></span></summary><div class="ans">Within 7 days of the client's full setup payment clearing, by EFT to your bank account.</div></details>
-      <details><summary>Do I earn on the monthly care fee?<span class="pm" aria-hidden="true"></span></summary><div class="ans">No. The R750 is a once-off payment per website sale.</div></details>
-      <details><summary>What if I just give you a name?<span class="pm" aria-hidden="true"></span></summary><div class="ans">We only pay for clients who are ready to sign and pay. A name alone doesn't qualify, so have the conversation first.</div></details>
-      <details><summary>What if someone else is talking to the same business?<span class="pm" aria-hidden="true"></span></summary><div class="ans">Tell us the business name when you start. The first person to tell us gets the reward.</div></details>
-      <details><summary>Can the client ask for anything?<span class="pm" aria-hidden="true"></span></summary><div class="ans">They get everything under "What's included." For anything else, say "let me check with Digital Switch."</div></details>
-      <details><summary>Is there a limit?<span class="pm" aria-hidden="true"></span></summary><div class="ans">No. Every client you bring is R750.</div></details>
-    </div>
-  </section>
-
-  <section class="sec final" id="join" aria-labelledby="joinH">
-    <div class="wrap">
-      <span class="label">Ready?</span>
-      <h2 id="joinH" style="margin-top:20px">Reply <em>"I'm in"</em> and let's get your first R750.</h2>
-      <div class="final-row">
-        <a href="https://wa.me/27761293926?text=Hi%20Digital%20Switch%2C%20I%27m%20in!%20Please%20send%20me%20the%20referral%20details." class="btn btn-solid" target="_blank" rel="noopener">I'm in: message us on WhatsApp</a>
-        <span class="contact"><span data-fill="contact"></span> on WhatsApp: <span data-fill="number"></span></span>
-        <button class="btn" type="button" data-copy-fill="number">Copy number</button>
-      </div>
-    </div>
-    <div class="wrap"><div class="giant" id="giant" aria-hidden="true">Switch</div></div>
-    <div class="wrap foot">
-      <span class="label">Digital Switch · Websites that move</span>
-      <span class="label">R750 per client you bring</span>
-    </div>
-  </section>
+  </div>
+</section>
 </main>
 
-<div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="/" aria-label="Digital Switch home">
+        <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
+        <span><span class="w1">Digital</span><span class="w2">Switch</span></span>
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/">Home</a><a href="/#work">Work</a><a href="/#value">Why us</a><a href="/founder/">Founder</a><a href="/terms/">Terms</a>
+      </nav>
+    </div>
+    <div class="foot-base mono"><span>Johannesburg, South Africa</span><span>Websites that move</span></div>
+  </div>
+</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-/* ---- Fill these in before sharing ---- */
-const CONFIG = {
-  demoLink: "/local/demo-roofer/",
-  number: "076 129 3926",
-  contact: "Digital Switch"
-};
-const PH = { demoLink: "[demo link]", number: "[your WhatsApp number]", contact: "[your name]" };
-const val = k => CONFIG[k] || PH[k];
-const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const show = k => CONFIG[k] ? esc(CONFIG[k]) : `<mark class="ph">${PH[k]}</mark>`;
-
-document.querySelectorAll("[data-fill]").forEach(el => {
-  const k = el.dataset.fill === "demo" ? "demoLink" : el.dataset.fill;
-  el.innerHTML = (k === "demoLink" && CONFIG.demoLink)
-    ? `<a href="${esc(CONFIG.demoLink)}" target="_blank" rel="noopener">Open the demo site</a>`
-    : show(k);
-});
-
-/* ---- Toast + copy ---- */
-const toast = document.getElementById("toast");
-let tt;
-function flash(msg) { toast.textContent = msg; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 1800); }
-function copyText(text) {
-  const done = () => flash("Copied");
-  const fallback = () => {
-    const ta = document.createElement("textarea");
-    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
-    document.body.appendChild(ta); ta.select();
-    let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
-    document.body.removeChild(ta);
-    flash(ok ? "Copied" : "Select the text and copy it");
-  };
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
-  else fallback();
-}
-document.querySelectorAll("[data-copy-fill]").forEach(b => b.addEventListener("click", () => {
-  const k = b.dataset.copyFill === "demo" ? "demoLink" : b.dataset.copyFill;
-  copyText(val(k));
-}));
-
-/* ---- Messages ---- */
-const MSGS = [
-  { id: "invite", tab: "Invite your network", note: "Send to friends and family to bring them into the programme.",
-    text: "Hey [Name]! I've started a web design business called Digital Switch. We build animated, modern, high-impact websites for businesses. Here's one we've made: {demoLink}\n\nI'm launching a referral programme and I'd love you in on it: for every business you bring me that signs up, I pay you R750.\n\nYou talk to the people you know, show them the site, and once they're keen I take care of the agreement and payment. You get paid as soon as their payment clears.\n\nThink about who you know with a business: your hairdresser, nail tech, mechanic, caterer, photographer, the person who does events at church, your cousin's cleaning company. Anyone with no website, or one that looks dated.\n\nReply \"I'm in\" and I'll send you everything you need." },
-  { id: "status", tab: "Status or group", note: "Short version for WhatsApp Status or group chats. Pair it with a screen recording of the demo scrolling.",
-    text: "Know a business that needs a website? Bring them to Digital Switch and earn R750 when they sign up. Animated, modern sites that make small businesses look like the big names. DM me for details. {demoLink}" },
-  { id: "close", tab: "Opener: close friend", note: "For a business owner you know well.",
-    text: "Hey [Name]! Random question: have you ever thought about getting a proper website for [business name]? My friend runs Digital Switch and they build these animated, modern sites. Have a look: {demoLink}. Honestly, it looks like something a big company would have. Would something like that work for you?" },
-  { id: "less", tab: "Opener: acquaintance", note: "For someone you know less well.",
-    text: "Hi [Name], it's [your name], [how you know them]. I'm working with Digital Switch, who build high-end animated websites for small businesses. I thought of [business name] straight away. Here's an example: {demoLink}. It's designed for your type of business, and they'll show you a free preview before you decide. Happy to tell you more if you're interested." },
-  { id: "price", tab: "When they ask the price", note: "Leave the exact price to Digital Switch.",
-    text: "Digital Switch quotes for each business, based on what you need. You'll see a free preview of your site first, so there's nothing to pay unless you love it. There's also a small monthly fee for hosting, your own web address, security and updates." },
-  { id: "handover", tab: "Handover", note: "When they've said yes. Tick the checklist below first.",
-    text: "Amazing! I'll connect you with {contact} now. They'll send you the agreement and payment details, and your site will be live within a week of getting your logo and photos." }
-];
-const tabsEl = document.getElementById("tabs"), bodyEl = document.getElementById("msgBody"), noteEl = document.getElementById("msgNote");
-let current = MSGS[0];
-const fillText = t => t.replace(/\{(\w+)\}/g, (_, k) => val(k));
-const fillHTML = t => esc(t).replace(/\[([^\]]+)\]/g, '<mark class="ph">[$1]</mark>').replace(/\{(\w+)\}/g, (_, k) => show(k));
-function pick(m, focus) {
-  current = m;
-  [...tabsEl.children].forEach(b => { const on = b.dataset.id === m.id; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
-  bodyEl.innerHTML = fillHTML(m.text);
-  noteEl.textContent = m.note;
-  try { localStorage.setItem("ds-tab", m.id); } catch (e) {}
-}
-MSGS.forEach(m => {
-  const b = document.createElement("button");
-  b.className = "tab"; b.type = "button"; b.setAttribute("role", "tab"); b.id = "tab-" + m.id; b.dataset.id = m.id; b.textContent = m.tab;
-  b.setAttribute("aria-controls", "msgPanel");
-  b.addEventListener("click", () => pick(m));
-  tabsEl.appendChild(b);
-});
-tabsEl.addEventListener("keydown", e => {
-  const i = MSGS.indexOf(current);
-  if (e.key === "ArrowRight") { e.preventDefault(); pick(MSGS[(i + 1) % MSGS.length], true); }
-  if (e.key === "ArrowLeft") { e.preventDefault(); pick(MSGS[(i - 1 + MSGS.length) % MSGS.length], true); }
-});
-let saved = null; try { saved = localStorage.getItem("ds-tab"); } catch (e) {}
-pick(MSGS.find(m => m.id === saved) || MSGS[0]);
-document.getElementById("copyMsg").addEventListener("click", () => copyText(fillText(current.text)));
-
-/* ---- Calculator ---- */
-const range = document.getElementById("clients"), out = document.getElementById("clientsOut"), word = document.getElementById("clientsWord"), total = document.getElementById("total");
-const rand = n => "R" + n.toLocaleString("en-ZA").replace(/\s| /g, ",");
-function calc() { const n = +range.value; out.textContent = n; word.textContent = n === 1 ? "client" : "clients"; total.textContent = rand(n * 750); }
-range.addEventListener("input", calc);
-document.getElementById("calc").addEventListener("submit", e => e.preventDefault());
-calc();
-
-/* ---- Checklist ---- */
-const boxes = [...document.querySelectorAll("#checklist input")], status = document.getElementById("checkStatus");
-function upd() {
-  const n = boxes.filter(b => b.checked).length;
-  status.textContent = n === 5 ? "All switched on. Hand them over." : `${n} of 5 switched on`;
-  status.classList.toggle("ready", n === 5);
-  try { localStorage.setItem("ds-check", JSON.stringify(boxes.map(b => b.checked))); } catch (e) {}
-}
-try { const s = JSON.parse(localStorage.getItem("ds-check") || "[]"); boxes.forEach((b, i) => b.checked = !!s[i]); } catch (e) {}
-boxes.forEach(b => b.addEventListener("change", upd)); upd();
-
-/* ---- Motion ---- */
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/* Hero ridge lines: corrugated-roof lines that ripple and bend toward the pointer */
-(function ridge() {
-  const cv = document.getElementById("ridge"), cx = cv.getContext("2d");
-  let w = 0, h = 0, dpr = 1, mx = -9999, my = -9999, tx = -9999, ty = -9999, run = true, looping = false, t0 = performance.now();
-  function size() { dpr = Math.min(2, window.devicePixelRatio || 1); w = cv.clientWidth; h = cv.clientHeight; cv.width = w * dpr; cv.height = h * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
-  size(); window.addEventListener("resize", size);
-  const hero = cv.parentElement;
-  hero.addEventListener("pointermove", e => { const r = cv.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; });
-  hero.addEventListener("pointerleave", () => { tx = -9999; ty = -9999; });
-  const kick = () => { if (!looping) { looping = true; requestAnimationFrame(draw); } };
-  new IntersectionObserver(([en]) => { run = en.isIntersecting; if (run) kick(); }).observe(cv);
-  function draw(now) {
-    looping = false;
-    const t = reduce ? 0 : (now - t0) / 1000;
-    mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
-    cx.clearRect(0, 0, w, h);
-    const lines = Math.max(14, Math.round(h / 26)), step = 8;
-    for (let i = 0; i < lines; i++) {
-      const base = h * 0.18 + (i / (lines - 1)) * h * 0.86;
-      const a = 0.05 + 0.1 * (i / lines);
-      cx.beginPath();
-      for (let x = -10; x <= w + 10; x += step) {
-        let y = base + Math.sin(x * 0.006 + t * 0.6 + i * 0.35) * 10 + Math.sin(x * 0.019 - t * 0.9) * 3;
-        const dx = x - mx, dy = base - my, d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 220) y += (1 - d / 220) * (dy > 0 ? 34 : -34) * Math.cos((d / 220) * Math.PI / 2);
-        x === -10 ? cx.moveTo(x, y) : cx.lineTo(x, y);
-      }
-      const near = i % 6 === 3;
-      cx.strokeStyle = near ? `rgba(195,176,255,${a + 0.14})` : `rgba(221,245,236,${a * 0.8})`;
-      cx.lineWidth = near ? 1.2 : 1;
-      cx.stroke();
-    }
-    if (run && !reduce) kick();
-  }
-  kick();
+(function(){
+  var WA = 'https://wa.me/27761293926?text=' + encodeURIComponent("Hi Digital Switch! I'd like to refer a business that needs a website.\nBusiness name:\nArea:\nTheir number (if you have it):\nMy name:");
+  document.querySelectorAll('.wa-ref').forEach(function(a){ a.href = WA; a.target = '_blank'; a.rel = 'noopener'; });
+  var btn = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
+  btn.addEventListener('click', function(){ var o = links.classList.toggle('open'); btn.setAttribute('aria-expanded', o); btn.textContent = o ? 'Close' : 'Menu'; });
+  links.addEventListener('click', function(e){ if(e.target.closest('a')){ links.classList.remove('open'); btn.setAttribute('aria-expanded', false); btn.textContent = 'Menu'; } });
+  var nav = document.getElementById('nav'), head = document.querySelector('.headline'), w2 = nav.querySelector('.logo .w2');
+  new IntersectionObserver(function(es){ var vis = es[0].isIntersecting, wasOff = nav.classList.contains('logo-off'); nav.classList.toggle('logo-off', vis); if(!vis && wasOff){ w2.classList.remove('flick'); void w2.offsetWidth; w2.classList.add('flick'); } }, {threshold:0}).observe(head);
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 24); }, {passive:true});
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -10% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el, i){ el.style.transitionDelay = ((i % 4) * 80) + 'ms'; io.observe(el); });
 })();
-
-if (!reduce && window.gsap) {
-  gsap.registerPlugin(ScrollTrigger, SplitText);
-
-  /* Smooth scroll */
-  let lenis = null;
-  if (window.Lenis) {
-    lenis = new Lenis({ lerp: 0.1 });
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
-      const id = a.getAttribute("href"); const el = id === "#top" ? 0 : document.querySelector(id);
-      if (el !== null) { e.preventDefault(); lenis.scrollTo(el, { offset: -72 }); }
-    }));
-  }
-
-  /* Hero headline: letters rise in */
-  document.fonts.ready.then(() => {
-    const split = new SplitText("#heroTitle", { type: "lines,chars", linesClass: "split-line" });
-    gsap.set("#heroTitle", { visibility: "visible" });
-    gsap.from(split.chars, { yPercent: 110, duration: 1, ease: "expo.out", stagger: 0.018, delay: 0.35 });
-    gsap.from(".hero .lede, .hero-ctas, .hero .label", { y: 18, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.7 });
-
-    /* Footer giant word */
-    const g = new SplitText("#giant", { type: "chars" });
-    gsap.from(g.chars, { yPercent: 105, duration: 1.1, ease: "expo.out", stagger: 0.05, scrollTrigger: { trigger: "#giant", start: "top 92%" } });
-    ScrollTrigger.refresh();
-  });
-
-  /* Marquee that speeds up with scroll velocity */
-  const track = document.getElementById("marquee");
-  let x = 0, boost = 0, half = track.scrollWidth / 2;
-  window.addEventListener("resize", () => { half = track.scrollWidth / 2; });
-  document.fonts.ready.then(() => { half = track.scrollWidth / 2; });
-  gsap.ticker.add(() => {
-    x -= 0.6 + boost; boost *= 0.92;
-    if (-x >= half) x += half;
-    track.style.transform = `translate3d(${x}px,0,0)`;
-  });
-  ScrollTrigger.create({ onUpdate: s => { boost = Math.min(14, Math.abs(s.getVelocity()) / 220); } });
-
-  /* R750 count-up */
-  const cu = document.getElementById("countUp"), obj = { v: 0 };
-  ScrollTrigger.create({ trigger: cu, start: "top 85%", once: true, onEnter: () => {
-    gsap.fromTo(obj, { v: 0 }, { v: 750, duration: 1.6, ease: "power3.out", onUpdate: () => cu.textContent = Math.round(obj.v) });
-  } });
-
-  /* Stacking steps: earlier cards shrink back as the next arrives */
-  const steps = gsap.utils.toArray(".step");
-  steps.forEach((s, i) => {
-    const next = steps[i + 1]; if (!next) return;
-    gsap.to(s, { scale: 0.92, ease: "none", force3D: true,
-      scrollTrigger: { trigger: next, start: "top 85%", end: "top 15%", scrub: 0.4 } });
-  });
-
-  /* Statement: words light up as you read */
-  const st = document.getElementById("statement");
-  const ws = new SplitText(st, { type: "words", wordsClass: "w" });
-  st.querySelectorAll(".r .w, .r").forEach(el => el.classList.add("r"));
-  ws.words.forEach(w => { if (w.closest(".r")) w.classList.add("r"); });
-  ScrollTrigger.create({ trigger: st, start: "top 80%", end: "bottom 45%", scrub: true,
-    onUpdate: s => { const n = Math.round(s.progress * ws.words.length); ws.words.forEach((w, i) => w.classList.toggle("on", i < n)); } });
-
-  /* Pitch cards tilt in */
-  gsap.from(".pitch", { y: 50, rotate: 3, transformOrigin: "left bottom", duration: 1, ease: "expo.out", stagger: 0.1,
-    scrollTrigger: { trigger: ".pitches", start: "top 85%" } });
-
-  /* Price cards and rules slide up */
-  gsap.from(".price-card", { y: 40, duration: 1, ease: "expo.out", stagger: 0.12, scrollTrigger: { trigger: ".price", start: "top 85%" } });
-  gsap.from(".rule", { y: 24, duration: 0.8, ease: "power3.out", stagger: 0.05, scrollTrigger: { trigger: ".rules", start: "top 85%" } });
-
-  /* Magnetic solid buttons */
-  document.querySelectorAll(".btn-solid").forEach(b => {
-    b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.25, y: (e.clientY - r.top - r.height / 2) * 0.35, duration: 0.4, ease: "power3.out" }); });
-    b.addEventListener("pointerleave", () => gsap.to(b, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1,.4)" }));
-  });
-}
-
-/* Replay the logo when it's clicked */
-document.querySelector(".nav-logo").addEventListener("click", () => {
-  const l = document.querySelector(".dsl"); if (l) { const c = l.cloneNode(true); l.replaceWith(c); }
-});
 </script>
-
 </body>
 </html>
