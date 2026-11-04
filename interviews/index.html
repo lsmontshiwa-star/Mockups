@@ -1,0 +1,182 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book your interview | Digital Switch</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Book your Digital Switch sales rep interview: Friday 6 November, online.">
+<meta property="og:title" content="Book your Digital Switch interview">
+<meta property="og:description" content="Friday 6 November, online. Pick a time that suits you.">
+<meta property="og:image" content="https://digitalswitch.co.za/brand/ds-header-banner-neon.png">
+<meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300;500&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
+<style>
+/* Layout: one column on phones, two on desktop: the day + what to expect on the left, the booking card (slots, then details) on the right. Neon route brand, dark only. */
+:root{--night:#071719;--card:#0d2629;--street:#123336;--river:#1b4a4d;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;
+--display:'Unbounded',system-ui,sans-serif;--script:'Ballet','Snell Roundhand',cursive;--body:'Inter Tight',system-ui,-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+--neon:0 0 8px rgba(195,176,255,.9),0 0 22px rgba(155,123,255,.75),0 0 44px rgba(155,123,255,.45);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--mint);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--lilac)}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:3px}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 600px at 80% 0%,#0f2d30,transparent 70%),linear-gradient(rgba(27,74,77,.28) 1px,transparent 1px) 0 0/64px 64px,linear-gradient(90deg,rgba(27,74,77,.28) 1px,transparent 1px) 0 0/64px 64px,var(--night)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+header img{height:32px;width:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;padding:18px 0 70px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--lilac);text-shadow:var(--neon)}
+h1{font-family:var(--display);font-weight:200;font-size:clamp(34px,5vw,60px);line-height:1.05;letter-spacing:-.04em;margin:14px 0 16px;text-wrap:balance}
+h1 em{font-family:var(--script);font-style:normal;color:#f1ecff;font-size:1.3em;line-height:.8;text-shadow:0 0 8px #fff,0 0 22px var(--lilac),0 0 48px var(--glow)}
+.lead{color:var(--mist);font-size:19px;margin:0 0 24px;max-width:48ch}
+.facts{display:grid;gap:12px;margin:0 0 26px}
+.fact{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:14px 16px;border:1px solid var(--river);border-radius:16px;background:var(--card)}
+.fact b{font:500 12px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lilac)}
+.fact span{color:var(--mint);font-size:16px}
+h2{font-family:var(--display);font-weight:300;font-size:22px;letter-spacing:-.02em;margin:0 0 6px}
+.next{border-left:2px solid var(--lilac);padding:4px 0 4px 16px;color:var(--mist);font-size:15.5px}
+.next p{margin:0 0 8px}
+.card{background:linear-gradient(180deg,rgba(195,176,255,.12),rgba(195,176,255,.03));border:1px solid rgba(195,176,255,.45);border-radius:22px;padding:24px;box-shadow:0 0 40px rgba(155,123,255,.18)}
+.sub{color:var(--sage);font-size:15px;margin:0 0 14px}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.slot{min-height:48px;border-radius:12px;border:1px solid var(--river);background:var(--night);color:var(--mint);font:500 16px var(--mono);cursor:pointer;font-variant-numeric:tabular-nums;transition:border-color .2s,box-shadow .2s,background .2s}
+.slot:hover:not(:disabled){border-color:var(--lilac)}
+.slot[aria-pressed="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac);box-shadow:0 0 22px rgba(155,123,255,.6)}
+.slot:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.loading{color:var(--dim);font:400 14px var(--mono);padding:10px 0}
+label{display:block;font-size:15px;color:var(--sage);margin:16px 0 6px}
+label small{color:var(--dim)}
+input,select,textarea{width:100%;font:inherit;color:var(--mint);background:var(--night);border:1px solid var(--river);border-radius:12px;padding:12px 14px;min-height:50px}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--lilac);outline-offset:1px}
+details{margin-top:14px;color:var(--mist);font-size:15px}
+summary{cursor:pointer;color:var(--lilac)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+button.go{width:100%;margin-top:20px;min-height:56px;border:0;border-radius:999px;background:var(--lilac);color:var(--night);font:600 18px var(--body);cursor:pointer;box-shadow:0 0 26px rgba(155,123,255,.6)}
+button.go:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:12px;font-size:15px;min-height:1.5em}
+.msg.err{color:#ffb4bf}
+.done{display:none;text-align:center;padding:12px 0}
+.done h2{font-size:26px;margin-bottom:10px}
+.done p{color:var(--mist);margin:0 0 10px}
+.done .when{font:500 20px var(--display);color:#f1ecff;text-shadow:var(--neon);margin:10px 0 16px}
+footer{padding:30px 0 50px;color:var(--dim);font-size:14px;border-top:1px solid var(--street)}
+@media (max-width:860px){.grid{grid-template-columns:1fr;gap:28px}.fact{grid-template-columns:1fr;gap:2px}}
+@media (max-width:380px){.slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="bg" aria-hidden="true"></div>
+<div class="wrap">
+<header><a href="/"><img src="/brand/ds-logo-on-dark.png" alt="Digital Switch" width="400" height="122"></a></header>
+<main class="grid">
+  <section>
+    <div class="eyebrow">Sales rep interviews</div>
+    <h1>Book your <em>interview</em></h1>
+    <p class="lead">Thanks for applying to Digital Switch. Pick a time on Friday that suits you. It's a relaxed 20-minute video call, so we can get to know you.</p>
+    <div class="facts">
+      <div class="fact"><b>When</b><span>Friday 6 November, between 08:00 and 18:00 (SA time)</span></div>
+      <div class="fact"><b>Where</b><span>Google Meet. The link comes in your confirmation email.</span></div>
+      <div class="fact"><b>How long</b><span>About 20 minutes, including a short practice call</span></div>
+    </div>
+    <h2>If you're selected</h2>
+    <div class="next">
+      <p><b>Monday 9 November, 10:00–12:00:</b> sales training workshop, online</p>
+      <p><b>Tuesday 10 November, 10:00–12:00:</b> onboarding: your tools, your leads, how you get paid</p>
+      <p>Everyone hears back by Saturday 7 November at 12:00.</p>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="bk">
+    <form id="f" novalidate>
+      <h2 id="bk">Choose a time</h2>
+      <p class="sub" id="dayline">Friday 6 November · each slot is 30 minutes</p>
+      <div class="slots" id="slots" role="group" aria-label="Interview times"><div class="loading">Loading times…</div></div>
+      <details id="none"><summary>None of these times work for me</summary>
+        <label for="other">When are you free on Friday? <small>(we'll email you a time)</small></label>
+        <input id="other" name="other" maxlength="200" placeholder="e.g. after 18:00, or 07:30">
+      </details>
+
+      <label for="name">Full name</label>
+      <input id="name" name="name" autocomplete="name" required maxlength="80">
+      <label for="email">Email <small>(the one you applied with)</small></label>
+      <input id="email" name="email" type="email" autocomplete="email" required maxlength="120">
+      <label for="wa">WhatsApp number <small>(optional)</small></label>
+      <input id="wa" name="wa" type="tel" autocomplete="tel" inputmode="tel" maxlength="20">
+      <label for="market">Which businesses would you rather call?</label>
+      <select id="market" name="market">
+        <option value="">Not sure yet</option>
+        <option>South African businesses</option>
+        <option>US businesses (afternoons and evenings, SA time)</option>
+        <option>Either</option>
+      </select>
+      <label for="experience">Any sales, phone or customer service experience? <small>(one or two lines is fine)</small></label>
+      <textarea id="experience" name="experience" maxlength="400"></textarea>
+      <div class="hp" aria-hidden="true"><label>Website<input id="company_website" name="company_website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="go" id="go" type="submit">Book my interview</button>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    </form>
+    <div class="done" id="done" role="status" aria-live="polite">
+      <h2>You're booked</h2>
+      <div class="when" id="when"></div>
+      <p>We've emailed you the Google Meet link and what to prepare. If you can't see it, check your spam folder.</p>
+      <p>Need to change your time? Book again with the same email and your booking moves.</p>
+    </div>
+  </section>
+</main>
+<footer>Digital Switch · a web design studio in Johannesburg · <a href="mailto:hello@digitalswitch.co.za">hello@digitalswitch.co.za</a></footer>
+</div>
+<script>
+(function(){
+var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
+var $=function(i){return document.getElementById(i)}, t0=Date.now(), chosen='';
+var DAYNAME={'2026-11-06':'Friday 6 November'};
+function msg(t,err){$('msg').textContent=t;$('msg').className='msg'+(err?' err':'')}
+function draw(j){
+  var box=$('slots'); box.innerHTML='';
+  if(j.closed){box.innerHTML='<div class="loading">Bookings are closed. Please email hello@digitalswitch.co.za.</div>';$('go').disabled=true;return}
+  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day]+' · each slot is 30 minutes';
+  var free=0;
+  j.slots.forEach(function(s){
+    var b=document.createElement('button'); b.type='button'; b.className='slot'; b.textContent=s;
+    var taken=j.taken.indexOf(s)>-1; b.disabled=taken; b.setAttribute('aria-pressed',s===chosen?'true':'false');
+    b.setAttribute('aria-label',s+(taken?', taken':''));
+    if(!taken)free++;
+    b.onclick=function(){chosen=s;[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});msg('')};
+    box.appendChild(b);
+  });
+  if(chosen&&j.taken.indexOf(chosen)>-1)chosen='';
+  if(!free){$('none').open=true}
+}
+function load(){
+  return fetch(EP+'?interviews=1&t='+Date.now()).then(function(r){return r.json()}).then(function(j){if(j&&j.slots)draw(j);else throw 0})
+    .catch(function(){$('slots').innerHTML='<div class="loading">Couldn’t load the times. Refresh, or email hello@digitalswitch.co.za.</div>'});
+}
+load();
+function poll(ref,tries){
+  return fetch(EP+'?interviews=1&ref='+ref+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
+    if(j&&j.pending&&tries>0)return new Promise(function(res){setTimeout(res,1500)}).then(function(){return poll(ref,tries-1)});
+    return j;
+  });
+}
+$('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var name=$('name').value.trim(), email=$('email').value.trim(), other=$('other').value.trim();
+  if(!chosen&&!other){msg('Choose a time, or tell us when you’re free.',true);return}
+  if(!name){msg('Please add your name.',true);$('name').focus();return}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg('Please check your email address.',true);$('email').focus();return}
+  var ref='iv'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+  var fd=new FormData();
+  [['kind','interview'],['site','interview'],['ref',ref],['slot',chosen],['other',other],['name',name],['email',email],['wa',$('wa').value.trim()],
+   ['market',$('market').value],['experience',$('experience').value.trim()],['company_website',$('company_website').value],['_t',String(Date.now()-t0)]]
+   .forEach(function(p){fd.append(p[0],p[1])});
+  $('go').disabled=true; msg('Booking…');
+  fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){return poll(ref,8)}).then(function(j){
+    if(j&&j.ok){$('f').style.display='none';$('when').textContent=j.when||'We’ll email you a time';$('done').style.display='block';return}
+    $('go').disabled=false;
+    if(j&&j.error==='taken'){msg('Someone just took that time. Please pick another.',true);chosen='';load();return}
+    if(j&&j.error==='closed'){msg('Bookings are closed. Please email hello@digitalswitch.co.za.',true);return}
+    if(j&&j.pending){msg('We’re still confirming. Check your email in a few minutes. If nothing arrives, email hello@digitalswitch.co.za.',true);return}
+    msg('Something didn’t go through. Please check your details and try again.',true);
+  }).catch(function(){$('go').disabled=false;msg('No connection. Please try again.',true)});
+});
+})();
+</script>
+</body></html>
