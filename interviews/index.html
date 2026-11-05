@@ -41,7 +41,8 @@ h2{font-family:var(--display);font-weight:300;font-size:22px;letter-spacing:-.02
 .slot{min-height:48px;border-radius:12px;border:1px solid var(--river);background:var(--night);color:var(--mint);font:500 16px var(--mono);cursor:pointer;font-variant-numeric:tabular-nums;transition:border-color .2s,box-shadow .2s,background .2s}
 .slot:hover:not(:disabled){border-color:var(--lilac)}
 .slot[aria-pressed="true"]{background:var(--lilac);color:var(--night);border-color:var(--lilac);box-shadow:0 0 22px rgba(155,123,255,.6)}
-.slot:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.slot:disabled{cursor:not-allowed;background:repeating-linear-gradient(135deg,rgba(27,74,77,.35) 0 6px,transparent 6px 12px);border-color:var(--street);color:var(--dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1.1}
+.slot:disabled small{font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
 .loading{color:var(--dim);font:400 14px var(--mono);padding:10px 0}
 label{display:block;font-size:15px;color:var(--sage);margin:16px 0 6px}
 label small{color:var(--dim)}
@@ -88,7 +89,7 @@ button.go:hover{box-shadow:0 0 40px rgba(155,123,255,.85)}
   <section>
     <div class="eyebrow">Telesales interviews</div>
     <h1>Book your <em>interview</em></h1>
-    <p class="lead">Thank you for applying to Digital Switch. Congratulations, your application has been selected for the next stage: an interview for the Telesales Representative role. Please choose a time below that works for you.</p>
+    <p class="lead">Congratulations, your application has been selected for the next stage: an interview for the Telesales Representative role. Please choose a time below that works for you.</p>
     <div class="facts">
       <div class="fact"><b>When</b><span>Monday 9 November, between 08:00 and 18:00 (SA time)</span></div>
       <div class="fact"><b>Where</b><span>Google Meet. The link comes in your confirmation email.</span></div>
@@ -111,7 +112,7 @@ button.go:hover{box-shadow:0 0 40px rgba(155,123,255,.85)}
   <section class="card" aria-labelledby="bk">
     <form id="f" novalidate>
       <h2 id="bk">Choose a time</h2>
-      <p class="sub" id="dayline">Monday 9 November · a slot every 30 minutes</p>
+      <p class="sub" id="dayline">Monday 9 November</p>
       <div class="slots" id="slots" role="group" aria-label="Interview times"><div class="loading">Loading times…</div></div>
 
       <label for="name">Full name</label>
@@ -153,12 +154,12 @@ function msg(t,err){$('msg').textContent=t;$('msg').className='msg'+(err?' err':
 function draw(j){
   var box=$('slots'); box.innerHTML='';
   if(j.closed){box.innerHTML='<div class="loading">Bookings are closed. Please email hello@digitalswitch.co.za.</div>';$('go').disabled=true;return}
-  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day]+' · a slot every 30 minutes';
+  if(j.day&&DAYNAME[j.day])$('dayline').textContent=DAYNAME[j.day];
   var free=0;
   j.slots.forEach(function(s){
     var b=document.createElement('button'); b.type='button'; b.className='slot'; b.textContent=s;
     var taken=j.taken.indexOf(s)>-1; b.disabled=taken; b.setAttribute('aria-pressed',s===chosen?'true':'false');
-    b.setAttribute('aria-label',s+(taken?', taken':''));
+    b.setAttribute('aria-label',s+(taken?', already booked':'')); if(taken){var t=document.createElement('small'); t.textContent='Booked'; b.appendChild(t);}
     if(!taken)free++;
     b.onclick=function(){chosen=s;[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});msg('')};
     box.appendChild(b);
@@ -170,6 +171,7 @@ function load(){
     .catch(function(){$('slots').innerHTML='<div class="loading">Couldn’t load the times. Refresh, or email hello@digitalswitch.co.za.</div>'});
 }
 load();
+setInterval(function(){ if(document.visibilityState==='visible' && $('f').style.display!=='none') load(); },60000);
 function poll(ref,tries){
   return fetch(EP+'?interviews=1&ref='+ref+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
     if(j&&j.pending&&tries>0)return new Promise(function(res){setTimeout(res,1500)}).then(function(){return poll(ref,tries-1)});
@@ -191,7 +193,7 @@ $('f').addEventListener('submit',function(e){
   fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){return poll(ref,8)}).then(function(j){
     if(j&&j.ok){$('f').style.display='none';$('when').textContent=j.when||'Thanks, we’ve received your note';$('done').style.display='block';return}
     $('go').disabled=false;
-    if(j&&j.error==='taken'){msg('Someone just took that time. Please pick another.',true);chosen='';load();return}
+    if(j&&j.error==='taken'){msg('Someone has just booked that time. Please choose another.',true);chosen='';load();return}
     if(j&&j.error==='closed'){msg('Bookings are closed. Please email hello@digitalswitch.co.za.',true);return}
     if(j&&j.pending){msg('We’re still confirming. Check your email in a few minutes. If nothing arrives, email hello@digitalswitch.co.za.',true);return}
     msg('Something didn’t go through. Please check your details and try again.',true);
