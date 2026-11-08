@@ -1,8 +1,7 @@
-// Mamepeng: a golden-hour 3D farm. Bees fly around the viewer as the camera
-// walks through Sefudi Farms; at the harvest the swarm carries the honey jar
-// up and presents it. Driven by the page's scroll (window.FARM api below).
+// Mamepeng: a morning 3D farm. Bees fly around the viewer as the camera
+// walks through Sefudi Farms; in the shop and the fridge test the swarm carries
+// their real jar up to you. Driven by the page's scroll (window.FARM api below).
 import * as THREE from './three.module.min.js';
-import { RoomEnvironment } from './RoomEnvironment.js';
 import { EffectComposer } from './EffectComposer.js';
 import { RenderPass } from './RenderPass.js';
 import { UnrealBloomPass } from './UnrealBloomPass.js';
@@ -16,7 +15,8 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, powerPreference: 'high-performance' });
 } catch (e) { document.documentElement.classList.add('no-webgl'); throw e; }
-renderer.setPixelRatio(Math.min(devicePixelRatio, small ? 1.4 : 1.75));
+let dpr = Math.min(devicePixelRatio, small ? 1.3 : 1.5);
+renderer.setPixelRatio(dpr);
 renderer.setSize(innerWidth, innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.0;
@@ -115,31 +115,40 @@ const windU = { value: 0 };
 }
 
 /* ---------- camera: every chapter moves in its own plane ---------- */
-// orbit, sweep, side-track, crane, aerial turn, dolly, orbit, truck, crane, pan
+// chapters: arrive, shop, founder, first hives, growth, forage, harvest, fridge, gallery, together, visit
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const lerp3 = (a, b, k) => a.clone().lerp(b, k);
 const orbit = (c, r, a, h) => V(c.x + Math.sin(a) * r, h, c.z + Math.cos(a) * r);
 const E = (t) => t * t * (3 - 2 * t);
 const SHOTS = [
   (t) => ({ p: orbit(V(5, 0, 0), 27 - t * 4, 0.72 + t * 0.4, 5.6 - t * 1.6), l: V(5, 2.4, 0) }),
+  small ? (t) => ({ p: lerp3(V(5.4, 4.2, 15.5), V(6.0, 3.2, 12.6), E(t)), l: V(6.2, 1.35, 6) })
+        : (t) => ({ p: lerp3(V(2.6, 4.4, 14.5), V(4.6, 3.0, 11.4), E(t)), l: V(9.4, 2.75, 5.6) }),
   (t) => ({ p: orbit(V(-14, 0, -10), 12.5, 0.55 - E(t) * 0.95, 3.1 + t * 0.6), l: V(-14, 3.2, -10) }),
   (t) => ({ p: V(3.5 + E(t) * 14, 2.0, 10.8), l: V(5.5 + E(t) * 10, 1.3, 4.2) }),
   (t) => ({ p: lerp3(V(15, 3.5, 15), V(4, 30, 60), E(t)), l: lerp3(V(10, 1.2, 4), V(52, 0, -2), E(t)) }),
   (t) => ({ p: orbit(V(-2, 0, 0), 70, 0.1 + t * 0.85, 138), l: V(-2, 0, 0) }),
-  (t) => ({ p: lerp3(V(6.2, 7.5, 24), V(6.2, 3.1, 12.6), E(t)), l: V(6.2, 2.75, 6) }),
-  (t) => ({ p: orbit(V(6.2, 0, 6), 5.4, -0.55 + E(t) * 1.1, 3.35), l: V(6.2, 3.1, 6) }),
-  (t) => ({ p: V(3.2 + E(t) * 2.2, 3.15, 11.6), l: V(6.1, 3.0, 6) }),
+  (t) => ({ p: V(16.5 - E(t) * 4, 1.6, 10.5), l: V(11 - E(t) * 2, 1.2, 2.5) }),
+  small ? (t) => ({ p: V(6.6 - t * 0.6, 3.0, 11.8 - t * 0.4), l: V(6.2, 1.4, 6) })
+        : (t) => ({ p: V(5.0 - t * 0.3, 2.95, 10.4 - t * 0.5), l: V(8.7, 2.65, 5.8) }),
   (t) => ({ p: lerp3(V(22, 20, 24), V(31, 8, 31), E(t)), l: V(0, 3, -4) }),
   (t) => ({ p: V(34, 12 + t * 3, 40), l: lerp3(V(0, 3, -4), V(-48, 9, -62), E(t)) }),
+  (t) => ({ p: lerp3(V(30, 16, 48), V(-6, 34, 104), E(t)), l: V(-10, 2, -20) }),
 ];
-function shot(ch, t) {
-  const cur = SHOTS[ch](t);
-  if (ch === 0 || t >= 0.3) return cur;
-  const prev = SHOTS[ch - 1](1), w = E(t / 0.3);
-  return { p: prev.p.lerp(cur.p, w), l: prev.l.lerp(cur.l, w) };
+const N = SHOTS.length;
+// P = chapter + phase: 0..0.75 while the chapter is pinned, 0.75..1 while the next one scrolls in
+function shotAt(P) {
+  const k = Math.min(N - 1, Math.floor(P)), ph = P - k;
+  if (ph < 0.75 || k === N - 1) return SHOTS[k](Math.min(1, ph / 0.75));
+  const a = SHOTS[k](1), b = SHOTS[k + 1](0), w = E((ph - 0.75) / 0.25);
+  return { p: a.p.lerp(b.p, w), l: a.l.lerp(b.l, w) };
 }
-const KF = SHOTS;
-const pathPts = []; for (let c = 0; c < SHOTS.length; c++) for (let k = 0; k <= 30; k++) pathPts.push(shot(c, k / 30).p);
+function weightOf(P, list) { // how much the current position belongs to chapters in the list
+  const k = Math.min(N - 1, Math.floor(P)), ph = P - k, in0 = list.includes(k) ? 1 : 0;
+  if (ph < 0.75 || k === N - 1) return in0;
+  const in1 = list.includes(k + 1) ? 1 : 0; return in0 + (in1 - in0) * E((ph - 0.75) / 0.25);
+}
+const pathPts = []; for (let k = 0; k <= N * 30; k++) pathPts.push(shotAt(k / 30).p);
 const nearPath = (x, z, r) => pathPts.some((p) => Math.hypot(p.x - x, p.z - z) < r);
 
 /* ---------- acacias ---------- */
@@ -208,7 +217,7 @@ for (let i = 0; i < flowerCount; i++) {
 }
 scene.add(flowers);
 const PALETTES = {
-  multi: ['#ff7fa3', '#ffffff', '#c7b3ff', '#ff9e7a', '#8fc3ff'],
+  multi: ['#f2c94c', '#ffffff', '#c7b3ff', '#ff9e7a', '#8fc3ff'],
   orange: ['#ffffff', '#fff6dc', '#ffe6a8', '#ffffff', '#ffd9a8'],
   wild: ['#b0262a', '#7a2a6b', '#d9522a', '#5b2a1a', '#ff8a3d'],
   acacia: ['#ffe14a', '#ffd21f', '#fff2a8', '#f6c36a', '#ffe14a'],
@@ -281,7 +290,7 @@ const hiveBody = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1.05, 0.75), n
 const hiveLid = new THREE.InstancedMesh(new THREE.BoxGeometry(1.14, 0.14, 0.9), new THREE.MeshStandardMaterial({ color: '#8f8a80', roughness: 0.5, metalness: 0.4 }), MAX_HIVES);
 const hiveDoor = new THREE.InstancedMesh(new THREE.BoxGeometry(0.62, 0.08, 0.04), new THREE.MeshBasicMaterial({ color: '#1a0f06' }), MAX_HIVES);
 const hiveStand = new THREE.InstancedMesh(new THREE.BoxGeometry(1.1, 0.16, 0.9), new THREE.MeshStandardMaterial({ color: '#5a4026', roughness: 1 }), MAX_HIVES);
-const hiveCols = ['#f7f3ea', '#9fd6c3', '#f6b8c8', '#b9d3f0', '#dce9b0'];
+const hiveCols = ['#f7f3ea', '#cfe0c4', '#ecd9a6', '#d9e6f2', '#f3ead2'];
 const hiveScale = new Float32Array(MAX_HIVES).fill(0);
 for (let i = 0; i < MAX_HIVES; i++) hiveBody.setColorAt(i, new THREE.Color(hiveCols[i % 5]));
 function placeHives() {
@@ -299,47 +308,36 @@ placeHives();
 scene.add(hiveBody, hiveLid, hiveDoor, hiveStand);
 
 /* ---------- the five-kilometre forage ring ---------- */
-const ring = new THREE.Mesh(new THREE.TorusGeometry(72, 0.45, 8, 180), new THREE.MeshBasicMaterial({ color: '#ff5f8f', transparent: true, opacity: 0, fog: false }));
+const ring = new THREE.Mesh(new THREE.TorusGeometry(72, 0.45, 8, 180), new THREE.MeshBasicMaterial({ color: '#d4ae5c', transparent: true, opacity: 0, fog: false }));
 ring.rotation.x = Math.PI / 2; ring.position.set(-2, 9, 0);
 scene.add(ring);
 
-/* ---------- the honey jar ---------- */
-const pmrem = new THREE.PMREMGenerator(renderer);
-const envMap = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
-const jar = new THREE.Group();
-const JAR_H = 2.3;
-const profile = [[0, 0], [0.82, 0], [0.97, 0.06], [1.02, 0.28], [1.02, 1.72], [0.97, 1.92], [0.86, 2.03], [0.8, 2.1], [0.8, 2.3]].map(([x, y]) => new THREE.Vector2(x, y));
-const glass = new THREE.Mesh(new THREE.LatheGeometry(profile, 72), new THREE.MeshPhysicalMaterial({
-  color: '#ffffff', metalness: 0, roughness: 0.04, transmission: 1, thickness: 0.25, ior: 1.5, envMap, envMapIntensity: 1.3, clearcoat: 1, clearcoatRoughness: 0.05, transparent: true, side: THREE.DoubleSide,
-}));
-const honeyClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
-const honeyMat = new THREE.MeshPhysicalMaterial({
-  color: '#e38a1c', roughness: 0.12, transmission: 0.62, thickness: 1.6, ior: 1.49, attenuationColor: new THREE.Color('#a8450c'), attenuationDistance: 0.9,
-  envMap, envMapIntensity: 1, clippingPlanes: [honeyClip], emissive: '#7a2e05', emissiveIntensity: 0.18,
-});
-const honeyProfile = profile.slice(0, 7).map((v) => new THREE.Vector2(Math.max(0, v.x * 0.93), Math.max(0.05, v.y)));
-const honey = new THREE.Mesh(new THREE.LatheGeometry(honeyProfile, 64), honeyMat);
-const surfaceMat = honeyMat.clone(); surfaceMat.clippingPlanes = [];
-const surface = new THREE.Mesh(new THREE.CircleGeometry(0.94, 64), surfaceMat);
-surface.rotation.x = -Math.PI / 2;
-const lidGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.32, 72, 1);
-const lp = lidGeo.attributes.position;
-for (let i = 0; i < lp.count; i++) { const a = Math.atan2(lp.getZ(i), lp.getX(i)); const k = 1 + 0.018 * Math.max(0, Math.cos(a * 36)); if (Math.abs(lp.getY(i)) < 0.159) { lp.setX(i, lp.getX(i) * k); lp.setZ(i, lp.getZ(i) * k); } }
-lidGeo.computeVertexNormals();
-const lid = new THREE.Mesh(lidGeo, new THREE.MeshStandardMaterial({ color: '#d9b25a', metalness: 1, roughness: 0.28, envMap, envMapIntensity: 1.4 }));
-const LID_Y = 2.42; lid.position.y = LID_Y;
-const labelTex = new THREE.TextureLoader().load('img/label.jpg');
-labelTex.colorSpace = THREE.SRGBColorSpace; labelTex.anisotropy = 8;
-const ARC = 1.85;
-const label = new THREE.Mesh(new THREE.CylinderGeometry(1.032, 1.032, 0.98, 64, 1, true, -ARC / 2, ARC), new THREE.MeshStandardMaterial({ map: labelTex, roughness: 0.55 }));
-label.position.y = 1.0;
-jar.add(honey, surface, glass, label, lid);
+/* ---------- their real jar, carried in by the bees ---------- */
+const crystalU = { value: 0 };
+const jarTex = new THREE.TextureLoader().load('img/real-jar.webp');
+jarTex.colorSpace = THREE.SRGBColorSpace; jarTex.anisotropy = 8;
+const jarMat = new THREE.MeshBasicMaterial({ map: jarTex, transparent: true, toneMapped: false, fog: false, depthWrite: false });
+jarMat.onBeforeCompile = (sh) => {
+  sh.uniforms.uCrystal = crystalU;
+  sh.fragmentShader = 'uniform float uCrystal;\n' + sh.fragmentShader.replace('#include <map_fragment>',
+    `#include <map_fragment>
+     vec3 c0 = diffuseColor.rgb;
+     float mx = max(c0.r, max(c0.g, c0.b)), mn = min(c0.r, min(c0.g, c0.b));
+     float sat = (mx - mn) / (mx + 0.001);
+     float hon = smoothstep(0.42, 0.68, sat) * (1.0 - smoothstep(0.5, 0.64, c0.g / (c0.r + 0.001))) * smoothstep(0.04, 0.16, mx);
+     float n = fract(sin(dot(floor(vMapUv * 260.0), vec2(12.9898, 78.233))) * 43758.5453);
+     float l = dot(c0, vec3(0.3, 0.59, 0.11));
+     vec3 set = vec3(0.97, 0.84, 0.55) * (0.62 + 0.7 * l) + (n - 0.5) * 0.07;
+     diffuseColor.rgb = mix(c0, set, hon * uCrystal);`);
+};
+const JAR_H = 1.55;
+const jar = new THREE.Mesh(new THREE.PlaneGeometry(JAR_H * 647 / 807, JAR_H), jarMat);
+jar.renderOrder = 5;
 jar.scale.setScalar(0.0001);
 scene.add(jar);
-const JAR_HOME = new THREE.Vector3(9.8, hivePos[2].y + 1.4, 4.4);
-const JAR_SHOW = new THREE.Vector3(6.2, 2.6, 6);
-let honeyLevel = 0.35, crystal = 0;
-const hCol = new THREE.Color('#e38a1c'), cCol = new THREE.Color('#efcd86');
+const JAR_HOME = new THREE.Vector3(9.8, hivePos[2].y + 1.2, 4.4);
+const JAR_SHOW = new THREE.Vector3(6.2, 2.62, 6);
+let crystal = 0;
 
 /* ---------- bees ---------- */
 const NB = small ? 80 : 180;
@@ -366,7 +364,7 @@ addEventListener('pointerup', () => { drag = null; document.documentElement.clas
 addEventListener('pointermove', (e) => { pointer.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1); pointerOn = true; }, { passive: true });
 addEventListener('pointerleave', () => (pointerOn = false));
 
-let chapter = 0, chapterT = 0, mode = 'multi';
+let targetP = 0, P = 0, mode = 'multi';
 
 /* ---------- post: soft bloom for the sun, aloes and honey ---------- */
 let composer = null;
@@ -379,7 +377,7 @@ if (!small) {
 
 function resize() {
   camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight); if (composer) composer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight); if (composer) { composer.setPixelRatio(dpr); composer.setSize(innerWidth, innerHeight); }
 }
 addEventListener('resize', resize);
 
@@ -387,7 +385,7 @@ addEventListener('resize', resize);
 const clock = new THREE.Clock();
 const tmpV = new THREE.Vector3(), fwd = new THREE.Vector3(), camPos = new THREE.Vector3(), look = new THREE.Vector3(), smLook = new THREE.Vector3(5, 2, 0), par = new THREE.Vector2();
 const q = new THREE.Quaternion(), m4 = new THREE.Matrix4(), wm = new THREE.Matrix4(), flap = new THREE.Matrix4(), mir = new THREE.Matrix4().makeScale(-1, 1, 1);
-let jarLift = 0, shown = false, introT = SNAP ? 1 : 0, focus = 0, focusTarget = 0, introDone = false;
+let jarLift = 0, shown = false, introT = SNAP ? 1 : 0, focus = 0, focusTarget = 0, introDone = false, slow = 0, dtAvg = 1 / 60;
 const INTRO_FROM = new THREE.Vector3(70, 48, 95);
 const ZERO2 = new THREE.Vector2();
 function frame() {
@@ -395,63 +393,55 @@ function frame() {
   windU.value = reduce ? 0 : t;
   pollenU.uTime.value = t; pollenU.uCam.value.copy(camera.position);
   mouseU.value.copy(pointerOn ? pointer : mouseU.value.set(9, 9));
-  focus += (focusTarget - focus) * 0.06;
-  const f = Math.min(SHOTS.length - 1, chapter + chapterT);
-  const ci = Math.min(SHOTS.length - 1, chapter), sh = shot(ci, ci === SHOTS.length - 1 ? Math.min(1, chapterT) : chapterT);
+  const k1 = (r) => 1 - Math.exp(-dt * r); // frame-rate independent easing
+  focus += (focusTarget - focus) * k1(3.5);
+  // the page tells us where the reader is; we glide there instead of jumping
+  P = SNAP ? targetP : P + (targetP - P) * k1(4.2);
+  const sh = shotAt(P);
   camPos.copy(sh.p); look.copy(sh.l);
-  par.lerp(pointerOn ? pointer : ZERO2, 0.04);
-  camPos.x += par.x * 0.6; camPos.y += par.y * 0.35;
-  // a slow descent onto the farm when the page opens, then the walk is yours
+  par.lerp(pointerOn ? pointer : ZERO2, k1(2.4));
+  camPos.x += par.x * 0.5; camPos.y += par.y * 0.3;
+  // a slow descent onto the farm when the page opens
   introT = Math.min(1, introT + dt / 4.2);
   const ie = 1 - Math.pow(1 - introT, 3);
   if (ie < 1) camPos.lerp(INTRO_FROM, 1 - ie);
   else if (!introDone) { introDone = true; document.documentElement.classList.add('intro-done'); }
-  // a gentle breathing drift, so the farm is never frozen
-  if (!reduce) { camPos.y += Math.sin(t * 0.4) * 0.12; camPos.x += Math.sin(t * 0.23) * 0.18; }
-  camera.position.lerp(camPos, SNAP || ie < 1 ? 1 : 0.12);
-  if (!drag) { yaw *= 0.95; pitch *= 0.95; }
-  if (yaw || pitch) { const d = look.clone().sub(camPos); d.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw); const right = new THREE.Vector3().crossVectors(d, new THREE.Vector3(0, 1, 0)).normalize(); d.applyAxisAngle(right, pitch); look.copy(camPos).add(d); }
-  smLook.lerp(look, SNAP ? 1 : 0.12); camera.lookAt(smLook);
+  if (!reduce) { camPos.y += Math.sin(t * 0.4) * 0.1; camPos.x += Math.sin(t * 0.23) * 0.14; }
+  camera.position.lerp(camPos, SNAP || ie < 1 ? 1 : k1(9));
+  if (!drag) { yaw *= Math.exp(-dt * 3); pitch *= Math.exp(-dt * 3); }
+  if (Math.abs(yaw) > 1e-4 || Math.abs(pitch) > 1e-4) { const d = look.clone().sub(camPos); d.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw); const right = new THREE.Vector3().crossVectors(d, new THREE.Vector3(0, 1, 0)).normalize(); d.applyAxisAngle(right, pitch); look.copy(camPos).add(d); }
+  smLook.lerp(look, SNAP ? 1 : k1(9)); camera.lookAt(smLook);
 
-  // hives grow across the hills during chapter 3
-  const g = f < 3 ? 0 : f > 4 ? 1 : f - 3;
+  // hives: six until the growth chapter, then they fill the hills
+  const g = P < 4 ? 0 : P > 4.75 ? 1 : (P - 4) / 0.75;
   const lit = 6 + Math.round(g * g * (MAX_HIVES - 6));
   let changed = false;
-  for (let i = 6; i < MAX_HIVES; i++) { const target = i < lit ? 1 : 0; const nv = SNAP ? target : hiveScale[i] + (target - hiveScale[i]) * 0.18; if (Math.abs(nv - hiveScale[i]) > 0.001) { hiveScale[i] = nv; changed = true; } }
+  for (let i = 6; i < MAX_HIVES; i++) { const target = i < lit ? 1 : 0; const nv = SNAP ? target : hiveScale[i] + (target - hiveScale[i]) * k1(10); if (Math.abs(nv - hiveScale[i]) > 0.001) { hiveScale[i] = nv; changed = true; } }
   if (changed) placeHives();
   window.FARM.hives = lit;
 
-  ring.material.opacity = Math.max(0, 1 - Math.abs(f - 4) * 1.6) * 0.9;
+  ring.material.opacity = weightOf(P, [5]) * 0.9;
 
-  // the jar: rests in a hive, then the swarm lifts it up to you (4.55 -> 5.4)
-  const lift = S(4.55, 5.35, f);
-  jarLift += (lift - jarLift) * (SNAP ? 1 : 0.08);
-  const shopShift = S(6.5, 7.2, f) * -1.1 + S(7.6, 8.2, f) * 1.1;
-  tmpV.copy(JAR_HOME).lerp(JAR_SHOW, jarLift); tmpV.y += Math.sin(jarLift * Math.PI) * 1.4 + Math.sin(t * 1.3) * 0.05 * jarLift; tmpV.x += shopShift;
+  // the jar: rests by a hive, the swarm lifts it to you in the shop and the fridge test
+  const want = weightOf(P, [1, 7]);
+  jarLift = SNAP ? want : jarLift + (want - jarLift) * k1(2.6);
+  tmpV.copy(JAR_HOME).lerp(JAR_SHOW, jarLift); tmpV.y += Math.sin(jarLift * Math.PI) * 1.2 + (reduce ? 0 : Math.sin(t * 1.3) * 0.05 * jarLift);
   jar.position.copy(tmpV);
-  const away = S(7.9, 8.5, f);
-  jar.scale.setScalar(Math.max(0.0001, Math.min(1, jarLift * 1.5) * (1 - away)) * 0.62);
-  jar.rotation.y = (reduce ? 0 : t * 0.25) + (1 - jarLift) * 2.5;
-  honeyLevel = 0.3 + S(5.0, 5.9, f) * 0.6;
-  const levelY = 0.06 + honeyLevel * 1.9;
-  honeyClip.constant = jar.position.y + levelY * jar.scale.y;
-  surface.position.y = levelY;
-  lid.position.y = LID_Y + (1 - S(5.75, 6.0, f)) * S(4.9, 5.1, f) * 1.1;
-  lid.rotation.y = lid.position.y * 3;
-  honeyMat.color.copy(hCol).lerp(cCol, crystal); honeyMat.transmission = 0.62 * (1 - crystal); honeyMat.roughness = 0.12 + crystal * 0.7;
-  surfaceMat.color.copy(honeyMat.color); surfaceMat.transmission = honeyMat.transmission; surfaceMat.roughness = honeyMat.roughness;
-  shown = jar.scale.x > 0.01;
+  jar.scale.setScalar(Math.max(0.0001, Math.min(1, jarLift * 1.4)));
+  jar.rotation.set(0, Math.atan2(camera.position.x - jar.position.x, camera.position.z - jar.position.z), reduce ? 0 : Math.sin(t * 0.9) * 0.025);
+  crystalU.value += (crystal - crystalU.value) * k1(3);
+  shown = jarLift > 0.35;
 
   // bees
   camera.getWorldDirection(fwd);
   const near = tmpV.copy(camera.position).addScaledVector(fwd, 6.5);
   let ptr = null;
   if (pointerOn) { ray.setFromCamera(pointer, camera); ptr = ray.ray.at(5.5, new THREE.Vector3()); }
-  const present = shown && f > 4.7 && f < 8.1;
+  const present = shown;
   for (let i = 0; i < NB; i++) {
     const b = B[i], a = t * b.sp + b.ph;
     let cx, cy, cz, r = b.r;
-    if (present && b.job < 0.75) { cx = jar.position.x; cy = jar.position.y + 0.9; cz = jar.position.z; r = 0.75 + b.r * 0.35; }
+    if (present && b.job < (small ? 0.32 : 0.55)) { cx = jar.position.x; cy = jar.position.y + 0.2; cz = jar.position.z; r = 0.6 + b.r * 0.16; }
     else if (b.job < 0.25) { const h = hivePos[b.hive]; cx = h.x; cy = h.y + 1.6; cz = h.z; r = 0.6 + b.r * 0.4; }
     else if (focus > 0.05 && b.job > 0.3) { cx = near.x; cy = near.y - 0.4; cz = near.z; r = 0.4 + b.r * 0.25 * (1 - focus * 0.6); }
     else { cx = near.x; cy = near.y; cz = near.z; }
@@ -474,14 +464,18 @@ function frame() {
   }
   bees.instanceMatrix.needsUpdate = wings.instanceMatrix.needsUpdate = true;
 
+  // keep it fluid: if frames run slow, render fewer pixels
+  dtAvg += (dt - dtAvg) * 0.05;
+  if (!SNAP && t > 6 && ++slow > 90) { slow = 0; if (dtAvg > 1 / 42 && dpr > 1) { dpr = Math.max(1, dpr - 0.25); renderer.setPixelRatio(dpr); resize(); } else if (dtAvg > 1 / 30 && composer) { composer = null; } }
   if (composer) composer.render(); else renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }
 
 window.FARM = {
   hives: 6,
-  set(ch, tt) { chapter = ch; chapterT = tt; },
+  set(p) { targetP = Math.max(0, Math.min(N - 1, p)); if (SNAP) P = targetP; },
   flora(m) { mode = m; paintFlowers(m); },
+  count: N,
   crystal(c) { crystal = c; },
   focus(on) { focusTarget = on ? 1 : 0; },
 };

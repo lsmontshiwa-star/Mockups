@@ -2,3 +2,5 @@ Photos from Unsplash (Unsplash License), used in the no-3D fallback and supporti
 u-frame, u-bees, u-macro, u-drip, u-comb, u-aloe, u-hive. Source: unsplash.com.
 Product, founder and team photos: Mamepeng / Sefudi Farms (Amazon listing and Instagram @beefarming_with_sefudi), for this private preview only.
 Fonts: Young Serif and Hanken Grotesk (SIL Open Font License).
+Jar photo: supplied by the client (Amazon product shot). Gallery photos (g-*.webp): Mamepeng's own Instagram posts, for this private preview only.
+Fonts now matched to the jar label: Didact Gothic, Caladea, Carlito, Qwitcher Grypen (SIL Open Font License).
