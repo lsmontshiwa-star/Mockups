@@ -1,0 +1,490 @@
+// Mamepeng: a golden-hour 3D farm. Bees fly around the viewer as the camera
+// walks through Sefudi Farms; at the harvest the swarm carries the honey jar
+// up and presents it. Driven by the page's scroll (window.FARM api below).
+import * as THREE from './three.module.min.js';
+import { RoomEnvironment } from './RoomEnvironment.js';
+import { EffectComposer } from './EffectComposer.js';
+import { RenderPass } from './RenderPass.js';
+import { UnrealBloomPass } from './UnrealBloomPass.js';
+import { OutputPass } from './OutputPass.js';
+
+const canvas = document.getElementById('farm');
+const small = Math.min(innerWidth, innerHeight) < 700 || matchMedia('(pointer:coarse)').matches;
+const SNAP = /shot=1/.test(location.search);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, powerPreference: 'high-performance' });
+} catch (e) { document.documentElement.classList.add('no-webgl'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, small ? 1.4 : 1.75));
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.localClippingEnabled = true;
+
+const scene = new THREE.Scene();
+const HORIZON = new THREE.Color('#e4edf0');
+scene.fog = new THREE.Fog(HORIZON, 70, 420);
+const camera = new THREE.PerspectiveCamera(small ? 55 : 42, innerWidth / innerHeight, 0.05, 1200);
+
+/* ---------- light & sky ---------- */
+const sunDir = new THREE.Vector3(-0.5, 0.42, -0.76).normalize();
+scene.add(new THREE.HemisphereLight('#e3f0ff', '#5d7a48', 1.55));
+const sun = new THREE.DirectionalLight('#fff3e2', 2.6);
+sun.position.copy(sunDir).multiplyScalar(100);
+scene.add(sun);
+const fill = new THREE.DirectionalLight('#9fb4ff', 0.35);
+fill.position.set(60, 40, 80);
+scene.add(fill);
+
+const sky = new THREE.Mesh(new THREE.SphereGeometry(900, 48, 24), new THREE.ShaderMaterial({
+  side: THREE.BackSide, depthWrite: false, fog: false,
+  uniforms: { sunDir: { value: sunDir } },
+  vertexShader: `varying vec3 vW; void main(){ vW = normalize((modelMatrix*vec4(position,1.)).xyz); gl_Position = projectionMatrix*viewMatrix*modelMatrix*vec4(position,1.); }`,
+  fragmentShader: `uniform vec3 sunDir; varying vec3 vW;
+    void main(){
+      float h = clamp(vW.y, -0.2, 1.0);
+      vec3 top = vec3(0.42,0.63,0.84), mid = vec3(0.72,0.83,0.92), hor = vec3(0.95,0.95,0.94);
+      vec3 c = mix(hor, mid, smoothstep(0.0, 0.18, h));
+      c = mix(c, top, smoothstep(0.15, 0.75, h));
+      float s = max(dot(vW, sunDir), 0.0);
+      c += vec3(1.0,0.86,0.88)*pow(s, 6.0)*0.25 + vec3(1.0,0.98,0.92)*pow(s, 800.0)*2.5;
+      gl_FragColor = vec4(c, 1.0);
+    }`
+}));
+scene.add(sky);
+
+/* ---------- terrain ---------- */
+const S = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+function H(x, z) {
+  const d = Math.hypot(x + 2, z);
+  const h = 3.2 * Math.sin(x * 0.028) * Math.cos(z * 0.022) + 1.6 * Math.sin(x * 0.061 + z * 0.047) + 0.8 * Math.sin(z * 0.11 + 1.3) + 0.012 * Math.max(0, x - 15) * 3.0;
+  return h * S(16, 48, d) + (d < 30 ? 0 : 0);
+}
+{
+  const g = new THREE.PlaneGeometry(700, 700, small ? 120 : 220, small ? 120 : 220);
+  g.rotateX(-Math.PI / 2);
+  const p = g.attributes.position, col = [];
+  const c1 = new THREE.Color('#5f8f45'), c2 = new THREE.Color('#9cc06a'), c3 = new THREE.Color('#c9c58e'), tmp = new THREE.Color();
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), z = p.getZ(i), y = H(x, z);
+    p.setY(i, y);
+    const n = 0.5 + 0.5 * Math.sin(x * 0.17) * Math.cos(z * 0.13);
+    tmp.copy(c1).lerp(c2, S(-1, 4, y) * 0.7 + n * 0.3).lerp(c3, Math.max(0, n - 0.75));
+    col.push(tmp.r, tmp.g, tmp.b);
+  }
+  g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+  g.computeVertexNormals();
+  scene.add(new THREE.Mesh(g, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1 })));
+}
+
+const rnd = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const dummy = new THREE.Object3D();
+
+/* ---------- grass that sways ---------- */
+const windU = { value: 0 };
+{
+  const n = small ? 9000 : 26000;
+  const blade = new THREE.BufferGeometry();
+  blade.setAttribute('position', new THREE.Float32BufferAttribute([-0.05, 0, 0, 0.05, 0, 0, 0, 1, 0], 3));
+  blade.setAttribute('color', new THREE.Float32BufferAttribute([0.22, 0.38, 0.16, 0.22, 0.38, 0.16, 0.78, 0.95, 0.55], 3));
+  blade.computeVertexNormals();
+  const m = new THREE.MeshStandardMaterial({ vertexColors: true, side: THREE.DoubleSide, roughness: 0.9 });
+  m.onBeforeCompile = (sh) => {
+    sh.uniforms.uTime = windU;
+    sh.vertexShader = 'uniform float uTime;\n' + sh.vertexShader.replace('#include <begin_vertex>',
+      `#include <begin_vertex>
+       vec3 ip = vec3(instanceMatrix[3][0], 0., instanceMatrix[3][2]);
+       float w = sin(uTime*1.7 + ip.x*0.35 + ip.z*0.21) + 0.5*sin(uTime*3.1 + ip.x*0.9);
+       transformed.x += w * position.y * position.y * 0.22;
+       transformed.z += w * position.y * position.y * 0.08;`);
+  };
+  const grass = new THREE.InstancedMesh(blade, m, n);
+  const c = new THREE.Color();
+  for (let i = 0; i < n; i++) {
+    const a = rnd() * Math.PI * 2, r = 3 + Math.pow(rnd(), 0.6) * 75;
+    const x = Math.cos(a) * r - 2, z = Math.sin(a) * r;
+    if (Math.hypot(x + 14, z + 10) < 5.2) { i--; continue; }
+    dummy.position.set(x, H(x, z), z);
+    dummy.rotation.set(0, rnd() * Math.PI, (rnd() - 0.5) * 0.3);
+    const s = 0.5 + rnd() * 0.9; dummy.scale.set(s, s * (0.8 + rnd() * 0.9), s);
+    dummy.updateMatrix(); grass.setMatrixAt(i, dummy.matrix);
+    grass.setColorAt(i, c.setHSL(0.22 + rnd() * 0.07, 0.5, 0.5 + rnd() * 0.2));
+  }
+  scene.add(grass);
+}
+
+/* ---------- camera: every chapter moves in its own plane ---------- */
+// orbit, sweep, side-track, crane, aerial turn, dolly, orbit, truck, crane, pan
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const lerp3 = (a, b, k) => a.clone().lerp(b, k);
+const orbit = (c, r, a, h) => V(c.x + Math.sin(a) * r, h, c.z + Math.cos(a) * r);
+const E = (t) => t * t * (3 - 2 * t);
+const SHOTS = [
+  (t) => ({ p: orbit(V(5, 0, 0), 27 - t * 4, 0.72 + t * 0.4, 5.6 - t * 1.6), l: V(5, 2.4, 0) }),
+  (t) => ({ p: orbit(V(-14, 0, -10), 12.5, 0.55 - E(t) * 0.95, 3.1 + t * 0.6), l: V(-14, 3.2, -10) }),
+  (t) => ({ p: V(3.5 + E(t) * 14, 2.0, 10.8), l: V(5.5 + E(t) * 10, 1.3, 4.2) }),
+  (t) => ({ p: lerp3(V(15, 3.5, 15), V(4, 30, 60), E(t)), l: lerp3(V(10, 1.2, 4), V(52, 0, -2), E(t)) }),
+  (t) => ({ p: orbit(V(-2, 0, 0), 70, 0.1 + t * 0.85, 138), l: V(-2, 0, 0) }),
+  (t) => ({ p: lerp3(V(6.2, 7.5, 24), V(6.2, 3.1, 12.6), E(t)), l: V(6.2, 2.75, 6) }),
+  (t) => ({ p: orbit(V(6.2, 0, 6), 5.4, -0.55 + E(t) * 1.1, 3.35), l: V(6.2, 3.1, 6) }),
+  (t) => ({ p: V(3.2 + E(t) * 2.2, 3.15, 11.6), l: V(6.1, 3.0, 6) }),
+  (t) => ({ p: lerp3(V(22, 20, 24), V(31, 8, 31), E(t)), l: V(0, 3, -4) }),
+  (t) => ({ p: V(34, 12 + t * 3, 40), l: lerp3(V(0, 3, -4), V(-48, 9, -62), E(t)) }),
+];
+function shot(ch, t) {
+  const cur = SHOTS[ch](t);
+  if (ch === 0 || t >= 0.3) return cur;
+  const prev = SHOTS[ch - 1](1), w = E(t / 0.3);
+  return { p: prev.p.lerp(cur.p, w), l: prev.l.lerp(cur.l, w) };
+}
+const KF = SHOTS;
+const pathPts = []; for (let c = 0; c < SHOTS.length; c++) for (let k = 0; k <= 30; k++) pathPts.push(shot(c, k / 30).p);
+const nearPath = (x, z, r) => pathPts.some((p) => Math.hypot(p.x - x, p.z - z) < r);
+
+/* ---------- acacias ---------- */
+{
+  const n = 34;
+  const trunk = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.16, 0.3, 3.4, 7), new THREE.MeshStandardMaterial({ color: '#6b5444', roughness: 1 }), n);
+  const crownGeo = new THREE.SphereGeometry(1, 14, 8); crownGeo.scale(1, 0.32, 1);
+  const crown = new THREE.InstancedMesh(crownGeo, new THREE.MeshStandardMaterial({ color: '#4f8a44', roughness: 1, flatShading: true }), n);
+  for (let i = 0; i < n; i++) {
+    const a = rnd() * 6.283, r = 26 + rnd() * 120, x = Math.cos(a) * r, z = Math.sin(a) * r - 20;
+    if (nearPath(x, z, 14) || Math.hypot(x + 14, z + 10) < 12) { i--; continue; }
+    const y = H(x, z), s = 0.8 + rnd() * 0.9;
+    dummy.position.set(x, y + 1.7 * s, z); dummy.rotation.set(0, 0, (rnd() - 0.5) * 0.25); dummy.scale.set(s, s, s); dummy.updateMatrix(); trunk.setMatrixAt(i, dummy.matrix);
+    dummy.position.set(x, y + 3.5 * s, z); dummy.rotation.set(0, rnd() * 3, 0); dummy.scale.set(3.6 * s, 2 * s, 3.2 * s); dummy.updateMatrix(); crown.setMatrixAt(i, dummy.matrix);
+  }
+  scene.add(trunk, crown);
+}
+
+/* ---------- aloes (winter forage, they glow at golden hour) ---------- */
+{
+  const n = small ? 90 : 180;
+  const spikeG = new THREE.ConeGeometry(0.16, 1.1, 7);
+  const spikes = new THREE.InstancedMesh(spikeG, new THREE.MeshStandardMaterial({ color: '#ff6f61', emissive: '#ff4f5e', emissiveIntensity: 0.25, roughness: 0.6 }), n * 3);
+  const rosette = new THREE.InstancedMesh(new THREE.ConeGeometry(0.7, 0.7, 8), new THREE.MeshStandardMaterial({ color: '#5c7a4a', roughness: 0.8, flatShading: true }), n);
+  for (let i = 0; i < n; i++) {
+    const a = rnd() * 6.283, r = 7 + Math.pow(rnd(), 0.7) * 60, x = Math.cos(a) * r, z = Math.sin(a) * r;
+    if (Math.hypot(x + 14, z + 10) < 6 || (x > 4 && x < 18 && z > 1 && z < 7)) { i--; continue; }
+    const y = H(x, z);
+    dummy.position.set(x, y + 0.3, z); dummy.rotation.set(Math.PI, rnd() * 3, 0); dummy.scale.set(1, 1, 1); dummy.updateMatrix(); rosette.setMatrixAt(i, dummy.matrix);
+    for (let k = 0; k < 3; k++) {
+      dummy.position.set(x + (rnd() - 0.5) * 0.5, y + 1.3 + rnd() * 0.5, z + (rnd() - 0.5) * 0.5);
+      dummy.rotation.set((rnd() - 0.5) * 0.3, 0, (rnd() - 0.5) * 0.3); dummy.scale.setScalar(0.8 + rnd() * 0.5); dummy.updateMatrix(); spikes.setMatrixAt(i * 3 + k, dummy.matrix);
+    }
+  }
+  scene.add(spikes, rosette);
+}
+
+/* ---------- forage flowers (recoloured by the flora chips) ---------- */
+const flowerCount = small ? 900 : 2200;
+const petal = new THREE.Shape();
+for (let k = 0; k <= 60; k++) { const a = (k / 60) * Math.PI * 2, r = 0.13 * (0.55 + 0.45 * Math.abs(Math.cos(a * 2.5))); const x = Math.cos(a) * r, y = Math.sin(a) * r; k ? petal.lineTo(x, y) : petal.moveTo(x, y); }
+const flowerGeo = new THREE.ShapeGeometry(petal); flowerGeo.rotateX(-Math.PI / 2 + 0.5);
+const mouseU = { value: new THREE.Vector2(9, 9) };
+const flowerMat = new THREE.MeshStandardMaterial({ roughness: 0.6, side: THREE.DoubleSide, emissive: '#ffffff', emissiveIntensity: 0.12 });
+flowerMat.onBeforeCompile = (sh) => {
+  sh.uniforms.uMouse = mouseU;
+  sh.vertexShader = 'uniform vec2 uMouse;\nvarying float vGlow;\n' + sh.vertexShader.replace('#include <begin_vertex>',
+    `#include <begin_vertex>
+     vec3 wp0 = (modelMatrix * instanceMatrix * vec4(0.,0.,0.,1.)).xyz;
+     float dc = distance(wp0, cameraPosition);
+     float bloom = mix(1.9, 0.25, smoothstep(3.0, 46.0, dc));
+     transformed *= bloom;`).replace('#include <project_vertex>',
+    `#include <project_vertex>
+     vec2 ndc = gl_Position.xy / gl_Position.w;
+     vGlow = 1.0 - smoothstep(0.0, 0.28, distance(ndc, uMouse));`);
+  sh.fragmentShader = 'varying float vGlow;\n' + sh.fragmentShader.replace('#include <emissivemap_fragment>',
+    `#include <emissivemap_fragment>
+     totalEmissiveRadiance = diffuseColor.rgb * (0.12 + vGlow * 1.6);`);
+};
+const flowers = new THREE.InstancedMesh(flowerGeo, flowerMat, flowerCount);
+const flowerKind = new Uint8Array(flowerCount);
+for (let i = 0; i < flowerCount; i++) {
+  const a = rnd() * 6.283, r = 4 + Math.sqrt(rnd()) * 72, x = Math.cos(a) * r - 2, z = Math.sin(a) * r;
+  dummy.position.set(x, H(x, z) + 0.3 + rnd() * 0.45, z); dummy.rotation.set(0, rnd() * 6.28, 0); dummy.scale.setScalar(0.8 + rnd() * 0.9); dummy.updateMatrix();
+  flowers.setMatrixAt(i, dummy.matrix); flowerKind[i] = Math.floor(rnd() * 5);
+}
+scene.add(flowers);
+const PALETTES = {
+  multi: ['#ff7fa3', '#ffffff', '#c7b3ff', '#ff9e7a', '#8fc3ff'],
+  orange: ['#ffffff', '#fff6dc', '#ffe6a8', '#ffffff', '#ffd9a8'],
+  wild: ['#b0262a', '#7a2a6b', '#d9522a', '#5b2a1a', '#ff8a3d'],
+  acacia: ['#ffe14a', '#ffd21f', '#fff2a8', '#f6c36a', '#ffe14a'],
+};
+function paintFlowers(mode) {
+  const p = PALETTES[mode] || PALETTES.multi, c = new THREE.Color();
+  for (let i = 0; i < flowerCount; i++) flowers.setColorAt(i, c.set(p[flowerKind[i]]));
+  flowers.instanceColor.needsUpdate = true;
+}
+paintFlowers('multi');
+
+/* ---------- pollen and dust caught in the low sun ---------- */
+const NP = small ? 500 : 1400;
+const pollenGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(NP * 3), pSeed = new Float32Array(NP);
+for (let i = 0; i < NP; i++) { pPos[i * 3] = (rnd() - 0.5) * 40; pPos[i * 3 + 1] = rnd() * 14; pPos[i * 3 + 2] = (rnd() - 0.5) * 40; pSeed[i] = rnd(); }
+pollenGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+pollenGeo.setAttribute('seed', new THREE.BufferAttribute(pSeed, 1));
+const pollenU = { uTime: { value: 0 }, uCam: { value: new THREE.Vector3() }, uPx: { value: renderer.getPixelRatio() } };
+const pollen = new THREE.Points(pollenGeo, new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, uniforms: pollenU,
+  vertexShader: `uniform float uTime; uniform vec3 uCam; uniform float uPx; attribute float seed; varying float vA;
+    void main(){
+      vec3 p = position;
+      p.x += sin(uTime*0.3 + seed*30.0)*1.5; p.y += sin(uTime*0.45 + seed*20.0)*0.8; p.z += cos(uTime*0.25 + seed*40.0)*1.5;
+      p = uCam + mod(p - uCam + 20.0, 40.0) - 20.0; p.y = uCam.y - 4.0 + mod(position.y + uTime*0.15*seed, 14.0);
+      vec4 mv = viewMatrix * vec4(p,1.0);
+      gl_PointSize = (2.0 + seed*4.0) * uPx * (12.0 / -mv.z);
+      vA = 0.35 + 0.65*sin(uTime*2.0 + seed*50.0)*0.5+0.5;
+      gl_Position = projectionMatrix * mv;
+    }`,
+  fragmentShader: `varying float vA; void main(){ float d = length(gl_PointCoord-0.5); float a = smoothstep(0.5,0.0,d); gl_FragColor = vec4(1.0,0.97,0.9, a*0.6*vA); }`,
+}));
+pollen.frustumCulled = false;
+scene.add(pollen);
+
+/* ---------- the rondavel from Boitumelo's photo ---------- */
+const RONDAVEL = new THREE.Vector3(-14, H(-14, -10), -10);
+{
+  const g = new THREE.Group();
+  const wall = new THREE.Mesh(new THREE.CylinderGeometry(4, 4, 3, 40, 1, true), new THREE.MeshStandardMaterial({ color: '#f6f1e6', roughness: 0.95, side: THREE.DoubleSide }));
+  wall.position.y = 1.5;
+  const roofGeo = new THREE.ConeGeometry(5.1, 3.6, 40, 6);
+  const rp = roofGeo.attributes.position;
+  for (let i = 0; i < rp.count; i++) { const n = (Math.sin(rp.getX(i) * 9) + Math.sin(rp.getZ(i) * 11)) * 0.035; rp.setX(i, rp.getX(i) * (1 + n)); rp.setZ(i, rp.getZ(i) * (1 + n)); }
+  roofGeo.computeVertexNormals();
+  const roof = new THREE.Mesh(roofGeo, new THREE.MeshStandardMaterial({ color: '#a88a5a', roughness: 1, flatShading: true }));
+  roof.position.y = 3 + 1.75;
+  const door = new THREE.Mesh(new THREE.BoxGeometry(1.1, 2, 0.2), new THREE.MeshStandardMaterial({ color: '#3b2a1c' }));
+  door.position.set(1.4, 1, 3.75); door.rotation.y = 0.35;
+  const win = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.7, 0.2), new THREE.MeshStandardMaterial({ color: '#9cc3e0', roughness: 0.2, metalness: 0.3 }));
+  win.position.set(3.2, 1.7, 2.35); win.rotation.y = 0.95;
+  g.add(wall, roof, door, win);
+  g.position.copy(RONDAVEL);
+  scene.add(g);
+}
+
+/* ---------- hives: six in 2021, close to 200 today ---------- */
+const MAX_HIVES = 200;
+const hivePos = [];
+for (let i = 0; i < 6; i++) hivePos.push(new THREE.Vector3(6 + i * 1.9, 0, 4 + (i % 2) * 0.4));
+{
+  const grid = [];
+  for (let x = 20; x < 120; x += 3.4) for (let z = -46; z < 40; z += 3.1) grid.push(new THREE.Vector3(x + (rnd() - 0.5) * 0.8, 0, z + (rnd() - 0.5) * 0.8));
+  grid.sort((a, b) => a.distanceTo(new THREE.Vector3(14, 0, 2)) - b.distanceTo(new THREE.Vector3(14, 0, 2)));
+  for (let i = 0; hivePos.length < MAX_HIVES; i++) hivePos.push(grid[i]);
+}
+hivePos.forEach((p) => (p.y = H(p.x, p.z)));
+const hiveBody = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1.05, 0.75), new THREE.MeshStandardMaterial({ roughness: 0.8 }), MAX_HIVES);
+const hiveLid = new THREE.InstancedMesh(new THREE.BoxGeometry(1.14, 0.14, 0.9), new THREE.MeshStandardMaterial({ color: '#8f8a80', roughness: 0.5, metalness: 0.4 }), MAX_HIVES);
+const hiveDoor = new THREE.InstancedMesh(new THREE.BoxGeometry(0.62, 0.08, 0.04), new THREE.MeshBasicMaterial({ color: '#1a0f06' }), MAX_HIVES);
+const hiveStand = new THREE.InstancedMesh(new THREE.BoxGeometry(1.1, 0.16, 0.9), new THREE.MeshStandardMaterial({ color: '#5a4026', roughness: 1 }), MAX_HIVES);
+const hiveCols = ['#f7f3ea', '#9fd6c3', '#f6b8c8', '#b9d3f0', '#dce9b0'];
+const hiveScale = new Float32Array(MAX_HIVES).fill(0);
+for (let i = 0; i < MAX_HIVES; i++) hiveBody.setColorAt(i, new THREE.Color(hiveCols[i % 5]));
+function placeHives() {
+  for (let i = 0; i < MAX_HIVES; i++) {
+    const p = hivePos[i], s = hiveScale[i];
+    dummy.position.set(p.x, p.y + 0.62 * s + 0.15, p.z); dummy.rotation.set(0, 0.25 + (i % 3) * 0.05, 0); dummy.scale.setScalar(Math.max(0.0001, s)); dummy.updateMatrix(); hiveBody.setMatrixAt(i, dummy.matrix);
+    dummy.position.y = p.y + 1.22 * s + 0.15; dummy.updateMatrix(); hiveLid.setMatrixAt(i, dummy.matrix);
+    dummy.position.y = p.y + 0.08 * s; dummy.updateMatrix(); hiveStand.setMatrixAt(i, dummy.matrix);
+    dummy.position.y = p.y + 0.3 * s; dummy.translateZ(0.385 * s); dummy.updateMatrix(); hiveDoor.setMatrixAt(i, dummy.matrix);
+  }
+  hiveBody.instanceMatrix.needsUpdate = hiveLid.instanceMatrix.needsUpdate = hiveDoor.instanceMatrix.needsUpdate = hiveStand.instanceMatrix.needsUpdate = true;
+}
+for (let i = 0; i < 6; i++) hiveScale[i] = 1;
+placeHives();
+scene.add(hiveBody, hiveLid, hiveDoor, hiveStand);
+
+/* ---------- the five-kilometre forage ring ---------- */
+const ring = new THREE.Mesh(new THREE.TorusGeometry(72, 0.45, 8, 180), new THREE.MeshBasicMaterial({ color: '#ff5f8f', transparent: true, opacity: 0, fog: false }));
+ring.rotation.x = Math.PI / 2; ring.position.set(-2, 9, 0);
+scene.add(ring);
+
+/* ---------- the honey jar ---------- */
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envMap = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+const jar = new THREE.Group();
+const JAR_H = 2.3;
+const profile = [[0, 0], [0.82, 0], [0.97, 0.06], [1.02, 0.28], [1.02, 1.72], [0.97, 1.92], [0.86, 2.03], [0.8, 2.1], [0.8, 2.3]].map(([x, y]) => new THREE.Vector2(x, y));
+const glass = new THREE.Mesh(new THREE.LatheGeometry(profile, 72), new THREE.MeshPhysicalMaterial({
+  color: '#ffffff', metalness: 0, roughness: 0.04, transmission: 1, thickness: 0.25, ior: 1.5, envMap, envMapIntensity: 1.3, clearcoat: 1, clearcoatRoughness: 0.05, transparent: true, side: THREE.DoubleSide,
+}));
+const honeyClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+const honeyMat = new THREE.MeshPhysicalMaterial({
+  color: '#e38a1c', roughness: 0.12, transmission: 0.62, thickness: 1.6, ior: 1.49, attenuationColor: new THREE.Color('#a8450c'), attenuationDistance: 0.9,
+  envMap, envMapIntensity: 1, clippingPlanes: [honeyClip], emissive: '#7a2e05', emissiveIntensity: 0.18,
+});
+const honeyProfile = profile.slice(0, 7).map((v) => new THREE.Vector2(Math.max(0, v.x * 0.93), Math.max(0.05, v.y)));
+const honey = new THREE.Mesh(new THREE.LatheGeometry(honeyProfile, 64), honeyMat);
+const surfaceMat = honeyMat.clone(); surfaceMat.clippingPlanes = [];
+const surface = new THREE.Mesh(new THREE.CircleGeometry(0.94, 64), surfaceMat);
+surface.rotation.x = -Math.PI / 2;
+const lidGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.32, 72, 1);
+const lp = lidGeo.attributes.position;
+for (let i = 0; i < lp.count; i++) { const a = Math.atan2(lp.getZ(i), lp.getX(i)); const k = 1 + 0.018 * Math.max(0, Math.cos(a * 36)); if (Math.abs(lp.getY(i)) < 0.159) { lp.setX(i, lp.getX(i) * k); lp.setZ(i, lp.getZ(i) * k); } }
+lidGeo.computeVertexNormals();
+const lid = new THREE.Mesh(lidGeo, new THREE.MeshStandardMaterial({ color: '#d9b25a', metalness: 1, roughness: 0.28, envMap, envMapIntensity: 1.4 }));
+const LID_Y = 2.42; lid.position.y = LID_Y;
+const labelTex = new THREE.TextureLoader().load('img/label.jpg');
+labelTex.colorSpace = THREE.SRGBColorSpace; labelTex.anisotropy = 8;
+const ARC = 1.85;
+const label = new THREE.Mesh(new THREE.CylinderGeometry(1.032, 1.032, 0.98, 64, 1, true, -ARC / 2, ARC), new THREE.MeshStandardMaterial({ map: labelTex, roughness: 0.55 }));
+label.position.y = 1.0;
+jar.add(honey, surface, glass, label, lid);
+jar.scale.setScalar(0.0001);
+scene.add(jar);
+const JAR_HOME = new THREE.Vector3(9.8, hivePos[2].y + 1.4, 4.4);
+const JAR_SHOW = new THREE.Vector3(6.2, 2.6, 6);
+let honeyLevel = 0.35, crystal = 0;
+const hCol = new THREE.Color('#e38a1c'), cCol = new THREE.Color('#efcd86');
+
+/* ---------- bees ---------- */
+const NB = small ? 80 : 180;
+const stripe = document.createElement('canvas'); stripe.width = 8; stripe.height = 64;
+{ const x = stripe.getContext('2d'); x.fillStyle = '#f2b02c'; x.fillRect(0, 0, 8, 64); x.fillStyle = '#1d1208'; [[6, 8], [22, 8], [38, 8], [52, 12]].forEach(([y, h]) => x.fillRect(0, y, 8, h)); }
+const beeTex = new THREE.CanvasTexture(stripe); beeTex.colorSpace = THREE.SRGBColorSpace;
+const bodyGeo = new THREE.SphereGeometry(1, 14, 10); bodyGeo.rotateX(Math.PI / 2); bodyGeo.scale(0.075, 0.07, 0.12);
+const bees = new THREE.InstancedMesh(bodyGeo, new THREE.MeshStandardMaterial({ map: beeTex, roughness: 0.5 }), NB);
+const wingGeo = new THREE.CircleGeometry(1, 16); wingGeo.scale(0.11, 0.055, 1); wingGeo.rotateX(-Math.PI / 2); wingGeo.translate(0.1, 0.04, -0.01);
+const wings = new THREE.InstancedMesh(wingGeo, new THREE.MeshBasicMaterial({ color: '#fffaf0', transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false }), NB * 2);
+scene.add(bees, wings);
+const B = [];
+for (let i = 0; i < NB; i++) B.push({
+  p: new THREE.Vector3((rnd() - 0.5) * 20 + 8, 2 + rnd() * 3, (rnd() - 0.5) * 20 + 6), v: new THREE.Vector3(),
+  r: 0.8 + rnd() * 3.4, sp: 0.5 + rnd() * 1.1, ph: rnd() * 6.28, hy: (rnd() - 0.5) * 2.4, hive: Math.floor(rnd() * 6), job: rnd(),
+});
+const pointer = new THREE.Vector2(9, 9); let pointerOn = false;
+const ray = new THREE.Raycaster();
+let drag = null, yaw = 0, pitch = 0;
+canvas.style.touchAction = 'pan-y';
+addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button === 0 && !e.target.closest('a,button,input,dialog,aside,.prod,label')) { drag = { x: e.clientX, y: e.clientY, yaw, pitch }; document.documentElement.classList.add('dragging'); } });
+addEventListener('pointermove', (e) => { if (drag) { yaw = drag.yaw - (e.clientX - drag.x) * 0.004; pitch = Math.max(-0.5, Math.min(0.5, drag.pitch + (e.clientY - drag.y) * 0.003)); } }, { passive: true });
+addEventListener('pointerup', () => { drag = null; document.documentElement.classList.remove('dragging'); });
+addEventListener('pointermove', (e) => { pointer.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1); pointerOn = true; }, { passive: true });
+addEventListener('pointerleave', () => (pointerOn = false));
+
+let chapter = 0, chapterT = 0, mode = 'multi';
+
+/* ---------- post: soft bloom for the sun, aloes and honey ---------- */
+let composer = null;
+if (!small) {
+  composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.28, 0.5, 0.93));
+  composer.addPass(new OutputPass());
+}
+
+function resize() {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight); if (composer) composer.setSize(innerWidth, innerHeight);
+}
+addEventListener('resize', resize);
+
+/* ---------- loop ---------- */
+const clock = new THREE.Clock();
+const tmpV = new THREE.Vector3(), fwd = new THREE.Vector3(), camPos = new THREE.Vector3(), look = new THREE.Vector3(), smLook = new THREE.Vector3(5, 2, 0), par = new THREE.Vector2();
+const q = new THREE.Quaternion(), m4 = new THREE.Matrix4(), wm = new THREE.Matrix4(), flap = new THREE.Matrix4(), mir = new THREE.Matrix4().makeScale(-1, 1, 1);
+let jarLift = 0, shown = false, introT = SNAP ? 1 : 0, focus = 0, focusTarget = 0, introDone = false;
+const INTRO_FROM = new THREE.Vector3(70, 48, 95);
+const ZERO2 = new THREE.Vector2();
+function frame() {
+  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+  windU.value = reduce ? 0 : t;
+  pollenU.uTime.value = t; pollenU.uCam.value.copy(camera.position);
+  mouseU.value.copy(pointerOn ? pointer : mouseU.value.set(9, 9));
+  focus += (focusTarget - focus) * 0.06;
+  const f = Math.min(SHOTS.length - 1, chapter + chapterT);
+  const ci = Math.min(SHOTS.length - 1, chapter), sh = shot(ci, ci === SHOTS.length - 1 ? Math.min(1, chapterT) : chapterT);
+  camPos.copy(sh.p); look.copy(sh.l);
+  par.lerp(pointerOn ? pointer : ZERO2, 0.04);
+  camPos.x += par.x * 0.6; camPos.y += par.y * 0.35;
+  // a slow descent onto the farm when the page opens, then the walk is yours
+  introT = Math.min(1, introT + dt / 4.2);
+  const ie = 1 - Math.pow(1 - introT, 3);
+  if (ie < 1) camPos.lerp(INTRO_FROM, 1 - ie);
+  else if (!introDone) { introDone = true; document.documentElement.classList.add('intro-done'); }
+  // a gentle breathing drift, so the farm is never frozen
+  if (!reduce) { camPos.y += Math.sin(t * 0.4) * 0.12; camPos.x += Math.sin(t * 0.23) * 0.18; }
+  camera.position.lerp(camPos, SNAP || ie < 1 ? 1 : 0.12);
+  if (!drag) { yaw *= 0.95; pitch *= 0.95; }
+  if (yaw || pitch) { const d = look.clone().sub(camPos); d.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw); const right = new THREE.Vector3().crossVectors(d, new THREE.Vector3(0, 1, 0)).normalize(); d.applyAxisAngle(right, pitch); look.copy(camPos).add(d); }
+  smLook.lerp(look, SNAP ? 1 : 0.12); camera.lookAt(smLook);
+
+  // hives grow across the hills during chapter 3
+  const g = f < 3 ? 0 : f > 4 ? 1 : f - 3;
+  const lit = 6 + Math.round(g * g * (MAX_HIVES - 6));
+  let changed = false;
+  for (let i = 6; i < MAX_HIVES; i++) { const target = i < lit ? 1 : 0; const nv = SNAP ? target : hiveScale[i] + (target - hiveScale[i]) * 0.18; if (Math.abs(nv - hiveScale[i]) > 0.001) { hiveScale[i] = nv; changed = true; } }
+  if (changed) placeHives();
+  window.FARM.hives = lit;
+
+  ring.material.opacity = Math.max(0, 1 - Math.abs(f - 4) * 1.6) * 0.9;
+
+  // the jar: rests in a hive, then the swarm lifts it up to you (4.55 -> 5.4)
+  const lift = S(4.55, 5.35, f);
+  jarLift += (lift - jarLift) * (SNAP ? 1 : 0.08);
+  const shopShift = S(6.5, 7.2, f) * -1.1 + S(7.6, 8.2, f) * 1.1;
+  tmpV.copy(JAR_HOME).lerp(JAR_SHOW, jarLift); tmpV.y += Math.sin(jarLift * Math.PI) * 1.4 + Math.sin(t * 1.3) * 0.05 * jarLift; tmpV.x += shopShift;
+  jar.position.copy(tmpV);
+  const away = S(7.9, 8.5, f);
+  jar.scale.setScalar(Math.max(0.0001, Math.min(1, jarLift * 1.5) * (1 - away)) * 0.62);
+  jar.rotation.y = (reduce ? 0 : t * 0.25) + (1 - jarLift) * 2.5;
+  honeyLevel = 0.3 + S(5.0, 5.9, f) * 0.6;
+  const levelY = 0.06 + honeyLevel * 1.9;
+  honeyClip.constant = jar.position.y + levelY * jar.scale.y;
+  surface.position.y = levelY;
+  lid.position.y = LID_Y + (1 - S(5.75, 6.0, f)) * S(4.9, 5.1, f) * 1.1;
+  lid.rotation.y = lid.position.y * 3;
+  honeyMat.color.copy(hCol).lerp(cCol, crystal); honeyMat.transmission = 0.62 * (1 - crystal); honeyMat.roughness = 0.12 + crystal * 0.7;
+  surfaceMat.color.copy(honeyMat.color); surfaceMat.transmission = honeyMat.transmission; surfaceMat.roughness = honeyMat.roughness;
+  shown = jar.scale.x > 0.01;
+
+  // bees
+  camera.getWorldDirection(fwd);
+  const near = tmpV.copy(camera.position).addScaledVector(fwd, 6.5);
+  let ptr = null;
+  if (pointerOn) { ray.setFromCamera(pointer, camera); ptr = ray.ray.at(5.5, new THREE.Vector3()); }
+  const present = shown && f > 4.7 && f < 8.1;
+  for (let i = 0; i < NB; i++) {
+    const b = B[i], a = t * b.sp + b.ph;
+    let cx, cy, cz, r = b.r;
+    if (present && b.job < 0.75) { cx = jar.position.x; cy = jar.position.y + 0.9; cz = jar.position.z; r = 0.75 + b.r * 0.35; }
+    else if (b.job < 0.25) { const h = hivePos[b.hive]; cx = h.x; cy = h.y + 1.6; cz = h.z; r = 0.6 + b.r * 0.4; }
+    else if (focus > 0.05 && b.job > 0.3) { cx = near.x; cy = near.y - 0.4; cz = near.z; r = 0.4 + b.r * 0.25 * (1 - focus * 0.6); }
+    else { cx = near.x; cy = near.y; cz = near.z; }
+    const tx = cx + Math.cos(a) * r + Math.sin(a * 2.3) * 0.4, ty = cy + b.hy * (r / 3) + Math.sin(a * 1.7) * 0.5, tz = cz + Math.sin(a) * r;
+    tmpV.set(tx - b.p.x, ty - b.p.y, tz - b.p.z).multiplyScalar(2.2).sub(b.v).multiplyScalar(dt * 3.2);
+    b.v.add(tmpV);
+    if (ptr) { // the cursor shoos bees away, the nearer the stronger
+      const ox = b.p.x - ray.ray.origin.x, oy = b.p.y - ray.ray.origin.y, oz = b.p.z - ray.ray.origin.z;
+      const along = ox * ray.ray.direction.x + oy * ray.ray.direction.y + oz * ray.ray.direction.z;
+      if (along > 0) { const qx = ox - ray.ray.direction.x * along, qy = oy - ray.ray.direction.y * along, qz = oz - ray.ray.direction.z * along; const d = Math.hypot(qx, qy, qz), rad = 0.18 * along + 0.4;
+        if (d < rad) { const k = (1 - d / rad) * 40 * dt / Math.max(d, 0.05); b.v.x += qx * k; b.v.y += qy * k; b.v.z += qz * k; } }
+    }
+    b.v.clampLength(0, 9);
+    b.p.addScaledVector(b.v, dt);
+    dummy.position.copy(b.p); tmpV.copy(b.p).add(b.v); dummy.lookAt(tmpV); dummy.scale.setScalar(1.35); dummy.updateMatrix();
+    bees.setMatrixAt(i, dummy.matrix);
+    const ang = reduce ? 0.3 : Math.sin(t * 55 + i) * 0.7;
+    flap.makeRotationZ(ang); wm.multiplyMatrices(dummy.matrix, flap); wings.setMatrixAt(i * 2, wm);
+    flap.makeRotationZ(-ang); wm.multiplyMatrices(dummy.matrix, mir).multiply(flap); wings.setMatrixAt(i * 2 + 1, wm);
+  }
+  bees.instanceMatrix.needsUpdate = wings.instanceMatrix.needsUpdate = true;
+
+  if (composer) composer.render(); else renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+
+window.FARM = {
+  hives: 6,
+  set(ch, tt) { chapter = ch; chapterT = tt; },
+  flora(m) { mode = m; paintFlowers(m); },
+  crystal(c) { crystal = c; },
+  focus(on) { focusTarget = on ? 1 : 0; },
+};
+requestAnimationFrame(frame);
+renderer.compile(scene, camera);
+document.documentElement.classList.add('farm-ready');
