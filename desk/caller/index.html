@@ -121,9 +121,9 @@ var CALL_OUT=[['agreed','Said yes: send their site',1],['noanswer','No answer'],
 var REPLY_OUT=[['agreed','They said yes on WhatsApp',1],['noreply','No reply: call them'],['notnow','They said no'],['dnc',"Don't contact again"]];
 var SENT_OUT=[['interested','They replied: interested',1],['callback','Call back later'],['notnow','They said no'],['dnc',"Don't contact again"]];
 var DEAL_OUT=[['pay','Ready to pay: tell Lethabo',1],['interested','Interested, still deciding'],['callback','Call back later'],['notnow','Not now / said no']];
-var LABEL={agreed:'Said yes',asked:'Asked on WhatsApp',sent:'Site sent',interested:'Interested',pay:'Ready to pay',sold:'Sold',noanswer:'No answer',callback:'Call back',notnow:'Not interested',notwa:'Not on WhatsApp',wrong:'Wrong number',dnc:"Don't contact",noreply:'No WhatsApp reply'};
-var DONE={notnow:1,wrong:1,dnc:1,sold:1,notwa:1};
-var DAY=86400000, FU=[2,5,9];
+var LABEL={agreed:'Said yes',asked:'Asked on WhatsApp',sent:'Site sent',interested:'Interested',pay:'Ready to pay',sold:'Sold',noanswer:'No answer',callback:'Call back',notnow:'Not interested',notwa:'Not on WhatsApp',wrong:'Wrong number',dnc:"Don't contact",noreply:'No WhatsApp reply',nowa:'No WhatsApp reply',busy:'Busy, call back',none:'No interest',closed:'Closed',hot:'Followed up after they looked'};
+var DONE={notnow:1,wrong:1,dnc:1,sold:1,notwa:1,none:1,closed:1};
+var DAY=86400000, GAP=[2,3,4];   // follow-ups 2, 3 and 4 days after the last message (day 2, 5, 9)
 var $=function(q){return document.querySelector(q)};
 function ls(k,v){try{if(v===undefined)return localStorage.getItem('dsc-'+k);localStorage.setItem('dsc-'+k,v)}catch(e){return null}}
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
@@ -149,8 +149,10 @@ function quoteUrl(l){var mm=String(l.site||'').match(/\/local\/za-([^/]+)\//);re
 function nextMsg(l){
   var s=stOf(l), st=s.status||'', now=Date.now();
   if(DONE[st]||st==='pay')return null;
+  // They opened the site we sent them, and nobody has followed up since: top of the list (9 Nov)
+  if(l.seen&&st&&st!=='agreed'&&l.seen.last>(s.hotAt||0)&&l.seen.last>(s.sentAt||0)-60000&&now-l.seen.last<7*DAY)return {k:'hot'};
   if(st==='agreed')return {k:'site',late:now-(s.lastAt||now)>3600000};
-  if(st==='sent'){var n=s.fu||0;if(n<3&&now-(s.sentAt||s.lastAt||now)>=FU[n]*DAY)return {k:'fu'+(n+1)};return null}
+  if(st==='sent'){var n=s.fu||0,base=s.fuAt||s.sentAt||s.lastAt||now;if(n<3&&now-base>=GAP[n]*DAY)return {k:'fu'+(n+1)};return null}
   if(st==='asked'&&now-(s.lastAt||now)<DAY)return {k:'wait'};
   if(!st&&canWa(l))return {k:'ask'};
   return null;
@@ -161,7 +163,7 @@ function inCall(l){
   if(st==='callback')return isDue(s);
   if(st==='noanswer')return (s.attempts||0)<3;
   if(st==='asked')return Date.now()-(s.lastAt||0)>=DAY;      // no WhatsApp reply in a day: call them
-  if(st==='noreply')return true;
+  if(st==='noreply'||st==='nowa'||st==='busy')return true;
   if(!st)return !canWa(l);                                   // landline: call first
   return false;
 }
@@ -171,6 +173,7 @@ function isDone(l){var s=stOf(l);return !!DONE[s.status]||(s.status==='noanswer'
 function text(k,l){
   var s=stOf(l), nm=l.name, hi=s.spoke?'Hi '+first(s.spoke):'Hi', me=ME?first(ME):'', sig=me?'\n\n'+me+', Digital Switch':'\n\nDigital Switch';
   if(k==='ask')return 'Hi, is this '+nm+'? My name is '+(me||'[name]')+' from Digital Switch. We design websites for businesses, and we\'ve built a preview of a website for '+nm+'. May I send you the link so you can have a look? There\'s no obligation.\n\nReply STOP and we won\'t message you again.';
+  if(k==='hot')return hi+', I see you had a look at the website we built for '+nm+'. What did you think?\n\nHappy to change anything you\'d like, or I can send you a quote to make it live.'+sig;
   if(k==='site')return hi+', as promised, here is the website preview we built for '+nm+':\n'+l.site+'\n\nOpen it on your phone and tap the buttons. If you like it, I\'ll send you a quote to make it live on your own web address.'+sig;
   if(k==='fu1')return hi+', did you get a chance to look at the website for '+nm+'?\n'+l.site+'\n\nHappy to change anything: colours, photos or wording.'+sig;
   if(k==='fu2')return hi+', just checking in on the website preview for '+nm+':\n'+l.site+'\n\nShall I send you a quote to make it live?'+sig;
@@ -178,13 +181,13 @@ function text(k,l){
   if(k==='quote')return hi+', here is your quote for the '+nm+' website:\n'+quoteUrl(l)+'\n\nOnce you\'re happy, I\'ll let the team know and they\'ll send the payment details. Your site goes live within 24 hours of payment.'+sig;
   return '';
 }
-var MSGNAME={wait:'Waiting for their reply',ask:'Ask to send their preview',site:'Send their site now',fu1:'Follow-up 1 (day 2)',fu2:'Follow-up 2 (day 5)',fu3:'Last follow-up (day 9)'};
+var MSGNAME={hot:'They opened their site: contact them now',wait:'Waiting for their reply',ask:'Ask to send their preview',site:'Send their site now',fu1:'Follow-up 1 (day 2)',fu2:'Follow-up 2 (day 5)',fu3:'Last follow-up (day 9)'};
 
 function render(){
   var nT=0,nW=0,ws=weekStart(),yes=0;
   Object.keys(state).forEach(function(id){(state[id].log||[]).forEach(function(e){if(today(e.at))nT++;if(e.at>=ws)nW++;if(e.at>=ws&&e.o==='agreed')yes++})});
   var msg=LEADS.filter(nextMsg), call=LEADS.filter(inCall), deal=LEADS.filter(inDeal), done=LEADS.filter(isDone);
-  var pri={site:0,fu1:2,fu2:2,fu3:2,ask:3,wait:4};
+  var pri={hot:-1,site:0,fu1:2,fu2:2,fu3:2,ask:3,wait:4};
   msg.sort(function(a,b){var x=nextMsg(a),y=nextMsg(b);return pri[x.k]-pri[y.k]||(a.pri||3)-(b.pri||3)});
   call.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.attempts||0)-(sb.attempts||0)});
   deal.sort(function(a,b){var o={pay:0,interested:1,sent:2};return o[stOf(a).status]-o[stOf(b).status]});
@@ -199,13 +202,14 @@ function render(){
   $('#list').innerHTML=list.length?list.map(card).join(''):'<div class="empty">'+empty+'</div>';
   document.querySelectorAll('.nm').forEach(function(e){e.textContent=ME||'[your name]'});
 }
+function ago(t){var m=Math.round((Date.now()-t)/60000);return m<60?m+' min ago':m<1440?Math.round(m/60)+'h ago':Math.round(m/1440)+'d ago'}
 function phoneShow(n){return String(n||'').replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
 function card(l){
   var s=stOf(l), isOpen=open===l.id, nx=nextMsg(l), due=isDue(s), b='', cls='';
-  if(view==='msg'&&nx){b='<span class="badge '+(nx.k==='site'?(nx.late?'late':'go'):'')+'">'+esc(MSGNAME[nx.k])+(nx.late?': waiting over an hour':'')+'</span>';if(nx.late)cls=' late'}
+  if(view==='msg'&&nx){b='<span class="badge '+(nx.k==='hot'?'go':nx.k==='site'?(nx.late?'late':'go'):'')+'">'+esc(nx.k==='hot'?'Opened their site '+ago(l.seen.last)+': contact them now':MSGNAME[nx.k])+(nx.late?': waiting over an hour':'')+'</span>';if(nx.late)cls=' late';if(nx.k==='hot')cls=' due'}
   else if(s.status){b='<span class="badge '+(due?'due':s.status==='pay'?'go':'')+'">'+esc(due?'Call back now':s.status==='asked'?'No WhatsApp reply: call':LABEL[s.status]||s.status)+'</span>';if(due)cls=' due'}
   if(view==='done')cls+=' done';
-  return '<article class="card'+cls+'" data-id="'+esc(l.id)+'"><button class="head" data-open aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="meta">'+esc(l.area||'')+' · '+phoneShow(l.num)+((s.attempts||0)?' · tried '+s.attempts+'×':'')+(s.fu?' · '+s.fu+' follow-up'+(s.fu>1?'s':''):'')+'</div>'+b+'</button>'+(isOpen?body(l,nx):'')+'</article>';
+  return '<article class="card'+cls+'" data-id="'+esc(l.id)+'"><button class="head" data-open aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="meta">'+esc(l.area||'')+' · '+phoneShow(l.num)+((s.attempts||0)?' · tried '+s.attempts+'×':'')+(s.fu?' · '+s.fu+' follow-up'+(s.fu>1?'s':''):'')+(l.seen?' · opened '+l.seen.n+'×, last '+ago(l.seen.last):'')+'</div>'+b+'</button>'+(isOpen?body(l,nx):'')+'</article>';
 }
 function outs(list,d){return '<div class="outs">'+list.map(function(o){return '<button class="'+(o[2]?'big':'')+'" data-o="'+o[0]+'" aria-pressed="'+(d.o===o[0])+'">'+o[1]+'</button>'}).join('')+'</div>'}
 function body(l,nx){
@@ -221,7 +225,7 @@ function body(l,nx){
   h+='<div class="row"><span class="num">'+phoneShow(l.num)+'</span><a class="btn call" href="tel:+'+esc(l.num)+'">Call</a>'+(canWa(l)?'<a class="btn" href="https://wa.me/'+esc(waNum(l))+'" target="_blank" rel="noopener">Chat</a>':'')+'</div>';
   if(l.site)h+='<div class="row"><a class="btn" href="'+esc(l.site)+'" target="_blank" rel="noopener">Their site ↗</a>'+(view==='deal'&&quoteUrl(l)?'<a class="btn" href="'+esc(quoteUrl(l))+'" target="_blank" rel="noopener">Their quote ↗</a>':'')+'</div>';
   if(view==='deal')h+=kit(l);
-  var list=view==='deal'?DEAL_OUT:(nx&&nx.k==='wait')?REPLY_OUT:(view==='msg'&&nx&&nx.k!=='ask')?SENT_OUT:(s.status==='asked'||s.status==='noreply')?[['agreed','Said yes: send their site',1]].concat(CALL_OUT.slice(1)):CALL_OUT;
+  var list=view==='deal'?DEAL_OUT:(nx&&nx.k==='hot')?SENT_OUT:(nx&&nx.k==='wait')?REPLY_OUT:(view==='msg'&&nx&&nx.k!=='ask')?SENT_OUT:(s.status==='asked'||s.status==='noreply')?[['agreed','Said yes: send their site',1]].concat(CALL_OUT.slice(1)):CALL_OUT;
   h+='<div class="step">What happened?</div>'+outs(list,d)+
     (d.o==='callback'?'<label for="cb-'+esc(l.id)+'">When to call back</label><input type="datetime-local" id="cb-'+esc(l.id)+'" data-f="cb" value="'+esc(d.cb)+'">':'')+
     (d.o==='agreed'?'<label for="wa-'+esc(l.id)+'">WhatsApp number, if different</label><input inputmode="tel" id="wa-'+esc(l.id)+'" data-f="wa" placeholder="e.g. 082 123 4567" value="'+esc(d.wa)+'">':'')+
@@ -260,7 +264,8 @@ document.addEventListener('click',function(e){
     var k=sb.dataset.sent, s=stOf(l);
     if(k==='ask')log(l,'asked',{status:'asked'},'Logged. If they don\'t reply by tomorrow, they move to To call.');
     else if(k==='site')log(l,'sent',{status:'sent',sentAt:Date.now(),fu:0,reached:true},'Site sent. Follow-ups will come up on day 2, 5 and 9.');
-    else log(l,'fu',{status:'sent',fu:(s.fu||0)+1},'Follow-up logged.');
+    else if(k==='hot')log(l,'hot',{hotAt:Date.now()},'Logged. Call them too if they don\'t reply.');
+    else log(l,'fu',{status:'sent',fu:(s.fu||0)+1,fuAt:Date.now()},'Follow-up logged.');
     return}
   var ob=t.closest('[data-o]'); if(ob){draft[id].o=ob.dataset.o;render();return}
   if(t.closest('[data-save]')){
@@ -287,10 +292,10 @@ function flush(){
 setInterval(flush,20000); window.addEventListener('online',flush);
 
 function load(){
-  fetch(EP+'?desk=za&key='+encodeURIComponent(KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
+  fetch(EP+'?desk=za&mine=1&key='+encodeURIComponent(KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
     if(!j.ok){ if(j.error==='key'){ls('key','');$('#app').hidden=true;$('#gate').hidden=false;$('#sync').textContent='Not connected'} return }
     ME=(j.who&&j.who.name)||''; CFG=j.cfg||{};
-    $('#hello').textContent='Hi '+(ME?first(ME):'there')+' · your own list of businesses. Nobody else contacts these.';
+    $('#hello').textContent=(j.who&&j.who.role==='admin')?'Your desk, Lethabo: everyone you\'ve contacted, plus your next 30 businesses. Reps\' leads stay on their desks.':'Hi '+(ME?first(ME):'there')+' · your own list of businesses. Nobody else contacts these.';
     LEADS=j.leads||[];
     Object.keys(j.state||{}).forEach(function(id){var srv=j.state[id], loc=state[id]; if(!loc||(srv.lastAt||0)>=(loc.lastAt||0))state[id]=srv});
     ls('state',JSON.stringify(state)); render(); syncLabel(); flush();
