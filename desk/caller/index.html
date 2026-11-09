@@ -91,7 +91,7 @@ textarea{min-height:70px;resize:vertical}
 
     <details class="script">
       <summary>How it works, and what to say</summary>
-      <p class="tip"><b>Your flow:</b> 1) Send the WhatsApp in <b>Messages</b> ("may we send you a preview?"). 2) No reply in a day? It moves to <b>To call</b>. 3) A yes, on WhatsApp or the phone, means you send their site straight away from <b>Messages</b>. 4) Follow up on day 2, 5 and 9 (the desk reminds you). 5) Close it from <b>Deals</b>, then tap <b>Ready to pay</b>. Lethabo sends the invoice and the site goes live.</p>
+      <p class="tip"><b>Your flow:</b> 1) Call from <b>To call</b> (no answer? the card has a WhatsApp ask instead). 2) Asked on WhatsApp and no reply in a day? It comes back to <b>To call</b>. 3) A yes, on WhatsApp or the phone, means you send their site straight away from <b>Messages</b>. 4) Follow up on day 2, 5 and 9 (the desk reminds you). 5) Close it from <b>Deals</b>, then tap <b>Ready to pay</b>. Lethabo sends the invoice and the site goes live.</p>
       <p class="tip">Every WhatsApp opens on <b>your</b> phone with the message already written. Check it, press send, then tap <b>I sent it</b> here.</p>
       <div class="say">1. Hi, is this <b>[business name]</b>?</div>
       <p class="tip">Wait for them to answer. Wrong business? Say sorry, tap <b>Wrong number</b>.</p>
@@ -154,7 +154,6 @@ function nextMsg(l){
   if(st==='agreed')return {k:'site',late:now-(s.lastAt||now)>3600000};
   if(st==='sent'){var n=s.fu||0,base=s.fuAt||s.sentAt||s.lastAt||now;if(n<3&&now-base>=GAP[n]*DAY)return {k:'fu'+(n+1)};return null}
   if(st==='asked'&&now-(s.lastAt||now)<DAY)return {k:'wait'};
-  if(!st&&canWa(l))return {k:'ask'};
   return null;
 }
 function inCall(l){
@@ -164,7 +163,7 @@ function inCall(l){
   if(st==='noanswer')return (s.attempts||0)<3;
   if(st==='asked')return Date.now()-(s.lastAt||0)>=DAY;      // no WhatsApp reply in a day: call them
   if(st==='noreply'||st==='nowa'||st==='busy')return true;
-  if(!st)return !canWa(l);                                   // landline: call first
+  if(!st)return true;                                        // untouched: call first (9 Nov)
   return false;
 }
 function inDeal(l){var st=stOf(l).status;return st==='sent'||st==='interested'||st==='pay'}
@@ -189,7 +188,7 @@ function render(){
   var msg=LEADS.filter(nextMsg), call=LEADS.filter(inCall), deal=LEADS.filter(inDeal), done=LEADS.filter(isDone);
   var pri={hot:-1,site:0,fu1:2,fu2:2,fu3:2,ask:3,wait:4};
   msg.sort(function(a,b){var x=nextMsg(a),y=nextMsg(b);return pri[x.k]-pri[y.k]||(a.pri||3)-(b.pri||3)});
-  call.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.attempts||0)-(sb.attempts||0)});
+  call.sort(function(a,b){var sa=stOf(a),sb=stOf(b);return (isDue(sb)?1:0)-(isDue(sa)?1:0)||(sa.status?0:1)-(sb.status?0:1)||(sa.attempts||0)-(sb.attempts||0)||(a.pri||3)-(b.pri||3)});
   deal.sort(function(a,b){var o={pay:0,interested:1,sent:2};return o[stOf(a).status]-o[stOf(b).status]});
   done.sort(function(a,b){return (stOf(b).lastAt||0)-(stOf(a).lastAt||0)});
   $('#sToday').textContent=nT;$('#sWeek').textContent=nW;$('#sYes').textContent=yes;$('#sDeals').textContent=deal.length;
@@ -223,6 +222,7 @@ function body(l,nx){
     if(nx.k==='ask')h+='<p class="tip">Prefer to call first? Just call, then log what happened below.</p>';
   }
   h+='<div class="row"><span class="num">'+phoneShow(l.num)+'</span><a class="btn call" href="tel:+'+esc(l.num)+'">Call</a>'+(canWa(l)?'<a class="btn" href="https://wa.me/'+esc(waNum(l))+'" target="_blank" rel="noopener">Chat</a>':'')+'</div>';
+  if(view==='call'&&!s.status&&canWa(l))h+='<details class="kit"><summary>No answer? Ask on WhatsApp instead</summary><div class="msg">'+esc(text('ask',l))+'</div><div class="row"><a class="btn wa" href="https://wa.me/'+esc(waNum(l))+'?text='+encodeURIComponent(text('ask',l))+'" target="_blank" rel="noopener">Open WhatsApp</a><button class="btn sent" data-sent="ask">I sent it ✓</button></div></details>';
   if(l.site)h+='<div class="row"><a class="btn" href="'+esc(l.site)+'" target="_blank" rel="noopener">Their site ↗</a>'+(view==='deal'&&quoteUrl(l)?'<a class="btn" href="'+esc(quoteUrl(l))+'" target="_blank" rel="noopener">Their quote ↗</a>':'')+'</div>';
   if(view==='deal')h+=kit(l);
   var list=view==='deal'?DEAL_OUT:(nx&&nx.k==='hot')?SENT_OUT:(nx&&nx.k==='wait')?REPLY_OUT:(view==='msg'&&nx&&nx.k!=='ask')?SENT_OUT:(s.status==='asked'||s.status==='noreply')?[['agreed','Said yes: send their site',1]].concat(CALL_OUT.slice(1)):CALL_OUT;
