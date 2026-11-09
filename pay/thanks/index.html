@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>Payment received</title>
+<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+:root{--night:#071719;--card:#0d2629;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 500px at 20% 0%,rgba(155,123,255,.16),transparent 60%),var(--night);color:var(--mint);font:16px/1.55 'Inter Tight',system-ui,sans-serif;padding:24px 16px}
+.card{max-width:460px;background:var(--card);border:1px solid rgba(195,176,255,.45);border-radius:22px;padding:28px 22px;text-align:center;box-shadow:0 0 40px rgba(155,123,255,.25)}
+h1{font:200 30px/1.2 'Unbounded',sans-serif;letter-spacing:-.04em;margin:0 0 10px}
+h1 em{font-family:'Ballet',cursive;font-style:normal;color:#f1ecff;font-size:1.3em;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
+p{color:var(--mist)}
+a.btn{display:inline-block;margin-top:10px;padding:14px 22px;border-radius:14px;background:var(--lilac);color:var(--night);font-weight:600;text-decoration:none;box-shadow:0 0 22px rgba(155,123,255,.6)}
+</style></head><body>
+<div class="card">
+  <h1>Thank you, <em>you're in</em></h1>
+  <p id="msg">Your payment went through. Next, tell us what should go on your site (logo, photos, services) so we can go live within 24 hours.</p>
+  <a class="btn" href="/start/">Send us your details</a>
+  <p style="font-size:13px">Questions? WhatsApp 076 129 3926 or hello@digitalswitch.co.za</p>
+</div>
+<script>var b=new URLSearchParams(location.search).get('b');if(b)document.getElementById('msg').textContent='Your payment for '+b.slice(0,80)+' went through. Next, tell us what should go on your site (logo, photos, services) so we can go live within 24 hours.';</script>
+</body></html>

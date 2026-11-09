@@ -1,0 +1,64 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#071719"><link rel="icon" type="image/svg+xml" href="/brand/favicon.svg"><title>Pay Digital Switch</title>
+<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Pay page (9 Nov 2026): one card, the business name, what they pay for, one glowing PayFast button. Built per client from the link: /pay/?b=Business+Name&a=2999 */
+:root{--night:#071719;--card:#0d2629;--river:#1b4a4d;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 500px at 80% 0%,rgba(155,123,255,.16),transparent 60%),var(--night);color:var(--mint);font:16px/1.55 'Inter Tight',system-ui,sans-serif;padding:24px 16px}
+.wrap{width:100%;max-width:460px}
+.logo{display:block;width:150px;margin:0 auto 22px;filter:drop-shadow(0 0 10px rgba(155,123,255,.45))}
+.card{background:var(--card);border:1px solid rgba(195,176,255,.45);border-radius:22px;padding:26px 22px;animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 1px rgba(155,123,255,.15),0 0 28px rgba(155,123,255,.18)}50%{box-shadow:0 0 0 1px rgba(155,123,255,.45),0 0 48px rgba(155,123,255,.38)}}
+.eyebrow{font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac);text-shadow:0 0 12px rgba(155,123,255,.7)}
+h1{font:200 clamp(26px,7vw,34px)/1.15 'Unbounded',sans-serif;letter-spacing:-.04em;margin:10px 0 6px}
+h1 em{font-family:'Ballet',cursive;font-style:normal;color:#f1ecff;font-size:1.3em;text-shadow:0 0 6px #fff,0 0 16px var(--lilac),0 0 34px var(--glow)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--river);color:var(--mist)}
+.row b{color:var(--mint);font-weight:600}
+.total b{font:300 26px/1 'Unbounded',sans-serif;color:var(--lilac);text-shadow:0 0 14px rgba(155,123,255,.6)}
+ul{margin:8px 0 18px;padding-left:20px;color:var(--mist);font-size:15px}
+button{width:100%;min-height:56px;border:0;border-radius:14px;background:var(--lilac);color:var(--night);font:600 17px 'Inter Tight',sans-serif;cursor:pointer;position:relative;overflow:hidden;animation:breath 3.2s ease-in-out infinite}
+button:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:sheen 3.6s ease-in-out infinite}
+@keyframes breath{0%,100%{box-shadow:0 0 14px rgba(155,123,255,.45)}50%{box-shadow:0 0 34px rgba(155,123,255,.85)}}
+@keyframes sheen{0%,55%{left:-60%}100%{left:130%}}
+.small{font-size:13px;color:var(--dim);text-align:center;margin:14px 0 0}
+.small a{color:var(--lilac)}
+@media (prefers-reduced-motion:reduce){.card,button,button:after{animation:none}}
+</style></head><body>
+<main class="wrap">
+  <img class="logo" src="/brand/ds-logo-on-dark.png" alt="Digital Switch">
+  <div class="card">
+    <div class="eyebrow">Secure payment</div>
+    <h1>Your website, <em>live</em></h1>
+    <div class="row"><span>For</span><b id="biz">Your business</b></div>
+    <div class="row"><span>What it covers</span><b>Website setup</b></div>
+    <ul><li>Your site, built and polished</li><li>Your own web address connected</li><li>Found on Google by name</li><li>Live within 24 hours of payment</li></ul>
+    <div class="row total"><span>Total today</span><b id="amt">R2,999</b></div>
+    <form id="pf" action="https://payment.payfast.io/eng/process" method="post">
+      <input type="hidden" name="cmd" value="_paynow">
+      <input type="hidden" name="receiver" value="37722973">
+      <input type="hidden" name="amount" id="f_amount" value="2999">
+      <input type="hidden" name="item_name" id="f_item" value="Website setup">
+      <input type="hidden" name="item_description" id="f_desc" value="Digital Switch website setup: design, build, domain and going live within 24 hours of payment.">
+      <input type="hidden" name="return_url" id="f_ret" value="https://digitalswitch.co.za/pay/thanks/">
+      <input type="hidden" name="cancel_url" id="f_cancel" value="https://digitalswitch.co.za/pay/">
+      <button type="submit">Pay securely with PayFast</button>
+    </form>
+    <p class="small">Card, instant EFT and more through PayFast. Questions? <a id="wa" href="https://wa.me/27761293926">WhatsApp us</a> or email <a href="mailto:hello@digitalswitch.co.za">hello@digitalswitch.co.za</a>.</p>
+  </div>
+</main>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), b=(q.get('b')||'').trim().slice(0,80), a=parseFloat(q.get('a')||'2999');
+  if(!(a>=50&&a<=200000))a=2999;
+  var money='R'+a.toLocaleString('en-ZA',{minimumFractionDigits:a%1?2:0});
+  if(b){document.getElementById('biz').textContent=b;document.title='Pay Digital Switch: '+b}
+  document.getElementById('amt').textContent=money;
+  document.getElementById('f_amount').value=a.toFixed(2);
+  document.getElementById('f_item').value=('Website setup'+(b?': '+b:'')).slice(0,100);
+  document.getElementById('f_ret').value='https://digitalswitch.co.za/pay/thanks/?b='+encodeURIComponent(b);
+  document.getElementById('f_cancel').value=location.href;
+  document.getElementById('wa').href='https://wa.me/27761293926?text='+encodeURIComponent('Hi Digital Switch, I have a question about paying for '+(b||'my website')+'.');
+})();
+</script>
+</body></html>
