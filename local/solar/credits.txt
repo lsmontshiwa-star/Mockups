@@ -1,0 +1,6 @@
+roof-tiles.webp  https://images.unsplash.com/photo-1780445392792-556e5609c5ab  (Unsplash License; demo stock, replaced with the client's own photos)
+install-drill.webp  https://images.unsplash.com/photo-1668097613572-40b7c11c8727  (Unsplash License; demo stock, replaced with the client's own photos)
+lift-panel.webp  https://images.unsplash.com/photo-1624397640148-949b1732bb0a  (Unsplash License; demo stock, replaced with the client's own photos)
+house.webp  https://images.unsplash.com/photo-1655300256335-beef51a914fe  (Unsplash License; demo stock, replaced with the client's own photos)
+hardhat.webp  https://images.unsplash.com/photo-1648135327756-b606e2eb8caa  (Unsplash License; demo stock, replaced with the client's own photos)
+dusk-array.webp  https://images.unsplash.com/photo-1694327671725-e2a81cda3436  (Unsplash License; demo stock, replaced with the client's own photos)

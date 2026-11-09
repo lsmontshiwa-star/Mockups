@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>{{business_name}} · Solar in {{area}}</title>
+<meta name="description" content="{{business_name}}: solar panels, inverters and backup batteries in {{area}}. {{headline}}">
+<meta property="og:title" content="{{business_name}}">
+<meta property="og:description" content="{{headline}} Solar, inverters and batteries in {{area}}.">
+<meta name="theme-color" content="#070c1c">
+<link rel="preload" href="/local/solar/fonts/shoulders.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/local/solar/fonts/martian.woff2" as="font" type="font/woff2" crossorigin>
+<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
+<!--
+  DS solar template. Scroll = one day on your roof: the sky, the sun, the street and the
+  battery readout follow the clock from 05:40 to midnight. The street is drawn on a canvas
+  as a dot-matrix (LED board) image. Fields in {{double braces}} come from build.py.
+-->
+<style>
+@font-face{font-family:Shoulders;src:url(/local/solar/fonts/shoulders.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Martian;src:url(/local/solar/fonts/martian.woff2) format("woff2");font-weight:100 800;font-stretch:75% 112.5%;font-display:swap}
+@font-face{font-family:Onest;src:url(/local/solar/fonts/onest.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --sun:{{accent}}; --night:#070c1c; --cream:#f6efe2; --sky:#8ec5ff; --ink:#0b1430;
+  --fg:var(--cream); --fg2:rgba(246,239,226,.72); --line:rgba(246,239,226,.22); --card:rgba(9,15,34,.55);
+  --big:Shoulders,"Arial Narrow",Impact,sans-serif; --mono:Martian,ui-monospace,Menlo,monospace; --body:Onest,system-ui,sans-serif;
+  --pad:clamp(18px,4.5vw,72px); --ease:cubic-bezier(.22,1,.36,1);
+}
+html.day{--fg:var(--ink);--fg2:rgba(11,20,48,.72);--line:rgba(11,20,48,.2);--card:rgba(255,255,255,.55)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--night);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:color .9s var(--ease)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+#sky{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.corner{position:fixed;z-index:2;width:14px;height:14px;pointer-events:none;color:var(--fg2);transition:color .9s}
+.corner::before,.corner::after{content:"";position:absolute;background:currentColor}
+.corner::before{left:6px;top:0;width:1.5px;height:14px}.corner::after{top:6px;left:0;height:1.5px;width:14px}
+.c1{left:14px;top:74px}.c2{right:14px;top:74px}.c3{left:14px;bottom:14px}.c4{right:14px;bottom:14px}
+@media (max-width:760px){.corner{display:none}}
+
+/* header: name, the clock of the day you're scrolling through, call + WhatsApp */
+.top{position:fixed;left:0;right:0;top:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px var(--pad)}
+.top::before{content:"";position:absolute;inset:0 0 -30px;z-index:-1;background:linear-gradient(rgba(7,12,28,.72),rgba(7,12,28,0));transition:opacity .9s}
+html.day .top::before{background:linear-gradient(rgba(240,246,255,.7),rgba(240,246,255,0))}
+.brand{font:800 26px/1 var(--big);letter-spacing:.02em;text-transform:uppercase;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand i{font-style:normal;color:var(--sun)}
+.clock{font:500 12px/1 var(--mono);letter-spacing:.06em;display:flex;align-items:center;gap:14px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .9s,border-color .9s;white-space:nowrap}
+.clock b{font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.clock .k{display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.clock .grid-off{color:#ff6b5b}
+.batt{width:22px;height:11px;border:1.5px solid currentColor;border-radius:3px;position:relative;padding:1.5px}
+.batt::after{content:"";position:absolute;right:-4px;top:2.5px;width:2px;height:4px;background:currentColor;border-radius:1px}
+.batt i{display:block;height:100%;width:var(--b,60%);background:var(--sun);border-radius:1px;transition:width .4s}
+.acts{display:flex;justify-content:flex-end;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:999px;font:600 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .3s,color .3s,border-color .9s}
+.pill.sun{background:var(--sun);color:#1a1205;border-color:transparent;box-shadow:0 0 24px color-mix(in srgb,var(--sun) 55%,transparent)}
+.pill:hover{background:var(--fg);color:var(--night)}.pill.sun:hover{background:#fff;color:#1a1205}
+.pill svg{width:16px;height:16px}
+.ex{font:500 9.5px var(--mono);letter-spacing:.08em;opacity:.6;text-transform:uppercase}
+@media (max-width:760px){.top{grid-template-columns:1fr auto;padding:12px 16px}.acts{display:none}.clock{gap:10px;padding:8px 11px}.clock .solar,.clock .ex{display:none}.brand{font-size:22px}}
+
+/* phone: call + WhatsApp always under the thumb */
+.dock{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:8px}
+.dock a{flex:1;justify-content:center;min-height:52px;font-size:12.5px}
+@media (max-width:760px){.dock{display:flex}}
+
+main{position:relative;z-index:10}
+section{position:relative;padding:18vh var(--pad)}
+.br{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg2);display:inline-flex;gap:.6em;margin:0 0 18px}
+.br::before{content:"("}.br::after{content:")"}
+.br b{color:var(--sun);font-weight:600}
+h1,h2,h3{margin:0;font-family:var(--big);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.005em}
+h2{font-size:clamp(64px,10vw,170px)}
+.lede{max-width:34ch;font-size:clamp(17px,1.4vw,21px);color:var(--fg2);margin:20px 0 0}
+.rule{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(transparent,var(--sun),transparent);opacity:.5}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translate3d(0,40px,0);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.wipe{clip-path:inset(0 100% 0 0);transition:clip-path 1.4s var(--ease)}
+.wipe.in{clip-path:inset(0 0 0 0)}
+
+/* 05:40 hero: giant type that scatters as you scroll away */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:36vh}
+.hero h1{font-size:clamp(64px,min(15.5vw,22vh),270px);max-width:11ch}
+.hero h1 .k{display:inline-block;will-change:transform;transform:translate3d(calc(var(--dx) * var(--p,0) * 1vw),calc(var(--dy) * var(--p,0) * 1vh),0) rotate(calc(var(--r) * var(--p,0) * 1deg))}
+.hero h1 .k.s{color:var(--sun);text-shadow:0 0 40px color-mix(in srgb,var(--sun) 60%,transparent)}
+.hero .lede{margin-top:26px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:58px;padding:0 26px;border-radius:999px;font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .3s,color .3s}
+.btn.sun{background:var(--sun);color:#1a1205;border:0;box-shadow:0 0 0 1px color-mix(in srgb,var(--sun) 30%,transparent),0 0 34px color-mix(in srgb,var(--sun) 55%,transparent)}
+.btn:hover{transform:translateY(-2px)}
+.btn.sun:hover{box-shadow:0 0 0 1px color-mix(in srgb,var(--sun) 40%,transparent),0 0 60px color-mix(in srgb,var(--sun) 80%,transparent)}
+.btn svg{width:18px;height:18px}
+.proof{display:flex;align-items:center;gap:12px;margin-top:26px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg2)}
+.stars{color:var(--sun);letter-spacing:.15em;font-size:14px}
+
+/* 08:30 what we install: three cards, three different hovers */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6vh}
+.card{position:relative;overflow:hidden;min-height:440px;border-radius:4px;padding:24px;background:#04060d;color:#f6efe2;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;box-shadow:0 30px 70px -40px rgba(4,6,13,.9)}
+.card h3{font-size:clamp(44px,4vw,64px);position:relative;z-index:3}
+.card p{position:relative;z-index:3;margin:10px 0 0;color:rgba(246,239,226,.75);max-width:28ch}
+.card .tag{position:absolute;z-index:3;left:24px;top:22px;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,239,226,.6)}
+.card .ph{position:absolute;inset:0;z-index:0;opacity:.35;transition:opacity .8s var(--ease),transform 1.2s var(--ease)}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.card:hover .ph{opacity:.55;transform:scale(1.06)}
+.card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,6,13,.1),rgba(4,6,13,.85) 75%)}
+/* 1. panels: an LED cell grid that swells up like a sunrise */
+.c-panels .cells{position:absolute;z-index:2;left:-2%;right:-2%;bottom:0;height:62%;transform-origin:50% 100%;transform:scaleY(.82);
+  background:radial-gradient(circle,color-mix(in srgb,var(--sun) 85%,#fff) 0 1.6px,transparent 2.2px) 0 0/12px 12px;
+  -webkit-mask:linear-gradient(transparent,#000 70%);mask:linear-gradient(transparent,#000 70%);opacity:.45;transition:transform .8s var(--ease),opacity .8s var(--ease),filter .8s}
+.c-panels:hover .cells,.c-panels:focus-within .cells{transform:scaleY(1.12);opacity:.9;filter:saturate(1.4) brightness(1.2)}
+/* 2. inverters: the sun runs an orbit; faster when you look */
+.c-inv .orbit{position:absolute;z-index:2;left:50%;top:38%;width:min(300px,80%);aspect-ratio:1;border:1px dashed rgba(246,239,226,.3);border-radius:50%;transform:translate(-50%,-50%);animation:spin 16s linear infinite}
+.c-inv .orbit::before{content:"";position:absolute;left:50%;top:-9px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--sun);box-shadow:0 0 18px var(--sun),0 0 48px var(--sun)}
+.c-inv .core{position:absolute;z-index:2;left:50%;top:38%;width:96px;height:96px;transform:translate(-50%,-50%);border-radius:18px;border:1px solid rgba(246,239,226,.35);background:rgba(10,16,34,.7);display:grid;place-items:center;font:600 13px var(--mono);letter-spacing:.06em}
+.c-inv .core i{font-style:normal;color:var(--sun)}
+.c-inv:hover .orbit{animation-duration:3s}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+/* 3. batteries: a charge band that fills the whole card */
+.c-bat .band{position:absolute;z-index:2;inset:0;clip-path:inset(46% 0 40% 0);transition:clip-path .7s var(--ease);
+  background:linear-gradient(90deg,#1a3b8f,#2b6be0 40%,color-mix(in srgb,var(--sun) 80%,#ff8a3d) 100%)}
+.c-bat .band::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 18px,rgba(4,6,13,.35) 18px 20px)}
+.c-bat .lvl{position:absolute;z-index:3;right:24px;top:22px;font:600 12px var(--mono)}
+.c-bat:hover .band,.c-bat:focus-within .band{clip-path:inset(0 0 0 0)}
+@media (max-width:900px){.cards{grid-template-columns:1fr}.card{min-height:340px}}
+
+/* 12:00 noon: real numbers, counted up */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:6vh}
+.stat{padding:22px 18px 0 0;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font:900 clamp(64px,8.5vw,140px)/.85 var(--big);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:10px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg2)}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat{padding-bottom:20px}}
+.flow{display:flex;align-items:center;gap:0;margin-top:8vh;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;flex-wrap:wrap}
+.flow span{padding:12px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+.flow i{flex:1;min-width:40px;height:2px;background:linear-gradient(90deg,transparent 0 40%,var(--sun) 40% 60%,transparent 60%) 0 0/36px 2px repeat-x;animation:run 1s linear infinite}
+@keyframes run{to{background-position:36px 0}}
+.flow em{display:block;width:100%;margin-top:12px;font-style:normal;color:var(--fg2);font-size:10.5px}
+
+/* 15:00 how it works */
+.steps{list-style:none;padding:0;margin:6vh 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s;position:relative}
+.steps::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line)}
+.steps::after{content:"";position:absolute;left:0;top:15px;height:2px;width:calc(var(--sp,0) * 100%);background:var(--sun);box-shadow:0 0 14px var(--sun)}
+.steps li{position:relative;padding:44px 16px 0 0;counter-increment:s}
+.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;top:0;left:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:600 11px var(--mono);background:var(--night);color:var(--cream);border:1px solid var(--sun);z-index:1}
+html.day .steps li::before{background:#fff;color:var(--ink)}
+.steps b{display:block;font:900 clamp(30px,2.6vw,44px)/.9 var(--big);text-transform:uppercase}
+.steps span{display:block;margin-top:8px;color:var(--fg2);font-size:15px}
+@media (max-width:900px){.steps{grid-template-columns:1fr;gap:26px}.steps::before,.steps::after{left:15px;right:auto;top:0;bottom:0;width:2px;height:auto}.steps::after{height:calc(var(--sp,0) * 100%);width:2px}.steps li{padding:2px 0 0 54px}}
+
+/* 16:30 their work: a collage cut into the type */
+.work{padding-bottom:12vh}
+.work h2{position:relative;z-index:2;mix-blend-mode:normal}
+.collage{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:-4vw}
+.shot{position:relative;margin:0;overflow:hidden;border-radius:3px;background:#0b1020}
+.shot img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.4s var(--ease)}
+.shot.in img{transform:scale(1)}
+.shot figcaption{position:absolute;left:10px;bottom:10px;font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(4,6,13,.6);padding:5px 8px;border-radius:999px}
+.s1{grid-column:1/8;aspect-ratio:16/10}.s2{grid-column:8/13;aspect-ratio:4/5;margin-top:14vh}
+.s3{grid-column:2/6;aspect-ratio:4/5;margin-top:-10vh}.s4{grid-column:6/12;aspect-ratio:16/10;margin-top:4vh}
+.s5{grid-column:1/6;aspect-ratio:16/10}.s6{grid-column:7/13;aspect-ratio:16/9;margin-top:-6vh}
+@media (max-width:760px){.collage{grid-template-columns:1fr 1fr;margin-top:20px}.shot{grid-column:auto!important;margin-top:0!important;aspect-ratio:4/5!important}.s1,.s4{grid-column:1/3!important;aspect-ratio:16/10!important}}
+
+/* 18:00 load-shedding: pinned, the street goes dark, this house doesn't */
+.ls{height:260vh;padding:0}
+.ls .pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:90px var(--pad) 26vh;overflow:hidden}
+.ls .word{font:900 clamp(70px,14.5vw,250px)/.84 var(--big);text-transform:uppercase;white-space:nowrap}
+.ls .word .f{display:inline-block;will-change:transform;transform:translate3d(0,calc(var(--f,0) * 115vh),0) rotate(calc(var(--f,0) * var(--r) * 1deg));opacity:calc(1 - var(--f,0) * .6)}
+.ls .after{position:absolute;left:var(--pad);right:var(--pad);top:50%;transform:translateY(-60%);opacity:0;transition:opacity 1s var(--ease),transform 1.2s var(--ease);pointer-events:none}
+.ls.on .after{opacity:1;transform:translateY(-50%);pointer-events:auto}
+.ls .after h2{color:var(--sun);text-shadow:0 0 60px color-mix(in srgb,var(--sun) 50%,transparent)}
+.ls .sched{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#ff6b5b;margin:0 0 16px;display:flex;align-items:center;gap:10px}
+.ls .sched i{width:8px;height:8px;border-radius:50%;background:#ff6b5b;box-shadow:0 0 12px #ff6b5b;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+
+/* 20:30 reviews: typed out like a message coming in */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6vh}
+.rev{border:1px solid var(--line);border-radius:4px;padding:22px;background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);min-height:230px;display:flex;flex-direction:column}
+.rev p{margin:12px 0 18px;font:400 14.5px/1.65 var(--mono);flex:1}
+.rev p::after{content:"▍";color:var(--sun);animation:blink .8s steps(2) infinite}
+.rev.done p::after{content:""}
+.rev footer{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg2)}
+@media (max-width:900px){.revs{grid-template-columns:1fr}}
+
+/* 21:30 why us */
+.why{display:grid;grid-template-columns:1.1fr 1fr;gap:6vw;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+.chip.sun{border-color:var(--sun);color:var(--sun)}
+.areas{columns:2;margin:22px 0 0;padding:0;list-style:none;font:900 clamp(30px,3.2vw,52px)/1.02 var(--big);text-transform:uppercase}
+.areas li{break-inside:avoid}
+.marq{overflow:hidden;margin-top:9vh;border-block:1px solid var(--line);padding:16px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marq div{display:flex;gap:48px;width:max-content;animation:marq 26s linear infinite;font:600 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fg2)}
+@keyframes marq{to{transform:translateX(-50%)}}
+@media (max-width:900px){.why{grid-template-columns:1fr}}
+
+/* 22:30 FAQ */
+.faq{max-width:900px;margin-top:5vh}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font:900 clamp(26px,2.6vw,40px)/1 var(--big);text-transform:uppercase}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 22px var(--mono);color:var(--sun);transition:transform .4s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 22px;color:var(--fg2);max-width:60ch}
+
+/* 23:45 contact: the quote helper writes the WhatsApp message for them */
+.contact{padding-bottom:22vh}
+.qh{display:grid;grid-template-columns:1.2fr 1fr;gap:5vw;margin-top:5vh;align-items:start}
+.q{margin-bottom:22px}
+.q>span{display:block;font:500 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg2);margin-bottom:10px}
+.opt{display:flex;flex-wrap:wrap;gap:8px}
+.opt button{cursor:pointer;font:500 12.5px var(--mono);padding:11px 15px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.opt button[aria-pressed=true]{background:var(--sun);color:#1a1205;border-color:var(--sun)}
+.q input{width:100%;min-height:52px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:0 16px;font:400 16px var(--body)}
+.msg{border:1px dashed var(--line);border-radius:6px;padding:22px;font:400 13.5px/1.7 var(--mono);white-space:pre-wrap;min-height:220px;background:var(--card)}
+.msg+.btn{margin-top:14px;width:100%;justify-content:center}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg2)}
+.facts a{text-decoration:none}.facts a:hover{color:var(--sun)}
+@media (max-width:900px){.qh{grid-template-columns:1fr}}
+.foot{position:relative;z-index:10;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:22px var(--pad) 90px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg2)}
+.foot a{color:var(--sun);text-decoration:none}
+.ribbon{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:45;font:500 11px var(--mono);letter-spacing:.04em;background:rgba(4,6,13,.85);color:#e8e2d6;padding:8px 14px;border-radius:999px;white-space:nowrap}
+.ribbon a{color:var(--sun)}
+@media (max-width:760px){.ribbon{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important}.rv{opacity:1;transform:none}.wipe{clip-path:none}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<i class="corner c1" aria-hidden="true"></i><i class="corner c2" aria-hidden="true"></i><i class="corner c3" aria-hidden="true"></i><i class="corner c4" aria-hidden="true"></i>
+
+<header class="top">
+  <a class="brand" href="#top">{{short_name}}<i>.</i></a>
+  <div class="clock" aria-label="Example 5 kW system, through the day">
+    <b id="clk">05:40</b>
+    <span class="k solar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span id="kw">0.0</span>&nbsp;kW</span>
+    <span class="k"><span class="batt"><i id="bt"></i></span><span id="bp">44%</span></span>
+    <span class="k" id="gr">Grid on</span>
+    <span class="ex">Example system</span>
+  </div>
+  <nav class="acts" aria-label="Contact">
+    <a class="pill" href="tel:+{{phone_intl}}">Call</a>
+    <a class="pill sun" href="https://wa.me/{{whatsapp_intl}}?text={{wa_text}}" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="top" data-time="5.67">
+    <p class="br rv">Solar · inverters · batteries <b>{{area}}</b></p>
+    <h1 id="h1" aria-label="{{headline}}">{{headline}}</h1>
+    <p class="lede rv">{{sub}}</p>
+    <div class="ctas rv">
+      <a class="btn sun" href="#quote">Get a quote on WhatsApp</a>
+      <a class="btn" href="tel:+{{phone_intl}}">Call {{phone_display}}</a>
+    </div>
+    <!--if:rating--><p class="proof rv"><span class="stars">★★★★★</span>{{rating}} on Google · {{review_count}} reviews</p><!--/if:rating-->
+  </section>
+
+  <section id="install" data-time="8.5">
+    <p class="br rv">08:30 <b>What we install</b></p>
+    <h2 class="rv">{{services_title}}</h2>
+    <div class="cards">
+      <article class="card c-panels rv" tabindex="0"><div class="ph"><img src="{{service_1_image}}" alt="" loading="lazy"></div><div class="cells"></div><span class="tag">01</span><h3>{{service_1_title}}</h3><p>{{service_1_desc}}</p></article>
+      <article class="card c-inv rv" tabindex="0"><div class="ph"><img src="{{service_2_image}}" alt="" loading="lazy"></div><div class="orbit"></div><div class="core">DC<i>→</i>AC</div><span class="tag">02</span><h3>{{service_2_title}}</h3><p>{{service_2_desc}}</p></article>
+      <article class="card c-bat rv" tabindex="0"><div class="ph"><img src="{{service_3_image}}" alt="" loading="lazy"></div><div class="band"></div><span class="tag">03</span><span class="lvl" id="cardLvl">100%</span><h3>{{service_3_title}}</h3><p>{{service_3_desc}}</p></article>
+    </div>
+  </section>
+
+  <section id="noon" data-time="12">
+    <p class="br rv">12:00 <b>Full sun</b></p>
+    <h2 class="rv">{{noon_title}}</h2>
+    <div class="stats">
+      <!--if:years--><div class="stat rv"><b data-n="{{years}}">0</b><span>Years in solar</span></div><!--/if:years-->
+      <!--if:installs--><div class="stat rv"><b data-n="{{installs}}">0</b><span>Systems installed</span></div><!--/if:installs-->
+      <!--if:areas_count--><div class="stat rv"><b data-n="{{areas_count}}">0</b><span>Areas served</span></div><!--/if:areas_count-->
+      <!--if:rating--><div class="stat rv"><b data-n="{{rating}}" data-d="1">0</b><span>Google rating</span></div><!--/if:rating-->
+    </div>
+    <div class="flow rv"><span>Panels</span><i></i><span>Inverter</span><i></i><span>Your home</span><i></i><span>Battery</span><em>Your roof powers the house first, then fills the battery for tonight.</em></div>
+  </section>
+
+  <section id="how" data-time="15">
+    <p class="br rv">15:00 <b>How it works</b></p>
+    <h2 class="rv">From roof<br>to switch-on.</h2>
+    <ol class="steps" id="steps">
+      <li class="rv"><b>Site visit</b><span>{{step_1}}</span></li>
+      <li class="rv"><b>Design</b><span>{{step_2}}</span></li>
+      <li class="rv"><b>Install</b><span>{{step_3}}</span></li>
+      <li class="rv"><b>Paperwork</b><span>{{step_4}}</span></li>
+      <li class="rv"><b>Handover</b><span>{{step_5}}</span></li>
+    </ol>
+  </section>
+
+  <section class="work" id="work" data-time="16.5">
+    <p class="br rv">16:30 <b>{{work_label}}</b></p>
+    <h2 class="rv">Roofs we've<br>switched on.</h2>
+    <div class="collage">
+      <figure class="shot s1 wipe"><img src="{{work_1_image}}" alt="{{work_1_caption}}" loading="lazy"><figcaption>{{work_1_caption}}</figcaption></figure>
+      <figure class="shot s2 wipe"><img src="{{work_2_image}}" alt="{{work_2_caption}}" loading="lazy"><figcaption>{{work_2_caption}}</figcaption></figure>
+      <figure class="shot s3 wipe"><img src="{{work_3_image}}" alt="{{work_3_caption}}" loading="lazy"><figcaption>{{work_3_caption}}</figcaption></figure>
+      <figure class="shot s4 wipe"><img src="{{work_4_image}}" alt="{{work_4_caption}}" loading="lazy"><figcaption>{{work_4_caption}}</figcaption></figure>
+      <figure class="shot s5 wipe"><img src="{{work_5_image}}" alt="{{work_5_caption}}" loading="lazy"><figcaption>{{work_5_caption}}</figcaption></figure>
+      <figure class="shot s6 wipe"><img src="{{work_6_image}}" alt="{{work_6_caption}}" loading="lazy"><figcaption>{{work_6_caption}}</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="ls" id="ls" data-time="18" data-pin>
+    <div class="pin">
+      <p class="sched"><i></i>Load-shedding · 18:00 to 20:30</p>
+      <div class="word" id="lsw" aria-label="Load-shedding">Load-shedding</div>
+      <div class="after"><h2>Not in<br>this house.</h2><p class="lede">The street goes dark. Your battery takes over by itself: lights, fridge and Wi-Fi stay on.</p></div>
+    </div>
+  </section>
+
+  <!--if:review_1_text--><section id="reviews" data-time="20.5">
+    <p class="br rv">20:30 <b>What customers say</b></p>
+    <h2 class="rv">Lights on.<br>Neighbours asking.</h2>
+    <div class="revs">
+      <article class="rev rv"><span class="stars">★★★★★</span><p data-t="{{review_1_text}}"></p><footer>{{review_1_name}}</footer></article>
+      <!--if:review_2_text--><article class="rev rv"><span class="stars">★★★★★</span><p data-t="{{review_2_text}}"></p><footer>{{review_2_name}}</footer></article><!--/if:review_2_text-->
+      <!--if:review_3_text--><article class="rev rv"><span class="stars">★★★★★</span><p data-t="{{review_3_text}}"></p><footer>{{review_3_name}}</footer></article><!--/if:review_3_text-->
+    </div>
+  </section><!--/if:review_1_text-->
+
+  <section id="why" data-time="21.5">
+    <div class="why">
+      <div>
+        <p class="br rv">21:30 <b>Why {{short_name}}</b></p>
+        <h2 class="rv">Done right,<br>signed off.</h2>
+        <div class="chips rv" id="creds" data-list="{{credentials}}"></div>
+      </div>
+      <div>
+        <p class="br rv">Where we work</p>
+        <ul class="areas rv" id="areas" data-list="{{areas}}"></ul>
+      </div>
+    </div>
+    <!--if:brands--><div class="marq" aria-label="Brands we install"><div id="brands" data-list="{{brands}}"></div></div><!--/if:brands-->
+  </section>
+
+  <section id="faq" data-time="22.5">
+    <p class="br rv">22:30 <b>Questions</b></p>
+    <h2 class="rv">Before you ask.</h2>
+    <div class="faq">
+      <details class="rv"><summary>{{faq_1_q}}</summary><p>{{faq_1_a}}</p></details>
+      <details class="rv"><summary>{{faq_2_q}}</summary><p>{{faq_2_a}}</p></details>
+      <details class="rv"><summary>{{faq_3_q}}</summary><p>{{faq_3_a}}</p></details>
+      <details class="rv"><summary>{{faq_4_q}}</summary><p>{{faq_4_a}}</p></details>
+    </div>
+  </section>
+
+  <section class="contact" id="quote" data-time="23.6">
+    <p class="br rv">23:45 <b>Sun's up in six hours</b></p>
+    <h2 class="rv">Let's get you<br>ready.</h2>
+    <div class="qh">
+      <div>
+        <div class="q rv"><span>Monthly electricity bill</span><div class="opt" data-q="bill" data-one><button>Under R1,500</button><button>R1,500 to R3,000</button><button>R3,000 to R5,000</button><button>Over R5,000</button></div></div>
+        <div class="q rv"><span>Must stay on in load-shedding</span><div class="opt" data-q="keep"><button>Lights + Wi-Fi</button><button>TV</button><button>Fridge</button><button>Geyser</button><button>Pool pump</button><button>Everything</button></div></div>
+        <div class="q rv"><span>Roof</span><div class="opt" data-q="roof" data-one><button>Tiles</button><button>Metal sheeting</button><button>Flat</button><button>Not sure</button></div></div>
+        <label class="q rv"><span>Your suburb</span><input id="sub" placeholder="e.g. {{area}}" autocomplete="address-level2"></label>
+      </div>
+      <div class="rv">
+        <div class="msg" id="msg" aria-live="polite"></div>
+        <a class="btn sun" id="send" href="#" target="_blank" rel="noopener">Send to {{short_name}} on WhatsApp</a>
+        <div class="facts"><a href="tel:+{{phone_intl}}">{{phone_display}}</a><a href="mailto:{{email}}">{{email}}</a><span>{{hours}}</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><span>© {{business_name}} · {{area}}</span><span>{{demo_note}}Website preview by <a href="https://digitalswitch.co.za" target="_blank" rel="noopener">Digital Switch</a></span></footer>
+<div class="ribbon">A preview made for {{business_name}} by Digital Switch. <a href="https://wa.me/27761293926?text=Hi%20Digital%20Switch%2C%20I%20saw%20my%20website%20preview" target="_blank" rel="noopener">Reply on WhatsApp</a></div>
+<div class="dock"><a class="pill" href="tel:+{{phone_intl}}">Call</a><a class="pill sun" href="https://wa.me/{{whatsapp_intl}}?text={{wa_text}}" target="_blank" rel="noopener">WhatsApp</a></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)},root=document.documentElement;
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,small=innerWidth<760,SNAP=/shot=1/.test(location.search);
+var WA="{{whatsapp_intl}}";
+
+/* lists from comma-separated fields */
+function list(el,tag,cls){if(!el)return;var v=(el.dataset.list||"").split(",").map(function(s){return s.trim()}).filter(Boolean);
+  el.innerHTML=v.map(function(s){return"<"+tag+(cls?' class="'+cls+'"':"")+">"+s.replace(/</g,"&lt;")+"</"+tag+">"}).join("");return v}
+list($("#creds"),"span","chip");list($("#areas"),"li");
+var br=$("#brands");if(br){var b=list(br,"span");br.innerHTML+=br.innerHTML}
+
+/* hero letters: each one gets its own direction for when the page scrolls away */
+var h1=$("#h1"),words=h1.textContent.trim().split(/\s+/),seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+h1.innerHTML=words.map(function(w,wi){return'<span style="white-space:nowrap">'+w.split("").map(function(c){var dx=(rnd()-.5)*90,dy=-30-rnd()*90,r=(rnd()-.5)*140;return'<span class="k'+(wi===words.length-1?" s":"")+'" style="--dx:'+dx.toFixed(1)+';--dy:'+dy.toFixed(1)+';--r:'+r.toFixed(0)+'" aria-hidden="true">'+c+"</span>"}).join("")+"</span>"}).join(" ");
+var lsw=$("#lsw");lsw.innerHTML=lsw.textContent.split("").map(function(c,i){return'<span class="f" style="--r:'+((rnd()-.5)*90).toFixed(0)+'" aria-hidden="true">'+c+"</span>"}).join("");
+var fl=[].slice.call(lsw.children);
+
+/* reveal + count-up + typed reviews */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;t.classList.add("in");io.unobserve(t);
+  t.querySelectorAll&&t.querySelectorAll("[data-n]").forEach(count);if(t.matches(".rev"))type(t)})},{threshold:.18});
+document.querySelectorAll(".rv,.wipe").forEach(function(el){if(reduce||SNAP)el.classList.add("in");else io.observe(el)});
+function count(el){var n=parseFloat(el.dataset.n),d=+el.dataset.d||0,t0=performance.now();if(reduce||SNAP){el.textContent=n.toFixed(d);return}
+  (function f(now){var k=Math.min(1,(now-t0)/1600),e=1-Math.pow(1-k,3);el.textContent=(n*e).toFixed(d);if(k<1)requestAnimationFrame(f)})(t0)}
+if(reduce||SNAP)document.querySelectorAll("[data-n]").forEach(count);
+function type(card){var p=card.querySelector("p"),s=p.dataset.t,i=0;if(reduce||SNAP){p.textContent=s;card.classList.add("done");return}
+  (function f(){i+=2;p.textContent=s.slice(0,i);if(i<s.length)setTimeout(f,18);else card.classList.add("done")})()}
+if(reduce||SNAP)document.querySelectorAll(".rev").forEach(type);
+
+/* ---------- the day: scroll position -> clock ---------- */
+var secs=[].slice.call(document.querySelectorAll("main>section")),tops=[],hs=[],T=secs.map(function(s){return+s.dataset.time});
+function layout(){tops=secs.map(function(s){return s.getBoundingClientRect().top+scrollY});hs=secs.map(function(s){return s.offsetHeight})}
+addEventListener("resize",function(){layout();size()});addEventListener("load",layout);if(document.fonts)document.fonts.ready.then(layout);layout();
+function hourAt(y){/* each chapter's time is reached when its top is 35% down the screen */
+  var vh=innerHeight,n=secs.length,A=[];for(var k=0;k<n;k++)A.push(k===0?0:Math.max(1,tops[k]-vh*.35));A.push(Math.max(A[n-1]+1,root.scrollHeight-vh));
+  var TT=T.concat([24]);if(y<=0)return TT[0];for(var i=0;i<n;i++)if(y<A[i+1]){var f=(y-A[i])/(A[i+1]-A[i]);return TT[i]+(TT[i+1]-TT[i])*Math.max(0,Math.min(1,f))}return 24}
+function sm(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)}
+function daylight(h){return sm(5.9,7.4,h)*(1-sm(17.4,18.9,h))}
+function solarKW(h){return h<6||h>18.6?0:5*Math.pow(Math.max(0,Math.sin(Math.PI*(h-6)/12.6)),1.2)}
+function gridOff(h){return h>=18.2&&h<20.5}
+function battery(h){if(h<6)return 61-3*h;if(h<13)return 44+(h-6)/7*56;if(h<17.5)return 100;if(h<18.2)return 100-(h-17.5)*8;if(h<20.5)return 94.4-(h-18.2)*14;return 62.2-(h-20.5)*2}
+
+/* ---------- the street, drawn as a dot-matrix board ---------- */
+var cv=$("#sky"),ctx=cv.getContext("2d"),dot=document.createElement("canvas"),dc=dot.getContext("2d"),buf=document.createElement("canvas"),b=buf.getContext("2d");
+var W,H,DPR,cell,bw,bh,pat,hz,houses=[],stars=[],poles=[],ours;
+function size(){DPR=Math.min(devicePixelRatio||1,small?1.25:1.5);W=innerWidth;H=innerHeight;cv.width=dot.width=Math.round(W*DPR);cv.height=dot.height=Math.round(H*DPR);
+  cell=small?6:8;bw=Math.ceil(W/cell);bh=Math.ceil(H/cell);buf.width=bw;buf.height=bh;
+  var pc=document.createElement("canvas"),s=cell*DPR;pc.width=pc.height=Math.round(s);var p=pc.getContext("2d");p.fillStyle="#fff";p.beginPath();p.arc(s/2,s/2,s*.37,0,7);p.fill();pat=dc.createPattern(pc,"repeat");
+  hz=Math.round(bh*(small?.86:.84));city()}
+function city(){seed=11;houses=[];stars=[];poles=[];var x=-2,ox=Math.round(bw*(small?.6:.7));
+  while(x<bw+4){var mine=!ours||false,w,h,roof,isOurs=x<=ox&&x+20>ox&&!houses.some(function(q){return q.ours});
+    if(isOurs){w=small?17:21;h=small?8:9;roof=small?6:7}else{w=6+Math.floor(rnd()*9);h=4+Math.floor(rnd()*5);roof=rnd()<.7?Math.round(w/2.8):0}
+    var hs2={x:x,w:w,h:h,roof:roof,ours:isOurs,tone:rnd(),win:[]};
+    for(var wx=x+2;wx<x+w-2;wx+=3)for(var wy=hz-h+2;wy<hz-1;wy+=3)hs2.win.push({x:wx,y:wy,lit:rnd()<.65});
+    houses.push(hs2);if(isOurs)ours=hs2;x+=w+1+Math.floor(rnd()*3)}
+  for(var px=6;px<bw;px+=small?20:26)poles.push(px);
+  var n=Math.round(bw*bh/(small?55:70));for(var i=0;i<n;i++)stars.push({x:Math.floor(rnd()*bw),y:Math.floor(rnd()*hz*.8),p:rnd()*7})}
+size();
+
+function mix(a,b,k){return[a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k,a[2]+(b[2]-a[2])*k]}
+function rgb(c,a){return"rgba("+(c[0]|0)+","+(c[1]|0)+","+(c[2]|0)+","+(a==null?1:a)+")"}
+var SKY=[[0,[5,8,22],[12,20,44]],[5.3,[8,12,32],[30,30,70]],[6.2,[34,46,104],[243,146,96]],[7.4,[70,128,206],[246,214,170]],[12,[52,128,214],[196,226,248]],[16.6,[66,126,204],[242,214,160]],[18.1,[44,44,96],[255,126,64]],[19,[16,22,56],[90,58,104]],[20.5,[5,8,22],[16,26,56]],[24,[5,8,22],[12,20,44]]];
+function skyAt(h){for(var i=0;i<SKY.length-1;i++)if(h<=SKY[i+1][0]){var k=(h-SKY[i][0])/(SKY[i+1][0]-SKY[i][0]);k=k*k*(3-2*k);return[mix(SKY[i][1],SKY[i+1][1],k),mix(SKY[i][2],SKY[i+1][2],k)]}return[SKY[0][1],SKY[0][2]]}
+var accent=getComputedStyle(root).getPropertyValue("--sun").trim()||"#ffb547";
+var AC=(function(){var c=document.createElement("canvas").getContext("2d");c.fillStyle=accent;var h=c.fillStyle.replace("#","");return[parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]})();
+
+var hNow=5.67,hTarget=5.67,t0=performance.now(),clk=$("#clk"),kw=$("#kw"),bp=$("#bp"),bt=$("#bt"),gr=$("#gr"),last=0,isDay=false;
+function draw(now){
+  var t=Math.max(0,(now-t0)/1000),h=hNow,L=daylight(h),night=1-L,sunUp=h>5.8&&h<18.7;
+  var sk=skyAt(h),off=gridOff(h),bat=Math.max(0,Math.min(100,battery(h))),kwv=solarKW(h);
+  // sky
+  ctx.globalCompositeOperation="source-over";ctx.globalAlpha=1;
+  var g=ctx.createLinearGradient(0,0,0,cv.height);g.addColorStop(0,rgb(sk[0]));g.addColorStop(.84,rgb(sk[1]));g.addColorStop(1,rgb(mix(sk[1],[0,0,0],.5)));ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
+  // sun position on its arc
+  var u=(h-6)/12.6,sx=bw*(.06+.88*u),alt=Math.sin(Math.PI*Math.max(0,Math.min(1,u))),sy=hz-alt*hz*.78,sr=small?4:5;
+  if(sunUp){var gl=ctx.createRadialGradient(sx*cell*DPR,sy*cell*DPR,0,sx*cell*DPR,sy*cell*DPR,H*DPR*.55);gl.addColorStop(0,"rgba(255,214,140,"+(.45+.25*(1-alt))+")");gl.addColorStop(1,"rgba(255,180,90,0)");ctx.fillStyle=gl;ctx.fillRect(0,0,cv.width,cv.height)}
+  // board
+  b.clearRect(0,0,bw,bh);
+  if(night>.05)stars.forEach(function(s){var a=night*(.35+.35*Math.sin(t*1.3+s.p));b.fillStyle="rgba(255,244,220,"+a.toFixed(2)+")";b.fillRect(s.x,s.y,1,1)});
+  if(sunUp){var sc=mix([255,120,60],[255,236,170],Math.min(1,alt*1.6));b.fillStyle=rgb(sc);b.beginPath();b.arc(sx,sy,sr,0,7);b.fill();
+    b.fillStyle=rgb(sc,.35);for(var r=0;r<12;r++){var a=r/12*Math.PI*2+t*.15,rr=sr+3+((r%2)?1:2);b.fillRect(Math.round(sx+Math.cos(a)*rr),Math.round(sy+Math.sin(a)*rr),1,1)}}
+  if(h>19.2||h<5.6){var mx=bw*.82,my=hz*.22;b.fillStyle="rgba(232,238,252,.9)";b.beginPath();b.arc(mx,my,3,0,7);b.fill();b.globalCompositeOperation="destination-out";b.beginPath();b.arc(mx+1.6,my-1,2.6,0,7);b.fill();b.globalCompositeOperation="source-over"}
+  // ground
+  b.fillStyle=rgb(mix([10,14,30],[46,52,48],L),.9);b.fillRect(0,hz,bw,bh-hz);
+  // power line
+  var wire=off?rgb([70,40,40],.6):rgb(mix([90,100,140],[40,46,70],L),.9);
+  b.fillStyle=wire;poles.forEach(function(px,i){b.fillRect(px,hz-14,1,14);b.fillRect(px-2,hz-14,5,1);var nx=poles[i+1];if(nx)for(var x=px;x<nx;x++){var k=(x-px)/(nx-px),y=hz-14+Math.round(Math.sin(k*Math.PI)*2.5);b.fillRect(x,y,1,1)}});
+  if(off&&Math.sin(t*9)>.97){b.fillStyle="rgba(255,120,90,.9)";var pi=poles[(Math.floor(t)%Math.max(1,poles.length-1))];b.fillRect(pi,hz-15,2,2)}
+  // houses
+  houses.forEach(function(q){var top=hz-q.h,wall=mix(mix([14,22,48],[226,214,196],L),mix([20,30,64],[204,190,170],L),q.tone),roofc=mix(mix([10,16,36],[176,90,60],L),mix([16,22,44],[106,118,140],L),q.tone>.5?1:0);
+    if(q.ours)wall=mix(wall,[255,255,255],.1);
+    b.fillStyle=rgb(wall);b.fillRect(q.x,top,q.w,q.h);
+    b.fillStyle=rgb(roofc);
+    if(q.roof){for(var r=0;r<q.roof;r++){var inset=Math.round((r+1)*q.w/(2*q.roof+1));b.fillRect(q.x+inset-1,top-1-r,q.w-2*inset+2,1)}b.fillRect(q.x-1,top-1,q.w+2,1)}else b.fillRect(q.x-1,top-1,q.w+2,1);
+    var lit=q.ours?night>.25:(night>.35&&!off);
+    q.win.forEach(function(w){if(lit&&(q.ours||w.lit)){b.fillStyle=q.ours?"rgba(255,222,150,1)":"rgba(255,196,110,.95)"}else b.fillStyle=rgb(mix(wall,[0,0,0],.35));b.fillRect(w.x,w.y,1,1)});
+    if(q.ours){
+      // panels on the roof: glint follows the sun
+      for(var rr=1;rr<q.roof-1;rr++){var ins=Math.round((rr+1)*q.w/(2*q.roof+1));for(var x=q.x+ins;x<q.x+q.w-ins;x++){var gl2=sunUp&&Math.abs(x-(q.x+((t*6)%q.w)))<1.5;b.fillStyle=gl2?"rgba(220,236,255,1)":((x+rr)%2?"rgb(36,72,170)":"rgb(26,52,128)");b.fillRect(x,top-1-rr,1,1)}}
+      // battery on the side wall
+      var bx=q.x+q.w+1,by=hz-6;b.fillStyle="rgb(200,210,228)";b.fillRect(bx,by-1,3,7);var lv=Math.round(bat/100*5);for(var i2=0;i2<5;i2++){b.fillStyle=i2<lv?rgb(AC):"rgb(40,48,70)";b.fillRect(bx+1,hz-1-i2,1,1)}
+      // energy: roof -> battery by day, battery -> house at night
+      var flowOn=kwv>.3||(night>.4);var path=[[q.x+q.w-2,top-2],[q.x+q.w,top+1],[q.x+q.w,hz-6],[bx+1,hz-7]];if(kwv<=.3)path=path.slice().reverse();
+      if(flowOn&&!reduce)for(var pI=0;pI<6;pI++){var s=(((t*.6)+pI/6)%1+1)%1,seg=s*(path.length-1),si=Math.floor(seg),f=seg-si,A=path[si],B=path[si+1]||A;b.fillStyle=rgb(AC);b.fillRect(Math.round(A[0]+(B[0]-A[0])*f),Math.round(A[1]+(B[1]-A[1])*f),1,1)}
+      if(night>.25){b.fillStyle=rgb(AC,.35);b.fillRect(q.x-2,hz-1,q.w+4,1)}
+    }
+  });
+  // glow pass (soft) then dot pass (crisp LED dots)
+  ctx.imageSmoothingEnabled=true;ctx.globalAlpha=.32;ctx.drawImage(buf,0,0,bw*cell*DPR,bh*cell*DPR);ctx.globalAlpha=1;
+  dc.globalCompositeOperation="source-over";dc.clearRect(0,0,dot.width,dot.height);dc.imageSmoothingEnabled=false;dc.drawImage(buf,0,0,bw*cell*DPR,bh*cell*DPR);
+  dc.globalCompositeOperation="destination-in";dc.fillStyle=pat;dc.fillRect(0,0,dot.width,dot.height);
+  ctx.drawImage(dot,0,0);
+  // readouts
+  var hh=Math.floor(h)%24,mm=Math.floor((h-Math.floor(h))*60);clk.textContent=(hh<10?"0":"")+hh+":"+(mm<10?"0":"")+mm;
+  kw.textContent=kwv.toFixed(1);bp.textContent=Math.round(bat)+"%";bt.style.setProperty("--b",bat+"%");gr.textContent=off?"Grid off":"Grid on";gr.classList.toggle("grid-off",off);
+  var d=L>.55;if(d!==isDay){isDay=d;root.classList.toggle("day",d)}
+}
+/* scroll-linked bits: hero scatter, load-shedding drop, steps line */
+var hero=$(".hero"),ls=$("#ls"),steps=$("#steps");
+function scrollFx(){var y=scrollY,vh=innerHeight;
+  if(!reduce)hero.style.setProperty("--p",Math.min(1.4,Math.max(0,y/(vh*.9))).toFixed(3));
+  var r=ls.getBoundingClientRect(),q=Math.max(0,Math.min(1,-r.top/(r.height-vh)));
+  fl.forEach(function(s,i){var f=Math.max(0,Math.min(1,(q-.12-i*.018)/.22));s.style.setProperty("--f",reduce?(q>.3?1:0):f.toFixed(3))});
+  ls.classList.toggle("on",q>.42);
+  var sr=steps.getBoundingClientRect();steps.style.setProperty("--sp",Math.max(0,Math.min(1,(vh*.8-sr.top)/(sr.height+vh*.2))).toFixed(3))}
+function frame(now){hTarget=hourAt(scrollY);hNow=SNAP?hTarget:hNow+(hTarget-hNow)*Math.min(1,(now-last)/1000*5||.1);last=now;scrollFx();
+  requestAnimationFrame(frame);if(!document.hidden)try{draw(now)}catch(e){if(window.console)console.warn(e)}}
+if(reduce){addEventListener("scroll",function(){hNow=hTarget=hourAt(scrollY);scrollFx();draw(performance.now())},{passive:true});draw(performance.now())}
+else requestAnimationFrame(frame);
+
+/* quote helper: builds the WhatsApp message */
+var picks={};document.querySelectorAll(".opt").forEach(function(g){var one=g.hasAttribute("data-one"),k=g.dataset.q;picks[k]=[];
+  g.querySelectorAll("button").forEach(function(btn){btn.type="button";btn.setAttribute("aria-pressed","false");btn.addEventListener("click",function(){var on=btn.getAttribute("aria-pressed")!=="true";
+    if(one)g.querySelectorAll("button").forEach(function(o){o.setAttribute("aria-pressed","false")});btn.setAttribute("aria-pressed",on);
+    picks[k]=[].slice.call(g.querySelectorAll('[aria-pressed=true]')).map(function(o){return o.textContent});msg()})})});
+var subI=$("#sub");subI.addEventListener("input",msg);
+function msg(){var lines=["Hi {{short_name}}, I'd like a solar quote."];
+  if(picks.bill.length)lines.push("Monthly bill: "+picks.bill[0]);if(picks.keep.length)lines.push("Must stay on: "+picks.keep.join(", "));
+  if(picks.roof.length)lines.push("Roof: "+picks.roof[0]);if(subI.value.trim())lines.push("Suburb: "+subI.value.trim());
+  var m=lines.join("\n");$("#msg").textContent=m;$("#send").href="https://wa.me/"+WA+"?text="+encodeURIComponent(m)}
+msg();
+})();
+</script>
+<!--DSVIEW-->
+</body>
+</html>
