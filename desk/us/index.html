@@ -138,7 +138,7 @@ details p{color:var(--mist);margin:0 0 12px}
 <div class="bar">
   <span class="chip-info" id="clock"><span class="dot" id="clockDot"></span><span id="clockTxt">…</span></span>
   <span class="chip-info me"><label for="myName">You</label><input id="myName" placeholder="First name" autocomplete="given-name"></span>
-  <span class="chip-info"><a href="/desk/">Local</a> · <a href="/desk/us/">US</a> · <a href="/desk/launch/">Setup</a></span>
+  <span class="chip-info" id="navDesks"><a href="/desk/" id="navZa">Local</a><span id="navUsSep"> · </span><a href="/desk/us/" id="navUs">US</a><span id="navSetup"> · <a href="/desk/launch/">Setup</a></span></span>
   <span class="sync" id="sync">Connecting…</span>
 </div>
 
@@ -150,6 +150,7 @@ details p{color:var(--mist);margin:0 0 12px}
 
 <section id="calls" class="on">
   <div class="stats" id="stats"></div>
+  <p class="muted" id="poolInfo" style="margin:-4px 0 14px;font-size:14px"></p>
   <div id="relog"></div>
   <div class="filters" id="filters"></div>
   <input class="search" id="q" type="search" placeholder="Search by business, area or note">
@@ -228,7 +229,7 @@ var CFG = {
    'asked-price':'They\'re interested. Answer straight, then close.',
    liked:'Go to the offer and ask to text the link.'}
 };
-var LEADS = [];
+var LEADS = [], POOL = null, WHO = null, BATCH = 30;
 var KEY='dsd-'+CFG.market+'-';
 var $=function(s){return document.querySelector(s)}, $$=function(s){return [].slice.call(document.querySelectorAll(s))};
 function lsGet(k,d){try{var v=localStorage.getItem(KEY+k);return v===null?d:v}catch(e){return d}}
@@ -299,12 +300,17 @@ function inView(l,v){
 }
 var VIEWS=[['next','Up next'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
 
+function applyWho(w){WHO=w;
+  if(w.role!=='admin'){var first=String(w.name||'').split(' ')[0]; if(first&&$('#myName').value!==first){$('#myName').value=first;try{localStorage.setItem('ds-name',first)}catch(e){};fillNames()} $('#myName').readOnly=true;
+    $('#navSetup').hidden=true; if(!w.us){$('#navUs').hidden=true;$('#navUsSep').hidden=true} if(!w.za){$('#navZa').hidden=true;$('#navUsSep').hidden=true}}
+}
 /* ---------- render list ---------- */
 function fmtWhen(ts){if(!ts)return '';var d=new Date(ts);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
 function render(){
   var c={called:0,reached:0,warm:0,sold:0};
   LEADS.forEach(function(l){var s=st(l);if(s.attempts)c.called++;if(REACHED[s.status]||s.reached)c.reached++;if((s.interest==='hot'||s.interest==='warm')&&!CLOSED[s.status])c.warm++;if(s.status==='sold')c.sold++});
   $('#stats').innerHTML='<div><b>'+c.called+'</b><span>Called</span></div><div><b>'+c.reached+'</b><span>Spoke to</span></div><div><b>'+c.warm+'</b><span>Hot & warm</span></div><div><b>'+c.sold+'</b><span>Sold</span></div>';
+  $('#poolInfo').innerHTML='<b>'+LEADS.filter(function(l){return status(l)==='call'}).length+'</b> US businesses not called yet. US calls go through the Digital Switch US line, paid by DS.';
   // re-log banner (local first 10 only)
   var b1=LEADS.filter(function(l){return l.b1 && !st(l).attempts});
   $('#relog').innerHTML=b1.length?'<div class="relog"><p><b>Your first '+b1.length+' calls aren\'t in here yet.</b> The old desk saved them on your phone only, where I can\'t read them. Open each one and log what happened, with an interest level and tags. It takes about two minutes and starts the feedback data with real calls.</p><button class="btn sm p" id="showB1">Log my first '+b1.length+' calls</button></div>':'';
@@ -354,8 +360,8 @@ function body(l){
     (hist?'<div><div class="lbl">History</div><div class="hist">'+hist+'</div></div>':'')+'</div>';
 }
 function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
-function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch, a web design studio in Joburg. I made a free website for '+l.name+'. May I send you the link so that you can see?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
-function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. It can be live on your own web address within 24 hours: R2,999 to set up, then R199 a month. Let me know what you think!'}
+function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch. We\'ve built a preview of a website for '+l.name+'. May I send you the link?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
+function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. It can be live on your own web address within 24 hours. What do you think?'}
 function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+l.site+'\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
 function usText(l){return l.site?('Hi, it\'s '+me()+' from Digital Switch. Here\'s the site I built for '+l.name+': '+l.site+' . It can be live on your own web address within 24 hours: $499 to set up, then $49 a month, no contract.'):('Hi, it\'s '+me()+' from Digital Switch, thanks for the chat. Here\'s some of my work: https://digitalswitch.co.za . I\'ll build a free preview for '+l.name+' and send it over.')}
 
@@ -413,8 +419,8 @@ function flush(){
 function load(verify){
   if(!DESK_KEY){renderKey();return}
   return fetch(CFG.endpoint+'?desk='+CFG.market+'&key='+encodeURIComponent(DESK_KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
-    if(!j.ok){ if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
-    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads));
+    if(!j.ok){ if(j.error==='market'){$('#list').innerHTML='<div class="empty">This desk isn\'t switched on for you. Use the '+(CFG.market==='za'?'<a href="/desk/us/">US desk</a>':'<a href="/desk/">Local desk</a>')+'.</div>';return} if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
+    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads)); POOL=(typeof j.pool==='number')?j.pool:null; BATCH=j.batch||30; if(j.who) applyWho(j.who);
     var remote=j.state||{};
     queue=queue.filter(function(q){var r=remote[q.id];return !(r&&(r.lastAt||0)>=(q.s.lastAt||0))});
     lsSet('queue',JSON.stringify(queue));

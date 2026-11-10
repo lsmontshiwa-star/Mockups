@@ -136,11 +136,11 @@ details p{color:var(--mist);margin:0 0 12px}
   <svg viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle cx="56" cy="22" r="15" fill="#071719"/></svg>
   <h1>Call <em>desk</em></h1><span class="market">Local</span>
 </header>
-<p class="sub">Every Gauteng roofer on the call list, in calling order. Log each call with how interested they were and what they said, and the desk learns what works.</p>
+<p class="sub">Your businesses, in calling order: anyone who opened their site and every follow-up due comes first. Log each call with how interested they were and what they said, and the desk learns what works.</p>
 <div class="bar">
   <span class="chip-info" id="clock"><span class="dot" id="clockDot"></span><span id="clockTxt">…</span></span>
   <span class="chip-info me"><label for="myName">You</label><input id="myName" placeholder="First name" autocomplete="given-name"></span>
-  <span class="chip-info"><a href="/desk/">Local</a> · <a href="/desk/us/">US</a> · <a href="/desk/launch/">Setup</a></span>
+  <span class="chip-info" id="navDesks"><a href="/desk/" id="navZa">Local</a><span id="navUsSep"> · </span><a href="/desk/us/" id="navUs">US</a><span id="navSetup"> · <a href="/desk/launch/">Setup</a></span></span>
   <span class="sync" id="sync">Connecting…</span>
 </div>
 
@@ -152,6 +152,7 @@ details p{color:var(--mist);margin:0 0 12px}
 
 <section id="calls" class="on">
   <div class="stats" id="stats"></div>
+  <p class="muted" id="poolInfo" style="margin:-4px 0 14px;font-size:14px"></p>
   <div id="relog"></div>
   <div class="filters" id="filters"></div>
   <input class="search" id="q" type="search" placeholder="Search by business, area or note">
@@ -162,29 +163,50 @@ details p{color:var(--mist);margin:0 0 12px}
 <section id="script" class="script">
 
 <h2>Local <em>script</em></h2>
-<p class="lead">WhatsApp first, then call. Every roofer here already has a website built for them, so the site does the selling. Your job is to get them to look at it, then find out what would make it a yes.</p>
-<h3>Before you call</h3>
-<p class="tip">Send <b>1 · First message</b> on WhatsApp. When they say yes, send <b>2 · Send the link</b>. Call once they've had a look. No reply means no: log "No reply on WhatsApp" and move on. Landlines (010 to 012) can't get WhatsApp, so call those straight away and offer to send the link to a cellphone.</p>
-<h3>Opening (they've seen it)</h3>
-<div class="say">Hi, it's <b class="nm">[your name]</b> from Digital Switch. I sent you the website I made for <b>[Business]</b>. Did you get a chance to look at it?</div>
-<h3>Opening (cold, or landline)</h3>
-<div class="say">Hi, is this <b>[Business]</b>? I'm <b class="nm">[your name]</b> from Digital Switch, a web design studio in Joburg. I made a <b>free website</b> for <b>[Business]</b>. May I send you the link so you can see?</div>
-<h3>Find out what they think</h3>
-<div class="say">What did you think of it? <b>What would you change</b> before you'd put it in front of customers?</div>
-<p class="tip">Then listen. Whatever they say here is the most useful thing you'll log. Write it down in their words.</p>
-<h3>The offer, only after they've looked</h3>
-<div class="say">It's <b>R2,999 to set up</b>: we put it on your own web address, set you up on Google, and it's <b>live within 24 hours</b>. Then it's <b>R199 a month</b> for hosting, your address, changes and support. No contract, cancel any time.</div>
-<h3>Close</h3>
-<div class="say">Shall I send you the payment link so we can have it live by tomorrow?</div>
-<p class="tip">If yes: send <b>/pay</b>, then <b>/details</b> in WhatsApp. Log the call as <b>Sold</b>.</p>
+<p class="lead">Permission message first, then their preview site, then the call. Every business on your list has a preview website built for them, so the site does the selling. Your job: get them to look, find out what would make it a yes, and send the pay link.</p>
+
+<h3>The rhythm: four touches, then leave them alone</h3>
+<p class="tip"><b>Day 0</b> permission message, then their site once they say yes · <b>Day 1</b> follow-up · <b>Day 4</b> follow-up · <b>Day 11</b> last follow-up. The desk shows "Follow-up due" and puts the right message on button 3. After touch 4, stop. No reply means no: log "No reply on WhatsApp" and move on. Benchmark: 50 dials a day.</p>
+<p class="tip"><b>Opened their site</b> (orange badge) means they looked in the last week. Those go to the top: call them now.</p>
+
+<h3>1 · Permission message (WhatsApp)</h3>
+<div class="say">Hi, is this <b>[Business]</b>? I'm <b class="nm">[your name]</b> from Digital Switch. We've built a preview of a website for <b>[Business]</b>, so you can see exactly what it would look like before paying anything. May I send you the link?</div>
+<p class="tip">Use the <b>1 · Permission message</b> button. When they say yes, press <b>2 · Send their site</b> and log <b>Site sent</b>.</p>
+
+<h3>2 · The call (about 5 minutes)</h3>
+<ol class="tip">
+<li><b>Open:</b> "Hi, it's [your name] from Digital Switch. I sent you the website we built for [Business]. Did you get a chance to look?"</li>
+<li><b>If not:</b> "Have you got one minute to open it on your phone now? I'll wait."</li>
+<li><b>Ask:</b> "What did you think? What would you change before you'd put it in front of customers?" Then listen and log it in their words.</li>
+<li><b>Find the pain:</b> "Where do most of your customers find you at the moment?" and "What happens when someone Googles you?"</li>
+<li><b>Show the 24/7 customer catcher:</b> "When someone finds you on Google at 10 at night, they can WhatsApp or call you straight from the site, or leave their details. Nobody is lost while you're busy on a job."</li>
+<li><b>The offer:</b> packages below. Lead with Starter unless they sell products or take bookings.</li>
+<li><b>Handle the objection</b> (below), then ask again.</li>
+<li><b>Close:</b> "Shall I send you the payment link so we can have it live this week?"</li>
+<li><b>Send the pay link</b> with the Closing kit button, log <b>Ready to pay</b>, then <b>Sold</b> once they've paid.</li>
+</ol>
+
+<h3>The two packages</h3>
+<div class="say"><b>Starter, R3,999 once-off, then R99 a month.</b> A landing website of up to 3 pages on your own web address, set up on Google, with tap-to-call, WhatsApp and a contact form. Live within 24 hours, plus a monthly report of visitors and everyone who contacted you.</div>
+<div class="say"><b>Premium, R7,999 once-off, then R199 a month.</b> A full website where customers can buy or book online, with everything in Starter.</div>
+<p class="tip">No contract on the monthly. Payflex lets them pay in 4 instalments, and DS is still paid upfront. You never take money: the client pays Digital Switch directly through the pay link. No discounts unless Lethabo approves in writing.</p>
+
+<h3>Upsell to Premium when…</h3>
+<p class="tip">They sell products, take bookings or appointments, or ask "can people order from it?" Say: "Then you'd want Premium: customers can book or buy straight from the site, even at night."</p>
+
 <h3>If they say…</h3>
-<details><summary>"It's too expensive."</summary><p>"I hear you. Most web designers charge R8,000 to R15,000 for a custom site. This is R2,999 to set up and R199 a month, and it's already built. One extra roofing job pays for it many times over." Tag it <b>Price</b>.</p></details>
-<details><summary>"I get my work from word of mouth."</summary><p>"That's the best kind of work. When someone recommends you, the first thing they do is Google you. This makes sure they find you, see your work and can call you in one tap." Tag it <b>Word of mouth</b>.</p></details>
-<details><summary>"I have a Facebook page."</summary><p>"Keep it! This works with it. A website on your own address shows up on Google, looks established, and you own it. We link your Facebook from it." Tag it <b>Facebook is enough</b>.</p></details>
-<details><summary>"I already have a website."</summary><p>"Have a look at this one on your phone next to yours. If it brings you more calls, we put it on your same address." Tag it <b>Has a website</b>.</p></details>
-<details><summary>"Send me info, I'll think about it."</summary><p>"Of course, it's on your WhatsApp. What would you want changed for it to be a yes? I can tweak it today." Set a call-back for tomorrow.</p></details>
-<details><summary>"Is this a scam? Who are you?"</summary><p>"Fair question. We're Digital Switch, a web design studio in Johannesburg. You don't pay anything until you've seen your site and you're happy with it. Our work is at digitalswitch.co.za." Tag it <b>Trust</b>.</p></details>
+<details><summary>"It's too expensive."</summary><p>"I understand. A custom website usually costs R8,000 to R15,000. Yours is already built, and it's R3,999 once-off, or four payments with Payflex. How much is one new customer worth to you?" Tag it <b>Price</b>.</p></details>
+<details><summary>"I get my work from word of mouth."</summary><p>"That's the best kind of work. When someone recommends you, the first thing they do is Google you. This makes sure they find you, see your work and can contact you straight away." Tag it <b>Word of mouth</b>.</p></details>
+<details><summary>"I have a Facebook page."</summary><p>"Keep it! This works with it. A website on your own address shows up on Google, looks established, and you own it. We link your Facebook from it." Tag it <b>Facebook</b>.</p></details>
+<details><summary>"Google Maps is enough."</summary><p>"Maps is great. The site adds what Maps can't: your own address, your work and prices, and a way to contact you even when you can't pick up." Tag it <b>Google Maps is enough</b>.</p></details>
+<details><summary>"I already have a website."</summary><p>"Have a look at this one on your phone next to yours. If it brings you more customers, we can put it on your same address." Tag it <b>Has a website</b>.</p></details>
+<details><summary>"Send me info, I'll think about it."</summary><p>"Of course, it's on your WhatsApp. What would you need to see for it to be a yes?" Set a call-back. The follow-up rhythm does the rest.</p></details>
+<details><summary>"Is this a scam? Who are you?"</summary><p>"Fair question. We're Digital Switch. You've already seen your site, and you pay nothing until you're happy with it. You pay us directly through a secure payment page, never into a personal account." Send digitalswitch.co.za.</p></details>
 <details><summary>"Not interested."</summary><p>"No problem at all, thanks for your time." Log <b>Not interested</b>, rate it, and tag the reason if they gave one. No pushing.</p></details>
+<details><summary>"Don't contact me again."</summary><p>"Of course, I'm sorry for bothering you." Log <b>Don't contact</b> the same day. Never message them again.</p></details>
+
+<h3>Never</h3>
+<p class="tip">Never promise Google rankings, traffic or a number of customers. Never pretend to be anyone but yourself from Digital Switch. Never call on Sundays or public holidays, or outside 08:00–20:00 on weekdays and 09:00–13:00 on Saturdays.</p>
 
 </section>
 
@@ -205,12 +227,12 @@ details p{color:var(--mist);margin:0 0 12px}
 (function(){
 var CFG = {
  market:'za', marketLabel:'Local', endpoint:'https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec', tz:'Africa/Johannesburg', clockLabel:'Joburg', hours:[8,17], days:['Mon','Tue','Wed','Thu','Fri','Sat'],
- outcomes:[['noanswer','No answer'],['nowa','No reply on WhatsApp'],['agreed','Agreed to see: send on WhatsApp'],['sent','Site sent'],['callback','Call back'],['interested','Interested'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
+ outcomes:[['noanswer','No answer'],['nowa','No reply on WhatsApp'],['agreed','Agreed to see: send on WhatsApp'],['sent','Site sent'],['callback','Call back'],['interested','Interested'],['pay','Ready to pay'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
  tags:[['liked','Liked the design'],['asked-price','Asked the price'],['price','Price'],['has-site','Has a website'],['provider','Happy with current provider'],['gmaps','Google Maps is enough'],['wom','Word of mouth'],['facebook','Facebook is enough'],['busy','Busy, call back'],['not-dm','Not the decision maker'],['trust','Trust / is this a scam?'],['changes','Wants changes'],['seen','Already looked at it']],
- extraViews:[['tosend','To send']],
+ extraViews:[['tosend','To send'],['follow','Follow-ups due'],['opened','Opened their site']],
  segments:[['No website',function(l){return l.web==='no'}],['Has a website',function(l){return l.web!=='no'}],['Cellphone',function(l){return l.mobile}],['Landline',function(l){return !l.mobile}]],
  lowPickup:'Lean on WhatsApp first and call only people who replied, and try landlines between 8 and 10 in the morning.',
- advice:{price:'Lead with what it costs per month (R199) and the one-extra-job line before the setup fee, and remind them it\'s already built.',
+ advice:{price:'Lead with "it\'s already built" and what one new customer is worth, then mention Payflex: four payments on R3,999.',
    'has-site':'Ask them to open both sites on their phone side by side. Focus on Google and tap-to-call.',
    wom:'Use the "they Google you after the referral" line early, before the price.',
    facebook:'Say "keep Facebook" first, then the Google and ownership point.',
@@ -218,13 +240,13 @@ var CFG = {
    provider:'Do not fight the provider. Ask if they would keep their email and hosting where it is and just let us redo the site on the same address.',
    busy:'Book a specific call-back time on the spot rather than "later".',
    'not-dm':'Ask for the owner\'s name and best time, and set a call-back for them.',
-   trust:'Send the digitalswitch.co.za link and Kasi Lobby as proof before the call, and say "you pay nothing until you\'re happy".',
+   trust:'Send the digitalswitch.co.za link before the call, and say "you\'ve seen your site already, and you pay nothing until you\'re happy".',
    changes:'Good sign. Make the change the same day and send it back. This is a buying signal.',
    'asked-price':'They\'re interested. Answer straight, then go to the close.',
-   liked:'They like it. Go to the offer and ask for the payment link.',
+   liked:'They like it. Go to the offer and send the pay link from the Closing kit.',
    seen:'They opened it. Ask what they\'d change, then make the offer.'}
 };
-var LEADS = [];
+var LEADS = [], POOL = null, WHO = null, BATCH = 30;
 var KEY='dsd-'+CFG.market+'-';
 var $=function(s){return document.querySelector(s)}, $$=function(s){return [].slice.call(document.querySelectorAll(s))};
 function lsGet(k,d){try{var v=localStorage.getItem(KEY+k);return v===null?d:v}catch(e){return d}}
@@ -239,7 +261,7 @@ try{setLeads(JSON.parse(lsGet('leads','[]')))}catch(e){}
 var OUTCOMES=CFG.outcomes, OUT={}; OUTCOMES.forEach(function(o){OUT[o[0]]=o[1]});
 var INTEREST=[['hot','Hot'],['warm','Warm'],['cold','Cold'],['none','No interest']], INT={}; INTEREST.forEach(function(o){INT[o[0]]=o[1]});
 var TAGS=CFG.tags, TAG={}; TAGS.forEach(function(o){TAG[o[0]]=o[1]});
-var REACHED={agreed:1,sent:1,interested:1,callback:1,sold:1,notnow:1,dnc:1,spoke:1};
+var REACHED={agreed:1,sent:1,interested:1,pay:1,callback:1,sold:1,notnow:1,dnc:1,spoke:1};
 var CLOSED={sold:1,notnow:1,dnc:1,wrong:1,nowa:1};
 
 var state={}; try{state=JSON.parse(lsGet('state','{}'))}catch(e){}
@@ -272,10 +294,22 @@ clock(); setInterval(clock,30000);
 function st(l){return state[l.id]||{}}
 function status(l){return st(l).status||'call'}
 function isDue(l){var s=st(l);return s.callback && new Date(s.callback).getTime()<=Date.now()+30*60000 && !CLOSED[s.status]}
+var DAY=86400000, FU=[1,4,11];
+/* Follow-up rhythm (10 Nov): Day 0 site sent, then Day 1, Day 4, Day 11, then leave them alone. */
+function fuInfo(l){var s=st(l), log=s.log||[], i, sentAt=0;
+  for(i=0;i<log.length;i++){if(log[i].o==='sent'){sentAt=log[i].at;break}}
+  if(!sentAt||CLOSED[status(l)]||status(l)==='pay') return null;
+  var touches=log.filter(function(e){return e.at>sentAt}).length;
+  if(touches>=FU.length) return {done:true,touch:touches};
+  var due=sentAt+FU[touches]*DAY; return {due:due,isDue:Date.now()>=due,touch:touches+2};
+}
+function opened(l){var s=st(l);return l.seen&&l.seen.last&&l.seen.last>(s.lastAt||0)&&!CLOSED[status(l)]&&Date.now()-l.seen.last<7*DAY}
 function hoursSince(s){return s.lastAt?(Date.now()-s.lastAt)/3600000:1e9}
 function rank(l){
   var s=st(l), x=status(l);
+  if(opened(l)) return [0,-l.seen.last];
   if(isDue(l)) return [0,new Date(s.callback).getTime()];
+  var fu=fuInfo(l); if(fu&&fu.isDue) return [1,fu.due];
   if(x==='agreed') return [0,s.lastAt||0];
   if(x==='call') return [l.b1?9:1, l.ix];
   if(x==='interested'||x==='sent'||x==='spoke') return hoursSince(s)>=20?[2,s.lastAt]:[6,s.lastAt];
@@ -291,17 +325,25 @@ function inView(l,v){
   if(v==='fresh') return x==='call';
   if(v==='site') return !!l.site && !CLOSED[x];
   if(v==='tosend') return x==='agreed';
+  if(v==='follow'){var f=fuInfo(l);return !!(f&&f.isDue)}
+  if(v==='opened') return opened(l);
   if(v==='closed') return !!CLOSED[x];
   return true;
 }
 var VIEWS=[['next','Up next'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
 
+function applyWho(w){WHO=w;
+  if(w.role!=='admin'){var first=String(w.name||'').split(' ')[0]; if(first&&$('#myName').value!==first){$('#myName').value=first;try{localStorage.setItem('ds-name',first)}catch(e){};fillNames()} $('#myName').readOnly=true;
+    $('#navSetup').hidden=true; if(!w.us){$('#navUs').hidden=true;$('#navUsSep').hidden=true} if(!w.za){$('#navZa').hidden=true;$('#navUsSep').hidden=true}}
+}
 /* ---------- render list ---------- */
 function fmtWhen(ts){if(!ts)return '';var d=new Date(ts);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
 function render(){
   var c={called:0,reached:0,warm:0,sold:0};
   LEADS.forEach(function(l){var s=st(l);if(s.attempts)c.called++;if(REACHED[s.status]||s.reached)c.reached++;if((s.interest==='hot'||s.interest==='warm')&&!CLOSED[s.status])c.warm++;if(s.status==='sold')c.sold++});
   $('#stats').innerHTML='<div><b>'+c.called+'</b><span>Called</span></div><div><b>'+c.reached+'</b><span>Spoke to</span></div><div><b>'+c.warm+'</b><span>Hot & warm</span></div><div><b>'+c.sold+'</b><span>Sold</span></div>';
+  var mineOpen=LEADS.filter(function(l){return status(l)==='call'}).length;
+  $('#poolInfo').innerHTML=(WHO&&WHO.role!=='admin'?'<b>'+mineOpen+'</b> new businesses on your list'+(POOL!==null?' · <b>'+POOL+'</b> more waiting in the pool':'')+'. Your list tops up to '+BATCH+' new leads automatically as you work through it.':(POOL!==null?'<b>'+POOL+'</b> untouched businesses waiting in the pool for reps.':''))+' Airtime: a weekly all-network bundle is reimbursed up to <b>R50</b> with your Friday payout.';
   // re-log banner (local first 10 only)
   var b1=LEADS.filter(function(l){return l.b1 && !st(l).attempts});
   $('#relog').innerHTML=b1.length?'<div class="relog"><p><b>Your first '+b1.length+' calls aren\'t in here yet.</b> The old desk saved them on your phone only, where I can\'t read them. Open each one and log what happened, with an interest level and tags. It takes about two minutes and starts the feedback data with real calls.</p><button class="btn sm p" id="showB1">Log my first '+b1.length+' calls</button></div>':'';
@@ -321,11 +363,12 @@ function card(l){
   var s=st(l), x=status(l), isOpen=!!open[l.id];
   var meta=CFG.market==='za'?(esc(l.area)+' · '+local(l)+(l.mobile?'':' · landline')+' · '+(l.web==='no'?'no website':l.web==='ads'?'runs ads':'has a website')):(esc(l.city)+' · '+esc(l.phone)+(l.rating?' · ★'+esc(l.rating):''));
   var why=CFG.market==='us'?whyUS(l):(s.caller&&s.by?'Called by <b>'+esc(s.by)+'</b>'+(x==='agreed'?' · <b>agreed to see it: send the link</b>':'')+(s.wa?' · WhatsApp '+esc(s.wa):''):'');
-  var badges='<span class="badge s-'+x+'">'+(x==='call'?'To call':esc(OUT[x]||x))+'</span>'+(s.interest?'<span class="badge i-'+s.interest+'">'+INT[s.interest]+'</span>':'')+(CFG.market==='us'&&l.site?'<span class="badge site">Site built</span>':'');
+  var badges='<span class="badge s-'+x+'">'+(x==='call'?'To call':esc(OUT[x]||x))+'</span>'+(s.interest?'<span class="badge i-'+s.interest+'">'+INT[s.interest]+'</span>':'')+(CFG.market==='us'&&l.site?'<span class="badge site">Site built</span>':'')+(opened(l)?'<span class="badge i-hot">Opened their site'+(l.seen.n>1?' '+l.seen.n+'×':'')+'</span>':'');
   var last=s.note?'<div class="last">'+esc(s.note.length>140?s.note.slice(0,140)+'…':s.note)+'</div>':'';
+  var fuI=fuInfo(l), fuLine=fuI&&!fuI.done?(fuI.isDue?'<div class="why" style="color:var(--warm)">Follow-up due now · touch '+fuI.touch+' of 4</div>':'<div class="why">Next follow-up '+fmtWhen(fuI.due)+' · touch '+fuI.touch+' of 4</div>'):(fuI&&fuI.done?'<div class="why">All 4 touches done: leave them alone</div>':'');
   var due=isDue(l)?'<div class="why" style="color:var(--warm)">Call back now · '+fmtWhen(new Date(s.callback).getTime())+'</div>':(s.callback&&x==='callback'?'<div class="why">Call back '+fmtWhen(new Date(s.callback).getTime())+'</div>':'');
   return '<article class="card'+(isDue(l)?' due':'')+(CLOSED[x]?' closed':'')+' s-'+x+'" data-id="'+esc(l.id)+'">'+
-    '<button class="head" data-toggle aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="badges">'+badges+'</div><div class="meta">'+meta+'</div>'+(why?'<div class="why">'+why+'</div>':'')+due+last+'</button>'+
+    '<button class="head" data-toggle aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="badges">'+badges+'</div><div class="meta">'+meta+'</div>'+(why?'<div class="why">'+why+'</div>':'')+(opened(l)?'<div class="why" style="color:var(--warm)">They opened their site '+fmtWhen(l.seen.last)+': call them now</div>':'')+due+fuLine+last+'</button>'+
     (isOpen?body(l):'')+'</article>';
 }
 function local(l){return l.num.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
@@ -336,7 +379,8 @@ function whyUS(l){
 function body(l){
   var s=st(l), d=drafts[l.id]||(drafts[l.id]={o:'',i:s.interest||'',t:(s.tags||[]).slice(),n:'',cb:s.callback||'',email:s.email||'',spoke:s.spoke||''});
   var acts='<div class="row"><span class="num">'+(CFG.market==='za'?local(l):esc(l.phone))+'</span><button class="btn sm" data-copy="'+esc(CFG.market==='za'?local(l):l.phone)+'">Copy</button><a class="btn p sm" href="tel:+'+l.num+'">Call</a>'+(l.site?'<a class="btn sm" href="'+esc(l.site)+'" target="_blank" rel="noopener">Their site ↗</a>':'')+'</div>';
-  if(CFG.market==='za' && l.mobile) acts+='<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFirst(l)))+'">1 · First message</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgLink(l)))+'">2 · Send the link</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">3 · Follow-up</a></div>';
+  if(CFG.market==='za' && l.mobile){ var fq=fuInfo(l); acts+='<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFirst(l)))+'">1 · Permission message</a>'+(l.site?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgLink(l)))+'">2 · Send their site</a>':'<span class="muted">Their preview is still being built</span>')+(l.site?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l,fq?fq.touch:2)))+'">3 · Follow-up'+(fq&&!fq.done?' (touch '+fq.touch+')':'')+'</a>':'')+'</div>';
+    var x0=status(l); if(x0==='sent'||x0==='interested'||x0==='pay'||x0==='agreed'||x0==='callback') acts+='<div class="row"><span class="lbl" style="margin:0">Closing kit</span><a class="btn p sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgPay(l,3999,'Starter')))+'">Pay link · Starter R3,999</a><a class="btn sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgPay(l,7999,'Premium')))+'">Pay link · Premium R7,999</a></div>'; }
   if(CFG.market==='us') acts+='<div class="row"><button class="btn sm" data-copytext="'+esc(usText(l))+'">Copy text for after they say yes</button></div>';
   var pick=function(arr,cur,key,cls){return '<div class="pick '+(cls||'')+'" data-pick="'+key+'">'+arr.map(function(o){var on=Array.isArray(cur)?cur.indexOf(o[0])>-1:cur===o[0];return '<button type="button" data-v="'+o[0]+'" class="'+(on?'on':'')+'">'+esc(o[1])+'</button>'}).join('')+'</div>'};
   var hist=(s.log||[]).slice().reverse().slice(0,6).map(function(e){return '<div><time>'+fmtWhen(e.at)+'</time>'+esc(OUT[e.o]||e.o)+(e.i?' · '+INT[e.i]:'')+(e.t&&e.t.length?' · '+e.t.map(function(t){return TAG[t]||t}).join(', '):'')+(e.n?'<br>'+esc(e.n):'')+'</div>'}).join('');
@@ -351,9 +395,13 @@ function body(l){
     (hist?'<div><div class="lbl">History</div><div class="hist">'+hist+'</div></div>':'')+'</div>';
 }
 function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
-function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch, a web design studio in Joburg. I made a free website for '+l.name+'. May I send you the link so that you can see?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
-function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. It can be live on your own web address within 24 hours: R2,999 to set up, then R199 a month. Let me know what you think!'}
-function msgFollow(l){return 'Hi, it\'s '+me()+' from Digital Switch again. Just checking you had a chance to look at the '+l.name+' website: '+l.site+'\n\nHappy to make any changes before it goes live. Shall I get it live for you this week?'}
+function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch. We\'ve built a preview of a website for '+l.name+', so you can see exactly what it would look like before paying anything. May I send you the link?\n\nIf you\'d rather not hear from me, just reply STOP and I won\'t message again.'}
+function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. Customers who search for you will find this, and can call or WhatsApp you straight from it. It can be live within 24 hours: R3,999 once-off, then R99 a month, no contract. What do you think?'}
+function msgFollow(l,t){var site=l.site||'';
+  if(t>=4) return 'Hi, it\'s '+me()+' from Digital Switch. I don\'t want to keep bothering you about the '+l.name+' website: '+site+'\n\nShall we go ahead, or leave it for now?';
+  if(t===3) return 'Hi, it\'s '+me()+' from Digital Switch. One thing I wanted to show you on the '+l.name+' site: customers can WhatsApp you straight from Google, even while you\'re busy on a job. '+site+'\n\nWe can have it live before the December rush. Shall I get it started?';
+  return 'Hi, it\'s '+me()+' from Digital Switch. Did you get a chance to look at the '+l.name+' website? '+site+'\n\nWhat did you think?'}
+function msgPay(l,a,pkg){return 'Great! Here\'s the secure payment link for your '+pkg+' website ('+(a===3999?'R3,999 once-off, then R99 a month':'R7,999 once-off, then R199 a month')+'): https://digitalswitch.co.za/pay/?b='+encodeURIComponent(l.name)+'&a='+a+'\n\nYou pay Digital Switch directly. Once it\'s paid, we\'ll get your site live.'}
 function usText(l){return l.site?('Hi'+(l.owner?' '+l.owner.split(' ')[0]:'')+', it\'s '+me()+' from Digital Switch. Here\'s the site I built for '+l.name+': '+l.site+' . It can be live on your own web address within 24 hours: $499 to set up, then $49 a month, no contract.'):('Hi'+(l.owner?' '+l.owner.split(' ')[0]:'')+', it\'s '+me()+' from Digital Switch, thanks for the chat. Here\'s some of my work: https://digitalswitch.co.za . I\'ll build a free preview for '+l.name+' and send it over.')}
 
 /* ---------- interactions ---------- */
@@ -410,8 +458,8 @@ function flush(){
 function load(verify){
   if(!DESK_KEY){renderKey();return}
   return fetch(CFG.endpoint+'?desk='+CFG.market+'&key='+encodeURIComponent(DESK_KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
-    if(!j.ok){ if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
-    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads));
+    if(!j.ok){ if(j.error==='market'){$('#list').innerHTML='<div class="empty">This desk isn\'t switched on for you. Use the '+(CFG.market==='za'?'<a href="/desk/us/">US desk</a>':'<a href="/desk/">Local desk</a>')+'.</div>';return} if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
+    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads)); POOL=(typeof j.pool==='number')?j.pool:null; BATCH=j.batch||30; if(j.who) applyWho(j.who);
     var remote=j.state||{};
     queue=queue.filter(function(q){var r=remote[q.id];return !(r&&(r.lastAt||0)>=(q.s.lastAt||0))});
     lsSet('queue',JSON.stringify(queue));
