@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: Lethabo's view of every rep. Alerts on top (yeses waiting, ready to pay), then one card per rep with this week's activity, pipeline and airtime earned, then add-a-rep. Neon route, dark only. */
+/* Layout: Lethabo's view of every rep. Alerts on top (yeses waiting, ready to pay), then one card per rep with this week's activity, pipeline and the airtime cap, then add-a-rep. Neon route, dark only. */
 :root{--night:#071719;--panel:#0b2124;--card:#0d2629;--street:#123336;--river:#1b4a4d;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;--ok:#7ee0b0;--warm:#ffd27a;--no:#ff9a9a;
 --display:'Unbounded',system-ui,sans-serif;--script:'Ballet',cursive;--body:'Inter Tight',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;color-scheme:dark}
 *{box-sizing:border-box}
@@ -75,7 +75,7 @@ function render(j){
       '<div class="nums"><div><b>'+r.week+'</b><span>Actions</span></div><div><b>'+r.yes+'</b><span>Yes now</span></div><div><b>'+(r.sent+r.interested)+'</b><span>Deals</span></div><div><b>'+r.sold+'</b><span>Sold</span></div></div>'+
       '<p class="line">'+r.held+' untouched leads on their list · '+r.asked+' asked on WhatsApp</p>'+
       (late?'<p class="line late">'+late+' yes'+(late>1?'es':'')+' waiting over an hour</p>':'')+
-      (j.cfg.on?'<p class="line">Airtime earned this week: <b>R'+r.airtime+'</b> (R'+j.cfg.rand+' per '+j.cfg.every+' actions; next at '+r.nextAt+')</p>':'')+
+      (j.cfg.on?'<p class="line">Airtime: reimbursed up to <b>R'+(j.cfg.cap||50)+' a week</b> on proof of purchase</p>':'')+
       (r.active?'<div class="tools"><button class="btn" data-copy="'+esc(r.link)+'">Copy desk link</button><button class="btn no" data-rm="'+r.n+'" data-nm="'+esc(r.name)+'">Remove</button></div>':'')+'</div>'}).join(''):'<p class="empty">No reps yet. Add one below.</p>';
   $('#st').textContent=j.pool+' untouched businesses in the pool waiting for a rep · updated '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 }

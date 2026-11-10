@@ -143,7 +143,7 @@ function first(n){return String(n||'').split(' ')[0]}
 function isDue(s){return s.status==='callback'&&s.callback&&new Date(s.callback).getTime()<=Date.now()+30*60000}
 function waNum(l){var s=stOf(l),w=String(s.wa||'').replace(/\D/g,'');if(w.length>=9)return w.charAt(0)==='0'?'27'+w.slice(1):w;return l.num||''}
 function canWa(l){var s=stOf(l);return !!(String(s.wa||'').replace(/\D/g,'').length>=9||l.mobile)}
-function payUrl(l){return 'https://digitalswitch.co.za/pay/?b='+encodeURIComponent(l.name)+'&a='+(CFG.setup||2999)}
+function payUrl(l){return 'https://digitalswitch.co.za/pay/?b='+encodeURIComponent(l.name)+'&a='+(CFG.setup||3999)}
 function quoteUrl(l){var mm=String(l.site||'').match(/\/local\/za-([^/]+)\//);return mm?'https://digitalswitch.co.za/offer-za/'+mm[1]+'/':''}
 
 // What the rep should send next on WhatsApp for this lead, or null.
@@ -196,8 +196,7 @@ function render(){
   $('#sToday').textContent=nT;$('#sWeek').textContent=nW;$('#sYes').textContent=yes;$('#sDeals').textContent=deal.length;
   $('#nMsg').textContent=msg.length;$('#nCall').textContent=call.length;$('#nDeal').textContent=deal.length;$('#nDone').textContent=done.length;
   var waiting=msg.filter(function(l){return nextMsg(l).k==='site'}).length; $('#nMsg').className=waiting?'hot':'';
-  if(CFG.airOn){var ev=CFG.airEvery||30,got=Math.floor(nW/ev)*(CFG.airRand||0),left=ev-(nW%ev);
-    $('#air').hidden=false;$('#air').innerHTML='Airtime this week: <b>R'+got+'</b> earned · '+left+' more messages or calls for the next R'+(CFG.airRand||0)+'<div class="bar"><i style="width:'+Math.round((nW%ev)/ev*100)+'%"></i></div>'}
+  if(CFG.airOn){$('#air').hidden=false;$('#air').innerHTML='Airtime: buy a weekly all-network bundle and keep the screenshot. We reimburse up to <b>R'+(CFG.airCap||50)+' a week</b> with your Friday payout.'}
   var list={msg:msg,call:call,deal:deal,done:done}[view];
   var empty={msg:'No messages due right now. New businesses arrive on your list automatically.',call:'Nobody to call right now.',deal:'No deals yet. They appear here once a site is sent.',done:'Nothing finished yet.'}[view];
   $('#list').innerHTML=list.length?list.map(card).join(''):'<div class="empty">'+empty+'</div>';
@@ -241,7 +240,7 @@ function kit(l){
   return '<details class="kit"><summary>Closing kit</summary>'+
     (q?'<p><b>Send the quote</b></p><div class="row"><a class="btn wa" href="https://wa.me/'+esc(waNum(l))+'?text='+encodeURIComponent(t)+'" target="_blank" rel="noopener">Send quote on WhatsApp</a></div>':'')+
     '<p><b>Ready to pay?</b> Send them the secure pay link (card or instant EFT, through PayFast), then tap <b>Ready to pay</b>.</p><div class="row"><a class="btn wa" href="https://wa.me/'+esc(waNum(l))+'?text='+encodeURIComponent(text('pay',l))+'" target="_blank" rel="noopener">Send pay link on WhatsApp</a></div>'+
-    '<p><b>Price:</b> R'+(CFG.setup||2999).toLocaleString('en-ZA')+' once, then R'+(CFG.monthly||199)+' a month. No contract. Live within 24 hours of payment.</p>'+
+    '<p><b>Price:</b> R'+(CFG.setup||3999).toLocaleString('en-ZA')+' once, then R'+(CFG.monthly||99)+' a month. No contract. Live within 24 hours of payment.</p>'+
     '<p><b>"I\'m already on Google Maps / Facebook."</b> "That\'s great, it\'s how we found you. A website is where those people land: your work, your services, and one tap to call or WhatsApp you. It also helps you show up when people search your name."</p>'+
     '<p><b>"It\'s too expensive."</b> "It\'s a once-off setup and then a small monthly fee that covers hosting, changes and keeping it online. One extra job usually pays for it."</p>'+
     '<p><b>"Let me think about it."</b> "Of course. What\'s the main thing you\'d want to be sure of?" Answer it, then agree a day to follow up and log a call-back.</p>'+
