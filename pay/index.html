@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Unbounded:wght@200;300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Pay page (9 Nov 2026): one card, the business name, what they pay for, one glowing PayFast button. Built per client from the link: /pay/?b=Business+Name&a=2999 */
+/* Pay page (9 Nov 2026): one card, the business name, what they pay for, one glowing PayFast button. Built per client from the link: /pay/?b=Business+Name&a=3999 */
 :root{--night:#071719;--card:#0d2629;--river:#1b4a4d;--lilac:#c3b0ff;--glow:#9b7bff;--mint:#ddf5ec;--mist:#b6d3cc;--sage:#9cc0b9;--dim:#6f9993;color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 500px at 80% 0%,rgba(155,123,255,.16),transparent 60%),var(--night);color:var(--mint);font:16px/1.55 'Inter Tight',system-ui,sans-serif;padding:24px 16px}
 .wrap{width:100%;max-width:460px}
@@ -33,11 +33,11 @@ button:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
     <div class="row"><span>For</span><b id="biz">Your business</b></div>
     <div class="row"><span>What it covers</span><b>Website setup</b></div>
     <ul><li>Your site, built and polished</li><li>Your own web address connected</li><li>Found on Google by name</li><li>Live within 24 hours of payment</li></ul>
-    <div class="row total"><span>Total today</span><b id="amt">R2,999</b></div>
+    <div class="row total"><span>Total today</span><b id="amt">R3,999</b></div>
     <form id="pf" action="https://payment.payfast.io/eng/process" method="post">
       <input type="hidden" name="cmd" value="_paynow">
       <input type="hidden" name="receiver" value="37722973">
-      <input type="hidden" name="amount" id="f_amount" value="2999">
+      <input type="hidden" name="amount" id="f_amount" value="3999">
       <input type="hidden" name="item_name" id="f_item" value="Website setup">
       <input type="hidden" name="item_description" id="f_desc" value="Digital Switch website setup: design, build, domain and going live within 24 hours of payment.">
       <input type="hidden" name="return_url" id="f_ret" value="https://digitalswitch.co.za/pay/thanks/">
@@ -49,8 +49,8 @@ button:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
 </main>
 <script>
 (function(){
-  var q=new URLSearchParams(location.search), b=(q.get('b')||'').trim().slice(0,80), a=parseFloat(q.get('a')||'2999');
-  if(!(a>=50&&a<=200000))a=2999;
+  var q=new URLSearchParams(location.search), b=(q.get('b')||'').trim().slice(0,80), a=parseFloat(q.get('a')||'3999');
+  if(!(a>=50&&a<=200000))a=3999;
   var money='R'+a.toLocaleString('en-ZA',{minimumFractionDigits:a%1?2:0});
   if(b){document.getElementById('biz').textContent=b;document.title='Pay Digital Switch: '+b}
   document.getElementById('amt').textContent=money;
