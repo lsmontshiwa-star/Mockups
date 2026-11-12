@@ -396,7 +396,7 @@ function card(l){
 }
 function local(l){return l.num.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
 function whyUS(l){
-  if(l.kind==='viewed') return '<b style="color:var(--warm)">Opened the site we emailed them</b> · warm: ask for <b>the owner</b>';
+  if(l.kind==='viewed') return '<b style="color:var(--warm)">Opened the site we built them</b> · warm: ask for <b>the owner</b>';
   var t=l.kind==='new'?'New business (licensed '+l.lic+')':l.kind==='bademail'?'Our email didn\'t reach them':l.kind==='bounced'?'Email bounced':l.kind==='emailed'?'Emailed, no reply':'Never contacted';
   return t+' · ask for <b>the owner</b>';
 }
