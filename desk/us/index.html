@@ -54,6 +54,7 @@ h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1
 .relog .btn{margin-top:4px}
 .card{background:var(--card);border:1px solid var(--river);border-radius:16px;margin:8px 0;overflow:hidden}
 .card.due{border-color:var(--warm)}
+.kit{background:var(--card,#0d2629);border:1px solid var(--river,#1b4a4d);border-radius:12px;padding:4px 12px;margin:0 0 12px}.kit summary{cursor:pointer;padding:10px 0;font-weight:600}.warmkit{border-color:var(--warm)!important}.warmkit summary{color:var(--warm)}.warmsteps{margin:6px 0 10px;padding-left:20px;font-size:14.5px;line-height:1.5}.warmsteps li{margin-bottom:6px}
 .card.s-sold{border-color:var(--ok)}
 .card.closed{opacity:.6}
 .head{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;background:none;border:0}
@@ -279,8 +280,10 @@ function st(l){return state[l.id]||{}}
 function status(l){return st(l).status||'call'}
 function isDue(l){var s=st(l);return s.callback && new Date(s.callback).getTime()<=Date.now()+30*60000 && !CLOSED[s.status]}
 function hoursSince(s){return s.lastAt?(Date.now()-s.lastAt)/3600000:1e9}
+function opened(l){var s=st(l);return l.seen&&l.seen.last&&l.seen.last>(s.lastAt||0)&&!CLOSED[status(l)]&&Date.now()-l.seen.last<7*86400000}
 function rank(l){
   var s=st(l), x=status(l);
+  if(opened(l)) return [0,-l.seen.last];
   if(isDue(l)) return [0,new Date(s.callback).getTime()];
   if(x==='call') return [l.b1?9:1, l.ix];
   if(x==='interested'||x==='sent'||x==='spoke') return hoursSince(s)>=20?[2,s.lastAt]:[6,s.lastAt];
@@ -295,10 +298,11 @@ function inView(l,v){
   if(v==='warm') return (s.interest==='hot'||s.interest==='warm')&&!CLOSED[x];
   if(v==='fresh') return x==='call';
   if(v==='site') return !!l.site && !CLOSED[x];
+  if(v==='seen') return !!(l.seen&&l.seen.last)&&!CLOSED[x];
   if(v==='closed') return !!CLOSED[x];
   return true;
 }
-var VIEWS=[['next','Up next'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
+var VIEWS=[['next','Up next'],['seen','Opened their site'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
 
 function applyWho(w){WHO=w;
   if(w.role!=='admin'){var first=String(w.name||'').split(' ')[0]; if(first&&$('#myName').value!==first){$('#myName').value=first;try{localStorage.setItem('ds-name',first)}catch(e){};fillNames()} $('#myName').readOnly=true;
@@ -322,6 +326,7 @@ function render(){
   if(q) list=LEADS.filter(function(l){return (l.name+' '+(l.area||l.city)+' '+(st(l).note||'')+' '+(l.owner||'')).toLowerCase().indexOf(q)>-1});
   list.sort(function(a,b){var ra=rank(a),rb=rank(b);return ra[0]-rb[0]||ra[1]-rb[1]});
   if(view==='closed'||view==='all') list.sort(function(a,b){return a.ix-b.ix});
+  if(view==='seen') list.sort(function(a,b){return b.seen.last-a.seen.last});
   if(!LEADS.length){$('#moreBtn').hidden=true; if(loaded)$('#list').innerHTML='<div class="empty">No leads on this list yet.</div>'; return}
   $('#list').innerHTML=list.length?list.slice(0,shown).map(card).join(''):'<div class="empty">'+(view==='next'?'Nothing due right now. Check Call-backs or Hot & warm, or come back later for second tries.':'Nobody here yet.')+'</div>';
   $('#moreBtn').hidden=list.length<=shown;
@@ -347,6 +352,7 @@ function body(l){
   var acts='<div class="row"><span class="num">'+(CFG.market==='za'?local(l):esc(l.phone))+'</span><button class="btn sm" data-copy="'+esc(CFG.market==='za'?local(l):l.phone)+'">Copy</button><a class="btn p sm" href="tel:+'+l.num+'">Call</a>'+(l.site?'<a class="btn sm" href="'+esc(l.site)+'" target="_blank" rel="noopener">Their site ↗</a>':'')+'</div>';
   if(CFG.market==='za' && l.mobile) acts+='<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFirst(l)))+'">1 · First message</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgLink(l)))+'">2 · Send the link</a><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l)))+'">3 · Follow-up</a></div>';
   if(CFG.market==='us') acts+='<div class="row"><button class="btn sm" data-copytext="'+esc(usText(l))+'">Copy text for after they say yes</button></div>';
+  if(l.seen&&l.seen.last) acts=warmKit(l)+acts;
   var pick=function(arr,cur,key,cls){return '<div class="pick '+(cls||'')+'" data-pick="'+key+'">'+arr.map(function(o){var on=Array.isArray(cur)?cur.indexOf(o[0])>-1:cur===o[0];return '<button type="button" data-v="'+o[0]+'" class="'+(on?'on':'')+'">'+esc(o[1])+'</button>'}).join('')+'</div>'};
   var hist=(s.log||[]).slice().reverse().slice(0,6).map(function(e){return '<div><time>'+fmtWhen(e.at)+'</time>'+esc(OUT[e.o]||e.o)+(e.i?' · '+INT[e.i]:'')+(e.t&&e.t.length?' · '+e.t.map(function(t){return TAG[t]||t}).join(', '):'')+(e.n?'<br>'+esc(e.n):'')+'</div>'}).join('');
   return '<div class="body">'+acts+
@@ -359,6 +365,15 @@ function body(l){
     '<div class="row"><button class="btn p" data-save>Log this call</button><span class="muted">'+(s.attempts?(s.attempts+' call'+(s.attempts>1?'s':'')+' so far'):'First call')+'</span></div>'+
     (hist?'<div><div class="lbl">History</div><div class="hist">'+hist+'</div></div>':'')+'</div>';
 }
+/* 12 Nov: warm call script for anyone who opened their site */
+function warmKit(l){var fresh=opened(l);
+  return '<details class="kit warmkit"'+(fresh?' open':'')+'><summary>Warm lead: they opened their site '+fmtWhen(l.seen.last)+(l.seen.n>1?' ('+l.seen.n+' times)':'')+'</summary>'+
+   '<ol class="warmsteps">'+
+   '<li><b>Open:</b> "Hi, this is '+esc(me())+' with Digital Switch. I saw you had a look at the website we built for '+esc(l.name)+'. What did you think?" <i>Then stop and listen.</i></li>'+
+   '<li><b>If they like it:</b> "What would you change before it goes live?" Note every change: it\'s a buying signal.</li>'+
+   '<li><b>Close:</b> "We can have it live on your own domain within 24 hours: $499 once, then $49 a month, no contract. Can I send you the payment link?"</li>'+
+   '<li><b>If they hesitate:</b> "That makes sense. What\'s the main thing you\'d want to be sure of?" Answer that, then ask again.</li>'+
+   '<li><b>Not now:</b> "When should I check back?" Log a Call back with that date.</li></ol></details>'}
 function wa(l,t){return 'https://wa.me/'+l.num+'?text='+encodeURIComponent(t)}
 function msgFirst(l){return 'Hi, is this '+l.name+'? I\'m '+me()+' from Digital Switch. We\'ve built a preview of a website for '+l.name+'. May I send you the link?\n\nIf you would rather not hear from me, just reply STOP and I won\'t message again.'}
 function msgLink(l){return 'Here it is: '+l.site+'\n\nHave a look on your phone. It can be live on your own web address within 24 hours. What do you think?'}

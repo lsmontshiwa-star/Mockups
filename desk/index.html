@@ -54,6 +54,7 @@ h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1
 .relog .btn{margin-top:4px}
 .card{background:var(--card);border:1px solid var(--river);border-radius:16px;margin:8px 0;overflow:hidden}
 .card.due{border-color:var(--warm)}
+.kit{background:var(--card,#0d2629);border:1px solid var(--river,#1b4a4d);border-radius:12px;padding:4px 12px;margin:0 0 12px}.kit summary{cursor:pointer;padding:10px 0;font-weight:600}.warmkit{border-color:var(--warm)!important}.warmkit summary{color:var(--warm)}.warmsteps{margin:6px 0 10px;padding-left:20px;font-size:14.5px;line-height:1.5}.warmsteps li{margin-bottom:6px}
 .card.s-sold{border-color:var(--ok)}
 .card.closed{opacity:.6}
 .head{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px 14px;cursor:pointer;width:100%;text-align:left;background:none;border:0}
@@ -300,7 +301,7 @@ var CFG = {
  market:'za', marketLabel:'Local', endpoint:'https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec', tz:'Africa/Johannesburg', clockLabel:'Joburg', hours:[8,17], days:['Mon','Tue','Wed','Thu','Fri','Sat'],
  outcomes:[['noanswer','No answer'],['nowa','No reply on WhatsApp'],['agreed','Agreed to see: send on WhatsApp'],['sent','Site sent'],['callback','Call back'],['interested','Interested'],['pay','Ready to pay'],['sold','Sold'],['notnow','Not interested'],['wrong','Wrong number'],['dnc',"Don't contact"]],
  tags:[['liked','Liked the design'],['asked-price','Asked the price'],['price','Price'],['has-site','Has a website'],['provider','Happy with current provider'],['gmaps','Google Maps is enough'],['wom','Word of mouth'],['facebook','Facebook is enough'],['busy','Busy, call back'],['not-dm','Not the decision maker'],['trust','Trust / is this a scam?'],['changes','Wants changes'],['seen','Already looked at it']],
- extraViews:[['tosend','To send'],['follow','Follow-ups due'],['opened','Opened their site']],
+ extraViews:[['tosend','To send'],['follow','Follow-ups due']],
  segments:[['No website',function(l){return l.web==='no'}],['Has a website',function(l){return l.web!=='no'}],['Cellphone',function(l){return l.mobile}],['Landline',function(l){return !l.mobile}]],
  lowPickup:'Lean on WhatsApp first and call only people who replied, and try landlines between 8 and 10 in the morning.',
  advice:{price:'Use LEAR: empathise, then ask what one or two extra customers a month are worth to them before you mention Payflex (four payments of about R1,000).',
@@ -398,10 +399,11 @@ function inView(l,v){
   if(v==='tosend') return x==='agreed';
   if(v==='follow'){var f=fuInfo(l);return !!(f&&f.isDue)}
   if(v==='opened') return opened(l);
+  if(v==='seen') return !!(l.seen&&l.seen.last)&&!CLOSED[x];   /* 12 Nov: everyone who opened their site = warm, until sold or closed */
   if(v==='closed') return !!CLOSED[x];
   return true;
 }
-var VIEWS=[['next','Up next'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
+var VIEWS=[['next','Up next'],['seen','Opened their site'],['due','Call-backs'],['warm','Hot & warm'],['fresh','Not called yet']].concat(CFG.extraViews||[]).concat([['closed','Closed'],['all','All']]);
 
 function applyWho(w){WHO=w;
   if(w.role!=='admin'){var first=String(w.name||'').split(' ')[0]; if(first&&$('#myName').value!==first){$('#myName').value=first;try{localStorage.setItem('ds-name',first)}catch(e){};fillNames()} $('#myName').readOnly=true;
@@ -426,6 +428,7 @@ function render(){
   if(q) list=LEADS.filter(function(l){return (l.name+' '+(l.area||l.city)+' '+(st(l).note||'')+' '+(l.owner||'')).toLowerCase().indexOf(q)>-1});
   list.sort(function(a,b){var ra=rank(a),rb=rank(b);return ra[0]-rb[0]||ra[1]-rb[1]});
   if(view==='closed'||view==='all') list.sort(function(a,b){return a.ix-b.ix});
+  if(view==='seen') list.sort(function(a,b){return b.seen.last-a.seen.last});
   if(!LEADS.length){$('#moreBtn').hidden=true; if(loaded)$('#list').innerHTML='<div class="empty">No leads on this list yet.</div>'; return}
   $('#list').innerHTML=list.length?list.slice(0,shown).map(card).join(''):'<div class="empty">'+(view==='next'?'Nothing due right now. Check Call-backs or Hot & warm, or come back later for second tries.':'Nobody here yet.')+'</div>';
   $('#moreBtn').hidden=list.length<=shown;
@@ -442,6 +445,20 @@ function card(l){
     '<button class="head" data-toggle aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="badges">'+badges+'</div><div class="meta">'+meta+'</div>'+(why?'<div class="why">'+why+'</div>':'')+(opened(l)?'<div class="why" style="color:var(--warm)">They opened their site '+fmtWhen(l.seen.last)+': call them now</div>':'')+due+fuLine+last+'</button>'+
     (isOpen?body(l):'')+'</article>';
 }
+/* 12 Nov: warm call script for anyone who opened their site (LEAR, never pushy) */
+function warmKit(l){var s=st(l), first=s.spoke?String(s.spoke).split(' ')[0]:'', hi=first?'Hi '+first:'Hi', fresh=opened(l);
+  var wmsg=hi+', it\'s '+me()+' from Digital Switch. I saw you had a look at the website we built for '+l.name+'. What did you think?\n\nHappy to change anything before it goes live, or I can send you the link to make it live on your own web address.';
+  return '<details class="kit warmkit"'+(fresh?' open':'')+'><summary>Warm lead: they opened their site '+fmtWhen(l.seen.last)+(l.seen.n>1?' ('+l.seen.n+' times)':'')+'</summary>'+
+   '<p class="muted">Call first. If they don\'t pick up, send the WhatsApp below. Then follow up the next day.</p>'+
+   '<ol class="warmsteps">'+
+   '<li><b>Open:</b> "Hi, it\'s '+esc(me())+' from Digital Switch. I saw you had a look at the website we built for '+esc(l.name)+'. What did you think?" <i>Then stop and listen.</i></li>'+
+   '<li><b>If they like it:</b> "What would you change before it goes live?" Write every change in Notes. Changes are a buying signal.</li>'+
+   '<li><b>Close:</b> "We can have it live on your own web address within 24 hours. It\'s R3,999 once-off, then R99 a month, no contract. Shall I send you the payment link now?" Yes = send the Starter pay link below, log <b>Ready to pay</b>.</li>'+
+   '<li><b>If they sell products or want more pages:</b> offer Premium (R7,999 + R199 a month) with the Premium pay link.</li>'+
+   '<li><b>If they hesitate (LEAR):</b> Listen. "That makes sense." Ask: "What\'s the main thing you\'d want to be sure of before it goes live?" Answer that one thing, then ask again: "Shall I send the link?"</li>'+
+   '<li><b>If it\'s not now:</b> "No problem. When should I check back?" Log a <b>Call back</b> with that date.</li></ol>'+
+   (l.num?'<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,wmsg))+'">WhatsApp: "I saw you had a look"</a></div>':'')+
+   '</details>'}
 function local(l){return l.num.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
 function whyUS(l){
   var t=l.kind==='new'?'New business (licensed '+l.lic+')':l.kind==='bademail'?'Our email didn\'t reach them':l.kind==='bounced'?'Email bounced':l.kind==='emailed'?'Emailed, no reply':'Never contacted';
@@ -453,6 +470,7 @@ function body(l){
   if(CFG.market==='za' && l.mobile){ var fq=fuInfo(l); acts+='<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFirst(l)))+'">1 · Permission message</a>'+(l.site?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgLink(l)))+'">2 · Send their site</a>':'<span class="muted">Their preview is still being built</span>')+(l.site?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgFollow(l,fq?fq.touch:2)))+'">3 · Follow-up'+(fq&&!fq.done?' (touch '+fq.touch+')':'')+'</a>':'')+'</div>';
     var x0=status(l); if(x0==='sent'||x0==='interested'||x0==='pay'||x0==='agreed'||x0==='callback') acts+='<div class="row"><span class="lbl" style="margin:0">Closing kit</span><a class="btn p sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgPay(l,3999,'Starter')))+'">Pay link · Starter R3,999</a><a class="btn sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgPay(l,7999,'Premium')))+'">Pay link · Premium R7,999</a></div>'; }
   if(CFG.market==='us') acts+='<div class="row"><button class="btn sm" data-copytext="'+esc(usText(l))+'">Copy text for after they say yes</button></div>';
+  if(l.seen&&l.seen.last) acts=warmKit(l)+acts;
   var pick=function(arr,cur,key,cls){return '<div class="pick '+(cls||'')+'" data-pick="'+key+'">'+arr.map(function(o){var on=Array.isArray(cur)?cur.indexOf(o[0])>-1:cur===o[0];return '<button type="button" data-v="'+o[0]+'" class="'+(on?'on':'')+'">'+esc(o[1])+'</button>'}).join('')+'</div>'};
   var hist=(s.log||[]).slice().reverse().slice(0,6).map(function(e){return '<div><time>'+fmtWhen(e.at)+'</time>'+esc(OUT[e.o]||e.o)+(e.i?' · '+INT[e.i]:'')+(e.t&&e.t.length?' · '+e.t.map(function(t){return TAG[t]||t}).join(', '):'')+(e.n?'<br>'+esc(e.n):'')+'</div>'}).join('');
   return '<div class="body">'+acts+
