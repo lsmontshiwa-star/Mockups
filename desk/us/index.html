@@ -40,6 +40,21 @@ section{display:none}section.on{display:block}
 h2{font-family:var(--display);font-weight:300;font-size:22px;letter-spacing:-.03em;margin:4px 0 6px;text-wrap:balance}
 h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1.6em;line-height:.6}
 .lead{color:var(--sage);margin:0 0 14px;max-width:64ch}
+.today{border:1px solid var(--lilac);border-radius:18px;padding:14px 16px 10px;margin:0 0 16px;background:linear-gradient(180deg,rgba(195,176,255,.10),rgba(195,176,255,.02));box-shadow:0 0 22px rgba(155,123,255,.18)}
+.today h2{font-family:var(--display);font-size:16px;margin:0 0 2px;letter-spacing:.01em}
+.today .sub{color:var(--sage);font-size:13px;margin:0 0 10px}
+.today ol{margin:0;padding:0;list-style:none;counter-reset:t}
+.today li{counter-increment:t;display:grid;grid-template-columns:26px 1fr auto;gap:8px;align-items:start;padding:9px 0;border-top:1px solid rgba(195,176,255,.15)}
+.today li:first-child{border-top:0}
+.today li::before{content:counter(t);font-family:var(--mono);color:var(--lilac);font-size:14px;padding-top:2px}
+.today .t{color:var(--mint);font-size:15px;line-height:1.35}
+.today .t a,.today .t button.lk{color:var(--mint);text-decoration:underline;text-decoration-color:rgba(195,176,255,.6);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-align:left}
+.today .d{color:var(--mist);font-size:13px;margin-top:2px;line-height:1.4}
+.today .tag{font-family:var(--mono);font-size:11px;color:var(--sage);margin-left:6px}
+.today details{margin-top:6px;color:var(--sage);font-size:13px}
+.today details li{grid-template-columns:26px 1fr auto}
+.today form{display:flex;gap:6px;margin-top:10px}
+.today form input{flex:1;min-width:0;background:var(--street);border:1px solid var(--river);border-radius:10px;color:var(--mint);padding:7px 10px;font:inherit;font-size:14px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
 .stats div{background:var(--card);border:1px solid var(--river);border-radius:14px;padding:10px 8px;text-align:center;min-width:0}
 .stats b{display:block;font-family:var(--display);font-weight:200;font-size:24px;color:var(--lilac);font-variant-numeric:tabular-nums}
@@ -62,7 +77,7 @@ h2 em{font-family:var(--script);font-style:normal;color:var(--lilac);font-size:1
 .head .meta{grid-column:1;font-family:var(--mono);font-size:11.5px;color:var(--dim);min-width:0;overflow-wrap:anywhere}
 .head .why{grid-column:1/-1;font-size:13.5px;color:var(--sage);min-width:0}
 .head .last{grid-column:1/-1;font-size:13.5px;color:var(--mist);border-left:2px solid var(--river);padding-left:8px;min-width:0;overflow-wrap:anywhere}
-.badges{display:flex;gap:5px;align-items:flex-start;justify-content:flex-end;flex-wrap:wrap;grid-row:1/span 2;grid-column:2}
+.badges{display:flex;gap:5px;align-items:flex-start;justify-content:flex-end;flex-wrap:wrap;grid-row:1/span 2;grid-column:2;max-width:210px}
 .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--river);border-radius:999px;padding:3px 8px;color:var(--mist);white-space:nowrap}
 .badge.s-interested,.badge.s-sent{color:var(--night);background:var(--lilac);border-color:var(--lilac)}
 .badge.s-sold{color:var(--night);background:var(--ok);border-color:var(--ok)}
@@ -150,6 +165,7 @@ details p{color:var(--mist);margin:0 0 12px}
 </nav>
 
 <section id="calls" class="on">
+  <div id="today"></div>
   <div class="stats" id="stats"></div>
   <p class="muted" id="poolInfo" style="margin:-4px 0 14px;font-size:14px"></p>
   <div id="relog"></div>
@@ -281,9 +297,12 @@ function status(l){return st(l).status||'call'}
 function isDue(l){var s=st(l);return s.callback && new Date(s.callback).getTime()<=Date.now()+30*60000 && !CLOSED[s.status]}
 function hoursSince(s){return s.lastAt?(Date.now()-s.lastAt)/3600000:1e9}
 function opened(l){var s=st(l);return l.seen&&l.seen.last&&l.seen.last>(s.lastAt||0)&&!CLOSED[status(l)]&&Date.now()-l.seen.last<7*86400000}
+function warmSeen(l){var s=st(l),x=status(l);if(!(l.seen&&l.seen.last)||CLOSED[x]||x==='pay'||x==='sold')return false;
+  if(s.callback&&new Date(s.callback).getTime()>Date.now()+30*60000)return false;      /* a call-back is booked: it comes back then */
+  return l.seen.last>(s.lastAt||0)||(Date.now()-(s.lastAt||0))>=20*3600000}             /* 13 Nov: anyone who opened their site stays at the top of Up next */
 function rank(l){
   var s=st(l), x=status(l);
-  if(opened(l)) return [0,-l.seen.last];
+  if(warmSeen(l)) return [-1,-l.seen.last];
   if(isDue(l)) return [0,new Date(s.callback).getTime()];
   if(x==='call') return [l.b1?9:1, l.ix];
   if(x==='interested'||x==='sent'||x==='spoke') return hoursSince(s)>=20?[2,s.lastAt]:[6,s.lastAt];
@@ -310,6 +329,39 @@ function applyWho(w){WHO=w;
 }
 /* ---------- render list ---------- */
 function fmtWhen(ts){if(!ts)return '';var d=new Date(ts);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
+
+/* ---------- owner's Today list (13 Nov): admin only, worked out by the pipeline every time the desk loads ---------- */
+var TODAY=null;
+function todayItem(it){
+  var go=it.q||it.view?'<button class="lk" data-tgo="'+esc(it.market||'')+'" data-tq="'+esc(it.q||'')+'" data-tv="'+esc(it.view||'')+'">'+esc(it.t)+'</button>':(it.link?'<a href="'+esc(it.link)+'" target="_blank" rel="noopener">'+esc(it.t)+'</a>':esc(it.t));
+  return '<li><div><div class="t">'+go+(it.src==='todo'?'<span class="tag">your list'+(it.due?' · due '+esc(it.due):'')+'</span>':'')+'</div>'+(it.d?'<div class="d">'+esc(it.d)+'</div>':'')+'</div>'+
+    (it.src==='todo'?'<button class="btn sm" data-tdone="'+it.row+'">Done</button>':'<span></span>')+'</li>';
+}
+function renderToday(){
+  var box=$('#today'); if(!box) return;
+  if(!TODAY||!WHO||WHO.role!=='admin'){box.innerHTML='';return}
+  var d=new Date(TODAY.day+'T12:00:00');
+  box.innerHTML='<div class="today"><h2>Today: your top '+TODAY.top.length+'</h2><p class="sub">'+d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})+' · updates every time you open the desk</p>'+
+    (TODAY.top.length?'<ol>'+TODAY.top.map(todayItem).join('')+'</ol>':'<p class="d">Nothing urgent. Work Up next.</p>')+
+    (TODAY.more&&TODAY.more.length?'<details><summary>'+TODAY.more.length+' more</summary><ol>'+TODAY.more.map(todayItem).join('')+'</ol></details>':'')+
+    '<form id="todayAdd"><input name="what" placeholder="Add to my list (e.g. Pay Chidera on Friday)" maxlength="200"><button class="btn sm p">Add</button></form></div>';
+}
+function ownerPost(fields){var b=new URLSearchParams();b.set('kind','owner');b.set('key',DESK_KEY);Object.keys(fields).forEach(function(k){b.set(k,fields[k])});
+  return fetch(CFG.endpoint,{method:'POST',mode:'no-cors',body:b}).catch(function(){})}
+document.addEventListener('click',function(e){
+  var g=e.target.closest&&e.target.closest('[data-tgo]');
+  if(g){var mk=g.dataset.tgo, q=g.dataset.tq, v=g.dataset.tv;
+    if(mk&&mk!==CFG.market){location.href=(mk==='us'?'/desk/us/':'/desk/')+(q?'?q='+encodeURIComponent(q):(v?'?v='+v:''));return}
+    if(q){$('#q').value=q}else{$('#q').value='';if(v){view=v}} shown=25;render();$('#filters').scrollIntoView({behavior:'smooth',block:'start'});return}
+  var dn=e.target.closest&&e.target.closest('[data-tdone]');
+  if(dn){var row=dn.dataset.tdone;dn.disabled=true;dn.textContent='Done ✓';
+    TODAY.top=TODAY.top.filter(function(i){return !(i.src==='todo'&&String(i.row)===row)});TODAY.more=(TODAY.more||[]).filter(function(i){return !(i.src==='todo'&&String(i.row)===row)});
+    ownerPost({op:'done',row:row}).then(function(){setTimeout(function(){load(true)},2500)});setTimeout(renderToday,400)}
+});
+document.addEventListener('submit',function(e){if(e.target.id!=='todayAdd')return;e.preventDefault();var w=e.target.what.value.trim();if(!w)return;
+  TODAY.top.push({src:'todo',row:0,t:w,d:''});renderToday();toast('Added to your list');ownerPost({op:'add',what:w,pri:'2'}).then(function(){setTimeout(function(){load(true)},2500)})});
+try{var qp=location.search.match(/[?&]q=([^&]+)/),vp=location.search.match(/[?&]v=([^&]+)/);if(qp)setTimeout(function(){$('#q').value=decodeURIComponent(qp[1]);render()},0);if(vp)view=decodeURIComponent(vp[1])}catch(e){}
+
 function render(){
   var c={called:0,reached:0,warm:0,sold:0};
   LEADS.forEach(function(l){var s=st(l);if(s.attempts)c.called++;if(REACHED[s.status]||s.reached)c.reached++;if((s.interest==='hot'||s.interest==='warm')&&!CLOSED[s.status])c.warm++;if(s.status==='sold')c.sold++});
@@ -335,15 +387,16 @@ function card(l){
   var s=st(l), x=status(l), isOpen=!!open[l.id];
   var meta=CFG.market==='za'?(esc(l.area)+' · '+local(l)+(l.mobile?'':' · landline')+' · '+(l.web==='no'?'no website':l.web==='ads'?'runs ads':'has a website')):(esc(l.city)+' · '+esc(l.phone)+(l.rating?' · ★'+esc(l.rating):''));
   var why=CFG.market==='us'?whyUS(l):'';
-  var badges='<span class="badge s-'+x+'">'+(x==='call'?'To call':esc(OUT[x]||x))+'</span>'+(s.interest?'<span class="badge i-'+s.interest+'">'+INT[s.interest]+'</span>':'')+(CFG.market==='us'&&l.site?'<span class="badge site">Site built</span>':'');
+  var badges='<span class="badge s-'+x+'">'+(x==='call'?'To call':esc(OUT[x]||x))+'</span>'+(s.interest?'<span class="badge i-'+s.interest+'">'+INT[s.interest]+'</span>':'')+(CFG.market==='us'&&l.site?'<span class="badge site">Site built</span>':'')+(l.seen&&l.seen.last&&!CLOSED[x]?'<span class="badge i-hot">Opened their site'+(l.seen.n>1?' '+l.seen.n+'×':'')+'</span>':'');
   var last=s.note?'<div class="last">'+esc(s.note.length>140?s.note.slice(0,140)+'…':s.note)+'</div>':'';
   var due=isDue(l)?'<div class="why" style="color:var(--warm)">Call back now · '+fmtWhen(new Date(s.callback).getTime())+'</div>':(s.callback&&x==='callback'?'<div class="why">Call back '+fmtWhen(new Date(s.callback).getTime())+'</div>':'');
   return '<article class="card'+(isDue(l)?' due':'')+(CLOSED[x]?' closed':'')+' s-'+x+'" data-id="'+esc(l.id)+'">'+
-    '<button class="head" data-toggle aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="badges">'+badges+'</div><div class="meta">'+meta+'</div>'+(why?'<div class="why">'+why+'</div>':'')+due+last+'</button>'+
+    '<button class="head" data-toggle aria-expanded="'+isOpen+'"><h3>'+esc(l.name)+'</h3><div class="badges">'+badges+'</div><div class="meta">'+meta+'</div>'+(why?'<div class="why">'+why+'</div>':'')+(l.seen&&l.seen.last&&!CLOSED[x]?'<div class="why" style="color:var(--warm)">They opened their site '+fmtWhen(l.seen.last)+(opened(l)?': call them now':'')+'</div>':'')+due+last+'</button>'+
     (isOpen?body(l):'')+'</article>';
 }
 function local(l){return l.num.replace(/^27/,'0').replace(/(\d{3})(\d{3})(\d{4})/,'$1 $2 $3')}
 function whyUS(l){
+  if(l.kind==='viewed') return '<b style="color:var(--warm)">Opened the site we emailed them</b> · warm: ask for <b>the owner</b>';
   var t=l.kind==='new'?'New business (licensed '+l.lic+')':l.kind==='bademail'?'Our email didn\'t reach them':l.kind==='bounced'?'Email bounced':l.kind==='emailed'?'Emailed, no reply':'Never contacted';
   return t+' · ask for <b>the owner</b>';
 }
@@ -435,7 +488,7 @@ function load(verify){
   if(!DESK_KEY){renderKey();return}
   return fetch(CFG.endpoint+'?desk='+CFG.market+'&key='+encodeURIComponent(DESK_KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
     if(!j.ok){ if(j.error==='market'){$('#list').innerHTML='<div class="empty">This desk isn\'t switched on for you. Use the '+(CFG.market==='za'?'<a href="/desk/us/">US desk</a>':'<a href="/desk/">Local desk</a>')+'.</div>';return} if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
-    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads)); POOL=(typeof j.pool==='number')?j.pool:null; BATCH=j.batch||30; if(j.who) applyWho(j.who);
+    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads)); POOL=(typeof j.pool==='number')?j.pool:null; BATCH=j.batch||30; if(j.who) applyWho(j.who); TODAY=j.today||null; renderToday();
     var remote=j.state||{};
     queue=queue.filter(function(q){var r=remote[q.id];return !(r&&(r.lastAt||0)>=(q.s.lastAt||0))});
     lsSet('queue',JSON.stringify(queue));
