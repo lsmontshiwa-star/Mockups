@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dudu M · Charcoal, made in Middelburg</title>
+<meta name="description" content="Dudu M makes charcoal briquettes for cooking and heating, and activated charcoal skincare: tissue oil, soap, powder and hand and shower gel. Middelburg, Mpumalanga.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f3f1ea">
+<meta property="og:title" content="Dudu M · Nature. Purpose. Impact.">
+<meta property="og:description" content="Charcoal briquettes and activated charcoal skincare from Middelburg, Mpumalanga.">
+<meta property="og:image" content="img/range.webp">
+<link rel="icon" href="img/d-mark.png">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&f[]=switzer@400,500&display=swap">
+<style>
+@font-face{font-family:"Necto Mono";src:url(/assets/fonts/necto-mono/NectoMono-Regular.woff2) format("woff2");font-display:swap}
+:root{
+  --paper:#f3f1ea; --paper2:#ebe8de; --ink:#121311; --ink2:#3b3d38; --mute:#8b8d84;
+  --leaf:#4f9a2c; --leaf2:#2f6219; --ember:#ff7a2e;
+  --glass:rgba(255,255,255,.55); --glass-line:rgba(255,255,255,.75);
+  --pad:clamp(16px,2.4vw,40px);
+  --head:"Cabinet Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"Switzer","Helvetica Neue",Arial,sans-serif;
+  --mono:"Necto Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.7,.15,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper);color:var(--ink)}
+body{font:400 16px/1.5 var(--body);background:var(--paper);overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+.label{font:11px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+@media (hover:hover) and (pointer:fine){body,a,button{cursor:none}}
+
+/* ---------- ambient field (always moving, very slow) ---------- */
+.ambient{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(70px);opacity:.75}
+.ambient i{position:absolute;border-radius:50%;animation:drift 34s ease-in-out infinite alternate}
+.ambient i:nth-child(1){width:46vw;height:46vw;left:8%;top:10%;background:radial-gradient(circle,#dfeccc 0,transparent 65%)}
+.ambient i:nth-child(2){width:40vw;height:40vw;right:6%;top:30%;background:radial-gradient(circle,#e7e3d6 0,transparent 65%);animation-duration:41s;animation-delay:-9s}
+.ambient i:nth-child(3){width:36vw;height:36vw;left:35%;bottom:4%;background:radial-gradient(circle,#d5e6c1 0,transparent 62%);animation-duration:38s;animation-delay:-17s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-4vh) scale(1.12)}100%{transform:translate(-5vw,5vh) scale(.94)}}
+main{position:relative;z-index:1}
+
+/* ---------- hairline grid ---------- */
+.grid-lines{position:fixed;inset:0 var(--pad);z-index:0;pointer-events:none;display:grid;grid-template-columns:repeat(3,1fr)}
+.grid-lines i{border-left:1px solid rgba(18,19,17,.06)}
+.grid-lines i:last-child{border-right:1px solid rgba(18,19,17,.06)}
+
+/* ---------- loader ---------- */
+.loader{position:fixed;inset:0;z-index:100;background:var(--paper);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;transition:transform 1.1s var(--ease)}
+.loader.done{transform:translateY(-100%)}
+.loader img{width:58px;filter:drop-shadow(0 0 22px rgba(79,154,44,.35))}
+.loader .bar{width:min(320px,60vw);height:1px;background:rgba(18,19,17,.12);position:relative}
+.loader .bar b{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--l,0));transition:transform .3s}
+.loader .row{width:min(320px,60vw);display:flex;justify-content:space-between}
+
+/* ---------- header pill ---------- */
+.top{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:40;display:flex;width:max-content;align-items:center;gap:6px;padding:6px;border-radius:999px;
+  background:rgba(255,255,255,.5);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid var(--glass-line);box-shadow:0 8px 30px rgba(18,19,17,.06)}
+.top .btn{height:40px;padding:0 16px;border-radius:999px;display:flex;align-items:center;gap:9px;font:500 14px var(--body)}
+.top .btn:hover{background:rgba(255,255,255,.7)}
+.burger{width:16px;height:9px;position:relative}
+.burger:before,.burger:after{content:"";position:absolute;left:0;right:0;height:1.5px;background:var(--ink);transition:transform .4s var(--ease)}
+.burger:before{top:0}.burger:after{bottom:0}
+.menu-open .burger:before{transform:translateY(3.75px) rotate(45deg)}
+.menu-open .burger:after{transform:translateY(-3.75px) rotate(-45deg)}
+.brand{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:0 14px;font:800 17px/1 var(--head);letter-spacing:.14em;color:var(--leaf2)}
+.brand img{height:24px}
+.bag{background:var(--ink);color:#fff !important}
+.bag:hover{background:#000 !important}
+.bag .n{min-width:20px;height:20px;border-radius:10px;background:var(--leaf);display:grid;place-items:center;font:600 11px var(--body);padding:0 5px;box-shadow:0 0 12px rgba(79,154,44,.8)}
+
+/* ---------- full-screen frosted menu ---------- */
+.menu{position:fixed;inset:0;z-index:35;background:rgba(243,241,234,.72);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
+.menu-open .menu{opacity:1;visibility:visible;transition:opacity .5s}
+.menu a{display:flex;align-items:baseline;gap:20px;font:800 clamp(46px,9vw,150px)/.95 var(--head);letter-spacing:-.04em;color:rgba(18,19,17,.22);transform:translateY(40px);opacity:0;transition:color .3s,transform .7s var(--ease),opacity .7s}
+.menu-open .menu a{transform:none;opacity:1}
+.menu a small{font:11px var(--mono);letter-spacing:.14em;color:var(--mute)}
+.menu a:hover{color:var(--ink)}
+.menu a:hover small{color:var(--leaf)}
+.menu .foot{position:absolute;left:var(--pad);right:var(--pad);bottom:var(--pad);display:flex;justify-content:space-between}
+
+/* ---------- 01 hero: exploded composition ---------- */
+.hero{height:330vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.halo{position:absolute;left:50%;top:50%;width:90vmin;height:90vmin;transform:translate(-50%,-50%) scale(var(--hs,1));border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0,rgba(226,240,208,.75) 30%,rgba(79,154,44,.14) 55%,transparent 70%);animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{50%{filter:brightness(1.06);transform:translate(-50%,-50%) scale(calc(var(--hs,1)*1.04))}}
+#smoke{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+.pc{position:absolute;left:50%;top:50%;will-change:transform,filter;z-index:3}
+.pc img{height:100%;width:auto;max-width:none;filter:drop-shadow(0 30px 30px rgba(18,19,17,.18))}
+.pc.back{z-index:1}.pc.front{z-index:5}
+.hero-copy{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none;text-align:center}
+.h1{font:800 clamp(64px,13.4vw,250px)/.82 var(--head);letter-spacing:-.055em;color:var(--ink)}
+.h1 .w{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(.15em);transition:opacity .2s linear}
+.h1 .g{color:var(--leaf2);text-shadow:0 0 40px rgba(79,154,44,.35)}
+.hero-sub{margin-top:clamp(18px,2.4vw,34px);font:500 clamp(17px,1.6vw,24px)/1.3 var(--body);color:var(--ink2);opacity:0;max-width:30ch;pointer-events:auto}
+.hero-cta{margin-top:22px;display:flex;gap:10px;opacity:0;pointer-events:auto}
+.corner{position:absolute;z-index:6;font:11px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.c-tl{left:var(--pad);top:calc(var(--pad) + 70px)}
+.c-tr{right:var(--pad);top:calc(var(--pad) + 70px);text-align:right}
+.c-bl{left:var(--pad);bottom:calc(var(--pad) + 4vh);max-width:28ch;text-transform:none;letter-spacing:0;font:500 15px/1.4 var(--body)}
+.c-br{right:var(--pad);bottom:calc(var(--pad) + 4vh);display:flex;align-items:center;gap:10px}
+.c-br u{display:block;width:54px;height:1px;background:rgba(18,19,17,.18);position:relative;text-decoration:none}
+.c-br u:after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(var(--p,0));transform-origin:left}
+
+/* buttons */
+.b{height:52px;padding:0 24px;border-radius:999px;display:inline-flex;align-items:center;gap:10px;font:500 15px var(--body);position:relative;overflow:hidden;white-space:nowrap;transition:transform .3s var(--ease)}
+.b:hover{transform:translateY(-2px)}
+.b-glow{background:var(--ink);color:#fff;box-shadow:0 0 0 1px rgba(79,154,44,.5),0 10px 40px rgba(79,154,44,.45)}
+.b-glow:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(140,220,90,.5) 50%,transparent 70%);transform:translateX(-120%);transition:transform .8s var(--ease)}
+.b-glow:hover:before{transform:translateX(120%)}
+.b-glass{background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.dot{width:8px;height:8px;border-radius:50%;background:#7bd34c;box-shadow:0 0 10px 2px rgba(123,211,76,.8)}
+
+/* ---------- sheets that cover the previous section ---------- */
+.sheet{position:relative;z-index:2;border-radius:28px 28px 0 0;margin-top:-6vh}
+
+/* ---------- 02 the charcoal (dark moment) ---------- */
+.coal{background:var(--ink);color:#f3f1ea;min-height:100vh;padding:clamp(80px,12vh,140px) var(--pad) clamp(60px,10vh,120px);overflow:hidden}
+.coal .label{color:#8a8c84}
+.coal-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,70px);align-items:center;min-height:70vh}
+.fill{font:700 clamp(30px,3.8vw,64px)/1.05 var(--head);letter-spacing:-.03em;margin:22px 0 34px}
+.fill .w{opacity:.18;transition:opacity .35s}
+.fill .w.on{opacity:1}
+.coal .fill .g{color:#9fdc78}
+.lump{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.lump .ember{position:absolute;width:80%;height:46%;bottom:12%;left:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,122,46,.75),rgba(255,70,20,.25) 55%,transparent);filter:blur(30px);animation:flick 3.2s ease-in-out infinite}
+@keyframes flick{0%,100%{opacity:.75;transform:scale(1)}30%{opacity:1;transform:scale(1.06,1.1)}60%{opacity:.6;transform:scale(.96)}}
+.lump img{position:relative;width:78%;transform:rotate(var(--rot,0deg)) translateY(var(--ly,0px));filter:drop-shadow(0 30px 40px rgba(0,0,0,.6)) contrast(1.05)}
+.gcard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px;padding:22px;display:grid;gap:14px;max-width:440px}
+.gcard h3{font:700 24px/1.1 var(--head)}
+.gcard p{color:#b9bab3;font-size:15px}
+.gcard .b-glow{justify-self:start}
+.photos{display:grid;grid-auto-flow:column;grid-auto-columns:min(70vw,420px);gap:10px;margin-top:40px;overflow-x:auto}
+.photos img{aspect-ratio:4/5;object-fit:cover;border-radius:14px}
+
+/* ---------- 03 shop: product deck ---------- */
+.shop{background:var(--paper);padding:clamp(90px,13vh,150px) var(--pad) clamp(60px,8vh,100px)}
+.shop-head{display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:end;margin-bottom:clamp(26px,4vh,50px)}
+.h2{font:800 clamp(48px,8vw,140px)/.86 var(--head);letter-spacing:-.05em}
+.shop-head p{font:500 clamp(16px,1.3vw,20px)/1.4 var(--body);color:var(--ink2);max-width:36ch;justify-self:end}
+.deck{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{position:relative;display:block;text-align:left;width:100%}
+.tile .ph{position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:16px;background:var(--paper2)}
+.tile .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .6s}
+.tile:hover .ph img.main{transform:scale(1.04)}
+.tile .ph img.alt{opacity:0}
+.tile .ph img.alt.on{opacity:1}
+.tile .tag{position:absolute;left:14px;top:14px;z-index:2;padding:7px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.tile .meta{display:flex;justify-content:space-between;align-items:baseline;padding:14px 4px 22px;gap:12px}
+.tile .meta b{font:700 clamp(20px,1.8vw,28px)/1.1 var(--head);letter-spacing:-.02em}
+.tile .meta span{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.flip{position:fixed;z-index:30;width:200px;height:250px;border-radius:14px;overflow:hidden;pointer-events:none;left:0;top:0;opacity:0;transform:translate(-50%,-50%) scale(.85);transition:opacity .25s,transform .35s var(--ease);box-shadow:0 30px 60px rgba(18,19,17,.25);background:#fff}
+.flip.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ---------- product panel (glass) ---------- */
+.panel{position:fixed;inset:0;z-index:50;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:3vw;padding:90px var(--pad) var(--pad);background:rgba(243,241,234,.62);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
+.panel.open{opacity:1;visibility:visible;transition:opacity .5s}
+.panel .stand{position:relative;height:min(74vh,720px);display:flex;align-items:center;justify-content:center}
+.panel .stand:before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(214,236,196,.8) 35%,transparent 68%)}
+.panel .stand img{position:relative;height:min(62vh,600px);max-width:90%;width:auto;object-fit:contain;filter:drop-shadow(0 40px 40px rgba(18,19,17,.22));transform:translateY(30px) scale(.94);opacity:0;transition:transform .9s var(--ease),opacity .6s}
+.panel.open .stand img{transform:none;opacity:1}
+.card{background:rgba(255,255,255,.62);border:1px solid #fff;border-radius:22px;padding:clamp(20px,2.4vw,34px);box-shadow:0 30px 80px rgba(18,19,17,.1);max-width:540px;max-height:calc(100vh - 120px);overflow:auto}
+.card h3{font:800 clamp(32px,3.4vw,56px)/.95 var(--head);letter-spacing:-.04em;margin:10px 0 6px}
+.card .kind{font:500 18px var(--body);color:var(--leaf2)}
+.card p{color:var(--ink2);margin:14px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chips span{padding:7px 12px;border-radius:999px;border:1px solid rgba(18,19,17,.14);font:500 13px var(--body)}
+.card details{border-top:1px solid rgba(18,19,17,.1);padding:12px 0}
+.card summary{font:500 15px var(--body);list-style:none;display:flex;justify-content:space-between}
+.card summary:after{content:"+";color:var(--mute)}
+.card details[open] summary:after{content:"–"}
+.card details p,.card details ol{font-size:14px;margin:10px 0 0}
+.card ol{padding-left:18px;color:var(--ink2)}
+.buy{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.qty{display:flex;align-items:center;border:1px solid rgba(18,19,17,.16);border-radius:999px;height:52px}
+.qty button{width:44px;height:100%;font-size:18px}
+.qty b{min-width:22px;text-align:center}
+.price{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:10px}
+.pnav{position:absolute;left:var(--pad);bottom:var(--pad);display:flex;gap:18px;align-items:center;font:500 14px var(--body)}
+.pnav button{display:flex;gap:8px;align-items:center}
+.pclose{position:absolute;right:var(--pad);top:78px;font:500 14px var(--body);display:flex;gap:8px;align-items:center}
+
+/* ---------- basket drawer ---------- */
+.drawer{position:fixed;top:12px;right:12px;bottom:12px;width:min(420px,calc(100vw - 24px));z-index:60;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid #fff;backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);box-shadow:0 30px 80px rgba(18,19,17,.18);padding:22px;display:flex;flex-direction:column;transform:translateX(calc(100% + 30px));transition:transform .6s var(--ease)}
+.drawer.open{transform:none}
+.drawer h4{font:800 30px var(--head);letter-spacing:-.03em}
+.drawer .items{flex:1;overflow:auto;margin:16px 0;display:grid;align-content:start;gap:10px}
+.it{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px;border-radius:14px;background:rgba(255,255,255,.6)}
+.it img{height:56px;width:56px;object-fit:contain}
+.it b{font:600 15px var(--body);display:block}
+.it small{color:var(--mute)}
+.it .qty{height:36px}.it .qty button{width:30px}
+.drawer .empty{color:var(--mute)}
+.drawer .note{font-size:13px;color:var(--mute);margin-bottom:12px}
+
+/* ---------- 04 story: lifting sheet reveals the range ---------- */
+.story{background:var(--paper);height:240vh;position:relative}
+.story .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.story .photo{position:absolute;inset:0}
+.story .photo img{width:100%;height:100%;object-fit:cover;transform:scale(var(--zs,1.15))}
+.story .lid{position:absolute;inset:0;background:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);transform:translateY(calc(var(--lift,0) * -100%));box-shadow:0 30px 60px rgba(18,19,17,.12);border-radius:0 0 28px 28px}
+.story .lid .fill{color:var(--ink);max-width:16ch;font-size:clamp(40px,6.4vw,112px);line-height:.95;letter-spacing:-.045em;font-weight:800}
+.story .lid .fill .g{color:var(--leaf2)}
+.story .cap{position:absolute;right:var(--pad);top:calc(var(--pad) + 80px);max-width:420px;opacity:var(--co,0);transform:translateY(calc((1 - var(--co,0)) * 30px))}
+.story .cap .gcard{background:rgba(255,255,255,.55);border-color:#fff;color:var(--ink)}
+.story .cap .gcard p{color:var(--ink2)}
+
+/* ---------- 05 order ---------- */
+.order{position:relative;z-index:2;padding:clamp(90px,14vh,160px) var(--pad) 40px;background:linear-gradient(transparent,rgba(255,255,255,.5))}
+.order .big{font:800 clamp(56px,11vw,210px)/.84 var(--head);letter-spacing:-.055em;text-align:center}
+.order .big .g{color:var(--leaf2);text-shadow:0 0 60px rgba(79,154,44,.35)}
+.order .lead{text-align:center;margin:26px auto 30px;max-width:40ch;color:var(--ink2);font:500 clamp(16px,1.3vw,20px)/1.4 var(--body)}
+.order .acts{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.form{margin:clamp(40px,7vh,80px) auto 0;max-width:760px;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;border-radius:24px;background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.form label{display:grid;gap:6px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.7)}
+.form label span{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.form input,.form select{font:500 16px var(--body);border:0;background:none;outline:none;color:var(--ink);width:100%}
+.form .full{grid-column:1/-1}
+.form .b{justify-self:stretch;justify-content:center}
+.carousel{margin:clamp(60px,10vh,110px) auto 0;width:min(760px,86vw);overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.carousel .track{display:flex;gap:18px;width:max-content;animation:slide 46s linear infinite}
+.carousel .track div{width:170px;height:210px;border-radius:16px;background:rgba(255,255,255,.6);border:1px solid #fff;display:grid;place-items:center}
+.carousel img{max-height:78%;max-width:78%;width:auto;filter:drop-shadow(0 14px 14px rgba(18,19,17,.15))}
+@keyframes slide{to{transform:translateX(-50%)}}
+footer{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:60px var(--pad) 110px;border-top:1px solid rgba(18,19,17,.08);margin-top:60px}
+footer .brand{padding:0}
+
+/* ---------- fog edge ---------- */
+.fog{position:fixed;left:0;right:0;bottom:0;height:12vh;z-index:20;pointer-events:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  mask-image:linear-gradient(transparent,#000 85%);-webkit-mask-image:linear-gradient(transparent,#000 85%)}
+
+/* ---------- cursor ---------- */
+.cur,.cur-dot{position:fixed;left:0;top:0;z-index:90;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%)}
+.cur{width:38px;height:38px;border:1px solid rgba(18,19,17,.5);transition:width .3s var(--ease),height .3s var(--ease),background .3s,border-color .3s;display:grid;place-items:center;font:10px var(--mono);letter-spacing:.12em;color:#fff;text-transform:uppercase}
+.cur.big{width:84px;height:84px;background:rgba(18,19,17,.86);border-color:transparent;box-shadow:0 0 30px rgba(79,154,44,.5)}
+.cur.on-dark{border-color:rgba(255,255,255,.6)}
+.cur-dot{width:5px;height:5px;background:var(--leaf);box-shadow:0 0 10px var(--leaf)}
+@media not ((hover:hover) and (pointer:fine)){.cur,.cur-dot{display:none}}
+
+/* ---------- phone ---------- */
+@media (max-width:760px){
+  .hero{height:300vh}
+  .h1{font-size:clamp(54px,19vw,120px);line-height:.86}
+  .c-tr,.c-br{display:none}
+  .c-bl{bottom:calc(var(--pad) + 10px)}
+  .coal-grid{grid-template-columns:1fr;min-height:0}
+  .lump{max-width:420px;margin:0 auto}
+  .shop-head{grid-template-columns:1fr}
+  .shop-head p{justify-self:start}
+  .deck{grid-template-columns:1fr}
+  .panel{grid-template-columns:1fr;align-content:end;padding:70px 10px 10px;overflow:auto}
+  .panel .stand{height:32vh}
+  .panel .stand img{height:30vh}
+  .card{max-height:none}
+  .pnav{position:static;padding:14px 4px}
+  .pclose{top:70px}
+  .form{grid-template-columns:1fr}
+  .top .btn.mlabel span{display:none}
+  .brand{padding:0 8px;font-size:15px;letter-spacing:.1em}
+  .story{height:220vh}
+}
+@media (prefers-reduced-motion:reduce){
+  .ambient i,.halo,.lump .ember,.carousel .track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grid-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="loader" id="loader">
+  <img src="img/d-mark.png" alt="">
+  <div class="bar"><b></b></div>
+  <div class="row label"><span>Dudu M</span><span id="lpct">0%</span></div>
+</div>
+
+<header class="top">
+  <button class="btn mlabel" id="menuBtn" aria-expanded="false"><i class="burger"></i><span>Menu</span></button>
+  <a class="brand" href="#top"><img src="img/d-mark.png" alt="">DUDU M</a>
+  <button class="btn bag" id="bagBtn">Order <span class="n" id="bagN">0</span></button>
+</header>
+
+<nav class="menu" id="menu">
+  <a href="#top"><small>01</small>Home</a>
+  <a href="#charcoal"><small>02</small>The charcoal</a>
+  <a href="#shop"><small>03</small>Skincare</a>
+  <a href="#story"><small>04</small>Our story</a>
+  <a href="#order"><small>05</small>Order</a>
+  <div class="foot label"><span>Nature. Purpose. Impact.</span><span>Middelburg · Mpumalanga</span></div>
+</nav>
+
+<main id="top">
+
+<!-- 01 HERO: one composition that comes apart as you scroll -->
+<section class="hero" id="hero">
+  <div class="stage">
+    <div class="halo" id="halo"></div>
+    <canvas id="smoke" aria-hidden="true"></canvas>
+    <div class="hero-copy">
+      <h1 class="h1" id="h1"><span class="w">Made</span> <span class="w">from</span><br><span class="w g">charcoal.</span></h1>
+      <p class="hero-sub" id="hsub">Charcoal for your fire. Charcoal for your skin.</p>
+      <div class="hero-cta" id="hcta">
+        <a class="b b-glow" href="#shop">Shop skincare</a>
+        <a class="b b-glass" href="#charcoal">Order charcoal</a>
+      </div>
+    </div>
+    <!-- pieces: x,y = start offset (vmin), tx,ty = end offset (vw,vh), h = height (vmin) -->
+    <div class="pc back"  data-x="-21" data-y="-3"  data-h="54" data-tx="-41" data-ty="-30" data-r="-9"  data-s="0.56"><img src="img/gel-cut.webp" alt="Dudu M Activated Charcoal Hand and Shower Gel"></div>
+    <div class="pc back"  data-x="-33" data-y="-24" data-h="14" data-tx="-46" data-ty="-38" data-r="-30" data-s="0.9" data-b="3"><img src="img/mint2.png" alt=""></div>
+    <div class="pc"       data-x="4"   data-y="2"   data-h="50" data-tx="40"  data-ty="-29" data-r="7"   data-s="0.55"><img src="img/powder-cut.webp" alt="Dudu M Activated Charcoal Powder"></div>
+    <div class="pc"       data-x="-28" data-y="10"  data-h="42" data-tx="-38" data-ty="30"  data-r="-5"  data-s="0.62"><img src="img/oil-cut.webp" alt="Dudu M Tissue Oil Activated"></div>
+    <div class="pc"       data-x="25"  data-y="15"  data-h="29" data-tx="39"  data-ty="31"  data-r="10"  data-s="0.7"><img src="img/soap-cut.webp" alt="Dudu M Activated Charcoal Soap"></div>
+    <div class="pc front" data-x="-6"  data-y="27"  data-h="13" data-tx="-8"  data-ty="44"  data-r="-18" data-s="1.2" data-b="2"><img src="img/coal.png" alt=""></div>
+    <div class="pc front" data-x="13"  data-y="29"  data-h="9"  data-tx="17"  data-ty="46"  data-r="24"  data-s="1.3" data-b="3"><img src="img/coal.png" alt=""></div>
+    <div class="pc front" data-x="10"  data-y="-25" data-h="17" data-tx="12"  data-ty="-44" data-r="20"  data-s="1.15" data-b="2"><img src="img/mint.png" alt=""></div>
+    <div class="pc front" data-x="34"  data-y="33"  data-h="26" data-tx="52"  data-ty="52"  data-r="-12" data-s="1.4" data-b="7" data-b0="5"><img src="img/mint.png" alt=""></div>
+
+    <div class="corner c-tl">Dudu M<br><span style="color:var(--mute)">Middelburg · Mpumalanga</span></div>
+    <div class="corner c-tr">Nature.<br>Purpose.<br>Impact.</div>
+    <p class="corner c-bl">Charcoal briquettes for cooking and heating, and a skincare range made with activated charcoal.</p>
+    <div class="corner c-br label" id="hint">Scroll <u></u></div>
+  </div>
+</section>
+
+<!-- 02 THE CHARCOAL: the main business -->
+<section class="sheet coal" id="charcoal">
+  <div class="coal-grid">
+    <div>
+      <div class="label">(01) The charcoal</div>
+      <p class="fill" data-fill>Dudu M started with firewood. Today she turns it into <span class="g">charcoal briquettes</span> that households use for cooking and heating.</p>
+      <div class="gcard">
+        <h3>Charcoal briquettes</h3>
+        <p>Made in Middelburg. Tell us how many bags you need and where, and we'll confirm the price and delivery on WhatsApp.</p>
+        <a class="b b-glow" data-wa="Hi Dudu M, I'd like to order charcoal briquettes. How many bags: ... Area: ..."><i class="dot"></i>Order briquettes</a>
+      </div>
+    </div>
+    <div class="lump" id="lump"><i class="ember"></i><img src="img/coal.png" alt="A piece of charcoal"></div>
+  </div>
+  <!--if:briquettePhotos--><div class="photos" id="photos"></div><!--/if-->
+</section>
+
+<!-- 03 SKINCARE: product deck -->
+<section class="sheet shop" id="shop">
+  <div class="shop-head">
+    <div>
+      <div class="label">(02) For your skin</div>
+      <h2 class="h2">Activated<br>charcoal care.</h2>
+    </div>
+    <p>Four products, all made with activated charcoal. Hover to see every side, tap to open.</p>
+  </div>
+  <div class="deck" id="deck"></div>
+</section>
+
+<!-- 04 STORY: the white lifts away to reveal the range -->
+<section class="story" id="story">
+  <div class="pin">
+    <div class="photo"><img src="img/range.webp" alt="The Dudu M range: tissue oil, hand and shower gel, charcoal powder and charcoal soap"></div>
+    <div class="lid" id="lid">
+      <div class="label">(03) Our story</div>
+      <p class="fill" data-fill>Nature. Purpose. <span class="g">Impact.</span> From firewood to briquettes to skincare.</p>
+    </div>
+    <div class="cap" id="cap">
+      <div class="gcard">
+        <div class="label">Middelburg · Mpumalanga</div>
+        <h3>Dudu M</h3>
+        <p>A charcoal business built by Dudu in Middelburg, now with its own skincare range. Featured by Kasi Economy in September 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ORDER -->
+<section class="order" id="order">
+  <div class="label" style="text-align:center">(04) Order</div>
+  <h2 class="big">Order from<br><span class="g">Dudu.</span></h2>
+  <p class="lead">Charcoal by the bag, skincare by the piece. Send your order on WhatsApp and Dudu will confirm price and delivery.</p>
+  <div class="acts">
+    <a class="b b-glow" data-wa="Hi Dudu M, I'd like to place an order."><i class="dot"></i>WhatsApp 082 083 3749</a>
+    <a class="b b-glass" href="tel:+27820833749">Call</a>
+  </div>
+  <form class="form" id="oform">
+    <label><span>Your name</span><input name="name" autocomplete="name" required></label>
+    <label><span>Area</span><input name="area" placeholder="e.g. Middelburg" required></label>
+    <label><span>I need</span><select name="need"><option>Charcoal briquettes</option><option>Skincare</option><option>Both</option></select></label>
+    <label><span>How many</span><input name="qty" placeholder="e.g. 5 bags"></label>
+    <button class="b b-glow full" type="submit"><i class="dot"></i>Send on WhatsApp</button>
+  </form>
+  <div class="carousel" aria-hidden="true"><div class="track" id="track"></div></div>
+</section>
+
+<footer>
+  <a class="brand" href="#top"><img src="img/d-mark.png" alt="">DUDU M</a>
+  <span class="label">Nature. Purpose. Impact.</span>
+  <span class="label">Middelburg · Mpumalanga · 082 083 3749</span>
+</footer>
+</main>
+
+<div class="fog" aria-hidden="true"></div>
+<div class="flip" id="flip"></div>
+
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Product">
+  <button class="pclose" id="pclose">Close ✕</button>
+  <div class="stand"><img id="pimg" alt=""></div>
+  <div class="card" id="pcard"></div>
+  <div class="pnav"><button id="pprev">←<span id="pprevN"></span></button><span class="label" id="pidx"></span><button id="pnext"><span id="pnextN"></span>→</button></div>
+</div>
+
+<aside class="drawer" id="drawer" aria-label="Your order">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h4>Your order</h4><button id="dclose">Close ✕</button></div>
+  <div class="items" id="items"></div>
+  <p class="note">Prices and delivery are confirmed by Dudu on WhatsApp.</p>
+  <a class="b b-glow" id="send" style="justify-content:center"><i class="dot"></i>Send order on WhatsApp</a>
+</aside>
+
+<div class="cur" id="cur"></div><div class="cur-dot" id="curDot"></div>
+
+<script>
+const WA='27820833749';
+const PRODUCTS=[
+  {id:'oil',name:'Tissue Oil',kind:'Activated',size:'100 ml',cut:'img/oil-cut.webp',imgs:['img/oil-scene.webp','img/oil-front.webp','img/oil-back.webp'],
+   desc:'A blend of natural oils and activated charcoal, made to nourish, restore and revitalise your skin.',
+   chips:['Natural','Nourishing','Restorative','100 ml'],
+   use:'Apply a small amount to clean skin and massage gently until fully absorbed. Use daily for best results.'},
+  {id:'soap',name:'Charcoal Soap',kind:'Activated charcoal',size:'70 g',cut:'img/soap-cut.webp',imgs:['img/soap-scene.webp','img/soap-front.webp','img/soap-back.webp'],
+   desc:'Cleanses, refreshes and cares for your skin. Deep cleansing, controls oil and gently exfoliates.',
+   chips:['Deep cleanse','Controls oil','Gentle exfoliation','70 g'],
+   use:'<ol><li>Lather with water.</li><li>Gently massage onto wet skin.</li><li>Rinse thoroughly.</li></ol>',
+   care:'Store in a cool, dry place or soap dish. For external use only; avoid contact with eyes.'},
+  {id:'powder',name:'Charcoal Powder',kind:'Activated',size:'250 ml',cut:'img/powder-cut.webp',imgs:['img/powder-scene.webp','img/powder-front.webp','img/powder-back.webp'],
+   desc:'100% pure activated charcoal powder, made from coconut shells and steam activated. Helps remove impurities and excess oil.',
+   chips:['100% pure','Food grade','Natural','250 ml'],
+   use:'<ol><li>Mix with water or your favourite ingredients to make a paste.</li><li>Apply to skin and leave for 5 to 10 minutes.</li><li>Rinse thoroughly with water.</li></ol>',
+   care:'Store in a cool, dry place. For external use only; avoid contact with eyes. Keep out of reach of children. Proudly made in SA.'},
+  {id:'gel',name:'Hand & Shower Gel',kind:'Activated charcoal',size:'300 ml',cut:'img/gel-cut.webp',imgs:['img/gel-scene.webp','img/gel-front.webp','img/gel-back.webp'],
+   desc:'Made with black soap, spearmint and charcoal to gently cleanse and leave your skin feeling fresh.',
+   chips:['Gentle cleanse','Refreshing','Clean skin','300 ml'],
+   use:'Apply to wet hands or body, lather gently and rinse thoroughly. Avoid eyes.',
+   care:'Ingredients: Aqua, Black Soap, Spearmint Extract, Charcoal, Glycerin, Cocamidopropyl Betaine, Sodium Citrate, Citric Acid, Phenoxyethanol, Ethylhexylglycerin, Fragrance.'}
+];
+const BRIQUETTE_PHOTOS=[]; // Dudu's own production photos go here
+</script>
+<script>
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const SNAP=new URLSearchParams(location.search).get('p');
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ss=(a,b,v)=>{v=clamp((v-a)/(b-a));return v*v*(3-2*v)};
+const wa=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);
+
+/* WhatsApp links */
+$$('[data-wa]').forEach(a=>{a.href=wa(a.dataset.wa);a.target='_blank';a.rel='noopener'});
+
+/* loader: real image progress */
+(function(){
+  const imgs=$$('img'); let n=0; const L=$('#loader'), pct=$('#lpct');
+  const step=()=>{n++;const p=Math.min(1,n/imgs.length);L.style.setProperty('--l',p);pct.textContent=Math.round(p*100)+'%';if(n>=imgs.length)done()};
+  let fin=false;function done(){if(fin)return;fin=true;setTimeout(()=>L.classList.add('done'),SNAP!==null?0:350)}
+  imgs.forEach(i=>i.complete?step():(i.addEventListener('load',step,{once:true}),i.addEventListener('error',step,{once:true})));
+  setTimeout(done,SNAP!==null?50:6000);
+})();
+
+/* menu */
+const mb=$('#menuBtn');
+mb.onclick=()=>{const o=document.body.classList.toggle('menu-open');mb.setAttribute('aria-expanded',o)};
+$$('.menu a').forEach((a,i)=>{a.style.transitionDelay=(i*.05)+'s';a.onclick=()=>document.body.classList.remove('menu-open')});
+
+/* word-fill paragraphs */
+$$('[data-fill]').forEach(p=>{
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.append(t);else{const s=document.createElement('span');s.className='w';s.textContent=t;f.append(s)}});c.replaceWith(f)}
+    else if(c.nodeType===1)walk(c)})};
+  walk(p);
+});
+
+/* ---------- hero pieces ---------- */
+const pcs=$$('.pc').map(el=>({el,x:+el.dataset.x,y:+el.dataset.y,h:+el.dataset.h,tx:+el.dataset.tx,ty:+el.dataset.ty,r:+el.dataset.r||0,s:+el.dataset.s||1,b:+el.dataset.b||0,b0:+el.dataset.b0||0}));
+function sizePcs(){const m=innerWidth<760?1.3:1;pcs.forEach(p=>{p.el.style.height=(p.h*m)+'vmin'})}sizePcs();addEventListener('resize',sizePcs);
+const corners=$$('.c-tl,.c-tr,.c-bl');const hero=$('#hero'), h1w=$$('#h1 .w'), hsub=$('#hsub'), hcta=$('#hcta'), hint=$('#hint'), halo=$('#halo');
+const narrow=()=>innerWidth<760;
+
+function heroP(){const r=hero.getBoundingClientRect();return clamp(-r.top/(r.height-innerHeight))}
+let hp=0;
+function drawHero(p){
+  const e=ss(0.05,0.62,p), nar=narrow();
+  const k=1;            // phones: push pieces further out
+  pcs.forEach(q=>{
+    const sx=q.x*(nar?1.15:1), sy=q.y*(nar?1.1:1);
+    const X=`calc(${sx}vmin*${1-e} + ${q.tx*k*e}vw)`, Y=`calc(${sy}vmin*${1-e} + ${q.ty*e}vh)`;
+    const s=1+(q.s-1)*e, rot=q.r*e, bl=q.b0+(q.b-q.b0)*e;
+    q.el.style.transform=`translate(-50%,-50%) translate(${X},${Y}) rotate(${rot}deg) scale(${s})`;
+    q.el.style.filter=bl>0.2?`blur(${bl.toFixed(1)}px)`:'none';
+  });
+  h1w.forEach((w,i)=>{const t=ss(0.2+i*0.09,0.42+i*0.09,p);w.style.opacity=t;w.style.filter=`blur(${(1-t)*14}px)`;w.style.transform=`translateY(${(1-t)*.15}em)`});
+  const t2=ss(.62,.8,p);hsub.style.opacity=t2;hcta.style.opacity=t2;hcta.style.pointerEvents=t2>.5?'auto':'none';
+  hint.style.setProperty('--p',p.toFixed(3));
+  const cf=1-ss(.2,.42,p);corners.forEach(c=>c.style.opacity=cf);
+  halo.style.setProperty('--hs',(1+e*.35).toFixed(3));
+}
+
+/* ---------- smoke trail (hero only) ---------- */
+const sc=$('#smoke'), sx=sc.getContext('2d'); let parts=[], mx=-1, my=-1, lastSpawn=0;
+function sizeSmoke(){const d=Math.min(devicePixelRatio||1,1.5);sc.width=innerWidth*d;sc.height=innerHeight*d;sx.setTransform(d,0,0,d,0,0)}
+addEventListener('resize',sizeSmoke);sizeSmoke();
+function puff(x,y,vx,vy){parts.push({x,y,vx:vx*.25+(Math.random()-.5)*.6,vy:vy*.25-.4-Math.random()*.5,r:14+Math.random()*18,a:.42,g:Math.random()<.35,life:0})}
+const stage=$('.stage');
+stage.addEventListener('pointermove',e=>{if(RM)return;const r=stage.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;
+  if(mx>=0){const dx=x-mx,dy=y-my,dist=Math.hypot(dx,dy),n=Math.min(6,Math.ceil(dist/14));for(let i=0;i<n;i++)puff(mx+dx*i/n,my+dy*i/n,dx,dy)}mx=x;my=y});
+stage.addEventListener('pointerleave',()=>{mx=-1});
+function drawSmoke(dt){
+  sx.clearRect(0,0,innerWidth,innerHeight);
+  if(!FINE&&!RM&&performance.now()-lastSpawn>900&&hp<.6){lastSpawn=performance.now();const x=innerWidth*(.3+Math.random()*.4),y=innerHeight*(.55+Math.random()*.2);for(let i=0;i<6;i++)puff(x+i*6,y,0,-2)}
+  parts=parts.filter(p=>p.life<1);
+  sx.globalCompositeOperation='multiply';
+  for(const p of parts){
+    p.life+=dt/2.6;p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.vy=p.vy*.985-.02;p.r+=.55;
+    p.x+=Math.sin((p.y+p.life*200)/40)*.35;
+    const a=p.a*(1-p.life)*(p.life<.1?p.life*10:1);
+    const g=sx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+    const c=p.g?'79,140,50':'40,42,38';
+    g.addColorStop(0,`rgba(${c},${a})`);g.addColorStop(1,`rgba(${c},0)`);
+    sx.fillStyle=g;sx.beginPath();sx.arc(p.x,p.y,p.r,0,7);sx.fill();
+  }
+}
+
+/* ---------- cursor ---------- */
+const cur=$('#cur'), dot=$('#curDot'); let cx=-100,cy=-100,tx=-100,ty=-100;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;dot.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`});
+function hoverCur(sel,label){document.addEventListener('pointerover',e=>{const t=e.target.closest(sel);if(t){cur.classList.add('big');cur.textContent=label}});document.addEventListener('pointerout',e=>{const t=e.target.closest(sel);if(t&&!t.contains(e.relatedTarget)){cur.classList.remove('big');cur.textContent=''}})}
+hoverCur('.tile','View');
+
+/* ---------- product deck ---------- */
+const deck=$('#deck'), flip=$('#flip');
+PRODUCTS.forEach((p,i)=>{
+  const b=document.createElement('button');b.className='tile';b.dataset.i=i;
+  b.innerHTML=`<div class="ph"><span class="tag">(0${i+1}) ${p.kind}</span><img class="main" src="${p.imgs[0]}" alt="${p.name}" loading="lazy">${p.imgs.slice(1).map(s=>`<img class="alt" src="${s}" alt="" loading="lazy">`).join('')}</div><div class="meta"><b>${p.name}</b><span>${p.size}</span></div>`;
+  deck.append(b);
+  b.onclick=()=>openP(i);
+});
+// desktop: floating card flips through the product's photos at the cursor
+let flipT=null, flipI=0;
+deck.addEventListener('pointermove',e=>{if(!FINE)return;flip.style.left=e.clientX+120+'px';flip.style.top=e.clientY+'px'});
+$$('.tile').forEach(t=>{
+  t.addEventListener('pointerenter',()=>{if(!FINE)return;const p=PRODUCTS[t.dataset.i];const set=[p.imgs[1],p.imgs[2],p.imgs[0]];
+    flip.innerHTML=set.map((s,k)=>`<img src="${s}" style="opacity:${k?0:1}">`).join('');flip.classList.add('on');flipI=0;clearInterval(flipT);
+    flipT=setInterval(()=>{const im=flip.children;if(!im.length)return;im[flipI].style.opacity=0;flipI=(flipI+1)%im.length;im[flipI].style.opacity=1},480)});
+  t.addEventListener('pointerleave',()=>{flip.classList.remove('on');clearInterval(flipT)});
+});
+// phones: tiles flip on their own while on screen
+if(!FINE){const io=new IntersectionObserver(es=>es.forEach(en=>{const t=en.target;clearInterval(t._f);if(en.isIntersecting){let k=0;const alts=t.querySelectorAll('.alt');t._f=setInterval(()=>{alts.forEach(a=>a.classList.remove('on'));k=(k+1)%(alts.length+1);if(k)alts[k-1].classList.add('on')},1600)}}),{threshold:.5});$$('.tile').forEach(t=>io.observe(t))}
+
+/* ---------- product panel ---------- */
+const panel=$('#panel'), pcard=$('#pcard'), pimg=$('#pimg'); let cur_i=0, qty=1;
+function openP(i){
+  cur_i=(i+PRODUCTS.length)%PRODUCTS.length;qty=1;const p=PRODUCTS[cur_i];
+  panel.classList.remove('open');void panel.offsetWidth;
+  pimg.src=p.cut;pimg.alt=p.name;
+  pcard.innerHTML=`<div class="label">(0${cur_i+1}) Dudu M · ${p.size}</div><h3>${p.name}</h3><div class="kind">${p.kind}</div><p>${p.desc}</p>
+   <div class="chips">${p.chips.map(c=>`<span>${c}</span>`).join('')}</div>
+   <details open><summary>How to use</summary>${p.use.startsWith('<')?p.use:`<p>${p.use}</p>`}</details>
+   ${p.care?`<details><summary>${p.id==='gel'?'Ingredients':'Care'}</summary><p>${p.care}</p></details>`:''}
+   <div class="buy"><div class="qty"><button data-q="-1" aria-label="Less">−</button><b id="qn">1</b><button data-q="1" aria-label="More">+</button></div>
+   <button class="b b-glow" id="add"><i class="dot"></i>Add to order</button></div>
+   <div class="price">Price confirmed on WhatsApp</div>`;
+  pcard.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{qty=Math.max(1,qty+ +b.dataset.q);$('#qn').textContent=qty});
+  $('#add').onclick=()=>{add(p.id,qty);close();openDrawer()};
+  const pv=PRODUCTS[(cur_i+PRODUCTS.length-1)%PRODUCTS.length], nx=PRODUCTS[(cur_i+1)%PRODUCTS.length];
+  $('#pprevN').textContent=' '+pv.name;$('#pnextN').textContent=nx.name+' ';$('#pidx').textContent=`0${cur_i+1} / 0${PRODUCTS.length}`;
+  panel.classList.add('open');
+}
+function close(){panel.classList.remove('open')}
+$('#pclose').onclick=close;$('#pprev').onclick=()=>openP(cur_i-1);$('#pnext').onclick=()=>openP(cur_i+1);
+addEventListener('keydown',e=>{if(e.key==='Escape'){close();closeDrawer();document.body.classList.remove('menu-open')}});
+
+/* ---------- basket ---------- */
+const bag={}; const drawer=$('#drawer');
+function add(id,n){bag[id]=(bag[id]||0)+n;renderBag()}
+function renderBag(){
+  const ids=Object.keys(bag).filter(k=>bag[k]>0), total=ids.reduce((a,k)=>a+bag[k],0);
+  $('#bagN').textContent=total;
+  $('#items').innerHTML=ids.length?ids.map(k=>{const p=PRODUCTS.find(x=>x.id===k);return `<div class="it"><img src="${p.cut}" alt=""><div><b>${p.name}</b><small>${p.size}</small></div><div class="qty"><button data-k="${k}" data-d="-1">−</button><b>${bag[k]}</b><button data-k="${k}" data-d="1">+</button></div></div>`}).join(''):'<p class="empty">Nothing yet. Open a product and add it to your order.</p>';
+  $$('#items [data-k]').forEach(b=>b.onclick=()=>{bag[b.dataset.k]=Math.max(0,bag[b.dataset.k]+ +b.dataset.d);renderBag()});
+  const msg='Hi Dudu M, I\'d like to order:\n'+ids.map(k=>{const p=PRODUCTS.find(x=>x.id===k);return `- ${bag[k]} x ${p.name} (${p.size})`}).join('\n')+'\n\nName:\nArea:';
+  const s=$('#send');s.href=wa(ids.length?msg:'Hi Dudu M, I\'d like to place an order.');s.target='_blank';s.rel='noopener';
+}
+function openDrawer(){drawer.classList.add('open')}function closeDrawer(){drawer.classList.remove('open')}
+$('#bagBtn').onclick=openDrawer;$('#dclose').onclick=closeDrawer;renderBag();
+
+/* order form → WhatsApp */
+$('#oform').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);
+  const m=`Hi Dudu M, my name is ${f.get('name')} (${f.get('area')}). I need: ${f.get('need')}${f.get('qty')?' – '+f.get('qty'):''}.`;
+  window.open(wa(m),'_blank','noopener')};
+
+/* briquette photos (only if Dudu sends them) */
+if(BRIQUETTE_PHOTOS.length&&$('#photos'))$('#photos').innerHTML=BRIQUETTE_PHOTOS.map(s=>`<img src="${s}" alt="Dudu M charcoal briquettes" loading="lazy">`).join('');
+
+/* slow centre carousel */
+const tr=$('#track');const one=PRODUCTS.map(p=>`<div><img src="${p.cut}" alt=""></div>`).join('');tr.innerHTML=one+one+one+one;
+
+/* ---------- scroll-driven bits ---------- */
+const fills=$$('[data-fill]'), coal=$('#charcoal'), lump=$('#lump img'), story=$('#story'), lid=$('#lid'), cap=$('#cap'), simg=$('.story .photo img');
+function fillP(el){const r=el.getBoundingClientRect();return clamp((innerHeight*.85-r.top)/(innerHeight*.55))}
+function scrollBits(){
+  fills.forEach(f=>{if(f.closest('#story'))return;const p=fillP(f),w=f.querySelectorAll('.w');w.forEach((s,i)=>s.classList.toggle('on',i<p*w.length))});
+  const cr=coal.getBoundingClientRect(), cp=clamp(1-(cr.top+cr.height)/(innerHeight+cr.height));
+  lump.style.setProperty('--rot',(-14+cp*28)+'deg');lump.style.setProperty('--ly',((.5-cp)*60)+'px');
+  const sr=story.getBoundingClientRect(), sp=clamp(-sr.top/(sr.height-innerHeight));
+  const w=lid.querySelectorAll('.w');w.forEach((s,i)=>s.classList.toggle('on',i<ss(0,.35,sp)*w.length));
+  const lift=ss(.38,.8,sp);lid.style.setProperty('--lift',lift.toFixed(4));
+  simg.style.setProperty('--zs',(1.15-lift*.15).toFixed(3));
+  cap.style.setProperty('--co',ss(.75,.92,sp).toFixed(3));
+  cur.classList.toggle('on-dark',cr.top<ty&&cr.bottom>ty);
+}
+
+let last=performance.now();
+function frame(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  const target=SNAP!==null?+SNAP:heroP();
+  hp+= (target-hp)*(SNAP!==null||RM?1:1-Math.exp(-dt*9));
+  drawHero(hp);
+  if(!RM)drawSmoke(dt);
+  scrollBits();
+  cx+=(tx-cx)*(1-Math.exp(-dt*16));cy+=(ty-cy)*(1-Math.exp(-dt*16));
+  cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+if(SNAP!==null&&+SNAP>1){/* allow ?p=section scroll tests */}
+})();
+</script>
+<script id="ds-view">(function(){var U="https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec";try{if(localStorage.getItem("ds-desk-key")||localStorage.getItem("dsc-key"))return}catch(e){}if(!navigator.sendBeacon||navigator.webdriver||/shot=1/.test(location.search)||/HeadlessChrome|PhantomJS|bot|crawl|spider|preview/i.test(navigator.userAgent))return;var m=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?"phone":"computer",tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}var v=Math.random().toString(36).slice(2,12),on=0,t0=document.visibilityState==="visible"?Date.now():0,sc=0,taps=[],seen=false;function scroll(){var h=document.documentElement,max=Math.max(1,h.scrollHeight-innerHeight);sc=Math.max(sc,Math.min(100,Math.round(100*(scrollY||h.scrollTop)/max)))}addEventListener("scroll",scroll,{passive:true});function tap(k){if(taps[taps.length-1]!==k&&taps.length<12)taps.push(k)}document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=(a.getAttribute("href")||"").toLowerCase();if(h.indexOf("tel:")===0)tap("call");else if(/wa\.me|whatsapp/.test(h))tap("whatsapp");else if(h.indexOf("mailto:")===0)tap("email");else if(h.indexOf("sms:")===0)tap("text");else if(/\/offer/.test(h))tap("offer")},true);document.addEventListener("submit",function(){tap("form")},true);function f(k){var d=new FormData();d.append("kind",k);d.append("path",location.pathname);d.append("q",location.search.slice(0,150));d.append("m",m);d.append("tz",tz);return d}function secs(){return Math.round((on+(t0?Date.now()-t0:0))/1000)}function send(){if(!seen)return;scroll();var d=f("engage");d.append("v",v);d.append("sec",secs());d.append("scroll",sc);d.append("taps",taps.join(","));navigator.sendBeacon(U,d)}document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){if(t0){on+=Date.now()-t0;t0=0}send()}else t0=Date.now()});addEventListener("pagehide",send);var iv=setInterval(function(){if(secs()<4)return;clearInterval(iv);seen=true;var k="dsv:"+location.pathname,again=false;try{again=!!sessionStorage.getItem(k);sessionStorage.setItem(k,"1")}catch(e){}if(!again){var d=f("view");d.append("ref",(document.referrer||"").slice(0,150));navigator.sendBeacon(U,d)}},1000);})();</script>
+</body>
+</html>
+
+<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
+</body>
+</html>
