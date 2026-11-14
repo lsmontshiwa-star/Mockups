@@ -166,6 +166,7 @@ footer img{height:22px}
   .hd-t{display:none}
   .hd-t:nth-child(4){display:block;left:5%;top:auto;bottom:4vh;width:30vw}
   .hd-hint{display:none}
+  .hd-b:nth-child(1),.hd-b:nth-child(3){display:none}
 }
 
 /* ---------- shutter-stack (Gen Studio, her favourite): panels slide up over each other; colour flood for the big moment ---------- */
@@ -230,7 +231,8 @@ footer img{height:22px}
 .st-c figure{margin:0;aspect-ratio:4/3;overflow:hidden}
 .st-c img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
 .st-c:hover img{transform:scale(1.06)}
-.st-b{position:relative;padding:20px 22px 22px;border-top:6px solid var(--c);display:flex;flex-direction:column;gap:6px}
+.st-b{position:relative;padding:20px 22px 22px;padding-top:26px;display:flex;flex-direction:column;gap:6px}
+.st-b::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--c)}
 .st-n{position:absolute;right:18px;top:12px;font:800 34px/1 var(--display);color:var(--c);letter-spacing:-.04em}
 .st-b h3{font:700 clamp(19px,1.5vw,24px)/1.15 var(--display);letter-spacing:-.025em;padding-right:44px}
 .st-b p{font-size:13px;color:var(--ink2)}
@@ -408,7 +410,7 @@ const V='attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(
 const F=`precision highp float;varying vec2 v;uniform sampler2D T;uniform vec2 S;uniform vec2 I;uniform float t;uniform vec4 D[20];
 void main(){vec2 uv=vec2(v.x,1.-v.y);float ca=S.x/S.y,ia=I.x/I.y;vec2 sc=ca>ia?vec2(1.,ia/ca):vec2(ca/ia,1.);vec2 o=vec2(0.);float hl=0.;
 for(int i=0;i<20;i++){vec4 d=D[i];if(d.w<=0.)continue;float age=t-d.z;if(age<0.||age>3.5)continue;vec2 q=(uv-d.xy)*vec2(ca,1.);float r=length(q);float front=age*.42;
-float env=exp(-age*1.1)*(1.-smoothstep(front-.14,front+.02,r))*smoothstep(0.,.25,front-r+.25)*exp(-r*2.);float w=sin(r*46.-age*10.)*env*d.w;o+=normalize(q+1e-5)*w*.03;hl+=max(w,0.)*.6;}
+float env=exp(-age*1.1)*(1.-smoothstep(front-.14,front+.02,r))*smoothstep(0.,.25,front-r+.25)*exp(-r*2.);float w=sin(r*46.-age*10.)*env*d.w;o+=normalize(q+1e-5)*w*.02;hl+=max(w,0.)*.6;}
 vec2 tc=(uv+o-.5)*sc+.5;vec4 c=texture2D(T,tc);gl_FragColor=vec4(mix(c.rgb,vec3(1.),clamp(hl*.5,0.,.45)),1.);}`;
 const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,V));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,F));gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return;gl.useProgram(pr);
 const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const ap=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(ap);gl.vertexAttribPointer(ap,2,gl.FLOAT,false,0,0);
