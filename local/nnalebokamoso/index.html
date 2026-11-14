@@ -155,7 +155,7 @@ footer img{height:22px}
 .sh-cloud{position:absolute;left:var(--x);top:var(--y);width:var(--w);animation:drift var(--sp) linear infinite;filter:drop-shadow(0 8px 14px rgba(16,18,58,.12))}
 .sh-cloud svg{width:100%;display:block}
 @keyframes drift{from{transform:translateX(-12vw)}to{transform:translateX(12vw)}}
-.sh-h{position:absolute;left:0;right:0;top:50%;transform:translateY(-58%);text-align:center;font:400 clamp(64px,12.6vw,232px)/.84 var(--display);text-transform:uppercase;color:var(--ink);letter-spacing:.005em;z-index:3;pointer-events:none}
+.sh-h{position:absolute;left:0;right:0;top:50%;transform:translateY(-58%);text-align:center;font:400 clamp(60px,min(12.6vw,17vh),232px)/.84 var(--display);text-transform:uppercase;color:var(--ink);letter-spacing:.005em;z-index:3;pointer-events:none}
 .sh-l{display:block;overflow:hidden;padding:0 .04em}
 .sh-l>span{display:inline-block;transform:translateY(105%);animation:rise 1s var(--ease) forwards}
 .sh-l:nth-child(2)>span{animation-delay:.12s}.sh-l:nth-child(3)>span{animation-delay:.24s}
@@ -166,9 +166,9 @@ footer img{height:22px}
 .sh-stk{position:absolute;left:var(--x);top:var(--y);width:var(--w);aspect-ratio:1;z-index:4;transform:rotate(var(--r));will-change:transform}
 .sh-stk>svg{animation:bobs var(--d,5s) ease-in-out infinite alternate}
 @keyframes bobs{to{transform:translateY(-12px) rotate(6deg)}}
-.sh-kids{position:absolute;left:50%;bottom:-2vh;width:min(46vw,620px);transform:translateX(-50%);z-index:2;will-change:transform}
-.sh-kids img{width:100%;display:block;filter:drop-shadow(0 20px 30px rgba(16,18,58,.25))}
-.sh-cta{position:absolute;left:0;right:0;bottom:15vh;display:flex;justify-content:center;z-index:6}
+.sh-kids{position:absolute;left:50%;bottom:-1vh;height:min(58vh,46vw);aspect-ratio:1400/1120;transform:translate(-50%,72%);z-index:2;will-change:transform}
+.sh-kids img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 20px 30px rgba(16,18,58,.25))}
+.sh-cta{position:absolute;left:0;right:0;top:calc(50% + min(16vw,22vh));display:flex;justify-content:center;z-index:6}
 .sh-scallop{position:absolute;left:0;right:0;bottom:-1px;height:7vw;min-height:46px;z-index:5;background:radial-gradient(circle at 50% 100%,var(--paper) 68%,transparent 69%) 0 100%/9vw 7vw repeat-x}
 .sh-who{position:relative;z-index:6;max-width:1100px;margin:0 auto;padding:clamp(60px,9vh,110px) var(--pad) clamp(40px,6vh,70px);text-align:center}
 .sh-label{font:500 15px/1 var(--mono);color:var(--mute)}
@@ -185,8 +185,8 @@ footer img{height:22px}
 .sh-tag{position:absolute;left:var(--x);top:var(--y);transform:rotate(var(--r));background:var(--c);color:var(--ink);font:700 clamp(18px,2vw,30px)/1 var(--hand);padding:.25em .6em .32em;border-radius:6px;box-shadow:0 8px 18px -8px rgba(16,18,58,.45);white-space:nowrap}
 @media (max-width:760px){
   .sh-h{font-size:clamp(54px,17vw,96px);transform:translateY(-78%)}
-  .sh-kids{width:84vw;bottom:-1vh}
-  .sh-cta{bottom:auto;top:62%}
+  .sh-kids{height:auto;width:92vw}
+  .sh-cta{top:64%}
   .sh-stk{width:calc(var(--w)*1.7)}
   .sh-say{font-size:26px}
   .sh-photo img{aspect-ratio:4/5}
@@ -449,14 +449,14 @@ addEventListener('DOMContentLoaded',()=>requestAnimationFrame(frame));
 })();
 
 /* sky-hero: stickers follow the pointer at their own depth and scatter on scroll; kids rise out of the clouds; eyes look at the pointer; swoosh draws in. */
-(()=>{const {$,$$,ss}=DS;const sky=$('#shSky');if(!sky)return;const stk=$$('.sh-stk'),kids=$('#shKids'),hd=$('#shH'),band=$('#shBand');
+(()=>{const {$,$$,ss}=DS;const sky=$('#shSky');if(!sky)return;const stk=$$('.sh-stk'),kids=$('#shKids'),hd=$('#shH'),band=$('#shBand'),cta=$('.sh-cta');
 let mx=0,my=0,tx=0,ty=0;addEventListener('pointermove',e=>{tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5;
   $$('.pupil').forEach(p=>{const b=p.ownerSVGElement.getBoundingClientRect(),dx=e.clientX-(b.left+b.width/2),dy=e.clientY-(b.top+b.height/2),d=Math.hypot(dx,dy)||1;p.setAttribute('transform',`translate(${dx/d*5} ${dy/d*5})`)})});
 DS.onFrame(()=>{const r=sky.getBoundingClientRect();if(r.bottom<-200)return;const p=ss(0,r.height,-r.top);mx+=(tx-mx)*.06;my+=(ty-my)*.06;
   stk.forEach((s,i)=>{const z=.6+(i%3)*.5,sx=(parseFloat(s.style.getPropertyValue('--x'))-50)/50;
     s.style.transform=`translate(${mx*-40*z+sx*p*30}vw,${my*-30*z-p*innerHeight*.5*z}px) rotate(${s.style.getPropertyValue('--r')})`});
-  kids.style.transform=`translate(-50%,${(1-ss(0,.35,p))*0+(-p*16)}vh) scale(${1+p*.08})`;
-  hd.style.transform=`translateY(calc(${innerWidth<760?-78:-58}% - ${p*22}vh))`;hd.style.opacity=(1-ss(.35,.8,p)).toFixed(3);
+  kids.style.transform=`translate(-50%,${72-ss(0,.6,p)*72}%)`;cta.style.opacity=(1-ss(.05,.3,p)).toFixed(3);
+  hd.style.transform=`translateY(calc(${innerWidth<760?-78:-58}% - ${p*22}vh))`;hd.style.opacity=(1-ss(.1,.45,p)).toFixed(3);
   if(band){const b=band.getBoundingClientRect();band.style.setProperty('--draw',ss(innerHeight,innerHeight*.2,b.top).toFixed(3))}});
 })();
 
