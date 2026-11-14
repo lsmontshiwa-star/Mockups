@@ -279,17 +279,6 @@ footer img{height:22px}
 .lgc{display:block;height:40px;background-repeat:no-repeat;mix-blend-mode:multiply}footer .lgc{height:44px}
 .wm{font:700 17px/1 var(--display);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}.wm em{font-style:normal;color:var(--accent)}
 </style>
-<!-- ds-og -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nna le Bokamoso · Where science meets art: website preview">
-<meta property="og:description" content="A preview of the new website Digital Switch built for Nna le Bokamoso · Where science meets art. Open it on your phone.">
-<meta property="og:image" content="https://digitalswitch.co.za/local/nnalebokamoso/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitalswitch.co.za/local/nnalebokamoso/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://digitalswitch.co.za/local/nnalebokamoso/og.jpg">
-<!-- /ds-og -->
 </head>
 <body>
 <!-- built by the DS sites engine · look: nlb-wonder · sections: hero-drift, shutter-stack, side-track, centre-carousel, order-whatsapp -->
@@ -408,7 +397,7 @@ const V='attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(
 const F=`precision highp float;varying vec2 v;uniform sampler2D T;uniform vec2 S;uniform vec2 I;uniform float t;uniform vec4 D[20];
 void main(){vec2 uv=vec2(v.x,1.-v.y);float ca=S.x/S.y,ia=I.x/I.y;vec2 sc=ca>ia?vec2(1.,ia/ca):vec2(ca/ia,1.);vec2 o=vec2(0.);float hl=0.;
 for(int i=0;i<20;i++){vec4 d=D[i];if(d.w<=0.)continue;float age=t-d.z;if(age<0.||age>3.5)continue;vec2 q=(uv-d.xy)*vec2(ca,1.);float r=length(q);float front=age*.42;
-float env=exp(-age*1.1)*smoothstep(front+.02,front-.12,r)*exp(-r*3.);float w=sin(r*46.-age*10.)*env*d.w;o+=normalize(q+1e-5)*w*.03;hl+=max(w,0.)*.6;}
+float env=exp(-age*1.1)*(1.-smoothstep(front-.14,front+.02,r))*smoothstep(0.,.25,front-r+.25)*exp(-r*2.);float w=sin(r*46.-age*10.)*env*d.w;o+=normalize(q+1e-5)*w*.03;hl+=max(w,0.)*.6;}
 vec2 tc=(uv+o-.5)*sc+.5;vec4 c=texture2D(T,tc);gl_FragColor=vec4(mix(c.rgb,vec3(1.),clamp(hl*.5,0.,.45)),1.);}`;
 const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,V));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,F));gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS))return;gl.useProgram(pr);
 const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const ap=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(ap);gl.vertexAttribPointer(ap,2,gl.FLOAT,false,0,0);
