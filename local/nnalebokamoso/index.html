@@ -160,7 +160,7 @@ footer img{height:22px}
 .hd-hint{position:absolute;right:var(--pad);bottom:22px;z-index:3}
 @media (max-width:760px){
   .hd{height:200vh}
-  .hd-main{right:-6vw;top:auto;bottom:3vh;width:62vw;height:28vh}
+  .hd-main{right:-6vw;top:auto;bottom:2vh;width:58vw;height:25vh}
   .hd-copy{top:96px;transform:none;max-width:none;right:var(--pad)}
   .hd h1{font-size:clamp(44px,12.4vw,72px)}
   .hd-t{display:none}
@@ -281,17 +281,6 @@ footer img{height:22px}
 .lgc{display:block;height:40px;background-repeat:no-repeat;mix-blend-mode:multiply}footer .lgc{height:44px}
 .wm{font:700 17px/1 var(--display);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}.wm em{font-style:normal;color:var(--accent)}
 </style>
-<!-- ds-og -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nna le Bokamoso · Where science meets art: website preview">
-<meta property="og:description" content="A preview of the new website Digital Switch built for Nna le Bokamoso · Where science meets art. Open it on your phone.">
-<meta property="og:image" content="https://digitalswitch.co.za/local/nnalebokamoso/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitalswitch.co.za/local/nnalebokamoso/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://digitalswitch.co.za/local/nnalebokamoso/og.jpg">
-<!-- /ds-og -->
 </head>
 <body>
 <!-- built by the DS sites engine · look: nlb-wonder · sections: hero-drift, shutter-stack, side-track, centre-carousel, order-whatsapp -->
@@ -399,7 +388,7 @@ DS.onFrame(now=>{if(hero.getBoundingClientRect().bottom<0)return;const p=DS.pinP
   tiles.forEach((el,i)=>{const sp=+el.dataset.sp;el.style.transform=`translate(${mx*-24*sp}px,${-e*innerHeight*sp*.9+Math.sin(t*.6+i*1.7)*6+my*-14*sp}px) rotate(${(+getComputedStyle(el).getPropertyValue('--r').replace('deg','')||0)*(1-e)}deg)`;el.style.opacity=(1-ss(.55,.9,p)).toFixed(3)});
   copy.style.transform=`translate(${-g*60}vw,${nar?0:'-46%'})`;copy.style.opacity=(1-ss(.3,.7,p)).toFixed(3);
   if(!nar){main.style.width=lerp(34,100,g)+'vw';main.style.height=lerp(66,100,g)+'vh';main.style.top=lerp(14,0,g)+'vh';main.style.right=lerp(6,0,g)+'vw'}
-  else{main.style.width=lerp(62,100,g)+'vw';main.style.height=lerp(34,100,g)+'vh';main.style.bottom=lerp(4,0,g)+'vh';main.style.right=lerp(-6,0,g)+'vw'}
+  else{main.style.width=lerp(58,100,g)+"vw";main.style.height=lerp(25,100,g)+"vh";main.style.bottom=lerp(2,0,g)+"vh";main.style.right=lerp(-6,0,g)+'vw'}
   main.style.transform=`translate(${mx*10*(1-g)}px,${my*8*(1-g)}px)`;
   if(R)R.draw(t)});
 
