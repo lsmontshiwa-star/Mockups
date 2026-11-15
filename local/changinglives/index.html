@@ -6,17 +6,15 @@
 <title>Changing Lives Foundation · Less of us. More of you.</title>
 <meta name="description" content="Changing Lives Foundation is a disaster-response NGO of African origin, based in Midrand. School shoes for rural learners, a job summit for unemployed graduates, and help where it&#x27;s needed most. Give online in seconds.">
 <meta name="robots" content="noindex,nofollow">
-
+<meta name="ds-fonts" content="4">
 <meta name="theme-color" content="#f3eee4">
 <meta property="og:title" content="Changing Lives Foundation · Less of us. More of you.">
 <meta property="og:description" content="Changing Lives Foundation is a disaster-response NGO of African origin, based in Midrand. School shoes for rural learners, a job summit for unemployed graduates, and help where it&#x27;s needed most. Give online in seconds.">
 <meta property="og:image" content="img/og.jpg">
 
-<link rel="preconnect" href="https://api.fontshare.com">
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=panchang@400,700&display=swap">
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap">
+<link rel="preload" href="/assets/fonts/inter/InterVariable-opsz.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-:root{--ivory:#f3eee4;--ivory2:#e8e1d3;--paper:#fbf8f2;--ink:#15151a;--ink2:#3d3c44;--mute:#7a776f;--accent:#0a2a9c;--panel-a:#f3eee4;--panel-b:#e8e1d3;--card:#fbf8f2;--green:#00793f;--yellow:#f4b40f;--navy:#06175e;--red:#e1202b;--blue:#0a2a9c;--black:#15151a;--forest:var(--accent);--pad:clamp(18px,2.6vw,44px);--mono:"Switzer",ui-monospace,Menlo,monospace;--display:"Panchang","Helvetica Neue",Arial,sans-serif;--ease:cubic-bezier(.22,.8,.18,1)}
+@font-face{font-family:"Inter Display";src:url(/assets/fonts/inter/InterVariable-opsz.woff2) format("woff2");font-weight:100 900;font-display:swap}@font-face{font-family:"Kalam";src:url(/assets/fonts/kalam/Kalam-Bold.woff2) format("woff2");font-weight:700;font-display:swap}:root{--hand:"Kalam",cursive}@font-face{font-family:"Kalam";src:url(/assets/fonts/kalam/Kalam-Regular.woff2) format("woff2");font-weight:400;font-display:swap}:root{--ivory:#f3eee4;--ivory2:#e8e1d3;--paper:#fbf8f2;--ink:#15151a;--ink2:#3d3c44;--mute:#7a776f;--accent:#0a2a9c;--panel-a:#f3eee4;--panel-b:#e8e1d3;--card:#fbf8f2;--green:#00793f;--yellow:#f4b40f;--navy:#06175e;--red:#e1202b;--blue:#0a2a9c;--black:#15151a;--forest:var(--accent);--pad:clamp(18px,2.6vw,44px);--mono:"Inter Display",ui-monospace,Menlo,monospace;--display:"Inter Display","Helvetica Neue",Arial,sans-serif;--ease:cubic-bezier(.22,.8,.18,1)}
 /* DS sites engine: core.css. LOCKED. Colours and fonts come only from the look (CSS variables). */
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--ivory);color:var(--ink)}
@@ -145,241 +143,218 @@ footer img{height:22px}
 .hh{width:152vw;background:var(--ivory)}
 .flag{display:inline-flex;height:10px;flex:none}.flag b{width:10px;height:100%}
 .flag.v{position:absolute;left:0;top:0;bottom:0;height:auto;flex-direction:column;width:12px;z-index:2}.flag.v b{width:100%;height:20%}
-.hh-copy{position:absolute;left:var(--pad);top:max(118px,19vh);width:60vw;z-index:4}
-.hh-kick{display:flex;align-items:center;gap:14px;font:500 12px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
-.hh-h{margin-top:3.2vh;font-size:clamp(40px,5.3vw,104px);line-height:.9;letter-spacing:-.045em;color:var(--ink)}
-.hh-h .ln{display:block;overflow:hidden;padding-bottom:.2em;margin-bottom:-.2em}
+.hh-copy{position:absolute;left:var(--pad);top:max(118px,17vh);width:62vw;z-index:4}
+.hh-kick{display:flex;align-items:center;gap:14px;color:var(--blue)}
+.hh-h{margin-top:2.6vh;font-size:clamp(58px,8.6vw,166px);font-weight:900;line-height:.86;letter-spacing:-.055em;color:var(--ink)}
+.hh-h .ln{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
 .hh-h .ln>span{display:block;transform:translateY(105%);transition:transform 1.3s var(--ease) calc(.25s + var(--i)*.12s)}
-.hh-h em{font-weight:400;color:var(--blue);letter-spacing:-.03em;padding-right:.04em}
+.hh-h em{color:var(--blue);font-size:1.12em;line-height:.7;letter-spacing:-.02em;margin-left:.04em}
 .hh.go .hh-h .ln>span,.shot .hh-h .ln>span{transform:none}
-.hh-sub{margin-top:3.4vh;max-width:31ch;font:400 clamp(15px,1.32vw,21px)/1.45 var(--mono);color:var(--ink2);letter-spacing:-.005em}
-.hh-sub b{font-weight:600;color:var(--ink)}
-.hh-cta{margin-top:4vh;display:flex;align-items:center;gap:26px}
-.hh-cta .g.dark{background:var(--ink)}
-.hh-more{font:500 13px var(--mono);letter-spacing:.02em;color:var(--ink);background:linear-gradient(currentColor,currentColor) 0 100%/100% 1.5px no-repeat;padding-bottom:3px;transition:background-size .5s var(--ease)}
-.hh-more:hover{background-size:0 1.5px;background-position:100% 100%}
-.hh-hands{position:absolute;left:58.5vw;bottom:-5vh;height:min(90vh,64vw);aspect-ratio:1040/1472;z-index:3}
+.hh-sub{margin-top:3.6vh;max-width:30ch;font:500 clamp(17px,1.45vw,23px)/1.4 var(--mono);color:var(--ink);letter-spacing:-.015em}
+.hh-sub b{font-weight:800}
+.hh-cta{margin-top:4.2vh;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hh-hands{position:absolute;left:60vw;bottom:-5vh;height:min(90vh,64vw);aspect-ratio:1040/1472;z-index:3}
 .hd-w{position:absolute;display:block;transform:translateY(115%);z-index:var(--z)}
 .hh.go .hd-w,.shot .hd-w{transform:none;transition:transform 1.7s cubic-bezier(.2,1.15,.3,1) calc(.5s + var(--d))}
 .shot .hd-w{transition:none}
 .hd{width:100%;height:100%;display:block;transform-origin:50% 100%;will-change:transform}
 .hh-photo{position:absolute;left:91vw;top:0;bottom:0;right:0;overflow:hidden;background:var(--ink)}
 .hh-pin{position:absolute;inset:0 -9%}
-.hh-pin img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.04)}
-.hh-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,20,.62),transparent 42%)}
-.hh-photo figcaption{position:absolute;left:clamp(40px,4vw,70px);right:var(--pad);bottom:72px;z-index:2;display:flex;align-items:flex-end;gap:22px;color:#fff;font:500 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}
-.hh-photo .yr{font-size:clamp(47.36px,5.92vw,111px);line-height:.8;letter-spacing:-.05em;text-transform:none}
+.hh-pin img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05)}
+.hh-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,20,.66),transparent 46%)}
+.hh-photo figcaption{position:absolute;left:clamp(40px,4vw,70px);right:var(--pad);bottom:76px;z-index:2;display:flex;align-items:flex-end;gap:22px;color:#fff;font:600 16px/1.25 var(--mono)}
+.hh-photo .yr{font-size:clamp(70px,9vw,170px);font-weight:900;line-height:.78;letter-spacing:-.06em}
 @media (max-width:760px){
   .hh{width:200vw}
-  .hh-copy{top:max(92px,13svh);width:calc(100vw - 2*var(--pad))}
-  .hh-kick{font-size:10px;gap:10px}.hh-kick .flag{height:8px}.hh-kick .flag b{width:8px}
-  .hh-h{font-size:11.2vw;margin-top:2.2svh}
-  .hh-sub{font-size:15px;margin-top:2svh;max-width:30ch}
-  .hh-cta{margin-top:2.6svh;gap:18px}
-  .hh-hands{left:16vw;bottom:-3svh;height:min(46svh,96vw)}
+  .hh-copy{top:max(88px,12svh);width:calc(100vw - 2*var(--pad))}
+  .hh-kick{gap:10px}.hh-kick .flag{height:8px}.hh-kick .flag b{width:8px}
+  .hh-h{font-size:17vw;margin-top:1.6svh}
+  .hh-sub{font-size:16px;margin-top:2svh;max-width:28ch}
+  .hh-cta{margin-top:2.4svh;gap:8px}
+  .hh-hands{left:16vw;bottom:-3svh;height:min(42svh,92vw)}
   .hh-photo{left:100vw}
-  .hh-photo figcaption{bottom:56px;flex-direction:column;align-items:flex-start;gap:10px;left:36px}
+  .hh-photo figcaption{bottom:60px;flex-direction:column;align-items:flex-start;gap:10px;left:36px}
 }
 
-/* hz-who: who they are, the founder as a mega cut-out on a flag-yellow column, the numbers set big */
+/* hz-who: who they are in one big line, the founder cut-out on a flag-yellow column with their tagline in the logo's hand, the numbers as solid colour tiles */
 .wh{display:flex;height:100svh;background:var(--paper)}
-.lbl{display:flex;gap:16px;font:500 12px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
-.lbl span{color:var(--red)}
-.wh-a{width:50vw;padding:max(130px,20vh) 5vw 0 var(--pad)}
-.wh-say{margin-top:4vh;font-size:clamp(24px,2.55vw,48px);--x:clamp(25.16px,3.03vw,54.76px);line-height:1;letter-spacing:-.035em;color:var(--ink)}
-.wh-say em{font-weight:400;color:var(--red)}
-.wh-p{margin-top:4vh;max-width:44ch;font-size:clamp(14px,1.08vw,17px);line-height:1.6;color:var(--ink2)}
-.wh-b{position:relative;width:74vw;flex:none}
-.wh-block{position:absolute;left:6vw;top:16vh;bottom:0;width:30vw;background:var(--yellow)}
-.wh-big{position:absolute;left:-2vw;top:7vh;font-size:min(34vh,22vw);line-height:.8;letter-spacing:-.06em;color:var(--ivory2);white-space:nowrap;z-index:0;font-weight:400}
-.wh-fig{position:absolute;left:3vw;bottom:0;height:94svh;width:38vw;z-index:2}
-.wh-fig img{position:absolute;left:50%;bottom:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:grayscale(1) contrast(1.18) brightness(1.04)}
-.wh-q{position:absolute;left:44vw;top:28vh;width:27vw;z-index:3}
-.wh-q p{font-size:clamp(22.2px,2.44vw,42.92px);line-height:1;letter-spacing:-.03em;font-weight:400;color:var(--ink)}
-.wh-q p em{color:var(--blue);font-style:normal}
-.wh-q footer{margin-top:4vh;display:grid;gap:6px;font-size:13px;color:var(--ink2)}
-.wh-q footer b{font-weight:600;color:var(--ink);font-size:15px}
-.wh-c{width:56vw;flex:none;display:grid;grid-template-columns:1fr 1fr;align-content:center;gap:7vh 4vw;padding:0 8vw 0 4vw;position:relative}
-.wh-n span{display:block;font-size:clamp(41.44px,4.74vw,87.32px);line-height:.85;letter-spacing:-.05em;color:var(--ink)}
-.wh-n:nth-child(1) span{color:var(--blue)}.wh-n:nth-child(4) span{color:var(--green)}
-.wh-n p{margin-top:16px;max-width:24ch;font-size:14px;line-height:1.5;color:var(--ink2);padding-top:14px;background:linear-gradient(var(--ink),var(--ink)) 0 0/34px 2px no-repeat}
-.wh-src{position:absolute;left:4vw;bottom:72px;font-size:11px;letter-spacing:.06em;color:var(--mute)}
+.wh-a{width:44vw;flex:none;padding:max(130px,19vh) 4vw 0 var(--pad)}
+.wh-tag{color:var(--red)}
+.wh-say{margin-top:2.4vh;font-size:clamp(44px,4.9vw,92px);font-weight:900;line-height:.92;letter-spacing:-.05em;color:var(--ink)}
+.wh-say em{color:var(--red);font-size:1.1em}
+.wh-p{margin-top:4vh;max-width:36ch;font-size:clamp(16px,1.25vw,20px);line-height:1.5;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+.wh-b{position:relative;width:64vw;flex:none}
+.wh-block{position:absolute;left:3vw;right:2vw;top:13vh;bottom:0;background:var(--yellow)}
+.wh-big{position:absolute;left:0;top:4vh;font-size:min(30vh,19vw);font-weight:900;line-height:.8;letter-spacing:-.07em;color:var(--ivory2);white-space:nowrap}
+.wh-fig{position:absolute;left:5vw;bottom:0;height:88svh;aspect-ratio:673/1278;z-index:2}
+.wh-fig img{width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:grayscale(1) contrast(1.15) brightness(1.03)}
+.wh-q{position:absolute;left:38vw;right:4vw;top:30vh;z-index:3}
+.wh-q p{font:700 clamp(32px,3.1vw,58px)/1.02 var(--hand);color:var(--ink);letter-spacing:-.01em}
+.wh-q p em{color:var(--blue);font-size:1em}
+.wh-q footer{margin-top:3.4vh;display:grid;gap:4px;font-size:16px;font-weight:500;color:var(--ink)}
+.wh-q footer b{font-weight:800;font-size:18px;letter-spacing:-.02em}
+.wh-c{width:58vw;flex:none;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.wh-n{background:var(--bg);color:#fff;padding:0 3vw 9vh;display:flex;flex-direction:column;justify-content:flex-end}
+.wh-n span{display:block;font-size:clamp(64px,7.4vw,140px);font-weight:900;line-height:.82;letter-spacing:-.06em}
+.wh-n p{margin-top:2vh;max-width:22ch;font-size:clamp(15px,1.15vw,19px);line-height:1.35;font-weight:600;letter-spacing:-.01em;opacity:.95}
 @media (max-width:760px){
-  .wh-a{width:100vw;padding:max(100px,15svh) var(--pad) 0}
-  .wh-say{font-size:6.2vw}
-  .wh-p{font-size:14px}
-  .wh-b{width:126vw;margin-left:16vw}
-  .wh-block{left:4vw;top:22svh;width:60vw}
-  .wh-big{font-size:25svh;top:9svh}
-  .wh-fig{left:0;width:64vw;height:76svh}
-  .wh-q{left:68vw;top:auto;bottom:22svh;width:50vw}
-  .wh-q p{font-size:6.4vw}
-  .wh-c{width:100vw;grid-template-columns:1fr 1fr;gap:5svh 6vw;padding:12svh var(--pad) 0}
-  .wh-n span{font-size:9.6vw}
-  .wh-n p{font-size:12.5px}
-  .wh-src{left:var(--pad);bottom:56px}
+  .wh-a{width:100vw;padding:max(96px,14svh) var(--pad) 0}
+  .wh-say{font-size:11.6vw}
+  .wh-p{font-size:16px}
+  .wh-b{width:108vw}
+  .wh-block{left:4vw;right:4vw;top:12svh}
+  .wh-big{font-size:22svh;top:4svh}
+  .wh-fig{left:10vw;height:62svh}
+  .wh-q{left:9vw;right:8vw;top:15svh}
+  .wh-q p{font-size:8.4vw}
+  .wh-q footer{margin-top:1.4svh;font-size:14px}.wh-q footer b{font-size:15px}
+  .wh-c{width:100vw}
+  .wh-n{padding:0 5vw 6svh}
+  .wh-n span{font-size:14vw}
+  .wh-n p{font-size:13.5px}
 }
 
-/* hz-work: four pillars as full-height slabs, each in one of the hands' colours */
-.wk{display:flex;height:100svh;background:var(--ivory)}
-.wk-in{width:40vw;flex:none;padding:max(130px,20vh) 5vw 0 6vw;position:relative}
-.wk-in h2{margin-top:4vh;font-size:clamp(29.6px,3.55vw,63.64px);line-height:.95;letter-spacing:-.04em}
-.wk-in h2 em{font-weight:400;color:var(--green)}
-.wk-lead{margin-top:4vh;max-width:36ch;font-size:clamp(14px,1.08vw,17px);line-height:1.6;color:var(--ink2)}
-.wk-hint{position:absolute;left:6vw;bottom:9vh;transform-origin:0 100%}
-.wk-hint span{font-size:clamp(16.28px,1.33vw,22.2px);font-weight:400;color:var(--ink)}
-.wk-p{position:relative;width:min(42vw,820px);flex:none;height:100%;background:var(--bg);color:var(--fg);padding:max(130px,19vh) 3.4vw 0;overflow:hidden}
-.wk-no{position:absolute;right:2.4vw;top:max(96px,13vh);font-size:clamp(51.8px,7.4vw,140.6px);line-height:.8;font-weight:400;letter-spacing:-.05em;opacity:.22}
-.wk-tag{font:500 12px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
-.wk-p h3{margin-top:2.4vh;font-size:clamp(28.12px,2.96vw,53.28px);line-height:.95;letter-spacing:-.04em;position:relative}
-.wk-t{margin-top:2.6vh;max-width:40ch;font-size:clamp(14px,1.04vw,16.5px);line-height:1.58;opacity:.92;position:relative}
-.wk-big{margin-top:3vh;font-size:clamp(34.04px,3.7vw,68.08px);line-height:.85;letter-spacing:-.05em;position:relative}
-.wk-big em{font-weight:400;font-size:.42em;letter-spacing:-.02em;margin-left:.2em}
+/* hz-work: four full-height slabs, each in one of the hands' colours; the first carries the section name */
+.wk{display:flex;height:100svh}
+.wk-p{position:relative;width:min(44vw,860px);flex:none;height:100%;background:var(--bg);color:var(--fg);padding:max(124px,17vh) 3.6vw 0;overflow:hidden}
+.wk-head{position:relative;font-size:clamp(20px,1.6vw,28px);font-weight:900;letter-spacing:-.03em;margin-bottom:1.4vh;opacity:.9}
+.wk-head em{font-size:1.1em}
+.wk-no{position:absolute;right:2.4vw;top:max(92px,12vh);font-size:clamp(90px,11vw,210px);font-weight:900;line-height:.8;letter-spacing:-.07em;opacity:.18}
+.wk-tag{position:relative;color:var(--tg,#fff)}
+.wk-p h3{margin-top:1.2vh;font-size:clamp(46px,4.8vw,92px);font-weight:900;line-height:.9;letter-spacing:-.055em;position:relative}
+.wk-t{margin-top:2.8vh;max-width:34ch;font-size:clamp(16px,1.2vw,19px);line-height:1.48;font-weight:500;letter-spacing:-.01em;position:relative}
+.wk-big{margin-top:3vh;font-size:clamp(56px,5.8vw,110px);font-weight:900;line-height:.85;letter-spacing:-.06em;position:relative}
+.wk-big em{font-size:.42em;letter-spacing:0;margin-left:.2em}
 .wk-ph{position:absolute;left:0;right:0;bottom:0;height:46%;overflow:hidden}
 .wk-ph>div{position:absolute;inset:0 -12%}
 .wk-ph img{width:100%;height:100%;object-fit:cover}
-.wk-ph figcaption{position:absolute;left:3.4vw;bottom:64px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#fff;z-index:2}
-.wk-ph:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.45),transparent 40%)}
-.wk-cut{position:absolute;right:-4vw;bottom:2vh;width:min(40vw,74vh);transform-origin:50% 50%}
-.wk-cut img{width:100%;height:auto;transform:rotate(-11deg);filter:drop-shadow(0 30px 30px rgba(60,40,0,.32))}
-.wk-hand{position:absolute;left:12%;bottom:-6%;height:62%;opacity:.95}
+.wk-ph figcaption{position:absolute;left:3.6vw;bottom:68px;font:700 22px var(--hand);color:#fff;z-index:2}
+.wk-ph:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent 40%)}
+.wk-hand{position:absolute;left:14%;bottom:-12%;height:54%;opacity:.95}
 .wk-hand img{height:100%;width:auto;max-width:none;filter:brightness(0) invert(1)}
-.wk-list{list-style:none;margin-top:4vh;display:grid;gap:1.6vh;position:relative}
-.wk-list li{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:1.6vh;background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)) 0 100%/100% 2px no-repeat}
-.wk-list li span{font-size:clamp(14.06px,1.15vw,20.72px);line-height:1.05;letter-spacing:-.025em}
-.wk-list li small{font:500 12px var(--mono);letter-spacing:.1em;opacity:.8;white-space:nowrap}
-@media (max-width:760px){
-  .wk-in{width:100vw;padding:max(100px,15svh) var(--pad) 0}
-  .wk-in h2{font-size:8.2vw}
-  .wk-lead{font-size:14px}
-  .wk-hint{left:var(--pad);bottom:12svh}
-  .wk-p{width:88vw;padding:max(96px,14svh) 6vw 0}
-  .wk-no{font-size:19vw;right:5vw;top:max(84px,11svh)}
-  .wk-p h3{font-size:7.8vw}
-  .wk-t{font-size:14px}
-  .wk-big{font-size:9.6vw}
-  .wk-ph{height:38%}
-  .wk-cut{width:84vw;right:-10vw;bottom:5svh}
-  .wk-hand{height:44%}
-  .wk-list{margin-top:3svh;gap:1.5svh}.wk-list li{padding-bottom:1.5svh}
-  .wk-list li span{font-size:4.2vw}
-}
 .wk-hand.ink{left:auto;right:4%;height:46%}.wk-hand.ink img{filter:brightness(0);opacity:.9}
+.wk-list{list-style:none;margin-top:3.6vh;display:grid;gap:1.5vh;position:relative}
+.wk-list li{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:1.5vh;background:linear-gradient(rgba(255,255,255,.3),rgba(255,255,255,.3)) 0 100%/100% 2px no-repeat}
+.wk-list li span{font-size:clamp(19px,1.55vw,27px);font-weight:800;line-height:1.08;letter-spacing:-.03em}
+.wk-list li small{font:700 18px var(--hand);opacity:.9;white-space:nowrap}
+@media (max-width:760px){
+  .wk-p{width:90vw;padding:max(92px,13svh) 6vw 0}
+  .wk-no{font-size:28vw;right:5vw;top:max(82px,11svh)}
+  .wk-p h3{font-size:12vw}
+  .wk-t{font-size:15px}
+  .wk-big{font-size:14vw}
+  .wk-ph{height:38%}
+  .wk-hand{height:42%}
+  .wk-list{margin-top:2.4svh;gap:1.2svh}.wk-list li{padding-bottom:1.2svh}
+  .wk-list li span{font-size:5vw}
+}
 
-/* hz-moments: real photos from their own events, set mega and staggered in height, drifting inside their frames */
+/* hz-moments: their own photos, mega and staggered in height, drifting inside their frames; then the partners set big */
 .mo{display:flex;align-items:stretch;height:100svh;background:var(--ink);color:#fff;gap:3vw;padding-right:5vw}
-.mo .lbl{color:rgba(255,255,255,.7)}
-.mo .lbl span{color:var(--yellow)}
-.mo-in{width:34vw;flex:none;padding:max(130px,20vh) 0 0 6vw}
-.mo-in h2{margin-top:4vh;font-size:clamp(29.6px,3.7vw,68.08px);line-height:.92;letter-spacing:-.045em}
-.mo-in h2 em{font-weight:400;color:var(--yellow)}
-.mo-lead{margin-top:4vh;max-width:34ch;font-size:clamp(14px,1.08vw,17px);line-height:1.6;color:rgba(255,255,255,.72)}
 .mo-f{position:relative;flex:none;align-self:center}
 .mo-i{position:relative;width:100%;height:100%;overflow:hidden;background:#222}
 .mo-i>div{position:absolute;inset:0 -10%}
 .mo-i img{width:100%;height:100%;object-fit:cover}
 .mo-tall{height:100svh;aspect-ratio:4/5;align-self:stretch}
-.mo-wide{height:62vh;aspect-ratio:4/3;align-self:flex-start;margin-top:13vh}
-.mo-sq{height:50vh;aspect-ratio:1;align-self:flex-end;margin-bottom:14vh}
-.mo-big{height:76vh;aspect-ratio:1}
-.mo-f figcaption{position:absolute;left:0;top:100%;padding-top:16px;display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:end;width:max(100%,320px);font-size:13px;color:rgba(255,255,255,.75)}
-.mo-f figcaption span{grid-row:1/3;font-size:clamp(29.6px,2.66vw,47.36px);line-height:.8;letter-spacing:-.05em;color:#fff}
-.mo-f figcaption b{font-weight:600;color:#fff;font-size:14px}
-.mo-tall figcaption,.mo-sq figcaption{top:auto;bottom:100%;padding:0 0 16px}
-.mo-tall figcaption{top:auto;bottom:0;padding:0 26px 72px;color:rgba(255,255,255,.85)}
-.mo-tall:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 38%);pointer-events:none}
-.mo-tall figcaption{z-index:2}
-.mo-pt{width:44vw;flex:none;padding:max(130px,20vh) 0 0 3vw}
-.mo-pt ul{list-style:none;margin-top:4vh;line-height:1.18 !important;font-size:clamp(18px,1.75vw,32px);--x:clamp(20.72px,2.15vw,38.48px);line-height:1.04;letter-spacing:-.035em;transform-origin:0 50%}
-.mo-pt li:nth-child(3n+1){font-weight:400;color:var(--yellow)}
+.mo-sq{height:52vh;aspect-ratio:1;align-self:flex-end;margin-bottom:15vh}
+.mo-big{height:70vh;aspect-ratio:1;align-self:flex-start;margin-top:14vh}
+.mo-tag{position:absolute;left:28px;top:max(110px,15vh);z-index:3;color:var(--yellow);font-size:clamp(26px,2.2vw,38px)}
+.mo-f figcaption{position:absolute;left:0;top:100%;padding-top:16px;display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:end;width:max(100%,320px);font-size:15px;font-weight:500;color:rgba(255,255,255,.8)}
+.mo-f figcaption span{grid-row:1/3;font-size:clamp(46px,4vw,72px);font-weight:900;line-height:.8;letter-spacing:-.06em;color:#fff}
+.mo-f figcaption b{font-weight:800;color:#fff;font-size:17px;letter-spacing:-.02em}
+.mo-sq figcaption{top:auto;bottom:100%;padding:0 0 16px}
+.mo-tall figcaption{top:auto;bottom:0;padding:0 28px 76px;z-index:2;color:rgba(255,255,255,.9)}
+.mo-tall:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.62),transparent 40%),linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%);pointer-events:none}
+.mo-pt{width:34vw;flex:none;padding:max(124px,17vh) 0 0 2vw}
+.mo-pt .tag{color:var(--yellow)}
+.mo-pt ul{list-style:none;margin-top:3vh;font-size:clamp(26px,2.5vw,46px);font-weight:900;line-height:1.02;letter-spacing:-.045em;transform-origin:0 50%}
+.mo-pt li:nth-child(3n+1){color:var(--yellow)}
 @media (max-width:760px){
   .mo{gap:8vw;padding-right:10vw}
-  .mo-in{width:100vw;padding:max(100px,15svh) var(--pad) 0}
-  .mo-in h2{font-size:9vw}
-  .mo-lead{font-size:14px}
-  .mo-tall{height:100svh;aspect-ratio:auto;width:86vw}
-  .mo-wide{height:auto;width:88vw;aspect-ratio:4/3;margin-top:18svh}
-  .mo-sq{height:auto;width:76vw;margin-bottom:20svh}
-  .mo-big{height:auto;width:88vw}
+  .mo-tall{height:100svh;aspect-ratio:auto;width:88vw}
+  .mo-sq{height:auto;width:78vw;margin-bottom:20svh}
+  .mo-big{height:auto;width:88vw;margin-top:16svh}
   .mo-f figcaption{width:100%}
-  .mo-pt{width:92vw;padding:max(100px,15svh) 0 0}
-  .mo-pt ul{font-size:6.2vw}
+  .mo-pt{width:92vw;padding:max(96px,14svh) 0 0}
+  .mo-pt ul{font-size:7.6vw}
 }
 
-/* hz-give: give online (amount chips -> PayFast checkout) and every way to reach them; the loop runs on to the start */
+/* hz-give: the ask and the form on one screen (once or monthly, amount chips -> PayFast), then every way to reach them; the loop runs on to the start */
 .gv{display:flex;height:100svh;background:var(--blue);color:#fff}
-.gv .lbl{color:rgba(255,255,255,.75)}.gv .lbl span{color:var(--yellow)}
-.gv-a{width:46vw;flex:none;padding:max(130px,20vh) 4vw 0 6vw;position:relative}
-.gv-a h2{margin-top:4vh;font-size:clamp(35.52px,4vw,74px);line-height:.9;letter-spacing:-.045em}
-.gv-a h2 em{font-weight:400;color:var(--yellow)}
-.gv-lead{margin-top:4vh;max-width:36ch;font-size:clamp(14px,1.09vw,17px);line-height:1.6;color:rgba(255,255,255,.82)}
-.gv-imp{position:absolute;left:6vw;bottom:10vh;display:flex;align-items:baseline;gap:16px}
-.gv-n{font-size:clamp(51.8px,6.66vw,125.8px);line-height:.8;letter-spacing:-.06em;color:var(--yellow);font-variant-numeric:tabular-nums;transition:transform .5s var(--ease)}
+.gv-tag{color:var(--yellow)}
+.gv-m{width:100vw;flex:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,38vw);gap:5vw;align-items:center;padding:0 5vw 0 6vw}
+.gv-a{align-self:stretch;padding-top:max(124px,17vh);position:relative}
+.gv-a h2{margin-top:2vh;font-size:clamp(52px,5.6vw,108px);font-weight:900;line-height:.86;letter-spacing:-.055em}
+.gv-a h2 em{color:var(--yellow);font-size:1.12em}
+.gv-lead{margin-top:3.6vh;max-width:32ch;font-size:clamp(17px,1.35vw,21px);line-height:1.45;font-weight:500;letter-spacing:-.01em}
+.gv-imp{position:absolute;left:0;bottom:12vh;display:flex;align-items:flex-end;gap:16px}
+.gv-n{font-size:clamp(90px,10vw,190px);font-weight:900;line-height:.78;letter-spacing:-.07em;color:var(--yellow);font-variant-numeric:tabular-nums;transition:transform .5s var(--ease)}
 .gv-n.bump{transform:translateY(-6px)}
-.gv-u{max-width:13ch;font-size:15px;line-height:1.35}
-.gv-b{width:40vw;flex:none;display:grid;align-items:center;padding:0 2vw}
-.gv-card{position:relative;background:var(--paper);color:var(--ink);padding:clamp(24px,2.6vw,44px);display:grid;gap:22px;box-shadow:0 40px 80px -40px rgba(0,0,20,.6)}
-.gv-h{font-size:clamp(19.24px,1.7vw,29.6px);line-height:1;letter-spacing:-.03em}
+.gv-u{max-width:15ch;font-size:17px;line-height:1.3;font-weight:600}
+.gv-u em{color:var(--yellow);font-size:1.15em}
+.gv-card>*{min-width:0}.gv-chips,.gv-row{grid-template-columns:repeat(3,minmax(0,1fr))}.gv-row input{width:100%}
+.gv-card{position:relative;background:var(--paper);color:var(--ink);padding:clamp(22px,2.2vw,36px);display:grid;gap:16px;box-shadow:0 40px 80px -40px rgba(0,0,20,.6)}
+.gv-freq{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:5px;border-radius:999px;background:var(--ivory2);isolation:isolate}
+.gv-freq button{height:44px;border-radius:999px;font:700 15px var(--mono);color:var(--ink2);transition:color .35s;letter-spacing:-.01em}
+.gv-freq button.on{color:#fff}
+.gv-freq i{position:absolute;z-index:-1;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;background:var(--ink);transition:transform .5s var(--ease)}
+.gv-freq.m i{transform:translateX(100%)}
 .gv-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.gv-chip,.gv-other{display:grid;gap:4px;padding:14px 14px 12px;background:var(--ivory);text-align:left;transition:background .3s,color .3s}
-.gv-chip b{font:700 clamp(15px,1.15vw,19px)/1 var(--display);letter-spacing:-.03em}
-.gv-chip small{font-size:11px;color:var(--mute);line-height:1.25}
+.gv-chip,.gv-other{display:grid;gap:3px;padding:13px 14px 11px;border-radius:16px;background:var(--ivory);text-align:left;transition:background .3s,color .3s,transform .3s}
+.gv-chip b{font-size:clamp(19px,1.45vw,24px);font-weight:900;line-height:1;letter-spacing:-.04em}
+.gv-chip small{font-size:12px;font-weight:500;color:var(--mute);line-height:1.2}
 .gv-chip:hover{background:var(--ivory2)}
 .gv-chip.on{background:var(--ink);color:#fff}.gv-chip.on small{color:rgba(255,255,255,.7)}
-.gv-other{grid-template-columns:auto 1fr;align-items:center;gap:6px}
-.gv-other span{font:700 16px var(--display)}
-.gv-other input{width:100%;min-width:0;background:none;border:0;outline:0;font:700 16px var(--display);color:var(--ink);letter-spacing:-.02em}
+.gv-other{grid-template-columns:auto 1fr;align-items:center;gap:4px}
+.gv-other span{font-size:21px;font-weight:900}
+.gv-other input{width:100%;min-width:0;background:none;border:0;outline:0;font:900 21px var(--mono);color:var(--ink);letter-spacing:-.04em}
 .gv-other.on{background:var(--ink);color:#fff}.gv-other.on input{color:#fff}
-.gv-row{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}
-.gv-row label{display:grid;gap:6px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.gv-row input{height:48px;padding:0 14px;background:var(--ivory);border:0;outline:0;font:500 15px var(--mono);color:var(--ink);letter-spacing:0;text-transform:none;transition:background .3s,box-shadow .3s}
-.gv-row input:focus{background:#fff;box-shadow:inset 0 -3px 0 var(--blue)}
-.gv-go{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 22px;background:var(--yellow);color:var(--ink);font:600 16px var(--mono);letter-spacing:-.005em;transition:background .3s}
-.gv-go:hover{background:#ffc52e}
-.gv-go b{font-weight:600}
-.gv-go .ar{background:rgba(0,0,0,.08);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;overflow:hidden;position:relative}
-.gv-go .ar svg{width:12px;height:12px;transition:transform .5s var(--ease)}.gv-go .ar svg+svg{position:absolute;transform:translateX(-20px)}
-.gv-go:hover .ar svg:first-child{transform:translateX(20px)}.gv-go:hover .ar svg+svg{transform:none}
-.gv-safe{font-size:12px;line-height:1.45;color:var(--ink2)}
-.gv-demo{font-size:11px;line-height:1.4;color:var(--mute);margin-top:-12px}
-.gv-thanks{position:absolute;inset:0;z-index:2;background:var(--paper);display:grid;align-content:center;gap:14px;padding:inherit}
-.gv-thanks .d{font-size:clamp(25.16px,2.22vw,38.48px);line-height:.95;letter-spacing:-.035em}
-.gv-c{width:52vw;flex:none;padding:max(130px,20vh) 6vw 0 5vw;position:relative}
-.gv-ct{margin-top:4vh;display:grid;grid-template-columns:1fr 1fr;gap:3.4vh 3vw}
-.gv-ct div{display:grid;gap:4px;align-content:start;font-size:15px;line-height:1.45}
-.gv-ct small{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:4px}
-.gv-ct a{width:max-content;max-width:100%;background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .5s var(--ease);overflow-wrap:anywhere}
-.gv-ct a:hover{background-size:100% 1.5px}
-.gv-end{position:absolute;left:5vw;right:6vw;bottom:13vh;display:flex;align-items:flex-end;gap:2vw}
+.gv-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) !important;gap:8px}
+.gv-row label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink2)}
+.gv-row input{height:48px;padding:0 16px;border-radius:12px;background:var(--ivory);border:0;outline:0;font:500 16px var(--mono);color:var(--ink);transition:background .3s,box-shadow .3s}
+.gv-row input:focus{background:#fff;box-shadow:inset 0 0 0 2px var(--blue)}
+.gv-row input.bad{box-shadow:inset 0 0 0 2px var(--red)}
+.gv .gv-go{width:100%;justify-content:space-between;height:62px;font-size:17px}
+.gv-go b{font-weight:800}
+.gv-safe{font-size:13px;line-height:1.45;color:var(--ink2);font-weight:500}
+.gv-demo{font-size:12px;line-height:1.4;color:var(--mute);margin-top:-8px}
+.gv-thanks{position:absolute;inset:0;z-index:2;background:var(--paper);display:grid;align-content:center;justify-items:start;gap:16px;padding:inherit}
+.gv-thanks[hidden]{display:none}
+.gv-thanks .d{font-size:clamp(40px,3.6vw,64px);font-weight:900;line-height:.9;letter-spacing:-.05em}
+.gv-thanks p:not(.d){font-size:17px;font-weight:500;max-width:30ch}
+.gv-c{width:56vw;flex:none;padding:max(124px,17vh) 6vw 0 4vw;position:relative}
+.gv-ct{margin-top:3.4vh;display:grid;grid-template-columns:1fr 1fr;gap:3.6vh 3vw}
+.gv-ct div{display:grid;gap:4px;align-content:start;font-size:17px;line-height:1.4;font-weight:500}
+.gv-ct small{font:700 19px var(--hand);color:var(--yellow);margin-bottom:2px}
+.gv-ct a{width:max-content;max-width:100%;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .5s var(--ease);overflow-wrap:anywhere}
+.gv-ct a:hover{background-size:100% 2px}
+.gv-end{position:absolute;left:4vw;right:6vw;bottom:13vh;display:flex;align-items:flex-end;gap:2vw}
 .gv-mark{height:clamp(90px,15vh,160px);width:auto;filter:brightness(0) invert(1)}
-.gv-end .d{flex:1;font-size:clamp(20.72px,2vw,35.52px);line-height:.95;letter-spacing:-.03em;font-weight:400}
-.gv-loop{display:flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-.gv-loop .ar{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden;position:relative}
-.gv-loop .ar svg{width:11px;height:11px}.gv-loop .ar svg+svg{display:none}
-.gv-fine{position:absolute;left:5vw;bottom:62px;font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.04em}
+.gv-sign{flex:1;font:700 clamp(30px,2.8vw,50px)/1 var(--hand)}
+.hz .gv .gv-loop{background:rgba(255,255,255,.12);color:#fff}.hz .gv .gv-loop .ar{background:var(--yellow);color:var(--ink)}
+.gv-fine{position:absolute;left:4vw;bottom:62px;font-size:12px;color:rgba(255,255,255,.6)}
 @media (max-width:760px){
-  .gv-a{width:100vw;padding:max(100px,15svh) var(--pad) 0}
-  .gv-a h2{font-size:11vw}
-  .gv-lead{font-size:14px}
-  .gv-imp{left:var(--pad);bottom:12svh}
-  .gv-n{font-size:21vw}
-  .gv-b{width:100vw;padding:0 4vw;align-items:start;padding-top:max(84px,11svh)}
-  .gv-card{gap:14px;padding:20px}
+  .gv-m{grid-template-columns:1fr;gap:2svh;align-items:start;align-content:start;padding:max(78px,10svh) 4vw 0}
+  .gv-a{padding-top:0}
+  .gv-a h2{font-size:12vw;margin-top:.6svh}
+  .gv-lead,.gv-imp{display:none}
+  .gv-card{gap:11px;padding:16px}
+  .gv-freq button{height:38px;font-size:14px}
   .gv-chips{gap:6px}
-  .gv-chip,.gv-other{padding:10px 10px 8px}
-  .gv-chip b{font-size:14px}.gv-chip small{font-size:10px}
-  .gv-row{grid-template-columns:1fr}
-  .gv-row input{height:44px}
-  .gv-go{height:56px}
-  .gv-c{width:100vw;padding:max(100px,15svh) var(--pad) 0}
-  .gv-ct{grid-template-columns:1fr 1fr;gap:2.4svh 5vw}
-  .gv-ct div{font-size:13px}
+  .gv-chip,.gv-other{padding:9px 10px 8px;border-radius:12px}
+  .gv-chip b{font-size:17px}.gv-chip small{font-size:10.5px}
+  .gv-row{grid-template-columns:1fr !important}
+  .gv-row input{height:42px}
+  .gv .gv-go{height:54px;font-size:15px}
+  .gv-safe{font-size:12px}
+  .gv-c{width:100vw;padding:max(96px,14svh) var(--pad) 0}
+  .gv-ct{gap:2.4svh 5vw}
+  .gv-ct div{font-size:14px}
   .gv-end{left:var(--pad);right:var(--pad);bottom:13svh;flex-wrap:wrap;gap:12px}
   .gv-mark{height:64px}
-  .gv-end .d{font-size:5.2vw;flex:1 1 50%}
+  .gv-sign{font-size:7vw;flex:1 1 50%}
   .gv-fine{left:var(--pad);right:var(--pad);bottom:44px}
 }
-.gv-thanks[hidden]{display:none}
 
 .lgc{display:block;height:40px;background-repeat:no-repeat;mix-blend-mode:multiply}footer .lgc{height:44px}
 .wm{font:700 17px/1 var(--display);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}.wm em{font-style:normal;color:var(--accent)}
@@ -398,11 +373,8 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
 .hz .top>*{pointer-events:auto}
 .hz .top .logo{position:absolute;left:0;top:0;height:auto;padding:16px 22px 14px var(--pad);background:var(--paper)}
 .hz .top .logo img{height:44px}
-.hz .top .g{height:44px;padding:0 20px}
-.hz .top a.g.dark{background:var(--yellow);color:var(--ink);box-shadow:none}
-.hz .top a.g.dark:before{background:radial-gradient(120px circle at var(--x) var(--y),rgba(255,255,255,.6),transparent 70%)}
 /* the rail: where you are in the loop */
-.hz-rail{position:fixed;left:var(--pad);right:var(--pad);bottom:18px;z-index:30;display:flex;align-items:center;gap:18px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);pointer-events:none;mix-blend-mode:difference;color:#fff}
+.hz-rail{position:fixed;left:var(--pad);right:var(--pad);bottom:18px;z-index:30;display:flex;align-items:center;gap:18px;font:500 12px/1 var(--mono);letter-spacing:0;color:var(--ink);pointer-events:none;mix-blend-mode:difference;color:#fff}
 .hz-rail .n{font-variant-numeric:tabular-nums;min-width:4.6em}
 .hz-rail .bar{flex:1;height:2px;background:rgba(255,255,255,.28);position:relative;overflow:hidden}
 .hz-rail .bar i{position:absolute;inset:0;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
@@ -422,21 +394,27 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
   .hz-rail{bottom:12px;gap:12px;font-size:10px}
   .hz-rail .t{display:none}
 }
-.hz .d{letter-spacing:-.025em !important}
+/* type: one sans for everything, the look's hand font (var(--hand)) for accent words and little tags */
+.hz em{font-family:var(--hand,inherit);font-style:normal;font-weight:700;letter-spacing:-.01em}
+.hz .tag{padding:0;border-radius:0;background:none;color:inherit;font:700 clamp(19px,1.5vw,24px)/1.1 var(--hand,var(--mono));letter-spacing:0;text-transform:none}
+/* buttons: soft pills, one font, sentence case, an arrow coin that slides */
+.hz .g{height:56px;padding:0 8px 0 24px;gap:18px;border-radius:999px;font:600 15px/1 var(--mono);letter-spacing:-.005em;text-transform:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--paper);color:var(--ink);transition:transform .5s var(--ease),background .3s,color .3s}
+.hz .g:before{display:none}
+.hz .g .ar{width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;box-shadow:none}
+.hz .g .ar svg{width:13px;height:13px}.hz .g .ar svg+svg{transform:translateX(-26px)}
+.hz .g:hover .ar svg:first-child{transform:translateX(26px)}.hz .g:hover .ar svg+svg{transform:none}
+.hz .g.dark{background:var(--ink);color:#fff}.hz .g.dark .ar{background:var(--yellow);color:var(--ink)}
+.hz .g.yel{background:var(--yellow);color:var(--ink)}.hz .g.yel .ar{background:var(--ink);color:#fff}
+.hz .g.soft{background:rgba(21,21,26,.07)}
+.hz .g:hover{transform:translateY(-2px)}
+.hz .top .g{height:46px;padding:0 20px}
+.hz .top #menuBtn{background:var(--paper);color:var(--ink)}
+.hz .top a.g.dark{background:var(--yellow);color:var(--ink)}
+@media (max-width:760px){.hz .g{height:52px;font-size:14px;padding-left:20px}.hz .g .ar{width:36px;height:36px}.hz .top .g{height:42px;padding:0 16px}}
+.hz.hdr-yel .top a.g.dark{background:var(--ink);color:#fff}
+.hz .top a.g.dark{transition:background .4s,color .4s,transform .5s var(--ease)}
 
-*,*::before,*::after{border-radius:0 !important}.chap,.field,.fs-stat,.pi-row,.sheet{box-shadow:none !important}
 </style>
-<!-- ds-og -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Changing Lives Foundation · Less of us. More of you.: website preview">
-<meta property="og:description" content="A preview of the new website Digital Switch built for Changing Lives Foundation · Less of us. More of you.. Open it on your phone.">
-<meta property="og:image" content="https://digitalswitch.co.za/local/changinglives/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitalswitch.co.za/local/changinglives/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://digitalswitch.co.za/local/changinglives/og.jpg">
-<!-- /ds-og -->
 </head>
 <body class="hz">
 <!-- built by the DS sites engine · look: clf-flag · sections: hz-hero, hz-who, hz-work, hz-moments, hz-give -->
@@ -445,10 +423,10 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
 <main id="top">
 <section class="hh" id="start" data-title="Less of us">
   <div class="hh-copy">
-    <p class="hh-kick"><i class="flag" aria-hidden="true"><b style="background:var(--blue)"></b><b style="background:var(--red)"></b><b style="background:var(--yellow)"></b><b style="background:var(--green)"></b><b style="background:var(--black)"></b></i><span>Changing Lives Foundation &middot; NPO 183-684</span></p>
+    <p class="hh-kick"><i class="flag" aria-hidden="true"><b style="background:var(--blue)"></b><b style="background:var(--red)"></b><b style="background:var(--yellow)"></b><b style="background:var(--green)"></b><b style="background:var(--black)"></b></i><span class="tag">Changing Lives Foundation</span></p>
     <h1 class="hh-h d" aria-label="Less of us. More of you."><span class="ln"><span style="--i:0">Less of us.</span></span><span class="ln"><span style="--i:1">More of <em>you.</em></span></span></h1>
     <p class="hh-sub">A disaster-response NGO of African origin, active in <b>39 countries</b>. School shoes for rural learners, a way into work for graduates, and help where it&rsquo;s needed most.</p>
-    <div class="hh-cta"><a class="g dark" href="#give">Give now <span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="hh-more" href="#work">See the work</a></div>
+    <div class="hh-cta"><a class="g dark" href="#give">Give now <span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="g soft" href="#work">See the work <span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a></div>
   </div>
   <div class="hh-hands" aria-hidden="true"><span class="hd-w" style="left:3.942%;top:47.215%;width:33.942%;height:48.505%;--d:0s;--z:3"><img class="hd" src="img/hand-green.webp" alt="" draggable="false" data-depth="1.3" style="--ph:0.0"></span><span class="hd-w" style="left:10.769%;top:21.603%;width:33.846%;height:74.117%;--d:0.1s;--z:2"><img class="hd" src="img/hand-red.webp" alt="" draggable="false" data-depth="0.9" style="--ph:1.7"></span><span class="hd-w" style="left:24.808%;top:1.495%;width:34.615%;height:94.226%;--d:0.2s;--z:1"><img class="hd" src="img/hand-blue.webp" alt="" draggable="false" data-depth="0.6" style="--ph:3.4"></span><span class="hd-w" style="left:55.577%;top:18.342%;width:32.692%;height:77.446%;--d:0.3s;--z:2"><img class="hd" src="img/hand-yellow.webp" alt="" draggable="false" data-depth="0.8" style="--ph:5.1"></span><span class="hd-w" style="left:39.038%;top:42.595%;width:55.865%;height:53.125%;--d:0.4s;--z:3"><img class="hd" src="img/hand-black.webp" alt="" draggable="false" data-depth="1.2" style="--ph:6.8"></span></div>
   <figure class="hh-photo">
@@ -459,97 +437,88 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
 </section>
 <section class="wh" id="who" data-title="Who we are">
   <div class="wh-a">
-    <p class="lbl"><span>01</span>Who we are</p>
-    <h2 class="wh-say d rv">We show up where help is needed most: after a disaster, at the school gate, at the job summit, <em>on a cold winter night.</em></h2>
+    <p class="tag wh-tag">Who we are</p>
+    <h2 class="wh-say d rv">We show up where help is needed <em>most.</em></h2>
     <p class="wh-p rv">Changing Lives Foundation is a registered non-profit based in Glen Austin, Midrand. We work in youth development, education and support for unemployed graduates, and we answer when communities are hit by disaster.</p>
   </div>
   <div class="wh-b">
+    <div class="wh-big d" data-px="-220" aria-hidden="true">Sgwili</div>
     <div class="wh-block" aria-hidden="true"><i class="flag v" aria-hidden="true"><b style="background:var(--blue)"></b><b style="background:var(--red)"></b><b style="background:var(--yellow)"></b><b style="background:var(--green)"></b><b style="background:var(--black)"></b></i></div>
-    <div class="wh-big d" data-px="-260" aria-hidden="true">Sgwili</div>
-    <figure class="wh-fig" data-px="70"><img class="" src="img/sgwili-cut.webp" alt="Sgwili Aphiwe Radebe speaking at the Unemployed Graduates Job Summit" decoding="async" draggable="false" style=""></figure>
+    <figure class="wh-fig"><img class="" src="img/sgwili-cut.webp" alt="Sgwili Aphiwe Radebe speaking at the Unemployed Graduates Job Summit" decoding="async" draggable="false" style=""></figure>
     <blockquote class="wh-q">
-      <p class="d rv">&ldquo;Together we can make a <em>difference.</em>&rdquo;</p>
-      <footer class="rv"><b>Sgwili Aphiwe Radebe</b><span>Founder &amp; CEO</span></footer>
+      <p>Together we can make a <em>difference.</em></p>
+      <footer><b>Sgwili Aphiwe Radebe</b><span>Founder &amp; CEO</span></footer>
     </blockquote>
   </div>
-  <div class="wh-c"><div class="wh-n rv" style="transition-delay:0.0s"><span class="d">39</span><p>countries where the foundation is active</p></div><div class="wh-n rv" style="transition-delay:0.08s"><span class="d">250k</span><p>pairs of school shoes called for in 2021, at R250 a pair</p></div><div class="wh-n rv" style="transition-delay:0.16s"><span class="d">4</span><p>provinces in the #NoMoreBareFeet hand-out</p></div><div class="wh-n rv" style="transition-delay:0.24s"><span class="d">2018</span><p>Unemployed Graduates Job Summit</p></div><p class="wh-src">Figures as published by the foundation.</p></div>
+  <div class="wh-c"><div class="wh-n" style="--bg:var(--blue)"><span class="d rv">39</span><p>countries where the foundation is active</p></div><div class="wh-n" style="--bg:var(--black)"><span class="d rv">250k</span><p>pairs of school shoes called for in 2021</p></div><div class="wh-n" style="--bg:var(--red)"><span class="d rv">4</span><p>provinces in the #NoMoreBareFeet hand-out</p></div><div class="wh-n" style="--bg:var(--green)"><span class="d rv">2018</span><p>our Unemployed Graduates Job Summit</p></div></div>
 </section>
 <section class="wk" id="work" data-title="What we do">
-  <div class="wk-in">
-    <p class="lbl"><span>02</span>What we do</p>
-    <h2 class="d rv">Four ways we <em>change lives.</em></h2>
-    <p class="wk-lead rv">Practical help, run with partners: shoes for school, a route to work for graduates, relief when disaster hits, and a hand for communities that need one.</p>
-    <p class="wk-hint" data-skew="1"><span class="d">Keep going &rarr;</span></p>
-  </div>
-  <article class="wk-p wk-k-hand" style="--bg:var(--red);--fg:#fff">
+  <article class="wk-p wk-k-hand" style="--bg:var(--red);--fg:#fff;--tg:var(--yellow)">
       <span class="wk-no d" aria-hidden="true">01</span>
-      <p class="wk-tag">Relief</p>
+      <p class="wk-head d">What we do</p><p class="tag wk-tag">Relief</p>
       <h3 class="d">Disaster response</h3>
       <p class="wk-t">We are a disaster-response NGO of African origin. When a community is hit, we mobilise partners, supplies and volunteers to get help on the ground.</p>
       <div class="wk-hand" data-px="160" aria-hidden="true"><img class="" src="img/hand-red.webp" alt="" decoding="async" draggable="false" style=""></div>
-    </article><article class="wk-p wk-k-hand" style="--bg:var(--yellow);--fg:var(--ink)">
+    </article><article class="wk-p wk-k-hand" style="--bg:var(--yellow);--fg:var(--ink);--tg:var(--blue)">
       <span class="wk-no d" aria-hidden="true">02</span>
-      <p class="wk-tag">#NoMoreBareFeet</p>
+      <p class="tag wk-tag">#NoMoreBareFeet</p>
       <h3 class="d">Education</h3>
-      <p class="wk-t">In 2021 we called for 250&#8202;000 pairs of school shoes for learners in rural schools across KwaZulu-Natal, the Eastern Cape, Mpumalanga and Limpopo, handed out with Mapholoba Foundation.</p><p class="wk-big d">R250<em>buys a pair</em></p>
+      <p class="wk-t">In 2021 we called for 250&nbsp;000 pairs of school shoes for learners in rural schools across KwaZulu-Natal, the Eastern Cape, Mpumalanga and Limpopo, handed out with Mapholoba Foundation.</p><p class="wk-big d">R250<em>buys a pair</em></p>
       <div class="wk-hand ink" data-px="160" aria-hidden="true"><img class="" src="img/hand-yellow.webp" alt="" decoding="async" draggable="false" style=""></div>
-    </article><article class="wk-p wk-k-photo" style="--bg:var(--blue);--fg:#fff">
+    </article><article class="wk-p wk-k-photo" style="--bg:var(--blue);--fg:#fff;--tg:var(--yellow)">
       <span class="wk-no d" aria-hidden="true">03</span>
-      <p class="wk-tag">Unemployed graduates</p>
+      <p class="tag wk-tag">Unemployed graduates</p>
       <h3 class="d">Youth &amp; graduates</h3>
       <p class="wk-t">Our Unemployed Graduates Job Summit filled a hall in 2018. Youth development and a way into work stay at the heart of what we do.</p>
-      <figure class="wk-ph"><div data-px="90"><img class="" src="img/summit-hall.webp" alt="Graduates filling the hall at the 2018 Job Summit" decoding="async" draggable="false" style=""></div><figcaption>Job Summit &middot; 2018</figcaption></figure>
-    </article><article class="wk-p wk-k-list" style="--bg:var(--green);--fg:#fff">
+      <figure class="wk-ph"><div data-px="90"><img class="" src="img/summit-hall.webp" alt="Graduates filling the hall at the 2018 Job Summit" decoding="async" draggable="false" style="object-position:50% 55%"></div><figcaption>Job Summit &middot; 2018</figcaption></figure>
+    </article><article class="wk-p wk-k-list" style="--bg:var(--green);--fg:#fff;--tg:var(--yellow)">
       <span class="wk-no d" aria-hidden="true">04</span>
-      <p class="wk-tag">In the community</p>
+      <p class="tag wk-tag">In the community</p>
       <h3 class="d">Communities</h3>
       <p class="wk-t">Standing with people when it counts.</p>
-      <ul class="wk-list"><li class="rv" style="transition-delay:0.0s"><span class="d">Winter appeal for people living on the street</span><small>2023</small></li><li class="rv" style="transition-delay:0.06s"><span class="d">Standing against gender-based violence</span><small>2020</small></li><li class="rv" style="transition-delay:0.12s"><span class="d">Black small business, on Power FM</span><small>2020</small></li><li class="rv" style="transition-delay:0.18s"><span class="d">The fight against HIV and AIDS</span><small>2018</small></li><li class="rv" style="transition-delay:0.24s"><span class="d">Animal rescue</span><small>Ongoing</small></li></ul>
+      <ul class="wk-list"><li class="rv" style="transition-delay:0.0s"><span>Winter appeal for people living on the street</span><small>2023</small></li><li class="rv" style="transition-delay:0.06s"><span>Standing against gender-based violence</span><small>2020</small></li><li class="rv" style="transition-delay:0.12s"><span>Black small business, on Power FM</span><small>2020</small></li><li class="rv" style="transition-delay:0.18s"><span>The fight against HIV and AIDS</span><small>2018</small></li><li class="rv" style="transition-delay:0.24s"><span>Animal rescue</span><small>Ongoing</small></li></ul>
     </article>
 </section>
 <section class="mo" id="moments" data-title="On the ground">
-  <div class="mo-in">
-    <p class="lbl"><span>03</span>On the ground</p>
-    <h2 class="d rv">Not stock photos. <em>Our people.</em></h2>
-    <p class="mo-lead rv">Every picture here is from the foundation&rsquo;s own events and campaigns.</p>
-  </div>
-  <figure class="mo-f mo-tall">
-      <div class="mo-i"><div data-px="80"><img class="" src="img/summit-speaker.webp" alt="Sgwili Radebe on stage at the Job Summit" decoding="async" draggable="false" style=""></div></div>
-      <figcaption><span class="d">2018</span><b>Unemployed Graduates Job Summit</b><small>Sgwili Radebe on stage</small></figcaption>
+  <figure class="mo-f mo-tall"><p class="tag mo-tag">On the ground</p>
+      <div class="mo-i"><div data-px="80"><img class="" src="img/classroom.webp" alt="Foundation team and teachers in a classroom with donated building blocks" decoding="async" draggable="false" style=""></div></div>
+      <figcaption><b>Toys for the classroom</b><small>Early learning centre hand-over</small></figcaption>
     </figure><figure class="mo-f mo-big">
       <div class="mo-i"><div data-px="100"><img class="" src="img/powerfm.webp" alt="In the Power FM studio talking about Black small business" decoding="async" draggable="false" style=""></div></div>
-      <figcaption><span class="d">2020</span><b>Small business, on air</b><small>Gqoboka Foundation on Power FM</small></figcaption>
+      <figcaption><span>2020</span><b>Small business, on air</b><small>Gqoboka Foundation on Power FM</small></figcaption>
     </figure><figure class="mo-f mo-sq">
-      <div class="mo-i"><div data-px="80"><img class="" src="img/handover.webp" alt="Gifts handed over at a community event" decoding="async" draggable="false" style=""></div></div>
-      <figcaption><b>Giving back</b><small>Hand-over at a community event</small></figcaption>
+      <div class="mo-i"><div data-px="80"><img class="" src="img/handover.webp" alt="Building blocks handed over to a teacher" decoding="async" draggable="false" style=""></div></div>
+      <figcaption><b>Giving back</b><small>Hand-over to the teachers</small></figcaption>
     </figure>
   <div class="mo-pt">
-    <p class="lbl"><span>&mdash;</span>With thanks to our partners</p>
+    <p class="tag">With thanks to our partners</p>
     <ul class="d" data-skew="1.2"><li>Mapholoba Foundation</li><li>Signature Restaurant</li><li>Ibhubesi Holdings</li><li>Amabhungane Funeral</li><li>Mthimkhulu Holdings</li><li>Digi Clean</li><li>Bigger Than Life Events</li><li>DJ Sbu</li><li>Mofaya</li></ul>
   </div>
 </section>
 <section class="gv" id="give" data-title="Give">
-  <div class="gv-a">
-    <p class="lbl"><span>04</span>Give</p>
-    <h2 class="d">Take a child<br>to <em>school.</em></h2>
-    <p class="gv-lead">R250 buys a pair of school shoes for a learner in a rural school. Give once, in under a minute, by card or instant EFT.</p>
-    <p class="gv-imp" aria-live="polite"><span class="d gv-n">4</span><span class="gv-u">pairs of school shoes your gift can buy</span></p>
-  </div>
-  <div class="gv-b">
-    <form class="gv-card no-drag" action="https://sandbox.payfast.co.za/eng/process" method="post">
-      <div class="gv-thanks" hidden><p class="d">Thank you.</p><p>Your gift is on its way to a child&rsquo;s school day.</p></div>
-      <p class="gv-h d">Give once</p>
+  <div class="gv-m">
+    <div class="gv-a">
+      <p class="tag gv-tag">Give</p>
+      <h2 class="d">Take a child<br>to <em>school.</em></h2>
+      <p class="gv-lead">R250 buys a pair of school shoes for a learner in a rural school. Give once, or every month, by card or instant EFT.</p>
+      <p class="gv-imp" aria-live="polite"><span class="d gv-n">4</span><span class="gv-u">pairs of school shoes your gift buys<em class="gv-per" hidden> every month</em></span></p>
+    </div>
+    <form class="gv-card no-drag" data-pf='{&quot;action&quot;: &quot;https://sandbox.payfast.co.za/eng/process&quot;, &quot;merchant_id&quot;: &quot;10000100&quot;, &quot;merchant_key&quot;: &quot;46f0cd694581a&quot;, &quot;passphrase&quot;: &quot;jt7NOE43FZPn&quot;, &quot;item&quot;: &quot;Donation to Changing Lives Foundation&quot;}' novalidate>
+      <div class="gv-thanks" hidden><p class="d">Thank you.</p><p>Your gift is on its way to a child&rsquo;s school day.</p><button type="button" class="g dark gv-again"><span>Give again</span><span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></button></div>
+      <div class="gv-freq" role="radiogroup" aria-label="How often">
+        <button type="button" role="radio" aria-checked="true" class="on" data-f="once">Give once</button>
+        <button type="button" role="radio" aria-checked="false" data-f="monthly">Give monthly</button><i></i>
+      </div>
       <div class="gv-chips" role="group" aria-label="Amount"><button type="button" class="gv-chip" data-a="250"><b>R250</b><small>1 pair of shoes</small></button><button type="button" class="gv-chip" data-a="500"><b>R500</b><small>2 pairs</small></button><button type="button" class="gv-chip on" data-a="1000"><b>R1&#8239;000</b><small>4 pairs</small></button><button type="button" class="gv-chip" data-a="2500"><b>R2&#8239;500</b><small>10 pairs</small></button><button type="button" class="gv-chip" data-a="5000"><b>R5&#8239;000</b><small>20 pairs</small></button><label class="gv-other"><span>R</span><input type="number" inputmode="numeric" min="10" step="1" placeholder="Other" aria-label="Other amount"></label></div>
       <div class="gv-row"><label><span>First name</span><input name="name_first" autocomplete="given-name" required></label>
         <label><span>Email for your receipt</span><input name="email_address" type="email" autocomplete="email" required></label></div>
-      <input type="hidden" name="merchant_id" value="10000100"><input type="hidden" name="merchant_key" value="46f0cd694581a"><input type="hidden" name="item_name" value="Donation to Changing Lives Foundation"><input type="hidden" name="amount" value="1000.00"><input type="hidden" name="return_url" value=""><input type="hidden" name="cancel_url" value=""><input type="hidden" name="custom_str1" value="website">
-      <button class="gv-go" type="submit"><span>Give <b class="gv-amt">R1&#8239;000</b></span><span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></button>
-      <p class="gv-safe">Secure checkout by PayFast: card, instant EFT and more. Your receipt comes by email.</p>
+      <button class="g yel gv-go" type="submit"><span>Give <b class="gv-amt">R1&#8239;000</b><b class="gv-pm" hidden> a month</b></span><span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></button>
+      <p class="gv-safe">Secure checkout by PayFast: card, instant EFT and more. Monthly gifts can be cancelled any time.</p>
       <p class="gv-demo">Preview: this opens PayFast&rsquo;s test checkout. No money moves.</p>
     </form>
   </div>
   <div class="gv-c">
-    <p class="lbl"><span>&mdash;</span>Talk to us</p>
+    <p class="tag gv-tag">Talk to us</p>
     <div class="gv-ct">
       <div><small>Call</small><a href="tel:+27110501470">011 050 1470</a><a href="tel:+27640751291">064 075 1291</a><a href="tel:+27659375118">065 937 5118</a></div>
       <div><small>WhatsApp</small><a data-wa="Hi Changing Lives Foundation, I&#x27;d like to help.">064 075 1291</a></div>
@@ -560,8 +529,8 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
     </div>
     <div class="gv-end">
       <img class="gv-mark" src="img/hands-full.webp" alt="" decoding="async" draggable="false" style="">
-      <p class="d">Less of us.<br>More of you.</p>
-      <a class="gv-loop" href="#start">Back to the start <span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a>
+      <p class="gv-sign">Less of us.<br>More of you.</p>
+      <a class="g soft gv-loop" href="#start">Back to the start <span class="ar"><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><svg viewBox="0 0 12 12"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a>
     </div>
     <p class="gv-fine">&copy; 2026 Changing Lives Foundation &middot; NPO 183-684</p>
   </div>
@@ -677,7 +646,7 @@ document.addEventListener('focusin',e=>{if(!main.contains(e.target))return;const
 addEventListener('resize',()=>{const f=wrap(x)/W;measure();x=tx=f*W});
 measure();addEventListener('load',measure);setTimeout(measure,1200);
 /* frame */
-let lastI=-1;
+let lastI=-1,fc=0;
 DS.onFrame(now=>{const dt=Math.min(64,now-last);last=now;
   const px=x;const k=SHOT?1:1-Math.pow(1-.085,dt/16.7);x+=(tx-x)*k;if(Math.abs(tx-x)<.05)x=tx;v=(x-px)/(dt/16.7||1);
   const xw=wrap(x);main.style.transform=`translate3d(${-xw}px,0,0)`;
@@ -689,6 +658,8 @@ DS.onFrame(now=>{const dt=Math.min(64,now-last);last=now;
   let i=0;for(let j=0;j<orig.length;j++){if(panels[j].l-xw<=vw*.5)i=j}
   if(xw>W-vw*.5)i=0;
   if(i!==lastI){lastI=i;rn.textContent='0'+(i+1)+' / 0'+orig.length;rt.textContent=orig[i].dataset.title||''}
+  /* header buttons keep their contrast: note the colour under the top-right corner (yellow panel -> dark donate button) */
+  if(++fc%8===0){let yel=false;for(const el of document.elementsFromPoint(innerWidth-70,40)){if(el.closest('.top'))continue;const m=getComputedStyle(el).backgroundColor.match(/[\d.]+/g);if(m&&(m[3]===undefined||+m[3]>.5)){yel=+m[0]>200&&+m[1]>140&&+m[2]<90;break}}document.body.classList.toggle('hdr-yel',yel)}
   rb.style.transform=`scaleX(${(xw/W).toFixed(4)})`;if(xw>40&&!hint.hidden){hint.style.opacity=0}
 });
 })();
@@ -712,18 +683,36 @@ DS.onFrame(t=>{if(DS.SHOT||DS.RM)return;const v=DS.hz?Math.abs(DS.hz.v):0;amp+=(
 
 
 
-/* hz-give: amount chips (never a dropdown), live "what it buys" count, PayFast checkout hand-off, thank-you on return */
+/* hz-give: once/monthly switch, amount chips (never a dropdown), live "what it buys" count, PayFast hand-off
+   (fields in PayFast's documented order + MD5 signature; monthly = PayFast subscription), thank-you with "give again". */
 (()=>{const forms=DS.$$('.gv-card');if(!forms.length)return;
-const fmt=a=>'R'+String(Math.round(a)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202f');
-forms.forEach(f=>{const sec=f.closest('.gv'),n=sec.querySelector('.gv-n'),amt=f.querySelector('.gv-amt'),hid=f.querySelector('input[name=amount]');
-  const oth=f.querySelector('.gv-other'),oi=oth.querySelector('input');
-  const set=a=>{a=Math.max(0,+a||0);hid.value=a.toFixed(2);amt.textContent=fmt(a);const k=Math.floor(a/250);
-    if(n.textContent!=String(k)){n.textContent=k;n.classList.add('bump');setTimeout(()=>n.classList.remove('bump'),220)}};
+/* md5 (RFC 1321), for the PayFast signature */
+const md5=s=>{s=unescape(encodeURIComponent(s));const k=[],r=[7,12,17,22,5,9,14,20,4,11,16,23,6,10,15,21];for(let i=0;i<64;i++)k[i]=Math.floor(Math.abs(Math.sin(i+1))*2**32)|0;
+ let h=[1732584193,-271733879,-1732584194,271733878];const n=((s.length+8>>6)+1)*16,w=new Array(n).fill(0);for(let i=0;i<s.length;i++)w[i>>2]|=s.charCodeAt(i)<<(i%4*8);w[s.length>>2]|=128<<(s.length%4*8);w[n-2]=s.length*8;
+ for(let j=0;j<n;j+=16){let[a,b,c,d]=h;for(let i=0;i<64;i++){let f,g;if(i<16){f=b&c|~b&d;g=i}else if(i<32){f=d&b|~d&c;g=(5*i+1)%16}else if(i<48){f=b^c^d;g=(3*i+5)%16}else{f=c^(b|~d);g=7*i%16}
+  const t=d;d=c;c=b;const x=a+f+k[i]+w[j+g]|0,sh=r[(i>>4)*4+i%4];b=b+(x<<sh|x>>>32-sh)|0;a=t}h=[h[0]+a|0,h[1]+b|0,h[2]+c|0,h[3]+d|0]}
+ return h.map(v=>[0,1,2,3].map(i=>('0'+(v>>>i*8&255).toString(16)).slice(-2)).join('')).join('')};
+const enc=v=>encodeURIComponent(v).replace(/%20/g,'+').replace(/[!'()*~]/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase());
+const fmt=a=>'R'+String(Math.round(a)).replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+forms.forEach(f=>{const cfg=JSON.parse(f.dataset.pf),sec=f.closest('.gv'),n=sec.querySelector('.gv-n'),per=sec.querySelector('.gv-per'),amt=f.querySelector('.gv-amt'),pm=f.querySelector('.gv-pm');
+  const oth=f.querySelector('.gv-other'),oi=oth.querySelector('input'),fq=f.querySelector('.gv-freq');let a=+f.querySelector('.gv-chip.on').dataset.a,monthly=false;
+  const set=v=>{a=Math.max(0,+v||0);amt.textContent=fmt(a);const k=Math.floor(a/250);if(n.textContent!=String(k)){n.textContent=k;n.classList.add('bump');setTimeout(()=>n.classList.remove('bump'),220)}};
+  fq.querySelectorAll('button').forEach(b=>b.onclick=()=>{monthly=b.dataset.f==='monthly';fq.classList.toggle('m',monthly);fq.querySelectorAll('button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-checked',x===b)});pm.hidden=!monthly;per.hidden=!monthly});
   f.querySelectorAll('.gv-chip').forEach(c=>c.onclick=()=>{f.querySelectorAll('.gv-chip').forEach(x=>x.classList.toggle('on',x===c));oth.classList.remove('on');oi.value='';set(c.dataset.a)});
   oi.addEventListener('focus',()=>{f.querySelectorAll('.gv-chip').forEach(x=>x.classList.remove('on'));oth.classList.add('on');if(oi.value)set(oi.value)});
   oi.addEventListener('input',()=>set(oi.value));
-  f.addEventListener('submit',e=>{const a=+hid.value;if(!(a>=10)){e.preventDefault();oi.focus();oi.placeholder='Min R10';return}
-    const base=location.href.split(/[?#]/)[0];f.querySelector('[name=return_url]').value=base+'?thanks=1#give';f.querySelector('[name=cancel_url]').value=base+'#give'});
+  f.querySelector('.gv-again').onclick=()=>{f.querySelector('.gv-thanks').hidden=true;history.replaceState(null,'',location.pathname)};
+  f.addEventListener('submit',e=>{e.preventDefault();const nm=f.querySelector('[name=name_first]'),em=f.querySelector('[name=email_address]');let ok=true;
+    [nm,em].forEach(i=>{const bad=!i.value.trim()||(i.type==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(i.value));i.classList.toggle('bad',bad);if(bad&&ok){i.focus();ok=false}});
+    if(!(a>=10)){oi.focus();oi.placeholder='Min R10';ok=false}if(!ok)return;
+    const base=location.href.split(/[?#]/)[0],d=new Date(),day=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    const F=[['merchant_id',cfg.merchant_id],['merchant_key',cfg.merchant_key],['return_url',base+'?thanks=1#give'],['cancel_url',base+'#give'],
+      ['name_first',nm.value.trim()],['email_address',em.value.trim()],['amount',a.toFixed(2)],['item_name',cfg.item+(monthly?' (monthly)':'')],['custom_str1','website']];
+    if(monthly)F.push(['subscription_type','1'],['billing_date',day],['recurring_amount',a.toFixed(2)],['frequency','3'],['cycles','0']);
+    let sig=F.filter(p=>p[1]!=='').map(p=>p[0]+'='+enc(String(p[1]).trim())).join('&');if(cfg.passphrase)sig+='&passphrase='+enc(cfg.passphrase.trim());
+    F.push(['signature',md5(sig)]);
+    const out=document.createElement('form');out.method='post';out.action=cfg.action;out.hidden=true;
+    F.forEach(([k,v])=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;out.append(i)});document.body.append(out);out.submit()});
 });
 if(/[?&]thanks=1/.test(location.search)){forms.forEach(f=>{f.querySelector('.gv-thanks').hidden=false});setTimeout(()=>DS.hz&&DS.hz.to('give'),400)}
 })();
