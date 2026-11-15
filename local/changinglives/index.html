@@ -146,7 +146,7 @@ footer img{height:22px}
 .hh-copy{position:absolute;left:var(--pad);top:max(118px,17vh);width:62vw;z-index:4}
 .hh-kick{display:flex;align-items:center;gap:14px;color:var(--blue)}
 .hh-h{margin-top:2.6vh;font-size:clamp(58px,8.6vw,166px);font-weight:900;line-height:.86;letter-spacing:-.055em;color:var(--ink)}
-.hh-h .ln{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+.hh-h .ln{display:block;overflow:hidden;padding:0 .1em .34em 0;margin-bottom:-.34em}
 .hh-h .ln>span{display:block;transform:translateY(105%);transition:transform 1.3s var(--ease) calc(.25s + var(--i)*.12s)}
 .hh-h em{color:var(--blue);font-size:1.12em;line-height:.7;letter-spacing:-.02em;margin-left:.04em}
 .hh.go .hh-h .ln>span,.shot .hh-h .ln>span{transform:none}
@@ -176,42 +176,55 @@ footer img{height:22px}
   .hh-photo figcaption{bottom:60px;flex-direction:column;align-items:flex-start;gap:10px;left:36px}
 }
 
-/* hz-who: who they are in one big line, the founder cut-out on a flag-yellow column with their tagline in the logo's hand, the numbers as solid colour tiles */
-.wh{display:flex;height:100svh;background:var(--paper)}
-.wh-a{width:44vw;flex:none;padding:max(130px,19vh) 4vw 0 var(--pad)}
-.wh-tag{color:var(--red)}
-.wh-say{margin-top:2.4vh;font-size:clamp(44px,4.9vw,92px);font-weight:900;line-height:.92;letter-spacing:-.05em;color:var(--ink)}
-.wh-say em{color:var(--red);font-size:1.1em}
-.wh-p{margin-top:4vh;max-width:36ch;font-size:clamp(16px,1.25vw,20px);line-height:1.5;font-weight:500;color:var(--ink);letter-spacing:-.01em}
-.wh-b{position:relative;width:64vw;flex:none}
-.wh-block{position:absolute;left:3vw;right:2vw;top:13vh;bottom:0;background:var(--yellow)}
-.wh-big{position:absolute;left:0;top:4vh;font-size:min(30vh,19vw);font-weight:900;line-height:.8;letter-spacing:-.07em;color:var(--ivory2);white-space:nowrap}
-.wh-fig{position:absolute;left:5vw;bottom:0;height:88svh;aspect-ratio:673/1278;z-index:2}
-.wh-fig img{width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:grayscale(1) contrast(1.15) brightness(1.03)}
-.wh-q{position:absolute;left:38vw;right:4vw;top:30vh;z-index:3}
-.wh-q p{font:700 clamp(32px,3.1vw,58px)/1.02 var(--hand);color:var(--ink);letter-spacing:-.01em}
-.wh-q p em{color:var(--blue);font-size:1em}
-.wh-q footer{margin-top:3.4vh;display:grid;gap:4px;font-size:16px;font-weight:500;color:var(--ink)}
-.wh-q footer b{font-weight:800;font-size:18px;letter-spacing:-.02em}
-.wh-c{width:58vw;flex:none;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
-.wh-n{background:var(--bg);color:#fff;padding:0 3vw 9vh;display:flex;flex-direction:column;justify-content:flex-end}
-.wh-n span{display:block;font-size:clamp(64px,7.4vw,140px);font-weight:900;line-height:.82;letter-spacing:-.06em}
-.wh-n p{margin-top:2vh;max-width:22ch;font-size:clamp(15px,1.15vw,19px);line-height:1.35;font-weight:600;letter-spacing:-.01em;opacity:.95}
+/* hz-who. Panel A (after Mattis "Strategy before pixels"): one solid flag colour, meta in a row, a giant right-hung headline,
+   a small black-and-white photo hung on the centre line, a big number in the corner, lots of air.
+   Panel B (after Mattis "Built on reputation"): solid boxes alternate above and below a centre line, big "/number"s. */
+.wh{display:flex;height:100svh}
+.wa{position:relative;width:100vw;flex:none;background:var(--yellow);color:var(--ink)}
+.wa-meta{position:absolute;left:var(--pad);right:var(--pad);top:max(104px,13vh);display:grid;grid-template-columns:repeat(4,1fr);font-size:14px;font-weight:600;letter-spacing:-.01em}
+.wa-meta .tag{color:var(--ink)}
+.wa-h{position:absolute;right:var(--pad);top:max(150px,19vh);width:48vw;text-align:right;font-size:clamp(54px,6.6vw,128px);font-weight:900;line-height:.86;letter-spacing:-.06em}
+.wa-h em{color:var(--blue);font-size:1.08em}
+.wa-p{position:absolute;left:var(--pad);top:46vh;width:min(25vw,380px);font-size:clamp(15px,1.12vw,18px);line-height:1.45;font-weight:600;letter-spacing:-.01em}
+.wa-ph{position:absolute;left:50vw;bottom:0;width:min(21vw,40vh);aspect-ratio:4/5}
+.wa-ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12)}
+.wa-ph figcaption{position:absolute;right:calc(100% + 18px);bottom:90px;width:max-content;display:grid;gap:2px;text-align:right;font-size:14px;font-weight:500}
+.wa-ph figcaption b{font-weight:800;font-size:15px}
+.wa-q{position:absolute;left:var(--pad);bottom:76px;width:30vw;font:700 clamp(24px,2vw,36px)/1.05 var(--hand)}
+.wa-n{position:absolute;right:var(--pad);bottom:58px;display:flex;align-items:flex-end;gap:18px}
+.wa-n p{max-width:15ch;text-align:right;font-size:14px;font-weight:600;line-height:1.3;padding-bottom:12px}
+.wa-n span{font-size:clamp(90px,10vw,190px);font-weight:900;line-height:.78;letter-spacing:-.07em}
+.wp{position:relative;width:128vw;flex:none;background:var(--ivory2)}
+.wp-tag{position:absolute;left:6vw;top:max(104px,13vh);color:var(--red)}
+.wp-h{position:absolute;left:6vw;top:max(140px,18vh);font-size:clamp(50px,5.6vw,108px);font-weight:900;line-height:.86;letter-spacing:-.06em;width:44vw}
+.wp-h em{color:var(--red);font-size:1.08em}
+.wp-box{--w:27vw;position:absolute;width:var(--w);height:36vh;background:var(--bg);color:var(--fg);padding:22px 24px;display:flex;flex-direction:column}
+.wp-box:nth-of-type(odd){top:50vh}.wp-box:nth-of-type(even){top:14vh}
+.wp-box:nth-of-type(1){left:30vw}.wp-box:nth-of-type(2){left:57vw}.wp-box:nth-of-type(3){left:84vw;--w:12vw;height:12vw}.wp-box:nth-of-type(4){left:96vw}
+.wp-l{max-width:22ch;font-size:15px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+.wp-n{margin-top:auto;font-size:clamp(64px,6.4vw,124px);font-weight:900;line-height:.8;letter-spacing:-.065em}
+.wp-n i{font-style:normal;font-weight:300;opacity:.85;margin-right:.02em}
+.wp-link{position:absolute;right:22px;bottom:24px;font-size:14px;font-weight:700}
+.wp-mark{background:var(--blue);display:flex;align-items:center;justify-content:center;padding:1.8vw}
+.wp-mark img{max-height:100%;max-width:100%;width:auto;height:auto;filter:brightness(0) invert(1)}
 @media (max-width:760px){
-  .wh-a{width:100vw;padding:max(96px,14svh) var(--pad) 0}
-  .wh-say{font-size:11.6vw}
-  .wh-p{font-size:16px}
-  .wh-b{width:108vw}
-  .wh-block{left:4vw;right:4vw;top:12svh}
-  .wh-big{font-size:22svh;top:4svh}
-  .wh-fig{left:10vw;height:62svh}
-  .wh-q{left:9vw;right:8vw;top:15svh}
-  .wh-q p{font-size:8.4vw}
-  .wh-q footer{margin-top:1.4svh;font-size:14px}.wh-q footer b{font-size:15px}
-  .wh-c{width:100vw}
-  .wh-n{padding:0 5vw 6svh}
-  .wh-n span{font-size:14vw}
-  .wh-n p{font-size:13.5px}
+  .wa-meta{top:max(84px,11svh);grid-template-columns:1fr 1fr;row-gap:6px;font-size:12.5px}
+  .wa-h{top:max(150px,19svh);left:var(--pad);width:auto;font-size:13.6vw}
+  .wa-p{top:auto;bottom:calc(30svh + 40px);width:44vw;font-size:13px}
+  .wa-ph{left:60vw;width:36vw}
+  .wa-ph figcaption{right:auto;left:0;bottom:calc(100% + 10px);text-align:left;font-size:12px}
+  .wa-q{bottom:calc(14svh + 30px);width:54vw;font-size:6vw}
+  .wa-n{left:var(--pad);right:auto;bottom:44px;flex-direction:row-reverse}
+  .wa-n span{font-size:26vw}.wa-n p{text-align:left;font-size:12px;max-width:9ch}
+  .wp{width:274vw}
+  .wp-tag{left:var(--pad);top:max(84px,11svh)}
+  .wp-h{left:var(--pad);top:max(116px,15svh);width:88vw;font-size:13vw}
+  .wp-box{--w:72vw;height:32svh;padding:16px 18px}
+  .wp-box:nth-of-type(odd){top:52svh}.wp-box:nth-of-type(even){top:16svh}
+  .wp-box:nth-of-type(1){left:18vw}.wp-box:nth-of-type(2){left:98vw}.wp-box:nth-of-type(3){left:170vw;--w:28vw;height:28vw}.wp-box:nth-of-type(4){left:198vw}
+  .wp-n{font-size:17vw}
+  .wp-l{font-size:13px;max-width:70%}
+  .wp-link{top:16px;bottom:auto;font-size:12.5px}
 }
 
 /* hz-work: four full-height slabs, each in one of the hands' colours; the first carries the section name */
@@ -225,14 +238,19 @@ footer img{height:22px}
 .wk-t{margin-top:2.8vh;max-width:34ch;font-size:clamp(16px,1.2vw,19px);line-height:1.48;font-weight:500;letter-spacing:-.01em;position:relative}
 .wk-big{margin-top:3vh;font-size:clamp(56px,5.8vw,110px);font-weight:900;line-height:.85;letter-spacing:-.06em;position:relative}
 .wk-big em{font-size:.42em;letter-spacing:0;margin-left:.2em}
-.wk-ph{position:absolute;left:0;right:0;bottom:0;height:46%;overflow:hidden}
-.wk-ph>div{position:absolute;inset:0 -12%}
-.wk-ph img{width:100%;height:100%;object-fit:cover}
-.wk-ph figcaption{position:absolute;left:3.6vw;bottom:68px;font:700 22px var(--hand);color:#fff;z-index:2}
-.wk-ph:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent 40%)}
-.wk-hand{position:absolute;left:14%;bottom:-12%;height:54%;opacity:.95}
-.wk-hand img{height:100%;width:auto;max-width:none;filter:brightness(0) invert(1)}
-.wk-hand.ink{left:auto;right:4%;height:46%}.wk-hand.ink img{filter:brightness(0);opacity:.9}
+/* photo hung like a print: bleeds off the right edge, caption row underneath */
+.wk-ph{position:absolute;left:3.6vw;right:0;bottom:8vh;height:42%;z-index:2}
+.wk-pi{position:absolute;inset:0 0 34px 0;overflow:hidden}
+.wk-pi>div{position:absolute;inset:0 -10%}
+.wk-pi img{width:100%;height:100%;object-fit:cover}
+.wk-ph figcaption{position:absolute;left:0;right:3.6vw;bottom:0;display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.wk-ph figcaption b{font:700 20px/1 var(--hand)}
+.wk-hand{position:absolute;bottom:-9%;opacity:var(--o,1);z-index:1}
+.wk-hand img{height:100%;width:auto;max-width:none;filter:brightness(0) invert(1);transform:rotate(var(--r));transform-origin:50% 100%;animation:wkWave 5s ease-in-out infinite alternate}
+.wk-hand:nth-child(2n) img{animation-duration:6.5s;animation-delay:-2s}
+.wk-hand.ink img{filter:brightness(0)}
+@keyframes wkWave{to{transform:rotate(calc(var(--r) + 5deg))}}
+.shot .wk-hand img{animation:none}
 .wk-list{list-style:none;margin-top:3.6vh;display:grid;gap:1.5vh;position:relative}
 .wk-list li{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:1.5vh;background:linear-gradient(rgba(255,255,255,.3),rgba(255,255,255,.3)) 0 100%/100% 2px no-repeat}
 .wk-list li span{font-size:clamp(19px,1.55vw,27px);font-weight:800;line-height:1.08;letter-spacing:-.03em}
@@ -243,40 +261,48 @@ footer img{height:22px}
   .wk-p h3{font-size:12vw}
   .wk-t{font-size:15px}
   .wk-big{font-size:14vw}
-  .wk-ph{height:38%}
-  .wk-hand{height:42%}
+  .wk-ph{height:36%;bottom:9svh}
+
   .wk-list{margin-top:2.4svh;gap:1.2svh}.wk-list li{padding-bottom:1.2svh}
   .wk-list li span{font-size:5vw}
 }
 
-/* hz-moments: their own photos, mega and staggered in height, drifting inside their frames; then the partners set big */
-.mo{display:flex;align-items:stretch;height:100svh;background:var(--ink);color:#fff;gap:3vw;padding-right:5vw}
-.mo-f{position:relative;flex:none;align-self:center}
-.mo-i{position:relative;width:100%;height:100%;overflow:hidden;background:#222}
-.mo-i>div{position:absolute;inset:0 -10%}
-.mo-i img{width:100%;height:100%;object-fit:cover}
-.mo-tall{height:100svh;aspect-ratio:4/5;align-self:stretch}
-.mo-sq{height:52vh;aspect-ratio:1;align-self:flex-end;margin-bottom:15vh}
-.mo-big{height:70vh;aspect-ratio:1;align-self:flex-start;margin-top:14vh}
-.mo-tag{position:absolute;left:28px;top:max(110px,15vh);z-index:3;color:var(--yellow);font-size:clamp(26px,2.2vw,38px)}
-.mo-f figcaption{position:absolute;left:0;top:100%;padding-top:16px;display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:end;width:max(100%,320px);font-size:15px;font-weight:500;color:rgba(255,255,255,.8)}
-.mo-f figcaption span{grid-row:1/3;font-size:clamp(46px,4vw,72px);font-weight:900;line-height:.8;letter-spacing:-.06em;color:#fff}
-.mo-f figcaption b{font-weight:800;color:#fff;font-size:17px;letter-spacing:-.02em}
-.mo-sq figcaption{top:auto;bottom:100%;padding:0 0 16px}
-.mo-tall figcaption{top:auto;bottom:0;padding:0 28px 76px;z-index:2;color:rgba(255,255,255,.9)}
-.mo-tall:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.62),transparent 40%),linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%);pointer-events:none}
-.mo-pt{width:34vw;flex:none;padding:max(124px,17vh) 0 0 2vw}
+/* hz-moments (after Mattis's portfolio montage): the stage holds still while the track keeps moving; each photo sits framed in the
+   middle over a blurred, reeded copy of itself with its name running behind; the next one wipes up from the bottom.
+   Then the partners, set as a numbered credit list. */
+.mo{display:flex;height:100svh;background:var(--ink);color:#fff}
+.mo-zone{position:relative;width:calc(var(--n)*100vw);flex:none;height:100%}
+.mo-stage{position:absolute;left:0;top:0;width:100vw;height:100%;overflow:hidden;will-change:transform}
+.ms{position:absolute;inset:0;clip-path:inset(var(--cl,0%) 0 0 0)}
+.ms-bg{position:absolute;inset:-6%}
+.ms-bg i{position:absolute;inset:0;background:center/cover no-repeat;filter:blur(18px) saturate(.8) brightness(.62);transform:scale(1.12)}
+.ms-bg:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 3px,rgba(0,0,0,.14) 3px 7px)}
+.ms-run{position:absolute;left:0;top:50%;transform:translateY(-50%);display:flex;white-space:nowrap;font-size:clamp(80px,10vw,190px);font-weight:900;letter-spacing:-.06em;line-height:1;color:#fff}
+.ms-run span{display:block;animation:msRun 40s linear infinite}
+@keyframes msRun{to{transform:translateX(-100%)}}
+.shot .ms-run span{animation:none}
+.ms-card{position:absolute;left:50%;top:50%;width:min(52vw,92vh);transform:translate(-50%,-46%)}
+.ms-frame{width:100%;aspect-ratio:16/10;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.ms-frame img{width:100%;height:100%;object-fit:cover}
+.ms-meta{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:18px;font-size:14px;font-weight:600;padding-top:14px}
+.ms-meta b{font-weight:800}
+.mo-tag{position:absolute;left:var(--pad);top:max(104px,13vh);z-index:5;color:var(--yellow);font-size:clamp(24px,2vw,34px)}
+.mo-count{position:absolute;right:var(--pad);top:max(110px,14vh);z-index:5;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.mo-pt{position:relative;width:62vw;flex:none;padding:max(124px,17vh) 6vw 0 6vw}
 .mo-pt .tag{color:var(--yellow)}
-.mo-pt ul{list-style:none;margin-top:3vh;font-size:clamp(26px,2.5vw,46px);font-weight:900;line-height:1.02;letter-spacing:-.045em;transform-origin:0 50%}
-.mo-pt li:nth-child(3n+1){color:var(--yellow)}
+.mo-pt ol{list-style:none;margin-top:4vh;display:grid;grid-template-columns:1fr 1fr;column-gap:4vw;row-gap:2.4vh}
+.mo-pt li{display:flex;align-items:baseline;gap:14px;font-size:clamp(20px,1.7vw,30px);font-weight:800;letter-spacing:-.035em;line-height:1.08}
+.mo-pt li span{font-size:13px;font-weight:600;letter-spacing:0;color:rgba(255,255,255,.5);min-width:20px}
+.mo-pn{position:absolute;right:6vw;bottom:58px;font-size:clamp(90px,10vw,190px);font-weight:900;line-height:.78;letter-spacing:-.07em;color:var(--yellow)}
+.mo-pn i{font-style:normal;font-weight:300}
 @media (max-width:760px){
-  .mo{gap:8vw;padding-right:10vw}
-  .mo-tall{height:100svh;aspect-ratio:auto;width:88vw}
-  .mo-sq{height:auto;width:78vw;margin-bottom:20svh}
-  .mo-big{height:auto;width:88vw;margin-top:16svh}
-  .mo-f figcaption{width:100%}
-  .mo-pt{width:92vw;padding:max(96px,14svh) 0 0}
-  .mo-pt ul{font-size:7.6vw}
+  .ms-card{width:86vw;transform:translate(-50%,-50%)}.ms-frame{aspect-ratio:4/5}
+  .ms-meta{grid-template-columns:auto 1fr;row-gap:2px;font-size:12.5px}
+  .ms-run{font-size:22vw}
+  .mo-pt{width:100vw;padding:max(96px,13svh) var(--pad) 0}
+  .mo-pt ol{grid-template-columns:1fr;row-gap:1.6svh}
+  .mo-pt li{font-size:6vw}
+  .mo-pn{font-size:24vw;bottom:44px}
 }
 
 /* hz-give: the ask and the form on one screen (once or monthly, amount chips -> PayFast), then every way to reach them; the loop runs on to the start */
@@ -322,17 +348,19 @@ footer img{height:22px}
 .gv-thanks[hidden]{display:none}
 .gv-thanks .d{font-size:clamp(40px,3.6vw,64px);font-weight:900;line-height:.9;letter-spacing:-.05em}
 .gv-thanks p:not(.d){font-size:17px;font-weight:500;max-width:30ch}
-.gv-c{width:56vw;flex:none;padding:max(124px,17vh) 6vw 0 4vw;position:relative}
-.gv-ct{margin-top:3.4vh;display:grid;grid-template-columns:1fr 1fr;gap:3.6vh 3vw}
+.gv-c{width:54vw;flex:none;padding:max(118px,16vh) 5vw 0 5vw;position:relative;background:var(--ink)}
+.gv-ch{font-size:clamp(54px,6vw,116px);font-weight:900;line-height:.86;letter-spacing:-.06em}
+.gv-ch em{color:var(--yellow);font-size:1.08em}
+.gv-ct{margin-top:5vh;display:grid;grid-template-columns:1fr 1fr;gap:3.6vh 3vw}
 .gv-ct div{display:grid;gap:4px;align-content:start;font-size:17px;line-height:1.4;font-weight:500}
 .gv-ct small{font:700 19px var(--hand);color:var(--yellow);margin-bottom:2px}
 .gv-ct a{width:max-content;max-width:100%;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .5s var(--ease);overflow-wrap:anywhere}
 .gv-ct a:hover{background-size:100% 2px}
-.gv-end{position:absolute;left:4vw;right:6vw;bottom:13vh;display:flex;align-items:flex-end;gap:2vw}
+.gv-end{position:absolute;left:5vw;right:6vw;bottom:13vh;display:flex;align-items:flex-end;gap:2vw}
 .gv-mark{height:clamp(90px,15vh,160px);width:auto;filter:brightness(0) invert(1)}
 .gv-sign{flex:1;font:700 clamp(30px,2.8vw,50px)/1 var(--hand)}
 .hz .gv .gv-loop{background:rgba(255,255,255,.12);color:#fff}.hz .gv .gv-loop .ar{background:var(--yellow);color:var(--ink)}
-.gv-fine{position:absolute;left:4vw;bottom:62px;font-size:12px;color:rgba(255,255,255,.6)}
+.gv-fine{position:absolute;left:5vw;bottom:62px;font-size:12px;color:rgba(255,255,255,.6)}
 @media (max-width:760px){
   .gv-m{grid-template-columns:1fr;gap:2svh;align-items:start;align-content:start;padding:max(78px,10svh) 4vw 0}
   .gv-a{padding-top:0}
@@ -347,7 +375,9 @@ footer img{height:22px}
   .gv-row input{height:42px}
   .gv .gv-go{height:54px;font-size:15px}
   .gv-safe{font-size:12px}
-  .gv-c{width:100vw;padding:max(96px,14svh) var(--pad) 0}
+  .gv-c{width:100vw;padding:max(92px,12svh) var(--pad) 0}
+  .gv-ch{font-size:15vw}
+  .gv-ct{margin-top:3svh}
   .gv-ct{gap:2.4svh 5vw}
   .gv-ct div{font-size:14px}
   .gv-end{left:var(--pad);right:var(--pad);bottom:13svh;flex-wrap:wrap;gap:12px}
@@ -415,17 +445,6 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
 .hz .top a.g.dark{transition:background .4s,color .4s,transform .5s var(--ease)}
 
 </style>
-<!-- ds-og -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Changing Lives Foundation · Less of us. More of you.: website preview">
-<meta property="og:description" content="A preview of the new website Digital Switch built for Changing Lives Foundation · Less of us. More of you.. Open it on your phone.">
-<meta property="og:image" content="https://digitalswitch.co.za/local/changinglives/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitalswitch.co.za/local/changinglives/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://digitalswitch.co.za/local/changinglives/og.jpg">
-<!-- /ds-og -->
 </head>
 <body class="hz">
 <!-- built by the DS sites engine · look: clf-flag · sections: hz-hero, hz-who, hz-work, hz-moments, hz-give -->
@@ -447,21 +466,19 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
   </figure>
 </section>
 <section class="wh" id="who" data-title="Who we are">
-  <div class="wh-a">
-    <p class="tag wh-tag">Who we are</p>
-    <h2 class="wh-say d rv">We show up where help is needed <em>most.</em></h2>
-    <p class="wh-p rv">Changing Lives Foundation is a registered non-profit based in Glen Austin, Midrand. We work in youth development, education and support for unemployed graduates, and we answer when communities are hit by disaster.</p>
+  <div class="wa">
+    <div class="wa-meta"><span class="tag">Who we are</span><span>Founded in Midrand</span><span>NPO 183-684</span><span>Active in 39 countries</span></div>
+    <h2 class="wa-h d">We show up where it <em>counts.</em></h2>
+    <p class="wa-p">Changing Lives Foundation is a registered non-profit based in Glen Austin, Midrand. We work in youth development, education and support for unemployed graduates, and we answer when communities are hit by disaster.</p>
+    <figure class="wa-ph" data-px="40"><img class="" src="img/sgwili-stage.webp" alt="Sgwili Aphiwe Radebe speaking at the Unemployed Graduates Job Summit" decoding="async" draggable="false" style=""><figcaption><b>Sgwili Aphiwe Radebe</b><span>Founder &amp; CEO</span></figcaption></figure>
+    <p class="wa-q">Together we can make a difference.</p>
+    <div class="wa-n"><p>countries where the foundation is active</p><span class="d">39</span></div>
   </div>
-  <div class="wh-b">
-    <div class="wh-big d" data-px="-220" aria-hidden="true">Sgwili</div>
-    <div class="wh-block" aria-hidden="true"><i class="flag v" aria-hidden="true"><b style="background:var(--blue)"></b><b style="background:var(--red)"></b><b style="background:var(--yellow)"></b><b style="background:var(--green)"></b><b style="background:var(--black)"></b></i></div>
-    <figure class="wh-fig"><img class="" src="img/sgwili-cut.webp" alt="Sgwili Aphiwe Radebe speaking at the Unemployed Graduates Job Summit" decoding="async" draggable="false" style=""></figure>
-    <blockquote class="wh-q">
-      <p>Together we can make a <em>difference.</em></p>
-      <footer><b>Sgwili Aphiwe Radebe</b><span>Founder &amp; CEO</span></footer>
-    </blockquote>
+  <div class="wp">
+    <p class="tag wp-tag">Our record</p>
+    <h2 class="wp-h d">Built on <em>showing up.</em></h2>
+    <div class="wp-box rv" style="--i:0;--bg:var(--black);--fg:#fff"><p class="wp-l">pairs of school shoes called for in 2021, at R250 a pair</p><p class="wp-n d"><i>/</i>250k</p><a class="wp-link" href="#give">Give a pair <span aria-hidden="true">&#8599;</span></a></div><div class="wp-box rv" style="--i:1;--bg:var(--paper);--fg:var(--ink)"><p class="wp-l">provinces in the #NoMoreBareFeet hand-out, with Mapholoba Foundation</p><p class="wp-n d"><i>/</i>4</p></div><div class="wp-box wp-mark" style="--i:2"><img class="" src="img/hands-full.webp" alt="" decoding="async" draggable="false" style=""></div><div class="wp-box rv" style="--i:3;--bg:var(--red);--fg:#fff"><p class="wp-l">the year our Unemployed Graduates Job Summit filled a hall</p><p class="wp-n d"><i>/</i>2018</p></div>
   </div>
-  <div class="wh-c"><div class="wh-n" style="--bg:var(--blue)"><span class="d rv">39</span><p>countries where the foundation is active</p></div><div class="wh-n" style="--bg:var(--black)"><span class="d rv">250k</span><p>pairs of school shoes called for in 2021</p></div><div class="wh-n" style="--bg:var(--red)"><span class="d rv">4</span><p>provinces in the #NoMoreBareFeet hand-out</p></div><div class="wh-n" style="--bg:var(--green)"><span class="d rv">2018</span><p>our Unemployed Graduates Job Summit</p></div></div>
 </section>
 <section class="wk" id="work" data-title="What we do">
   <article class="wk-p wk-k-hand" style="--bg:var(--red);--fg:#fff;--tg:var(--yellow)">
@@ -469,41 +486,56 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
       <p class="wk-head d">What we do</p><p class="tag wk-tag">Relief</p>
       <h3 class="d">Disaster response</h3>
       <p class="wk-t">We are a disaster-response NGO of African origin. When a community is hit, we mobilise partners, supplies and volunteers to get help on the ground.</p>
-      <div class="wk-hand" data-px="160" aria-hidden="true"><img class="" src="img/hand-red.webp" alt="" decoding="async" draggable="false" style=""></div>
+      <div class="wk-hand" data-px="120" style="left:6%;height:50%;--r:-6deg;--o:1" aria-hidden="true"><img class="" src="img/hand-red.webp" alt="" decoding="async" draggable="false" style=""></div><div class="wk-hand" data-px="220" style="left:40%;height:64%;--r:3deg;--o:1" aria-hidden="true"><img class="" src="img/hand-blue.webp" alt="" decoding="async" draggable="false" style=""></div><div class="wk-hand" data-px="90" style="left:70%;height:40%;--r:10deg;--o:0.9" aria-hidden="true"><img class="" src="img/hand-green.webp" alt="" decoding="async" draggable="false" style=""></div>
     </article><article class="wk-p wk-k-hand" style="--bg:var(--yellow);--fg:var(--ink);--tg:var(--blue)">
       <span class="wk-no d" aria-hidden="true">02</span>
       <p class="tag wk-tag">#NoMoreBareFeet</p>
       <h3 class="d">Education</h3>
       <p class="wk-t">In 2021 we called for 250&nbsp;000 pairs of school shoes for learners in rural schools across KwaZulu-Natal, the Eastern Cape, Mpumalanga and Limpopo, handed out with Mapholoba Foundation.</p><p class="wk-big d">R250<em>buys a pair</em></p>
-      <div class="wk-hand ink" data-px="160" aria-hidden="true"><img class="" src="img/hand-yellow.webp" alt="" decoding="async" draggable="false" style=""></div>
+      <div class="wk-hand ink" data-px="180" style="left:60%;height:46%;--r:6deg;--o:1" aria-hidden="true"><img class="" src="img/hand-yellow.webp" alt="" decoding="async" draggable="false" style=""></div><div class="wk-hand ink" data-px="100" style="left:30%;height:34%;--r:-8deg;--o:0.85" aria-hidden="true"><img class="" src="img/hand-black.webp" alt="" decoding="async" draggable="false" style=""></div>
     </article><article class="wk-p wk-k-photo" style="--bg:var(--blue);--fg:#fff;--tg:var(--yellow)">
       <span class="wk-no d" aria-hidden="true">03</span>
       <p class="tag wk-tag">Unemployed graduates</p>
       <h3 class="d">Youth &amp; graduates</h3>
       <p class="wk-t">Our Unemployed Graduates Job Summit filled a hall in 2018. Youth development and a way into work stay at the heart of what we do.</p>
-      <figure class="wk-ph"><div data-px="90"><img class="" src="img/summit-hall.webp" alt="Graduates filling the hall at the 2018 Job Summit" decoding="async" draggable="false" style="object-position:50% 55%"></div><figcaption>Job Summit &middot; 2018</figcaption></figure>
+      <div class="wk-hand" data-px="120" style="left:8%;height:60%;--r:-8deg;--o:1" aria-hidden="true"><img class="" src="img/hand-green.webp" alt="" decoding="async" draggable="false" style=""></div><div class="wk-hand" data-px="200" style="left:60%;height:56%;--r:7deg;--o:1" aria-hidden="true"><img class="" src="img/hand-red.webp" alt="" decoding="async" draggable="false" style=""></div><figure class="wk-ph"><div class="wk-pi"><div data-px="90"><img class="" src="img/summit-hall.webp" alt="Graduates filling the hall at the 2018 Job Summit" decoding="async" draggable="false" style="object-position:50% 40%"></div></div><figcaption><b>Job Summit</b><span>2018</span></figcaption></figure>
     </article><article class="wk-p wk-k-list" style="--bg:var(--green);--fg:#fff;--tg:var(--yellow)">
       <span class="wk-no d" aria-hidden="true">04</span>
       <p class="tag wk-tag">In the community</p>
       <h3 class="d">Communities</h3>
       <p class="wk-t">Standing with people when it counts.</p>
-      <ul class="wk-list"><li class="rv" style="transition-delay:0.0s"><span>Winter appeal for people living on the street</span><small>2023</small></li><li class="rv" style="transition-delay:0.06s"><span>Standing against gender-based violence</span><small>2020</small></li><li class="rv" style="transition-delay:0.12s"><span>Black small business, on Power FM</span><small>2020</small></li><li class="rv" style="transition-delay:0.18s"><span>The fight against HIV and AIDS</span><small>2018</small></li><li class="rv" style="transition-delay:0.24s"><span>Animal rescue</span><small>Ongoing</small></li></ul>
+      <ul class="wk-list"><li class="rv" style="transition-delay:0.0s"><span>Winter appeal for people living on the street</span><small>2023</small></li><li class="rv" style="transition-delay:0.06s"><span>Standing against gender-based violence</span><small>2020</small></li><li class="rv" style="transition-delay:0.12s"><span>Black small business, on Power FM</span><small>2020</small></li><li class="rv" style="transition-delay:0.18s"><span>The fight against HIV and AIDS</span><small>2018</small></li><li class="rv" style="transition-delay:0.24s"><span>Animal rescue</span><small>Ongoing</small></li></ul><div class="wk-hand" data-px="140" style="left:72%;height:28%;--r:8deg;--o:0.95" aria-hidden="true"><img class="" src="img/hand-yellow.webp" alt="" decoding="async" draggable="false" style=""></div><div class="wk-hand" data-px="90" style="left:50%;height:22%;--r:-6deg;--o:0.8" aria-hidden="true"><img class="" src="img/hand-blue.webp" alt="" decoding="async" draggable="false" style=""></div>
     </article>
 </section>
-<section class="mo" id="moments" data-title="On the ground">
-  <figure class="mo-f mo-tall"><p class="tag mo-tag">On the ground</p>
-      <div class="mo-i"><div data-px="80"><img class="" src="img/classroom.webp" alt="Foundation team and teachers in a classroom with donated building blocks" decoding="async" draggable="false" style=""></div></div>
-      <figcaption><b>Toys for the classroom</b><small>Early learning centre hand-over</small></figcaption>
-    </figure><figure class="mo-f mo-big">
-      <div class="mo-i"><div data-px="100"><img class="" src="img/powerfm.webp" alt="In the Power FM studio talking about Black small business" decoding="async" draggable="false" style=""></div></div>
-      <figcaption><span>2020</span><b>Small business, on air</b><small>Gqoboka Foundation on Power FM</small></figcaption>
-    </figure><figure class="mo-f mo-sq">
-      <div class="mo-i"><div data-px="80"><img class="" src="img/handover.webp" alt="Building blocks handed over to a teacher" decoding="async" draggable="false" style=""></div></div>
-      <figcaption><b>Giving back</b><small>Hand-over to the teachers</small></figcaption>
-    </figure>
+<section class="mo" id="moments" data-title="On the ground" style="--n:4">
+  <div class="mo-zone"><div class="mo-stage">
+    <p class="tag mo-tag">On the ground</p><p class="mo-count"><b class="mo-cur">01</b> / 04</p>
+    <div class="ms" style="--i:0">
+        <div class="ms-bg" aria-hidden="true"><i style="background-image:url(img/classroom.webp)"></i></div>
+        <div class="ms-run d" aria-hidden="true"><span>Toys for the classroom Toys for the classroom Toys for the classroom Toys for the classroom&nbsp;</span><span>Toys for the classroom Toys for the classroom Toys for the classroom Toys for the classroom&nbsp;</span></div>
+        <div class="ms-card"><figure class="ms-frame"><img class="" src="img/classroom.webp" alt="Foundation team and teachers in a classroom with donated building blocks" decoding="async" draggable="false" style=""></figure>
+        <div class="ms-meta"><span>(01)</span><b>Toys for the classroom</b><span>Early learning centre</span><span></span></div></div>
+      </div><div class="ms" style="--i:1">
+        <div class="ms-bg" aria-hidden="true"><i style="background-image:url(img/nobarefeet.webp)"></i></div>
+        <div class="ms-run d" aria-hidden="true"><span>No more bare feet No more bare feet No more bare feet No more bare feet&nbsp;</span><span>No more bare feet No more bare feet No more bare feet No more bare feet&nbsp;</span></div>
+        <div class="ms-card"><figure class="ms-frame"><img class="" src="img/nobarefeet.webp" alt="The #NoMoreBareFeet campaign poster asking for 250 000 pairs of school shoes" decoding="async" draggable="false" style=""></figure>
+        <div class="ms-meta"><span>(02)</span><b>#NoMoreBareFeet</b><span>School shoes for rural learners</span><span>2021</span></div></div>
+      </div><div class="ms" style="--i:2">
+        <div class="ms-bg" aria-hidden="true"><i style="background-image:url(img/powerfm.webp)"></i></div>
+        <div class="ms-run d" aria-hidden="true"><span>Small business on air Small business on air Small business on air Small business on air&nbsp;</span><span>Small business on air Small business on air Small business on air Small business on air&nbsp;</span></div>
+        <div class="ms-card"><figure class="ms-frame"><img class="" src="img/powerfm.webp" alt="In the Power FM studio talking about Black small business" decoding="async" draggable="false" style=""></figure>
+        <div class="ms-meta"><span>(03)</span><b>Small business, on air</b><span>Gqoboka Foundation, Power FM</span><span>2020</span></div></div>
+      </div><div class="ms" style="--i:3">
+        <div class="ms-bg" aria-hidden="true"><i style="background-image:url(img/handover.webp)"></i></div>
+        <div class="ms-run d" aria-hidden="true"><span>Giving back Giving back Giving back Giving back&nbsp;</span><span>Giving back Giving back Giving back Giving back&nbsp;</span></div>
+        <div class="ms-card"><figure class="ms-frame"><img class="" src="img/handover.webp" alt="Building blocks handed over to a teacher" decoding="async" draggable="false" style=""></figure>
+        <div class="ms-meta"><span>(04)</span><b>Giving back</b><span>Hand-over to the teachers</span><span></span></div></div>
+      </div>
+  </div></div>
   <div class="mo-pt">
     <p class="tag">With thanks to our partners</p>
-    <ul class="d" data-skew="1.2"><li>Mapholoba Foundation</li><li>Signature Restaurant</li><li>Ibhubesi Holdings</li><li>Amabhungane Funeral</li><li>Mthimkhulu Holdings</li><li>Digi Clean</li><li>Bigger Than Life Events</li><li>DJ Sbu</li><li>Mofaya</li></ul>
+    <ol><li><span>01</span>Mapholoba Foundation</li><li><span>02</span>Signature Restaurant</li><li><span>03</span>Ibhubesi Holdings</li><li><span>04</span>Amabhungane Funeral</li><li><span>05</span>Mthimkhulu Holdings</li><li><span>06</span>Digi Clean</li><li><span>07</span>Bigger Than Life Events</li><li><span>08</span>DJ Sbu</li><li><span>09</span>Mofaya</li></ol>
+    <p class="mo-pn d"><i>/</i>09</p>
   </div>
 </section>
 <section class="gv" id="give" data-title="Give">
@@ -529,7 +561,7 @@ html.hzh,.hz{height:100%;overflow:hidden;overscroll-behavior:none}
     </form>
   </div>
   <div class="gv-c">
-    <p class="tag gv-tag">Talk to us</p>
+    <h2 class="gv-ch d">Talk to <em>us.</em></h2>
     <div class="gv-ct">
       <div><small>Call</small><a href="tel:+27110501470">011 050 1470</a><a href="tel:+27640751291">064 075 1291</a><a href="tel:+27659375118">065 937 5118</a></div>
       <div><small>WhatsApp</small><a data-wa="Hi Changing Lives Foundation, I&#x27;d like to help.">064 075 1291</a></div>
@@ -675,24 +707,36 @@ DS.onFrame(now=>{const dt=Math.min(64,now-last);last=now;
 });
 })();
 
-/* hz-hero: hands rise on load, then sway on their own and lean with the pointer and the scroll speed */
+/* hz-hero: hands rise on load, then wave on their own; each leans toward the pointer and the one nearest it reaches up;
+   scrolling makes them wave harder. On touch screens they wave a little more on their own. */
 (()=>{const heroes=DS.$$('.hh');if(!heroes.length)return;
 const go=()=>heroes.forEach(h=>h.classList.add('go'));
 if(DS.SHOT)go();else{(document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>setTimeout(go,120));setTimeout(go,1500)}
-const hands=DS.$$('.hh .hd').map(e=>({e,dp:+e.dataset.depth||1,ph:+e.style.getPropertyValue('--ph')||0}));
-let mx=0,my=0,sx=0,sy=0,amp=0;
-addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-DS.onFrame(t=>{if(DS.SHOT||DS.RM)return;const v=DS.hz?Math.abs(DS.hz.v):0;amp+=(Math.min(v*.18,5)-amp)*.06;
-  sx+=(mx-sx)*.05;sy+=(my-sy)*.05;
-  for(const h of hands){const r=Math.sin(t*.0009+h.ph)*(.7+amp)*h.dp;
-    h.e.style.transform=`translate3d(${(sx*14*h.dp).toFixed(2)}px,${(sy*8*h.dp).toFixed(2)}px,0) rotate(${r.toFixed(3)}deg)`}});
+const hands=DS.$$('.hh .hd').map((e,i)=>({e,dp:+e.dataset.depth||1,ph:(+e.style.getPropertyValue('--ph')||0)+i,lift:0,sw:0}));
+let px=-1,py=-1,amp=0;const touch=!DS.FINE;
+addEventListener('pointermove',e=>{px=e.clientX;py=e.clientY});addEventListener('pointerleave',()=>{px=-1});
+DS.onFrame(t=>{if(DS.SHOT||DS.RM)return;const v=DS.hz?Math.abs(DS.hz.v):0;amp+=(Math.min(v*.35,9)-amp)*.08;
+  for(const h of hands){const r=h.e.getBoundingClientRect();if(r.right<0||r.left>innerWidth)continue;
+    const cx=r.left+r.width/2,cy=r.top+r.height*.25;let near=0,lean=0;
+    if(px>=0){const dx=px-cx,dy=py-cy,d=Math.hypot(dx,dy);near=Math.max(0,1-d/(innerWidth*.22));lean=Math.max(-1,Math.min(1,dx/(innerWidth*.3)))}
+    h.lift+=(near-h.lift)*.09;h.sw+=(lean-h.sw)*.06;
+    const wave=Math.sin(t*.0016+h.ph*1.3)*((touch?2.4:1.6)+amp)*h.dp+Math.sin(t*.0041+h.ph)*.6;
+    h.e.style.transform=`translate3d(${(h.sw*16*h.dp).toFixed(2)}px,${(-h.lift*7).toFixed(2)}%,0) rotate(${(wave+h.sw*6).toFixed(3)}deg)`}});
 })();
 
 
 
 
 
-
+/* hz-moments: pin the stage while the montage zone passes, and wipe each next photo up from the bottom */
+(()=>{const secs=DS.$$('.mo');if(!secs.length)return;
+const S=secs.map(s=>({z:s.querySelector('.mo-zone'),st:s.querySelector('.mo-stage'),sl:[...s.querySelectorAll('.ms')],cur:s.querySelector('.mo-cur'),last:-1}));
+DS.onFrame(()=>{for(const o of S){const r=o.z.getBoundingClientRect(),vw=innerWidth;if(r.right<-vw||r.left>vw*2)continue;
+  const span=r.width-vw,off=Math.min(Math.max(-r.left,0),span);o.st.style.transform=`translate3d(${off}px,0,0)`;
+  const f=span>0?off/span*(o.sl.length-1):0;
+  o.sl.forEach((s,i)=>{if(i===0)return;const k=Math.min(Math.max(f-(i-1),0),1);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;s.style.setProperty('--cl',((1-e)*100).toFixed(2)+'%')});
+  const n=Math.min(o.sl.length,Math.round(f)+1);if(n!==o.last){o.last=n;o.cur.textContent=String(n).padStart(2,'0')}}});
+})();
 
 /* hz-give: once/monthly switch, amount chips (never a dropdown), live "what it buys" count, PayFast hand-off
    (fields in PayFast's documented order + MD5 signature; monthly = PayFast subscription), thank-you with "give again". */
