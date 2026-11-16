@@ -518,6 +518,37 @@ function warmKit(l){var s=st(l), first=s.spoke?String(s.spoke).split(' ')[0]:'',
    '<li><b>If it\'s not now:</b> "No problem. When should I check back?" Log a <b>Call back</b> with that date.</li></ol>'+
    (l.num?'<div class="row"><a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(wa(l,wmsg))+'">WhatsApp: "I saw you had a look"</a></div>':'')+
    '</details>'}
+/* 17 Nov: One-Hour Site. A lead who said yes gets their own preview built by the engine (about 10 minutes). Lethabo approves before anyone sends it. */
+var PREV={}, PREV_ON=true, PV_TRADES=[['roofing','Roofing'],['plumbing-electrical','Plumbing / electrical'],['solar','Solar'],['food','Food / catering'],['salon','Salon / barber'],['carwash','Car wash']];
+function previewKit(l){var p=PREV[l.id]||{}, admin=WHO&&WHO.role==='admin', s=p.status||'', id=esc(l.id), busy=/^(Queued|Building)/.test(s), head, body='';
+  if(s==='Approved') head='Their own site is approved: send the link on this card';
+  else if(s==='Needs Lethabo OK') head=admin?'Their own preview is built: have a look, then approve':'Their own preview is built. Waiting for Lethabo\'s OK before you send it';
+  else if(busy) head='Building their own preview now (about 10 minutes)';
+  else if(s) head='Preview: '+esc(s)+'. You can try again';
+  else head='One-Hour Site: build this business its own preview';
+  if(p.url) body+='<p class="d"><a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.url)+'</a>'+(p.gate?' · checks '+esc(p.gate):'')+'</p>';
+  if(admin&&p.todo) body+='<p class="d">Still to confirm with the owner: '+esc(p.todo)+'</p>';
+  if(admin&&(s==='Needs Lethabo OK'||s==='On hold')) body+='<div class="row"><button class="btn sm p" data-pv="approve" data-pid="'+id+'">Approve: reps may send it</button><button class="btn sm" data-pv="hold" data-pid="'+id+'">Not yet</button></div>';
+  if(!busy&&s!=='Approved'){
+    body+='<p class="d">Only fill in what you can see on their public Facebook, Instagram or Google page. Leave the rest empty: the site marks anything unknown as "to confirm". Never guess.</p>'+
+     '<div class="lbl">Trade</div><div class="row pvt">'+PV_TRADES.map(function(t){return '<button type="button" class="btn sm" data-pvt="'+t[0]+'">'+t[1]+'</button>'}).join('')+'</div>'+
+     '<div class="lbl">What they do, in their own words (copy from their page)</div><textarea data-pvf="about" rows="2" maxlength="600"></textarea>'+
+     '<div class="grid2"><div><div class="lbl">Services they list (commas)</div><input data-pvf="services" placeholder="e.g. Leak repairs, Gutters"></div><div><div class="lbl">Area</div><input data-pvf="area" value="'+esc(l.area||'')+'"></div></div>'+
+     '<div class="grid2"><div><div class="lbl">Address</div><input data-pvf="address"></div><div><div class="lbl">Opening hours</div><input data-pvf="hours" placeholder="e.g. Mon to Sat 08:00 to 17:00"></div></div>'+
+     '<div class="lbl">Links to their own photos, one per line (open the photo, copy image address)</div><textarea data-pvf="photos" rows="2"></textarea>'+
+     '<div class="lbl">Link to their logo picture</div><input data-pvf="logo">'+
+     '<div class="row"><button class="btn sm p" data-pv="build" data-pid="'+id+'">Build preview</button></div>';}
+  return '<details class="kit pvkit"'+((admin&&s==='Needs Lethabo OK')?' open':'')+'><summary>'+head+'</summary>'+body+'</details>'}
+function previewPost(f){var b=new URLSearchParams();b.set('kind','previewreq');b.set('key',DESK_KEY);Object.keys(f).forEach(function(k){b.set(k,f[k])});
+  return fetch(CFG.endpoint,{method:'POST',mode:'no-cors',body:b}).catch(function(){})}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-pvt]');
+  if(t){[].forEach.call(t.parentNode.children,function(x){x.classList.toggle('p',x===t)});return}
+  var b=e.target.closest&&e.target.closest('[data-pv]'); if(!b)return; var id=b.dataset.pid, act=b.dataset.pv, box=b.closest('.pvkit'), f={id:id,act:act};
+  if(act==='build'){var ex={}, tr=box.querySelector('[data-pvt].p'); if(tr)ex.trade=tr.dataset.pvt;
+    [].forEach.call(box.querySelectorAll('[data-pvf]'),function(i){if(i.value.trim())ex[i.dataset.pvf]=i.value.trim()}); f.extra=JSON.stringify(ex);
+    PREV[id]={status:'Queued',at:Date.now()}; toast('Building. Give it about 10 minutes, then refresh.')}
+  else{PREV[id]=Object.assign({},PREV[id],{status:act==='approve'?'Approved':'On hold'}); toast(act==='approve'?'Approved. It is now the link on this card.':'Kept back from reps.')}
+  previewPost(f); render()});
 /* 16 Nov: the 10-minute site tour. Owners miss most of what their site does on their own; a short walk-through builds the excitement and ends in the close. */
 function tourKit(l){var s=st(l), booked=status(l)==='tour'&&s.callback;
   return '<details class="kit tourkit"'+(booked?' open':'')+'><summary>'+(booked?'Site tour booked '+fmtWhen(new Date(s.callback).getTime())+': the 10-minute walk-through':'Site tour kit: book and run the 10-minute walk-through')+'</summary>'+
@@ -545,6 +576,7 @@ function body(l){
     var x0=status(l); if(x0==='sent'||x0==='interested'||x0==='pay'||x0==='agreed'||x0==='callback') acts+='<div class="row"><span class="lbl" style="margin:0">Closing kit</span><a class="btn p sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgPay(l,3999,'Starter')))+'">Pay link · Starter R3,999</a><a class="btn sm" target="_blank" rel="noopener" href="'+esc(wa(l,msgPay(l,7999,'Premium')))+'">Pay link · Premium R7,999</a></div>'; }
   if(CFG.market==='us') acts+='<div class="row"><button class="btn sm" data-copytext="'+esc(usText(l))+'">Copy text for after they say yes</button></div>';
   if(l.seen&&l.seen.last) acts=warmKit(l)+acts;
+  if(CFG.market==='za'&&PREV_ON){var xp=status(l); if(PREV[l.id]||xp==='agreed'||xp==='interested'||xp==='sent'||xp==='tour'||xp==='callback') acts=previewKit(l)+acts;}
   if(CFG.market==='za'&&l.site){var xt=status(l); if(xt==='tour'||xt==='sent'||xt==='interested'||xt==='callback'||xt==='agreed') acts=tourKit(l)+acts;}
   var pick=function(arr,cur,key,cls){return '<div class="pick '+(cls||'')+'" data-pick="'+key+'">'+arr.map(function(o){var on=Array.isArray(cur)?cur.indexOf(o[0])>-1:cur===o[0];return '<button type="button" data-v="'+o[0]+'" class="'+(on?'on':'')+'">'+esc(o[1])+'</button>'}).join('')+'</div>'};
   var hist=(s.log||[]).slice().reverse().slice(0,6).map(function(e){return '<div><time>'+fmtWhen(e.at)+'</time>'+esc(OUT[e.o]||e.o)+(e.i?' · '+INT[e.i]:'')+(e.t&&e.t.length?' · '+e.t.map(function(t){return TAG[t]||t}).join(', '):'')+(e.n?'<br>'+esc(e.n):'')+'</div>'}).join('');
@@ -629,7 +661,7 @@ function load(verify){
   if(!DESK_KEY){renderKey();return}
   return fetch(CFG.endpoint+'?desk='+CFG.market+'&key='+encodeURIComponent(DESK_KEY)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
     if(!j.ok){ if(j.error==='market'){$('#list').innerHTML='<div class="empty">This desk isn\'t switched on for you. Use the '+(CFG.market==='za'?'<a href="/desk/us/">US desk</a>':'<a href="/desk/">Local desk</a>')+'.</div>';return} if(j.error==='key'){try{localStorage.removeItem('ds-desk-key')}catch(e){} DESK_KEY='';renderKey()} else {$('#sync').textContent='Couldn\'t reach the sheet. Your calls are kept on this device.'} return }
-    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads)); POOL=(typeof j.pool==='number')?j.pool:null; BATCH=j.batch||30; TOUR_ON=!(j.cfg&&j.cfg.tour===false); if(j.who) applyWho(j.who); TODAY=j.today||null; renderToday();
+    setLeads(j.leads); lsSet('leads',JSON.stringify(j.leads)); POOL=(typeof j.pool==='number')?j.pool:null; BATCH=j.batch||30; TOUR_ON=!(j.cfg&&j.cfg.tour===false); PREV=j.previews||{}; PREV_ON=!(j.cfg&&j.cfg.preview===false); if(j.who) applyWho(j.who); TODAY=j.today||null; renderToday();
     var remote=j.state||{};
     queue=queue.filter(function(q){var r=remote[q.id];return !(r&&(r.lastAt||0)>=(q.s.lastAt||0))});
     lsSet('queue',JSON.stringify(queue));
