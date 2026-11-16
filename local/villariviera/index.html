@@ -160,8 +160,8 @@ main>section{position:relative;z-index:1}
 .vr-k{font:400 11.5px/1.4 var(--mono);letter-spacing:.28em;text-transform:uppercase}
 .vr-it{font-style:italic;font-weight:400}
 /* the stage: one photo behind the whole page, crossfading as you travel */
-.vr-stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--plum)}
-.vr-stage img{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.8s var(--ease),transform 14s linear}
+.vr-stage{position:fixed;top:0;left:0;right:0;height:100vh;height:100lvh;z-index:0;overflow:hidden;background:var(--plum)}
+.vr-stage img{position:absolute;inset:-2%;width:104%;height:104%;max-width:none;max-height:none;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.8s var(--ease),transform 14s linear}
 .vr-stage img.on{opacity:1;transform:scale(1)}
 .vr-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,21,25,.34),rgba(35,21,25,0) 26%,rgba(35,21,25,0) 62%,rgba(35,21,25,.42))}
 /* glass: bone, frosted, soft light edge */
@@ -204,7 +204,7 @@ main>section{position:relative;z-index:1}
 .vr-ic{width:30px;height:30px;color:var(--paper)}
 /* ---------- hero: one frame, the villa at golden hour ---------- */
 .vr-hero{height:100svh;min-height:600px;overflow:hidden;display:grid;place-items:center}
-.vh-media{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--plum);transition:opacity .8s var(--ease)}
+.vh-media{position:fixed;top:0;left:0;right:0;height:100vh;height:100lvh;z-index:0;overflow:hidden;background:var(--plum);transition:opacity .8s var(--ease)}
 .past-hero .vh-media{opacity:0;visibility:hidden;transition:opacity .8s var(--ease),visibility 0s .8s}
 .vh-vid{width:100%;height:100%;object-fit:cover;transform:scale(1.04);will-change:transform}
 .vh-media:after{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 48%,rgba(35,21,25,.34),rgba(35,21,25,0) 70%),linear-gradient(180deg,rgba(35,21,25,.3),rgba(35,21,25,0) 30%,rgba(35,21,25,0) 66%,rgba(35,21,25,.5))}
@@ -240,17 +240,18 @@ main>section{position:relative;z-index:1}
 .top .g.dark{background:linear-gradient(155deg,#4a2e37,#3d252d 50%,#33202a);box-shadow:inset 0 1px 1px rgba(255,255,255,.2)}
 
 /* ---------- journey: picture to picture through an arch ---------- */
-.vr-journey{height:calc((var(--n) + .45) * 100svh)}
-.vj-pin{position:sticky;top:0;height:100svh;overflow:hidden}
-.vj-ch{position:absolute;inset:0;pointer-events:none}
+.vr-journey{height:calc((var(--n) + .45) * 100vh);height:calc((var(--n) + .45) * 100lvh);--chin:calc(100lvh - 100svh)}
+@supports not (height:1lvh){.vr-journey{--chin:0px}}
+.vj-pin{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden}
+.vj-ch{position:absolute;inset:0;pointer-events:none;contain:paint}
 .vj-img{position:absolute;inset:0;overflow:hidden;clip-path:inset(22% 37% 12% 37% round 999px 999px 0 0);will-change:clip-path}
 .vj-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.18);will-change:transform}
 .vj-img:after{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 0% 100%,rgba(35,21,25,.62),rgba(35,21,25,0) 70%),linear-gradient(180deg,rgba(35,21,25,.2),rgba(35,21,25,0) 28%,rgba(35,21,25,0) 60%,rgba(35,21,25,.35))}
-.vj-txt{position:absolute;left:var(--pad);bottom:clamp(36px,8vh,90px);max-width:min(760px,86vw);display:grid;gap:18px;opacity:0;transform:translateY(26px);will-change:opacity,transform}
+.vj-txt{position:absolute;left:var(--pad);bottom:calc(clamp(36px,8vh,90px) + var(--chin));max-width:min(760px,86vw);display:grid;gap:18px;opacity:0;transform:translateY(26px);will-change:opacity,transform}
 .vj-txt h2{font-size:clamp(36px,4.9vw,84px);line-height:1.04;color:var(--paper);text-wrap:balance;text-shadow:0 2px 30px rgba(35,21,25,.35)}
 .vj-txt .vr-k{color:var(--paper);opacity:.9}
 .vj-note{font-size:clamp(15px,1.15vw,18px);color:rgba(239,238,234,.88);max-width:44ch}
-.vj-cap{position:absolute;right:var(--pad);bottom:clamp(40px,8.6vh,96px);color:rgba(239,238,234,.8);opacity:0;text-align:right;max-width:22ch}
+.vj-cap{position:absolute;right:var(--pad);bottom:calc(clamp(40px,8.6vh,96px) + var(--chin));color:rgba(239,238,234,.8);opacity:0;text-align:right;max-width:22ch}
 .vj-rail{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);display:grid;justify-items:center;gap:14px;font:400 11px var(--mono);letter-spacing:.2em;color:rgba(239,238,234,.85)}
 .vj-dots{display:grid;gap:8px}
 .vj-dots i{width:2px;height:28px;border-radius:2px;background:rgba(239,238,234,.28);overflow:hidden;position:relative}
@@ -259,7 +260,7 @@ main>section{position:relative;z-index:1}
   .vj-img{clip-path:inset(24% 22% 18% 22% round 999px 999px 0 0)}
   .vj-cap{display:none}
   .vj-rail{top:auto;bottom:auto;top:96px;transform:none}
-  .vj-txt{bottom:44px}
+  .vj-txt{bottom:calc(44px + var(--chin))}
 }
 
 /* ---------- rooms: sentence with photos in it, then a composition of frames ---------- */
@@ -628,47 +629,66 @@ const stage=DS.$('#vrStage'),cache=new Map();let cur=null,list=[],idx=0,timer=0,
 const show=src=>{if(!src||src===cur)return;cur=src;let im=cache.get(src);
   if(!im){im=new Image();im.decoding='async';im.alt='';im.src=src;cache.set(src,im);stage.append(im)}
   const go=()=>{stage.querySelectorAll('img.on').forEach(x=>{if(x!==im)x.classList.remove('on')});stage.append(im);requestAnimationFrame(()=>im.classList.add('on'))};
-  im.complete?go():im.onload=go};
+  const ready=()=>(im.decode?im.decode():Promise.resolve()).then(go,go);im.complete?ready():im.onload=ready};
 const cycle=()=>{clearInterval(timer);if(list.length>1&&!DS.SHOT)timer=setInterval(()=>{idx=(idx+1)%list.length;show(list[idx]);DS.stage.onTick&&DS.stage.onTick(idx)},6200)};
 DS.stage={set(l,i=0){list=l;idx=i;show(list[idx]);cycle()},go(i){idx=(i+list.length)%list.length;show(list[idx]);cycle()},get i(){return idx},onTick:null};
 const secs=DS.$$('main>section[data-stage]');
-const pick=()=>{const c=innerHeight*.5;let s=null;for(const x of secs){const r=x.getBoundingClientRect();if(r.top<=c&&r.bottom>c){s=x;break}}
+/* stable measures: section positions and a viewport height that ignores the phone toolbar sliding in and out */
+const hero=DS.$('.vr-hero');let VH=hero.offsetHeight,box=[];
+const measure=()=>{VH=hero.offsetHeight;box=secs.map(x=>{const r=x.getBoundingClientRect();return [r.top+scrollY,r.bottom+scrollY]});ly=-1};
+addEventListener('resize',measure);
+new ResizeObserver(()=>measure()).observe(document.body);
+const pick=()=>{const c=scrollY+VH*.5;let s=null;for(let i=0;i<secs.length;i++){if(box[i]&&box[i][0]<=c&&box[i][1]>c){s=secs[i];break}}
   if(s&&s!==owner){owner=s;const l=(s.dataset.stage||'').split(' ').filter(Boolean);if(s.dataset.stageOwner==='js')s.dispatchEvent(new Event('stage'));else DS.stage.set(l)}};
 DS.owner=()=>owner;
 /* header + hero push */
-const hero=DS.$('.vr-hero'),vid=DS.$('.vh-vid'),cen=DS.$('.vh-centre');let ly=-1;
-DS.onFrame(()=>{const y=scrollY;if(y===ly)return;ly=y;document.body.classList.toggle('scrolled',y>innerHeight*.75);document.body.classList.toggle('past-hero',y>innerHeight*1.8);pick();
-  if(y<innerHeight*1.2){const p=y/innerHeight;if(vid)vid.style.transform=`scale(${(1.04+Math.min(p,1)*.06).toFixed(4)})`;
+const vid=DS.$('.vh-vid'),cen=DS.$('.vh-centre'),bc=document.body.classList;let ly=-1,past=false,sc=false;
+DS.onFrame(()=>{const y=scrollY;if(y===ly)return;ly=y;
+  if((y>VH*.75)!==sc){sc=!sc;bc.toggle('scrolled',sc)}
+  if((y>VH*1.8)!==past){past=!past;bc.toggle('past-hero',past);if(vid){past?vid.pause():vid.play().catch(()=>{})}}
+  pick();
+  if(y<VH*1.2){const p=y/VH;if(vid)vid.style.transform=`scale(${(1.04+Math.min(p,1)*.06).toFixed(4)})`;
     if(cen){cen.style.transform=`translateY(${(-p*90).toFixed(1)}px)`;cen.style.opacity=(1-p*1.3).toFixed(3)}}});
-addEventListener('load',pick);pick();
+measure();addEventListener('load',()=>{measure();pick()});pick();
 /* entrance */
 if(!DS.SHOT){DS.$$('.vh-centre>*,.vh-foot').forEach((e,i)=>{e.classList.add('vh-in');e.style.animationDelay=(.25+i*.22)+'s'})}
 /* video: keep it light (pause off screen), never block the page */
-if(vid){const vo=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?vid.play().catch(()=>{}):vid.pause()));vo.observe(vid)}
+if(vid){document.addEventListener('visibilitychange',()=>{document.hidden||past?vid.pause():vid.play().catch(()=>{})})}
 })();
 
-/* journey: each chapter's arch opens with scroll; text follows; all reversible */
+/* journey: each chapter's arch opens with scroll; text follows; all reversible.
+   Positions are measured once (and on resize), so the phone toolbar sliding in and out never shifts the clock;
+   each frame only touches what changed, and chapters fully covered by the next one stop painting. */
 (()=>{
 const sec=DS.$('.vr-journey');if(!sec)return;
 const pin=DS.$('.vj-pin',sec),chs=DS.$$('.vj-ch',sec),n=chs.length,num=DS.$('.vj-num',sec),dots=DS.$$('.vj-dots i',sec);
-const parts=chs.map(c=>({img:c.querySelector('.vj-img'),pic:c.querySelector('.vj-img img'),txt:c.querySelector('.vj-txt'),cap:c.querySelector('.vj-cap')}));
-const ph=matchMedia('(max-width:760px)');let last=-1;
+const parts=chs.map(c=>({ch:c,img:c.querySelector('.vj-img'),pic:c.querySelector('.vj-img img'),txt:c.querySelector('.vj-txt'),cap:c.querySelector('.vj-cap'),e:-1,o:-1,f:-1,vis:null}));
+const ph=matchMedia('(max-width:760px)');let last=-1,top=0,tot=1,pinH=0,lastNum='';
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-DS.onFrame(()=>{const r=sec.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight*1.2)return;
-  const tot=sec.offsetHeight-innerHeight;const y=DS.clamp(-r.top/tot);if(y===last)return;last=y;
+const measure=()=>{top=sec.getBoundingClientRect().top+scrollY;pinH=pin.offsetHeight;tot=Math.max(1,sec.offsetHeight-pinH);last=-1};
+measure();addEventListener('resize',measure);addEventListener('load',measure);new ResizeObserver(measure).observe(document.body);
+DS.onFrame(()=>{const sy=scrollY;if(sy+pinH*1.2<top||sy>top+tot+pinH)return;
+  const y=DS.clamp((sy-top)/tot);if(y===last)return;last=y;
   const g=y*(n+.45)-.35;pin.style.opacity=(1-DS.ss(n-.62,n+.08,g)).toFixed(3);  /* chapter clock: chapter i opens over [i-.35, i+.35] */
   const s0=ph.matches?[24,22,18]:[22,37,12];
   let curI=0;
-  parts.forEach((p,i)=>{const e=ease(DS.clamp((g-i+.35)/.55));const t=1-e;
-    p.img.style.clipPath=`inset(${(s0[0]*t).toFixed(2)}% ${(s0[1]*t).toFixed(2)}% ${(s0[2]*t).toFixed(2)}% ${(s0[1]*t).toFixed(2)}% round ${(999*t*t+2*t).toFixed(1)}px ${(999*t*t+2*t).toFixed(1)}px 0 0)`;
-    p.pic.style.transform=`scale(${(1.18-.18*e).toFixed(4)})`;
-    p.img.style.visibility=(g-i+.35)<-.05&&i>0?'hidden':'visible';
+  parts.forEach((p,i)=>{const raw=DS.clamp((g-i+.35)/.55),e=ease(raw);
+    if(raw>.5)curI=i;
+    /* hidden before its turn, and once the next chapter has fully covered it */
+    const nxt=parts[i+1],covered=nxt&&DS.clamp((g-i-1+.35)/.55)>=1;
+    const vis=!((g-i+.35)<-.05&&i>0)&&!covered;
+    if(vis!==p.vis){p.vis=vis;p.ch.style.visibility=vis?'visible':'hidden'}
+    if(dots[i]){const f=raw.toFixed(3);if(f!==p.f){p.f=f;dots[i].style.setProperty('--f',f)}}
+    if(!vis)return;
+    const ek=Math.round(e*2000);
+    if(ek!==p.e){p.e=ek;const t=1-e,rr=(999*t*t+2*t).toFixed(1);
+      p.img.style.clipPath=e>=1?'none':`inset(${(s0[0]*t).toFixed(2)}% ${(s0[1]*t).toFixed(2)}% ${(s0[2]*t).toFixed(2)}% ${(s0[1]*t).toFixed(2)}% round ${rr}px ${rr}px 0 0)`;
+      p.pic.style.transform=`scale(${(1.18-.18*e).toFixed(4)})`}
     const tin=DS.ss(.18,.34,g-i),tout=i===n-1?1:1-DS.ss(.5,.62,g-i);const o=Math.min(tin,tout);
-    p.txt.style.opacity=o.toFixed(3);p.txt.style.transform=`translateY(${((1-tin)*26-(1-tout)*20).toFixed(1)}px)`;
-    if(p.cap)p.cap.style.opacity=(o*.9).toFixed(3);
-    if(e>.5)curI=i;
-    if(dots[i])dots[i].style.setProperty('--f',DS.clamp((g-i+.35)/.55).toFixed(3))});
-  if(num)num.textContent=String(curI+1).padStart(2,'0')});
+    const ok=Math.round(o*1000)+'|'+Math.round(tin*1000)+'|'+Math.round(tout*1000);
+    if(ok!==p.o){p.o=ok;p.txt.style.opacity=o.toFixed(3);p.txt.style.transform=`translate3d(0,${((1-tin)*26-(1-tout)*20).toFixed(1)}px,0)`;if(p.cap)p.cap.style.opacity=(o*.9).toFixed(3)}
+  });
+  const nt=String(curI+1).padStart(2,'0');if(num&&nt!==lastNum){lastNum=nt;num.textContent=nt}});
 })();
 
 /* rooms: frames drift at slightly different speeds; the video frame plays only when seen; links pick the room */
