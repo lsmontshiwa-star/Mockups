@@ -143,10 +143,10 @@ form{animation:frame 4s ease-in-out infinite,rise .9s .3s cubic-bezier(.2,.7,.2,
       <label for="business">Business name</label>
       <input id="business" name="business" required autocomplete="organization" placeholder="e.g. Thandi's Hair Studio">
       <label for="trade">What does your business do?</label>
-      <input id="trade" name="trade" list="trades" placeholder="e.g. hair salon, plumbing, catering">
+      <input id="trade" name="trade" required list="trades" placeholder="e.g. hair salon, plumbing, catering">
       <datalist id="trades"><option value="Hair salon / barber"><option value="Plumbing"><option value="Roofing"><option value="Catering / food"><option value="Mechanic / auto"><option value="Building / construction"><option value="Cleaning"><option value="Events / decor"><option value="Photography"><option value="Retail / shop"></datalist>
       <label for="area">Area</label>
-      <input id="area" name="area" placeholder="e.g. Soweto, Sandton, Lenasia" autocomplete="address-level2">
+      <input id="area" name="area" required placeholder="e.g. Soweto, Sandton, Pretoria" autocomplete="address-level2">
       <label for="wa">WhatsApp number</label>
       <input id="wa" name="wa" required inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567">
       <label for="email">Email <span class="small">(optional)</span></label>
@@ -201,6 +201,8 @@ $('f').addEventListener('submit',function(e){
   e.preventDefault();
   var b=$('business').value.trim(), w=$('wa').value.replace(/\D/g,'');
   if(!b){$('msg').textContent='Please add your business name.';$('business').focus();return}
+  if(!$('trade').value.trim()){$('msg').textContent='Please tell us what your business does.';$('trade').focus();return}
+  if(!$('area').value.trim()){$('msg').textContent='Please add your area.';$('area').focus();return}
   if(w.length<9){$('msg').textContent='Please add a WhatsApp number we can send it to.';$('wa').focus();return}
   if(!$('consent').checked){$('msg').textContent='Please tick the box so we may WhatsApp you the preview.';$('consent').focus();return}
   var fd=new FormData(); fd.append('kind','preview'); fd.append('business',b); fd.append('trade',$('trade').value.trim()); fd.append('area',$('area').value.trim());

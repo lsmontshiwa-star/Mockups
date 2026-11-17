@@ -52,12 +52,12 @@ footer{padding:40px var(--gut);border-top:1px solid var(--line);display:flex;jus
 #ok{display:none;font-family:var(--serif);font-size:40px;line-height:1.1}button.cta{border:0;cursor:pointer;font:500 16px var(--sans)}</style>
 <div class="fi"><label>Business name</label><input name="business" id="business" required></div>
 <div class="fi"><label>Your email</label><input name="email" id="email" type="email" required></div>
-<div class="fi"><label>Phone for the website</label><input name="phone"></div>
+<div class="fi"><label>Phone for the website</label><input name="phone" type="tel" required></div>
 <div class="fi"><label>Your web address, if you have one</label><input name="domain" placeholder="e.g. smithroofing.com, or leave blank and I set one up"></div>
-<div class="fi"><label>Services you want listed</label><textarea name="services" rows="3"></textarea></div>
-<div class="fi"><label>Areas you serve</label><textarea name="areas" rows="2"></textarea></div>
-<div class="fi"><label>Logo and photos (up to 8)</label><input type="file" id="files" accept="image/*" multiple></div>
-<div class="fi"><label>Anything else</label><textarea name="notes" rows="3"></textarea></div>
+<div class="fi"><label>Services you want listed</label><textarea name="services" rows="3" required></textarea></div>
+<div class="fi"><label>Areas you serve</label><textarea name="areas" rows="2" required></textarea></div>
+<div class="fi"><label>Logo and photos (up to 8, if you have them)</label><input type="file" id="files" accept="image/*" multiple></div>
+<div class="fi"><label>Anything else (optional)</label><textarea name="notes" rows="3"></textarea></div>
 <input class="hp" name="company_website" tabindex="-1" autocomplete="off">
 <button class="cta" type="submit" id="btn">Send my details</button>
 <p id="ok">Got it, thank you. Your site is on its way.</p>

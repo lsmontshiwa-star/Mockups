@@ -146,8 +146,8 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
       <input id="name" autocomplete="name" required maxlength="80">
       <label for="email">Email</label>
       <input id="email" type="email" autocomplete="email" required maxlength="120">
-      <label for="wa">WhatsApp number <small>(optional)</small></label>
-      <input id="wa" type="tel" inputmode="tel" autocomplete="tel" maxlength="20">
+      <label for="wa">WhatsApp number</label>
+      <input id="wa" type="tel" required inputmode="tel" autocomplete="tel" maxlength="20">
       <label for="note">Anything you'd like to cover? <small>(optional)</small></label>
       <textarea id="note" maxlength="300"></textarea>
       <div class="hp" aria-hidden="true"><label>Website<input id="company_website" tabindex="-1" autocomplete="off"></label></div>
@@ -158,7 +158,7 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
       <h2>You're booked</h2>
       <div class="when" id="when"></div>
       <p>We've emailed you the Meet link. If you can't see it, check your spam folder.</p>
-      <p>Need a different time? Book again with the same email and your booking moves.</p>
+      <p>Your time is set. If something serious means you can't make it, email <a href="mailto:hello@digitalswitch.co.za">hello@digitalswitch.co.za</a> and tell us why.</p>
     </div>
   </section>
 </main>
@@ -169,6 +169,11 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
 (function(){var b=document.getElementById('stars');if(!b)return;var n=window.innerWidth<600?26:44;for(var i=0;i<n;i++){var e=document.createElement('i');if(i%7===0)e.className='b';e.style.left=(Math.random()*100).toFixed(1)+'%';e.style.top=(Math.random()*100).toFixed(1)+'%';e.style.animationDelay=(-Math.random()*5).toFixed(2)+'s';e.style.animationDuration=(4+Math.random()*4).toFixed(2)+'s';b.appendChild(e)}})();
 var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
 var $=function(i){return document.getElementById(i)}, t0=Date.now();
+
+var LK='ds-setup-booked';
+function remember(w){try{localStorage.setItem(LK,JSON.stringify({when:w,at:Date.now()}))}catch(e){}}
+function showBooked(w){$('f').style.display='none';$('when').textContent=w;$('done').style.display='block'}
+try{var prev=JSON.parse(localStorage.getItem(LK)||'null');if(prev&&prev.when&&Date.now()-prev.at<30*86400000)setTimeout(function(){showBooked(prev.when)},0)}catch(e){}
 function msg(t,err){$('msg').textContent=t;$('msg').className='msg'+(err?' err':'')}
 function poll(ref,tries){
   return fetch(EP+'?result='+ref+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
@@ -194,13 +199,15 @@ $('f').addEventListener('submit',function(e){
   if(!chosen){msg('Please choose a time.',true);return}
   if(!name){msg('Please add your name.',true);$('name').focus();return}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg('Please check your email address.',true);$('email').focus();return}
+  if($('wa').value.replace(/\D/g,'').length<9){msg('Please add your WhatsApp number.',true);$('wa').focus();return}
   var ref='sc'+Date.now().toString(36)+Math.random().toString(36).slice(2,8), fd=new FormData();
   [['kind','setupcall'],['site','setupcall'],['ref',ref],['day',day],['slot',chosen],['name',name],['email',email],['wa',$('wa').value.trim()],['note',$('note').value.trim()],
    ['company_website',$('company_website').value],['_t',String(Date.now()-t0)]].forEach(function(p){fd.append(p[0],p[1])});
   $('go').disabled=true; msg('Booking…');
   fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){return poll(ref,10)}).then(function(j){
-    if(j&&j.ok){$('f').style.display='none';$('when').textContent=j.when;$('done').style.display='block';return}
+    if(j&&j.ok){remember(j.when);showBooked(j.when);return}
     $('go').disabled=false;
+    if(j&&j.error==='booked'){msg('You have already booked'+(j.when?' ('+j.when+')':'')+'. To change it, email hello@digitalswitch.co.za and tell us why.',true);$('go').disabled=true;return}
     if(j&&j.error==='taken'){msg('That time has just gone. Please choose another.',true);chosen='';load();return}
     if(j&&j.error==='closed'){msg('Bookings are closed. Please WhatsApp Lethabo on 076 129 3926.',true);return}
     if(j&&j.pending){msg('We’re still confirming. Check your email in a few minutes.',true);return}

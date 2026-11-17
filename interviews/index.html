@@ -139,8 +139,8 @@ button.go:hover{box-shadow:0 0 40px rgba(155,123,255,.85)}
       <input id="name" name="name" autocomplete="name" required maxlength="80">
       <label for="email">Email <small>(the one you applied with)</small></label>
       <input id="email" name="email" type="email" autocomplete="email" required maxlength="120">
-      <label for="wa">WhatsApp number <small>(optional)</small></label>
-      <input id="wa" name="wa" type="tel" autocomplete="tel" inputmode="tel" maxlength="20">
+      <label for="wa">WhatsApp number</label>
+      <input id="wa" name="wa" type="tel" required autocomplete="tel" inputmode="tel" maxlength="20">
       <label for="market">Which businesses would you rather call?</label>
       <select id="market" name="market">
         <option value="">Not sure yet</option>
@@ -158,7 +158,7 @@ button.go:hover{box-shadow:0 0 40px rgba(155,123,255,.85)}
       <h2>You're booked</h2>
       <div class="when" id="when"></div>
       <p>We've emailed you the details. If you can't see it, check your spam folder.</p>
-      <p>Need to change your time? Book again with the same email and your booking moves.</p>
+      <p>Your time is set. If something serious means you can't make it, email <a href="mailto:hello@digitalswitch.co.za">hello@digitalswitch.co.za</a> and tell us why.</p>
     </div>
   </section>
 </main>
@@ -170,6 +170,11 @@ button.go:hover{box-shadow:0 0 40px rgba(155,123,255,.85)}
 var EP='https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec';
 var $=function(i){return document.getElementById(i)}, t0=Date.now(), chosen='';
 var DAYNAME={'2026-11-06':'Friday 6 November','2026-11-09':'Monday 9 November'};
+
+var LK='ds-interview-booked';
+function remember(w){try{localStorage.setItem(LK,JSON.stringify({when:w,at:Date.now()}))}catch(e){}}
+function showBooked(w){$('f').style.display='none';$('when').textContent=w;$('done').style.display='block'}
+try{var prev=JSON.parse(localStorage.getItem(LK)||'null');if(prev&&prev.when&&Date.now()-prev.at<30*86400000)setTimeout(function(){showBooked(prev.when)},0)}catch(e){}
 function msg(t,err){$('msg').textContent=t;$('msg').className='msg'+(err?' err':'')}
 function draw(j){
   var box=$('slots'); box.innerHTML='';
@@ -201,9 +206,10 @@ function poll(ref,tries){
 $('f').addEventListener('submit',function(e){
   e.preventDefault();
   var name=$('name').value.trim(), email=$('email').value.trim(), other=$('other').value.trim();
-  if(!chosen&&!other){msg('Please choose a time.',true);return}
+  if(!chosen){msg('Please choose a time.',true);return}
   if(!name){msg('Please add your name.',true);$('name').focus();return}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg('Please check your email address.',true);$('email').focus();return}
+  if($('wa').value.replace(/\D/g,'').length<9){msg('Please add your WhatsApp number.',true);$('wa').focus();return}
   var ref='iv'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   var fd=new FormData();
   [['kind','interview'],['site','interview'],['ref',ref],['slot',chosen],['other',other],['name',name],['email',email],['wa',$('wa').value.trim()],
@@ -211,8 +217,9 @@ $('f').addEventListener('submit',function(e){
    .forEach(function(p){fd.append(p[0],p[1])});
   $('go').disabled=true; msg('Booking…');
   fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){return poll(ref,8)}).then(function(j){
-    if(j&&j.ok){$('f').style.display='none';$('when').textContent=j.when||'Thanks, we’ve received your note';$('done').style.display='block';return}
+    if(j&&j.ok){remember(j.when);showBooked(j.when);return}
     $('go').disabled=false;
+    if(j&&j.error==='booked'){msg('You have already booked'+(j.when?' ('+j.when+')':'')+'. To change it, email hello@digitalswitch.co.za and tell us why.',true);$('go').disabled=true;return}
     if(j&&j.error==='taken'){msg('Someone has just booked that time. Please choose another.',true);chosen='';load();return}
     if(j&&j.error==='closed'){msg('Bookings are closed. Please email hello@digitalswitch.co.za.',true);return}
     if(j&&j.pending){msg('We’re still confirming. Check your email in a few minutes. If nothing arrives, email hello@digitalswitch.co.za.',true);return}

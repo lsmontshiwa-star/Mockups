@@ -558,8 +558,8 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
           <label for="pvBusiness">Business name</label>
           <input id="pvBusiness" required autocomplete="organization" placeholder="e.g. Thandi's Hair Studio">
           <div class="row2">
-            <div><label for="pvTrade">What you do</label><input id="pvTrade" list="pvTrades" placeholder="e.g. plumbing"></div>
-            <div><label for="pvArea">Area</label><input id="pvArea" autocomplete="address-level2" placeholder="e.g. Sandton"></div>
+            <div><label for="pvTrade">What you do</label><input id="pvTrade" required list="pvTrades" placeholder="e.g. plumbing"></div>
+            <div><label for="pvArea">Area</label><input id="pvArea" required autocomplete="address-level2" placeholder="e.g. Sandton"></div>
           </div>
           <datalist id="pvTrades"><option value="Hair salon / barber"><option value="Plumbing"><option value="Roofing"><option value="Catering / food"><option value="Mechanic / auto"><option value="Building / construction"><option value="Cleaning"><option value="Events / decor"><option value="Photography"><option value="Retail / shop"></datalist>
           <label for="pvNum">WhatsApp number</label>
@@ -925,6 +925,8 @@ f.addEventListener('submit',function(e){
   e.preventDefault();
   var b=$('pvBusiness').value.trim(), w=$('pvNum').value.replace(/\D/g,'');
   if(!b){$('pvMsg').textContent='Please add your business name.';$('pvBusiness').focus();return}
+  if(!$('pvTrade').value.trim()){$('pvMsg').textContent='Please tell us what your business does.';$('pvTrade').focus();return}
+  if(!$('pvArea').value.trim()){$('pvMsg').textContent='Please add your area.';$('pvArea').focus();return}
   if(w.length<9){$('pvMsg').textContent='Please add a WhatsApp number we can send it to.';$('pvNum').focus();return}
   if(!$('pvConsent').checked){$('pvMsg').textContent='Please tick the box so we may WhatsApp you the preview.';$('pvConsent').focus();return}
   var fd=new FormData(); fd.append('kind','preview'); fd.append('business',b); fd.append('trade',$('pvTrade').value.trim()); fd.append('area',$('pvArea').value.trim());

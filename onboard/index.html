@@ -107,6 +107,7 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
 .btn2{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--lilac);color:var(--mint);text-decoration:none;font:500 15px var(--body);margin:6px 8px 0 0}
 .btn2:hover{box-shadow:0 0 20px rgba(155,123,255,.45)}
 .hide{display:none}
+#f .bad{border-color:#ff8fa3;box-shadow:0 0 0 2px rgba(255,143,163,.25)}
 @media (max-width:520px){.row2{grid-template-columns:1fr;gap:0}.poster{grid-template-columns:90px 1fr}.poster img{width:90px}}
 
 </style></head><body>
@@ -137,7 +138,7 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
     </div>
     <h2 style="margin-top:26px">Your warm list</h2>
     <div class="next">
-      <p>Send each business you know through the <a href="/refer/send/">referral form</a> and tick "I'm a Digital Switch rep". That puts it on your desk and credits it to you.</p>
+      <p><b>Do this before you submit this form.</b> Send at least <b>3 businesses you know</b> through the <a href="/refer/send/">referral form</a>, tick "I'm a Digital Switch rep" and use the same email as here. That puts them on your desk and credits them to you. This form checks, and won't go through until they're in.</p>
     </div>
   </section>
 
@@ -147,19 +148,19 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
       <div class="sect">About you</div>
       <div class="row2">
         <div><label for="name">Full legal name</label><input id="name" autocomplete="name" required maxlength="80"></div>
-        <div><label for="preferred">Preferred name</label><input id="preferred" maxlength="60"></div>
+        <div><label for="preferred">Preferred name <small>(optional)</small></label><input id="preferred" maxlength="60"></div>
       </div>
       <div class="row2">
         <div><label for="email">Email</label><input id="email" type="email" autocomplete="email" required maxlength="120"></div>
-        <div><label for="phone">Personal phone</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20"></div>
+        <div><label for="phone">Personal phone</label><input id="phone" required type="tel" inputmode="tel" autocomplete="tel" maxlength="20"></div>
       </div>
-      <label for="place">Country and city</label><input id="place" maxlength="80">
+      <label for="place">Country and city</label><input id="place" required maxlength="80">
 
       <div class="sect">Your work number</div>
-      <label for="work">Work number <small>(a separate SIM just for Digital Switch)</small></label><input id="work" type="tel" inputmode="tel" maxlength="20">
+      <label for="work">Work number <small>(a separate SIM just for Digital Switch)</small></label><input id="work" required type="tel" inputmode="tel" maxlength="20">
       <div class="row2">
-        <div><label for="wab">WhatsApp set up on it?</label><select id="wab"><option>Not yet</option><option>Yes</option></select></div>
-        <div><label for="logo">Our logo as the profile picture?</label><select id="logo"><option>Not yet</option><option>Yes</option></select></div>
+        <div><label for="wab">WhatsApp set up on it?</label><select id="wab" required><option value="">Choose</option><option>Yes</option><option>Not yet</option></select></div>
+        <div><label for="logo">Our logo as the profile picture?</label><select id="logo" required><option value="">Choose</option><option>Yes</option><option>Not yet</option></select></div>
       </div>
       <div class="row2">
         <div><label for="dualsim">Is your phone dual-SIM?</label><select id="dualsim"><option value="">Choose</option><option>Yes</option><option>No</option></select></div>
@@ -168,27 +169,27 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
 
       <div class="sect">How you'll work</div>
       <label for="market">Market</label>
-      <select id="market"><option>South Africa</option><option>US</option><option>Both</option></select>
+      <select id="market" required><option value="">Choose</option><option>South Africa</option><option>US</option><option>Both</option></select>
       <div class="row2">
-        <div><label for="days">The days you plan to call</label><input id="days" maxlength="120" placeholder="e.g. Mon to Fri"></div>
-        <div><label for="hours">The hours you plan to call</label><input id="hours" maxlength="120" placeholder="e.g. 08:00 to 12:00"></div>
+        <div><label for="days">The days you plan to call</label><input id="days" required maxlength="120" placeholder="e.g. Mon to Fri"></div>
+        <div><label for="hours">The hours you plan to call</label><input id="hours" required maxlength="120" placeholder="e.g. 08:00 to 12:00"></div>
       </div>
-      <label for="firstcall">When will you make your first call?</label><input id="firstcall" maxlength="80" placeholder="e.g. Wednesday 09:00">
+      <label for="firstcall">When will you make your first call?</label><input id="firstcall" required maxlength="80" placeholder="e.g. Wednesday 09:00">
 
       <div class="sect">How you'll be paid</div>
       <label for="payout">Payout method</label>
-      <select id="payout"><option>South African bank (EFT)</option><option>Payoneer</option></select>
+      <select id="payout" required><option value="">Choose</option><option>South African bank (EFT)</option><option>Payoneer</option></select>
       <div id="pyo" class="hide"><label for="payoneer">The email on your Payoneer account</label><input id="payoneer" type="email" maxlength="120"></div>
-      <label for="file_bank">Proof of bank account <small>(PDF or photo, max 5 MB)</small></label><input id="file_bank" type="file" accept=".pdf,image/*">
+      <div id="bankBox"><label for="file_bank">Proof of bank account <small>(PDF or photo, max 5 MB)</small></label><input id="file_bank" required type="file" accept=".pdf,image/*"></div>
 
       <div class="sect">Signed documents</div>
-      <label for="file_agreement">Signed Contractor Agreement <small>(PDF or photo, max 5 MB)</small></label><input id="file_agreement" type="file" accept=".pdf,image/*">
-      <label for="file_code">Signed Code of Conduct <small>(PDF or photo, max 5 MB)</small></label><input id="file_code" type="file" accept=".pdf,image/*">
+      <label for="file_agreement">Signed Contractor Agreement <small>(PDF or photo, max 5 MB)</small></label><input id="file_agreement" required type="file" accept=".pdf,image/*">
+      <label for="file_code">Signed Code of Conduct <small>(PDF or photo, max 5 MB)</small></label><input id="file_code" required type="file" accept=".pdf,image/*">
 
       <div class="sect">Your first week</div>
       <label for="help">One thing you'd like help with <small>(optional)</small></label><textarea id="help" maxlength="500"></textarea>
       <label for="notes">Anything else we should know? <small>(optional)</small></label><textarea id="notes" maxlength="500"></textarea>
-      <label class="check"><input type="checkbox" id="kit"> <span>I've read the DS Rep Starter Kit.</span></label>
+      <label class="check"><input type="checkbox" id="kit" required> <span>I've read the DS Rep Starter Kit.</span></label>
       <div class="hp" aria-hidden="true"><label>Website<input id="company_website" tabindex="-1" autocomplete="off"></label></div>
       <button class="go" id="go" type="submit">Submit my onboarding</button>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
@@ -215,14 +216,28 @@ function poll(ref,tries){
     return j;
   });
 }
-$('payout').addEventListener('change',function(){$('pyo').className=this.value==='Payoneer'?'':'hide'});
+$('payout').addEventListener('change',function(){var p=this.value==='Payoneer';$('pyo').className=p?'':'hide';$('bankBox').className=p?'hide':''});
 function readFile(id){return new Promise(function(res,rej){var f=$(id).files[0];if(!f)return res(null);if(f.size>5*1024*1024)return rej(id);var r=new FileReader();r.onload=function(){res({data:r.result,name:f.name})};r.onerror=function(){rej(id)};r.readAsDataURL(f)})}
 $('f').addEventListener('submit',function(e){
   e.preventDefault();
   var name=$('name').value.trim(), email=$('email').value.trim();
-  if(!name){msg('Please add your full name.',true);$('name').focus();return}
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg('Please check your email address.',true);$('email').focus();return}
-  if(!$('kit').checked){msg('Please confirm you’ve read the Starter Kit.',true);return}
+  // 17 Nov: every question and document is required (preferred name, help and notes stay optional)
+  var payo=/payoneer/i.test($('payout').value), miss=[], first=null;
+  function need(id,label,ok){if(!ok){miss.push(label);if(!first)first=id}}
+  need('name','full name',!!name); need('email','email',/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email));
+  need('phone','personal phone',$('phone').value.replace(/\D/g,'').length>=9); need('place','country and city',!!$('place').value.trim());
+  need('work','work number',$('work').value.replace(/\D/g,'').length>=9); need('wab','WhatsApp on the work number',!!$('wab').value);
+  need('logo','logo as profile picture',!!$('logo').value); need('dualsim','dual-SIM',!!$('dualsim').value); need('laptop','laptop',!!$('laptop').value);
+  need('market','market',!!$('market').value); need('days','calling days',!!$('days').value.trim()); need('hours','calling hours',!!$('hours').value.trim());
+  need('firstcall','first call',!!$('firstcall').value.trim()); need('payout','payout method',!!$('payout').value);
+  if(payo)need('payoneer','Payoneer email',/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('payoneer').value.trim()));
+  else need('file_bank','proof of bank account',$('file_bank').files.length>0);
+  need('file_agreement','signed Contractor Agreement',$('file_agreement').files.length>0);
+  need('file_code','signed Code of Conduct',$('file_code').files.length>0);
+  need('kit','Starter Kit tick',$('kit').checked);
+  [].forEach.call(document.querySelectorAll('#f .bad'),function(x){x.classList.remove('bad')});
+  if(miss.length){
+    msg('Please complete: '+miss.join(', ')+'.',true);var el=$(first);if(el){el.classList.add('bad');el.focus()}return}
   $('go').disabled=true; msg('Uploading…');
   Promise.all([readFile('file_bank'),readFile('file_agreement'),readFile('file_code')]).then(function(files){
     var ref='ob'+Date.now().toString(36)+Math.random().toString(36).slice(2,8), fd=new FormData();
@@ -235,6 +250,8 @@ $('f').addEventListener('submit',function(e){
   }).then(function(j){
     if(j&&j.ok){$('f').style.display='none';$('done').style.display='block';$('dp').textContent=j.missing&&j.missing.length?('Still to send: '+j.missing.join(', ')+'. Submit the form again with just those, or reply to our email with them attached.'):'We have everything, including your documents. Check your email for a confirmation.';return}
     $('go').disabled=false;
+    if(j&&j.error==='referrals'){msg('We have '+j.sent+' of the '+j.min+' businesses we need from you. Send '+(j.min-j.sent)+' more through the referral form (tick “I’m a Digital Switch rep”, same email as here), then submit this form again.',true);return}
+    if(j&&j.error==='fields'&&j.need){msg('Please complete: '+j.need.join(', ')+'.',true);return}
     if(j&&j.pending){msg('Still uploading. If you don’t get a confirmation email in a few minutes, email hello@digitalswitch.co.za.',true);return}
     msg('Something didn’t go through. Please check your details and try again.',true);
   }).catch(function(id){$('go').disabled=false;msg(typeof id==='string'?'One of your files is over 5 MB or couldn’t be read. Please use a smaller PDF or photo.':'No connection. Please try again.',true)});

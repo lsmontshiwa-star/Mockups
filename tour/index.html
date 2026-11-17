@@ -146,8 +146,8 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
         <button type="button" class="slot" data-how="wa" aria-pressed="true">WhatsApp call</button>
         <button type="button" class="slot" data-how="phone" aria-pressed="false">Normal call</button>
       </div>
-      <label for="name">Your name <small>(optional)</small></label>
-      <input id="name" autocomplete="name" maxlength="80">
+      <label for="name">Your name</label>
+      <input id="name" autocomplete="name" required maxlength="80">
       <label for="wa">Number to call <small>(leave blank for the number we messaged)</small></label>
       <input id="wa" type="tel" inputmode="tel" autocomplete="tel" maxlength="20">
       <label for="note">Anything you'd like us to look at? <small>(optional)</small></label>
@@ -213,6 +213,7 @@ load(); setInterval(function(){if(document.visibilityState==='visible'&&$('f').s
 $('f').addEventListener('submit',function(e){
   e.preventDefault();
   if(!chosen){msg('Please choose a time.',true);return}
+  if(!$('name').value.trim()){msg('Please add your name.',true);$('name').focus();return}
   var ref='tr'+Date.now().toString(36)+Math.random().toString(36).slice(2,8), fd=new FormData();
   [['kind','tour'],['site','tour'],['ref',ref],['l',LID],['day',day],['slot',chosen],['how',how],['name',$('name').value.trim()],['wa',$('wa').value.trim()],['note',$('note').value.trim()],
    ['company_website',$('company_website').value],['_t',String(Date.now()-t0)]].forEach(function(p){fd.append(p[0],p[1])});

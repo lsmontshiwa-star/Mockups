@@ -158,7 +158,7 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
         <label for="referrer_wa">Your WhatsApp number <small>(so we can pay your R500)</small></label>
         <input id="referrer_wa" type="tel" inputmode="tel" autocomplete="tel" maxlength="20">
       </div>
-      <label for="referrer_email">Your email <small>(optional, for a confirmation)</small></label>
+      <label for="referrer_email">Your email <small id="emHint">(optional, for a confirmation)</small></label>
       <input id="referrer_email" type="email" autocomplete="email" maxlength="120">
 
       <div class="sect">The business</div>
@@ -166,8 +166,8 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
       <input id="business" required maxlength="80">
       <div class="row2">
         <div><label for="trade">What they do</label>
-        <select id="trade"><option value="">Choose one</option><option>Solar</option><option>Roofing</option><option>Steel or fabrication</option><option>Machinery</option><option>Agriculture</option><option>Wholesale or resale</option><option>Plumbing</option><option>Electrical</option><option>Building or renovations</option><option>Beauty or salon</option><option>Mechanic or auto</option><option>Other</option></select></div>
-        <div><label for="area">Area or town</label><input id="area" maxlength="60"></div>
+        <select id="trade" required><option value="">Choose one</option><option>Solar</option><option>Roofing</option><option>Steel or fabrication</option><option>Machinery</option><option>Agriculture</option><option>Wholesale or resale</option><option>Plumbing</option><option>Electrical</option><option>Building or renovations</option><option>Beauty or salon</option><option>Mechanic or auto</option><option>Other</option></select></div>
+        <div><label for="area">Area or town</label><input id="area" required maxlength="60"></div>
       </div>
       <div class="row2">
         <div><label for="phone">Their phone or WhatsApp</label><input id="phone" type="tel" inputmode="tel" required maxlength="20"></div>
@@ -204,13 +204,16 @@ function poll(ref,tries){
     return j;
   });
 }
-$('is_rep').addEventListener('change',function(){$('nonrep').className=this.checked?'hide':''});
+$('is_rep').addEventListener('change',function(){$('nonrep').className=this.checked?'hide':'';$('emHint').textContent=this.checked?'(the one you onboarded with: it credits the business to you)':'(optional, for a confirmation)'});
 $('f').addEventListener('submit',function(e){
   e.preventDefault();
   var rep=$('is_rep').checked, who=$('referrer').value.trim(), wa=$('referrer_wa').value.replace(/\D/g,''), biz=$('business').value.trim(), ph=$('phone').value.replace(/\D/g,'');
   if(!who){msg('Please add your name.',true);$('referrer').focus();return}
   if(!rep&&wa.length<9){msg('Please add your WhatsApp number, so we can pay you.',true);$('referrer_wa').focus();return}
+  if(rep&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('referrer_email').value.trim())){msg('Please add your email, so the business is credited to you.',true);$('referrer_email').focus();return}
   if(!biz){msg('Please add the business name.',true);$('business').focus();return}
+  if(!$('trade').value){msg('Please choose what the business does.',true);$('trade').focus();return}
+  if(!$('area').value.trim()){msg('Please add the business’s area or town.',true);$('area').focus();return}
   if(ph.length<9){msg('Please add the business phone or WhatsApp number.',true);$('phone').focus();return}
   if(!$('consent').checked){msg('Please confirm you know this business.',true);return}
   var ref='rf'+Date.now().toString(36)+Math.random().toString(36).slice(2,8), fd=new FormData();
