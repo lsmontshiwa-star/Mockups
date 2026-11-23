@@ -49,7 +49,7 @@
       "makesOffer": {
         "@type": "Offer",
         "name": "Business website",
-        "description": "Custom animated, phone-first website with basic SEO, live within 24 hours, plus monthly hosting, security and changes. Quoted per project."
+        "description": "Custom animated, phone-first website with basic SEO, live within 24 hours. Quoted per project."
       }
     },
     {
@@ -309,6 +309,7 @@ section{position:relative}
 .extras div:last-child{border-bottom:0}
 .extras span:last-child{color:var(--sage);text-align:right}
 @media (max-width: 860px){.plans{grid-template-columns:1fr}}
+.plans{grid-template-columns:minmax(0,1fr);max-width:760px}
 
 
 /* SJ preview, drawn live in HTML (photo from the SJ site) */
@@ -681,9 +682,8 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
       <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M6 6h6l2 6-3 2a14 14 0 0 0 7 7l2-3 6 2v6a2 2 0 0 1-2 2A22 22 0 0 1 4 8a2 2 0 0 1 2-2Z"/></svg><h3>Tap to call and WhatsApp</h3><p>Customers reach you in one tap, plus a quote form and a map.</p></div>
       <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c4 4 4 20 0 24M16 4c-4 4-4 20 0 24"/></svg><h3>Your own web address</h3><p>Connected to your own domain, so you look established.</p></div>
       <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"/><path d="m21 21 7 7"/></svg><h3>Found on Google (SEO)</h3><p>We set your site up so Google understands your name, services and area, and shows it when people search for your business.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M16 3 5 7v8c0 7 5 12 11 14 6-2 11-7 11-14V7Z"/></svg><h3>Hosting and security</h3><p>We keep it online, secure and up to date every month.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M5 9h22M5 16h22M5 23h14"/></svg><h3>Monthly changes</h3><p>One batch of updates every month: text, photos, prices, branding.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M5 26V16M12 26V9M19 26v-7M26 26V5"/></svg><h3>A monthly report</h3><p>A short note on your visitors and enquiries, based on what's actually measured.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M16 3 5 7v8c0 7 5 12 11 14 6-2 11-7 11-14V7Z"/></svg><h3>Live and secure</h3><p>On your own web address, with the padlock certificate that keeps it trusted by Google.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M5 9h22M5 16h22M5 23h14"/></svg><h3>Changes when you need them</h3><p>New text, photos, prices or branding later on? Send them and we quote the update.</p></div>
     </div>
   </div>
 </section>
@@ -702,7 +702,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
       <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 01</span><h3>Say go</h3><p>Message us on WhatsApp. Tell us about your business, or reply "yes" to a site we've already built for you.</p></li>
       <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 02</span><h3>Approve and pay</h3><p>Happy with your preview? You get your quote and a secure payment link. The 24-hour clock starts when payment clears.</p></li>
       <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 03</span><h3>Send what you like</h3><p>Your logo, photos, services and areas. It's optional: the site goes live either way.</p></li>
-      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 04</span><h3>You're <span class="script glow">switched on</span></h3><p>Live on your own web address within 24 hours. Changes once a month, fixes any time.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 04</span><h3>You're <span class="script glow">switched on</span></h3><p>Live on your own web address within 24 hours.</p></li>
       </ol>
     </div>
   </div>
@@ -712,7 +712,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 <section class="section" id="value" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow mono reveal">Why Digital Switch</div>
-    <h2 class="h2 reveal">Built once. <span class="script">Looked after</span> every month.</h2>
+    <h2 class="h2 reveal">Built once. <span class="script">Yours</span> to grow.</h2>
     <p class="lead reveal">Every business is different, and we build for clients in South Africa and abroad, so we quote per project, in your currency. See a preview of your site first, then decide.</p>
     <div class="plans">
       <div class="plan hot reveal">
@@ -727,47 +727,10 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
         </ul>
         <a class="btn btn-primary" href="#preview">See my preview</a>
       </div>
-      <div class="plan reveal">
-        <span class="mono">The care</span>
-        <div class="amount"><b class="word">Always on</b></div>
-        <ul>
-          <li>Hosting and security</li>
-          <li>One batch of changes every month (text, photos, prices, branding)</li>
-          <li>Fixes whenever something breaks, at no extra cost</li>
-          <li>Enquiries sent straight to your email and WhatsApp</li>
-          <li>A short monthly report: visitors and enquiries</li>
-          <li>Month to month. Cancel any time, no contract</li>
-        </ul>
-        <a class="btn btn-ghost" href="#monthly">What the care covers ↓</a>
       </div>
-    </div>
     <div class="extras reveal">
       <div><span>Integrations: online booking, payments, chat, CRM</span><span>Quoted separately</span></div>
-      <div><span>Extra changes beyond the monthly batch</span><span>Quoted separately, usually small</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- MONTHLY -->
-<section class="section" id="monthly" style="padding-top:0">
-  <div class="wrap">
-    <div class="monthly reveal">
-      <div class="m-head">
-        <div class="eyebrow mono">Monthly care, explained</div>
-        <h2 class="h2" style="font-size:clamp(34px,4.4vw,64px)">What your monthly care <span class="script">actually</span> covers.</h2>
-        <p class="lead">A website isn't a once-off thing. It has to be hosted, its address renewed, kept secure and kept up to date. Skip those and it quietly breaks or disappears. Our monthly care covers all of it, so you never have to think about it.</p>
-        <div class="per-day"><b>No contract</b><span class="mono">month to month</span></div>
-      </div>
-      <div class="m-grid">
-        <div class="m-item"><span class="mono">01</span><h3>Hosting</h3><p>Your site stays online day and night on fast, secure servers. No hosting means no website.</p></div>
-        <div class="m-item"><span class="mono">02</span><h3>Your web address</h3><p>We renew your .co.za every year, so it never lapses and nobody else can take it.</p></div>
-        <div class="m-item"><span class="mono">03</span><h3>Security</h3><p>The padlock certificate, backups and updates that keep your site safe and trusted by Google.</p></div>
-        <div class="m-item"><span class="mono">04</span><h3>Monthly changes</h3><p>New prices, photos, specials or hours. Send them once a month and we update the site.</p></div>
-        <div class="m-item"><span class="mono">05</span><h3>Fixes included</h3><p>If anything on your site breaks, we fix it at no extra cost.</p></div>
-        <div class="m-item"><span class="mono">06</span><h3>Every enquiry, delivered</h3><p>Messages from your site go straight to your WhatsApp and email.</p></div>
-        <div class="m-item"><span class="mono">07</span><h3>A monthly report</h3><p>How many people visited and how many got in touch, so you can see it working.</p></div>
-        <div class="m-item"><span class="mono">08</span><h3>A real person</h3><p>Questions answered on WhatsApp by the people who built your site. Cancel any time.</p></div>
-      </div>
+      <div><span>Changes after launch</span><span>Quoted per request, usually small</span></div>
     </div>
   </div>
 </section>
@@ -800,9 +763,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
       <details><summary>Who owns the web address?<span class="tg" aria-hidden="true"></span></summary><p>If you already own your domain, it stays yours and we just connect it. If we buy one for you, we manage it while the service runs.</p></details>
       <details><summary>Do you need my passwords?<span class="tg" aria-hidden="true"></span></summary><p>No. We never need your email, social media or other account logins.</p></details>
       <details><summary>What do you publish about my business?<span class="tg" aria-hidden="true"></span></summary><p>Only what you supply or approve. We don't invent reviews, licences or claims.</p></details>
-      <details><summary>Can I cancel?<span class="tg" aria-hidden="true"></span></summary><p>Yes, any time, with no notice period. The service runs to the end of the month you paid for.</p></details>
-      <details><summary>What if a payment fails?<span class="tg" aria-hidden="true"></span></summary><p>You get a notice and 7 days to sort it out. The site stays up during that time.</p></details>
-      <details><summary>How do I pay?<span class="tg" aria-hidden="true"></span></summary><p>A secure card or EFT link for the setup, then a monthly debit order. No cash. Full details are in our <a href="/terms/" target="_blank" rel="noopener" style="color:var(--lilac)">client terms</a>.</p></details>
+      <details><summary>How do I pay?<span class="tg" aria-hidden="true"></span></summary><p>One secure card or EFT payment link. No cash. Full details are in our <a href="/terms/" target="_blank" rel="noopener" style="color:var(--lilac)">client terms</a>.</p></details>
     </div>
   </div>
 </section>
