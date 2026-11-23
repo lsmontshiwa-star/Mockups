@@ -260,7 +260,7 @@ section{position:relative}
 }
 
 /* included */
-.included{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street);border-left:1px solid var(--street)}
+.included{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--street);border-left:1px solid var(--street)}
 .inc{padding:30px 28px 34px;border-right:1px solid var(--street);border-bottom:1px solid var(--street);min-height:230px;display:flex;flex-direction:column;gap:14px;transition:background .3s}
 .inc:hover{background:rgba(22,64,67,.35)}
 .inc svg{transition:filter .35s}
@@ -459,6 +459,37 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 @media (max-width: 900px){.pv-grid{grid-template-columns:1fr}}
 @media (max-width: 600px){.pv-form .row2{grid-template-columns:1fr}}
 @media (prefers-reduced-motion: reduce){.pv-route path,.pv-badge,.pv-go,.pv-go:after,.pv-form,.pv-wa:after{animation:none}}
+/* hero card additions (23 Nov) */
+.price-card .pc-head,.price-card .pc-foot{grid-column:1/-1}
+.price-card .pc-head .mono{color:var(--lilac);font-size:12px}
+.price-card .pc-foot{flex-direction:row!important;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--river);padding-top:16px;color:var(--mist);font-size:15px}
+.price-card .pc-foot b{font-size:inherit;font-family:var(--body);font-weight:600;color:var(--mint);letter-spacing:0}
+.hero-lede .hl{font-weight:500;color:var(--mint)}
+/* packages: Starter vs Premium (23 Nov) */
+.pk-intro{margin-top:clamp(72px,9vw,128px)}
+.pk-free{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.pk-free span{border:1px solid rgba(195,176,255,.55);border-radius:999px;padding:9px 16px;font-size:15px;color:var(--lilac);box-shadow:0 0 16px rgba(155,123,255,.2)}
+.pk-grid{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:clamp(32px,4vw,52px) 0 0}
+.pk{border-radius:26px;padding:clamp(26px,3vw,38px);background:var(--card);border:1px solid var(--river);display:flex;flex-direction:column;gap:14px;transition:border-color .4s,box-shadow .4s}
+.pk:hover{border-color:rgba(195,176,255,.6);box-shadow:0 0 50px rgba(155,123,255,.18)}
+.pk.hot{background:linear-gradient(180deg,rgba(195,176,255,.1),rgba(13,37,40,.86) 55%);border-color:rgba(195,176,255,.55)}
+.pk .mono{color:var(--lilac)}
+.pk-price{font-family:var(--display);font-weight:200;font-size:clamp(38px,3.6vw,54px);letter-spacing:-.04em;line-height:1}
+.pk-price small{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-left:8px}
+.pk-out{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(20px,1.8vw,25px);letter-spacing:-.03em;line-height:1.25}
+.pk-for{margin:0;color:var(--mist);font-size:16px}
+.pk .btn{align-self:flex-start;margin-top:6px}
+.cmp-wrap{overflow-x:auto;margin-top:clamp(28px,3vw,44px)}
+.cmp{width:100%;border-collapse:collapse;font-size:15px}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:14px 12px;border-bottom:1px solid var(--street)}
+.cmp thead th{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac);font-weight:400}
+.cmp tbody th{font-weight:500;color:var(--mint);width:30%}
+.cmp td{color:var(--sage);width:35%}
+.cmp td.n{color:var(--dim)}
+.cmp tr.diff td:last-child{color:var(--lilac)}
+.pk-note{margin-top:22px;color:var(--mist);font-size:16px;max-width:860px}
+@media (max-width: 900px){.pk-grid{grid-template-columns:1fr}}
+@media (max-width: 600px){.cmp{font-size:14px}.cmp th,.cmp td{padding:12px 6px}.cmp tbody th{width:34%}}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 </head>
@@ -475,10 +506,8 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
       <a href="#work">Work</a>
       <a href="#included">What you get</a>
       <a href="#how">How it works</a>
-      <a href="#value">Why us</a>
+      <a href="/founder/">Founder</a>
       <a href="#refer">Refer &amp; earn</a>
-      <a href="#faq">FAQ</a>
-      <a href="#preview">Preview yours</a>
       <a class="btn btn-primary wa-link" href="#">Get your site</a>
     </nav>
   </div>
@@ -514,17 +543,19 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     </h1>
     <div class="hero-foot">
       <div>
-        <p class="hero-lede">Business never switches off. Animated, phone-first websites built for hustlers, made to be found at <span class="script">2am</span>.</p>
+        <p class="hero-lede">We build your website and <b class="hl">submit your business to Google</b>, so when people search for what you do, they find you, not your competitor. Enquiries, orders and even payments come straight to you, at <span class="script">2am</span>.</p>
         <div class="hero-actions">
           <a class="btn btn-primary wa-link" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>Get your site</a>
           <a class="btn btn-ghost" href="#preview">Preview your site first</a>
         </div>
       </div>
       <div class="price-card">
-        <div><span class="mono">Preview</span><b>Before you pay</b></div>
-        <div><span class="mono">Live in</span><b>24 hours</b></div>
+        <div class="pc-head"><span class="mono">Free for the first year</span></div>
+        <div><span class="mono">Domain</span><b>Your free .co.za</b></div>
+        <div><span class="mono">Email</span><b>Your free email</b></div>
         <div><span class="mono">On Google</span><b>Found by name</b></div>
         <div><span class="mono">Enquiries</span><b>Straight to WhatsApp</b></div>
+        <div class="pc-foot"><span>From <b>R3,999</b> once-off</span><span>Live in 24 hours</span></div>
       </div>
     </div>
   </div>
@@ -535,70 +566,14 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   <span>Salons</span><span class="dot"></span><span>Plumbers</span><span class="dot"></span><span>Roofers</span><span class="dot"></span><span>Mechanics</span><span class="dot"></span><span>Caterers</span><span class="dot"></span><span>Barbers</span><span class="dot"></span><span>Builders</span><span class="dot"></span><span>Tutors</span><span class="dot"></span><span>Cleaners</span><span class="dot"></span><span>Photographers</span><span class="dot"></span>
 </div></div>
 
-<!-- FREE PREVIEW -->
-<section class="section pv" id="preview" aria-labelledby="pv-h">
-  <svg class="pv-route" viewBox="0 0 1600 160" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 140 C 380 40, 820 150, 1620 30"/></svg>
-  <div class="wrap">
-    <div class="pv-grid">
-      <div>
-        <div class="eyebrow mono reveal"><span class="pv-badge"><i></i>Website preview</span></div>
-        <h2 class="h2 reveal" id="pv-h">See your website <span class="script">before</span> you pay.</h2>
-        <ul class="pv-ticks reveal">
-          <li>Tell us your business name. We build a preview of your site, animated and made for phones.</li>
-          <li>It lands on your WhatsApp within 24 hours (weekdays). Open it, tap the buttons, show your family.</li>
-          <li>Like it? It goes live on your own address. Don't? You owe nothing.</li>
-        </ul>
-        <div class="pv-steps reveal"><span><b>01</b>You ask</span><span><b>02</b>We build</span><span><b>03</b>You decide</span></div>
-        <a class="btn btn-ghost pv-wa reveal" id="pvWa" href="https://wa.me/27761293926" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>Or ask on WhatsApp</a>
-      </div>
 
-      <form class="pv-form reveal" id="pvForm" novalidate>
-        <div id="pvAsk">
-          <h3>See my preview</h3>
-          <p class="small">Takes 20 seconds. No payment details.</p>
-          <label for="pvBusiness">Business name</label>
-          <input id="pvBusiness" required autocomplete="organization" placeholder="e.g. Thandi's Hair Studio">
-          <div class="row2">
-            <div><label for="pvTrade">What you do</label><input id="pvTrade" required list="pvTrades" placeholder="e.g. plumbing"></div>
-            <div><label for="pvArea">Area</label><input id="pvArea" required autocomplete="address-level2" placeholder="e.g. Sandton"></div>
-          </div>
-          <datalist id="pvTrades"><option value="Hair salon / barber"><option value="Plumbing"><option value="Roofing"><option value="Catering / food"><option value="Mechanic / auto"><option value="Building / construction"><option value="Cleaning"><option value="Events / decor"><option value="Photography"><option value="Retail / shop"></datalist>
-          <label for="pvNum">WhatsApp number</label>
-          <input id="pvNum" type="tel" required inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567">
-          <label for="pvEmail">Email (optional)</label>
-          <input id="pvEmail" type="email" autocomplete="email">
-          <div class="hp" aria-hidden="true"><label for="pvHp">Leave empty</label><input id="pvHp" tabindex="-1" autocomplete="off"></div>
-          <label class="consent"><input type="checkbox" id="pvConsent" required> <span>Yes, Digital Switch may WhatsApp me my preview and follow up about it. I can reply STOP at any time.</span></label>
-          <button class="btn btn-primary pv-go" type="submit" id="pvGo">Build my preview</button>
-          <div class="pv-msg" id="pvMsg" role="status"></div>
-          <p class="small">Previews are built Monday to Friday. We'll never share your number.</p>
-        </div>
-        <div class="pv-done" id="pvDone">
-          <h3>You're on the list ✨</h3>
-          <p>We'll WhatsApp your preview to <b id="pvDoneNum"></b> within 24 hours (weekdays).</p>
-          <p>Can't wait? Look through our work below, or message us now.</p>
-          <a class="btn btn-ghost pv-wa" id="pvWaDone" href="https://wa.me/27761293926" target="_blank" rel="noopener">WhatsApp us</a>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
 
-<!-- PROBLEM -->
-<section class="section">
-  <div class="wrap">
-    <div class="eyebrow mono reveal">The problem</div>
-    <h2 class="h2 reveal">Right now, someone is searching for exactly what you do. <span class="script">Can they find you?</span></h2>
-    <div class="truths">
-      <div class="truth reveal"><span class="num">01</span><h3>They search on their phone</h3><p>Most people look for a plumber, a salon or a mechanic on the phone in their pocket, often after hours. Your website has to work there first.</p></div>
-      <div class="truth reveal"><span class="num">02</span><h3>If you're not there, someone else is</h3><p>When your business doesn't show up, the customer doesn't wait. They call the next name on the list.</p></div>
-      <div class="truth reveal"><span class="num">03</span><h3>A social page isn't enough</h3><p>Your own website, on your own address, with tap-to-call and WhatsApp buttons, makes you look established and easy to book.</p></div>
-    </div>
-  </div>
-</section>
+
+
+
 
 <!-- WORK -->
-<section class="section" id="work" style="padding-top:0">
+<section class="section" id="work">
   <div class="wrap">
     <div class="work-head">
       <div>
@@ -671,20 +646,115 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
   </div>
 </section>
 
-<!-- INCLUDED -->
+<!-- FREE PREVIEW -->
+<section class="section pv" id="preview" aria-labelledby="pv-h">
+  <svg class="pv-route" viewBox="0 0 1600 160" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 140 C 380 40, 820 150, 1620 30"/></svg>
+  <div class="wrap">
+    <div class="pv-grid">
+      <div>
+        <div class="eyebrow mono reveal"><span class="pv-badge"><i></i>Free preview</span></div>
+        <h2 class="h2 reveal" id="pv-h">Want to see what we can do <span class="script">for you?</span></h2>
+        <ul class="pv-ticks reveal">
+          <li>Tell us your business name. We build a free preview of your own website, made for phones.</li>
+          <li>It lands on your WhatsApp within 24 hours (weekdays). Open it, tap the buttons, show your family.</li>
+          <li>Like it? It goes live on your own address. Don't? You owe nothing.</li>
+        </ul>
+        <div class="pv-steps reveal"><span><b>01</b>You ask</span><span><b>02</b>We build</span><span><b>03</b>You decide</span></div>
+        <a class="btn btn-ghost pv-wa reveal" id="pvWa" href="https://wa.me/27761293926" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>Or ask on WhatsApp</a>
+      </div>
+
+      <form class="pv-form reveal" id="pvForm" novalidate>
+        <div id="pvAsk">
+          <h3>See my preview</h3>
+          <p class="small">Takes 20 seconds. No payment details.</p>
+          <label for="pvBusiness">Business name</label>
+          <input id="pvBusiness" required autocomplete="organization" placeholder="e.g. Thandi's Hair Studio">
+          <div class="row2">
+            <div><label for="pvTrade">What you do</label><input id="pvTrade" required list="pvTrades" placeholder="e.g. plumbing"></div>
+            <div><label for="pvArea">Area</label><input id="pvArea" required autocomplete="address-level2" placeholder="e.g. Sandton"></div>
+          </div>
+          <datalist id="pvTrades"><option value="Hair salon / barber"><option value="Plumbing"><option value="Roofing"><option value="Catering / food"><option value="Mechanic / auto"><option value="Building / construction"><option value="Cleaning"><option value="Events / decor"><option value="Photography"><option value="Retail / shop"></datalist>
+          <label for="pvNum">WhatsApp number</label>
+          <input id="pvNum" type="tel" required inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567">
+          <label for="pvEmail">Email (optional)</label>
+          <input id="pvEmail" type="email" autocomplete="email">
+          <div class="hp" aria-hidden="true"><label for="pvHp">Leave empty</label><input id="pvHp" tabindex="-1" autocomplete="off"></div>
+          <label class="consent"><input type="checkbox" id="pvConsent" required> <span>Yes, Digital Switch may WhatsApp me my preview and follow up about it. I can reply STOP at any time.</span></label>
+          <button class="btn btn-primary pv-go" type="submit" id="pvGo">Build my preview</button>
+          <div class="pv-msg" id="pvMsg" role="status"></div>
+          <p class="small">Previews are built Monday to Friday. We'll never share your number.</p>
+        </div>
+        <div class="pv-done" id="pvDone">
+          <h3>You're on the list ✨</h3>
+          <p>We'll WhatsApp your preview to <b id="pvDoneNum"></b> within 24 hours (weekdays).</p>
+          <p>Can't wait? Look through our work above, or message us now.</p>
+          <a class="btn btn-ghost pv-wa" id="pvWaDone" href="https://wa.me/27761293926" target="_blank" rel="noopener">WhatsApp us</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED: outcomes first, then the two packages (23 Nov 2026; items from INV-011 / QUO-012) -->
 <section class="section" id="included" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow mono reveal">What you get</div>
-    <h2 class="h2 reveal">Everything to get you found. <span class="script">No hidden extras.</span></h2>
+    <h2 class="h2 reveal">Not just a website. <span class="script">More customers.</span></h2>
     <div class="included">
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/></svg><h3>Built for phones first</h3><p>Fast to load, easy to read and simple to use on any phone.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M4 16c4-8 8-8 12 0s8 8 12 0"/><circle cx="16" cy="16" r="2"/></svg><h3>Animated and custom</h3><p>Designed for your business, with motion that makes people stop scrolling.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M6 6h6l2 6-3 2a14 14 0 0 0 7 7l2-3 6 2v6a2 2 0 0 1-2 2A22 22 0 0 1 4 8a2 2 0 0 1 2-2Z"/></svg><h3>Tap to call and WhatsApp</h3><p>Customers reach you in one tap, plus a quote form and a map.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c4 4 4 20 0 24M16 4c-4 4-4 20 0 24"/></svg><h3>Your own web address</h3><p>Connected to your own domain, so you look established.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"/><path d="m21 21 7 7"/></svg><h3>Found on Google (SEO)</h3><p>We set your site up so Google understands your name, services and area, and shows it when people search for your business.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M16 3 5 7v8c0 7 5 12 11 14 6-2 11-7 11-14V7Z"/></svg><h3>Live and secure</h3><p>On your own web address, with the padlock certificate that keeps it trusted by Google.</p></div>
-      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M5 9h22M5 16h22M5 23h14"/></svg><h3>Changes when you need them</h3><p>New text, photos, prices or branding later on? Send them and we quote the update.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="9"/><path d="m21 21 7 7"/></svg><h3>Come up first on Google</h3><p>People search for what you do and find your competitor. We submit your business to Google, so they find you instead.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c4 4 4 20 0 24M16 4c-4 4-4 20 0 24"/></svg><h3>Look like the market leader</h3><p>Your own .co.za and an official business email make you look established next to anyone.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M16 3 5 7v8c0 7 5 12 11 14 6-2 11-7 11-14V7Z"/></svg><h3>Charge what you're worth</h3><p>A premium look supports premium prices. Customers judge you before they call.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><path d="M6 6h6l2 6-3 2a14 14 0 0 0 7 7l2-3 6 2v6a2 2 0 0 1-2 2A22 22 0 0 1 4 8a2 2 0 0 1 2-2Z"/></svg><h3>Never miss an enquiry</h3><p>Customers reach you on WhatsApp in one tap, even at 2am, instead of getting lost in your DMs.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" rx="3"/><path d="M4 13h24M9 19h5"/></svg><h3>Wake up to payments</h3><p>With Premium, customers order and pay on your site while you sleep. The money goes straight to your account.</p></div>
+      <div class="inc reveal"><svg viewBox="0 0 32 32"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/></svg><h3>Made for their phone</h3><p>Fast, simple and built for the phone in your customer's pocket, where they search.</p></div>
     </div>
+
+    <div class="pk-intro">
+      <div class="eyebrow mono reveal">Two ways to switch on</div>
+      <h2 class="h2 reveal" style="font-size:clamp(34px,4.4vw,64px)">Pick the one that <span class="script">fits</span> how you sell.</h2>
+      <p class="lead reveal">Both come with these, free for the first year:</p>
+      <div class="pk-free reveal"><span>Your own .co.za domain</span><span>A professional email</span><span>Hosting</span><span>SSL security</span><span>Submitted to Google</span></div>
+    </div>
+    <ul class="pk-grid">
+      <li class="pk reveal">
+        <span class="mono">Starter · get found, get enquiries</span>
+        <div class="pk-price">R3,999<small>once-off</small></div>
+        <p class="pk-out">Customers find you, trust you and message you.</p>
+        <p class="pk-for">For businesses where people call or WhatsApp to book or order: plumbers, salons, builders, cleaners, tutors.</p>
+        <a class="btn btn-ghost" href="#preview">See my free preview</a>
+      </li>
+      <li class="pk hot reveal">
+        <span class="mono">Premium · sell and get paid online</span>
+        <div class="pk-price">R7,999<small>once-off</small></div>
+        <p class="pk-out">Customers order and pay on your site while you sleep. Wake up to payments, not messages.</p>
+        <p class="pk-for">For businesses that sell food or products, or take bookings: restaurants, shops, caterers, venues.</p>
+        <a class="btn btn-primary" href="#preview">See my free preview</a>
+      </li>
+    </ul>
+    <div class="cmp-wrap reveal">
+    <table class="cmp">
+      <thead><tr><th scope="col">What's included</th><th scope="col">Starter</th><th scope="col">Premium</th></tr></thead>
+      <tbody>
+        <tr class="diff"><th scope="row">Your website</th><td>One page, up to five sections</td><td>Several pages that work like an app. Customers add it to their home screen</td></tr>
+        <tr><th scope="row">Built for phones first</th><td>✓</td><td>✓</td></tr>
+        <tr><th scope="row">Tap to call and contact form</th><td>✓</td><td>✓</td></tr>
+        <tr class="diff"><th scope="row">How customers order</th><td>WhatsApp buttons with the product and price filled in, and an order form to your email</td><td>A cart and checkout for delivery or collection. WhatsApp ordering stays too</td></tr>
+        <tr class="diff"><th scope="row">Customers pay on your site</th><td class="n">No</td><td>Card, Instant EFT, Apple Pay and Google Pay, paid straight into your own account</td></tr>
+        <tr class="diff"><th scope="row">Products or menu</th><td>Products in a spotlight, each with its own order button</td><td>A full menu or catalogue with photos, descriptions and prices, as many items as you like</td></tr>
+        <tr class="diff"><th scope="row">Order alerts</th><td>By email</td><td>On WhatsApp and email, with the customer's details</td></tr>
+        <tr class="diff"><th scope="row">Delivery areas and fees</th><td class="n">No</td><td>Shown at checkout</td></tr>
+        <tr class="diff"><th scope="row">Extra pages</th><td class="n">No</td><td>Your own pages for things like events, catering, partners or a special product</td></tr>
+        <tr><th scope="row">Submitted to Google</th><td>✓ Titles, descriptions and a sitemap</td><td>✓ Same</td></tr>
+        <tr><th scope="row">Own .co.za domain with SSL</th><td>✓ Free for the first year</td><td>✓ Free for the first year</td></tr>
+        <tr><th scope="row">Professional email</th><td>✓ On your .co.za, set up for you</td><td>✓ On your .co.za, set up for you</td></tr>
+        <tr><th scope="row">Hosting</th><td>✓ Free for the first year</td><td>✓ Free for the first year</td></tr>
+        <tr><th scope="row">Live within 24 hours</th><td>✓ Of payment</td><td>✓ Of the final payment</td></tr>
+        <tr class="diff"><th scope="row">Changes</th><td>One round before launch</td><td>Unlimited changes to words, photos and layout in the first month</td></tr>
+        <tr class="diff"><th scope="row">How you pay</th><td>Once, in full</td><td>50% deposit to start, 50% before launch</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="pk-note reveal">See a free preview of your own site before you pay anything. Bigger projects are quoted.</p>
   </div>
 </section>
 
@@ -694,43 +764,15 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <div class="how-intro">
       <div class="eyebrow mono reveal">How it works</div>
       <h2 class="h2 reveal">From hello to <span class="script">live</span> in a day.</h2>
-      <p class="lead reveal">No meetings needed unless you want one. It all happens on WhatsApp.</p>
     </div>
     <div class="stops" id="stops">
       <div class="stops-line" aria-hidden="true"><span class="base"></span><span class="fill" id="stopsFill"></span></div>
       <ol class="stop-list">
-      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 01</span><h3>Say go</h3><p>Message us on WhatsApp. Tell us about your business, or reply "yes" to a site we've already built for you.</p></li>
-      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 02</span><h3>Approve and pay</h3><p>Happy with your preview? You get your quote and a secure payment link. The 24-hour clock starts when payment clears.</p></li>
-      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 03</span><h3>Send what you like</h3><p>Your logo, photos, services and areas. It's optional: the site goes live either way.</p></li>
-      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 04</span><h3>You're <span class="script glow">switched on</span></h3><p>Live on your own web address within 24 hours.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 01</span><h3>Say go</h3><p>Ask for a free preview, or message us on WhatsApp.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 02</span><h3>Approve and pay</h3><p>Like what you see? Pay with a secure link.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 03</span><h3>Send what you like</h3><p>Your logo, photos and details. Optional.</p></li>
+      <li class="stop"><span class="dot" aria-hidden="true"></span><span class="mono">Stop 04</span><h3>You're <span class="script glow">switched on</span></h3><p>Live on your own .co.za within 24 hours.</p></li>
       </ol>
-    </div>
-  </div>
-</section>
-
-<!-- VALUE (was pricing; prices removed, quoted per project) -->
-<section class="section" id="value" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow mono reveal">Why Digital Switch</div>
-    <h2 class="h2 reveal">Built once. <span class="script">Yours</span> to grow.</h2>
-    <p class="lead reveal">Every business is different, and we build for clients in South Africa and abroad, so we quote per project, in your currency. See a preview of your site first, then decide.</p>
-    <div class="plans">
-      <div class="plan hot reveal">
-        <span class="mono">The build</span>
-        <div class="amount"><b class="word">See it first</b></div>
-        <ul>
-          <li>Your website, finished with your logo, photos and details</li>
-          <li>Built for phones first: tap to call, quote form, fast loading</li>
-          <li>Found on Google: set up to come up when people search your business name</li>
-          <li>Connected to your own web address</li>
-          <li>Live within 24 hours of approval</li>
-        </ul>
-        <a class="btn btn-primary" href="#preview">See my preview</a>
-      </div>
-      </div>
-    <div class="extras reveal">
-      <div><span>Integrations: online booking, payments, chat, CRM</span><span>Quoted separately</span></div>
-      <div><span>Changes after launch</span><span>Quoted per request, usually small</span></div>
     </div>
   </div>
 </section>
@@ -759,11 +801,11 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <div class="eyebrow mono reveal">Good questions</div>
     <h2 class="h2 reveal">Before you <span class="script">switch</span>.</h2>
     <div class="faq reveal">
-      <details><summary>How much does it cost?<span class="tg" aria-hidden="true"></span></summary><p>It depends on what your business needs, and we work with clients in South Africa and abroad, so we quote per project, in your currency. You see a preview of your site first, and only pay if you decide to go live.</p></details>
-      <details><summary>Who owns the web address?<span class="tg" aria-hidden="true"></span></summary><p>If you already own your domain, it stays yours and we just connect it. If we buy one for you, we manage it while the service runs.</p></details>
+      <details><summary>How much does it cost?<span class="tg" aria-hidden="true"></span></summary><p>Starter is R3,999 and Premium is R7,999, once-off. Bigger projects are quoted. You see a free preview of your site before you pay anything.</p></details>
+      <details><summary>What happens after the first year?<span class="tg" aria-hidden="true"></span></summary><p>You renew your domain, email and hosting directly with the provider for a small yearly fee. We email you a month before it's due.</p></details>
+      <details><summary>Who owns the web address?<span class="tg" aria-hidden="true"></span></summary><p>If you already have one, we connect it. If not, we register your .co.za for you, free for the first year.</p></details>
+      <details><summary>How do I pay?<span class="tg" aria-hidden="true"></span></summary><p>Starter is paid once, in full. Premium is 50% to start and 50% before launch. One secure card or EFT link. Full details are in our <a href="/terms/" target="_blank" rel="noopener" style="color:var(--lilac)">client terms</a>.</p></details>
       <details><summary>Do you need my passwords?<span class="tg" aria-hidden="true"></span></summary><p>No. We never need your email, social media or other account logins.</p></details>
-      <details><summary>What do you publish about my business?<span class="tg" aria-hidden="true"></span></summary><p>Only what you supply or approve. We don't invent reviews, licences or claims.</p></details>
-      <details><summary>How do I pay?<span class="tg" aria-hidden="true"></span></summary><p>One secure card or EFT payment link. No cash. Full details are in our <a href="/terms/" target="_blank" rel="noopener" style="color:var(--lilac)">client terms</a>.</p></details>
     </div>
   </div>
 </section>
@@ -789,7 +831,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
         <span><span class="w1">Digital</span><span class="w2">Switch</span></span>
       </a>
       <nav class="foot-links" aria-label="Footer">
-        <a href="#work">Work</a><a href="#value">Why us</a><a href="#refer">Refer &amp; earn</a><a href="/founder/">Founder</a><a href="/terms/" target="_blank" rel="noopener">Terms</a><a class="wa-link" href="#">WhatsApp</a>
+        <a href="#work">Work</a><a href="#included">What you get</a><a href="#refer">Refer &amp; earn</a><a href="/founder/">Founder</a><a href="/terms/" target="_blank" rel="noopener">Terms</a><a class="wa-link" href="#">WhatsApp</a>
       </nav>
     </div>
     <div class="foot-base mono"><span>Web design studio · Johannesburg, South Africa</span><span>Websites that move</span></div>
