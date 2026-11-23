@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Refer a business, earn R500 | Digital Switch</title>
-<meta name="description" content="Know a business that needs a website? Send its name to Digital Switch on WhatsApp. We follow up, and if they buy, you earn R500.">
+<meta name="description" content="Know a business that needs a website? Send us its name in a quick form. We follow up, and if they buy, you earn R500.">
 <link rel="canonical" href="https://digitalswitch.co.za/refer/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Digital Switch">
 <meta property="og:url" content="https://digitalswitch.co.za/refer/">
 <meta property="og:title" content="Know a business that needs a website? Earn R500.">
-<meta property="og:description" content="Send us the name on WhatsApp. We follow up. If they buy, you get R500. No limit.">
+<meta property="og:description" content="Send us the name. We follow up. If they buy, you get R500. No limit.">
 <meta property="og:image" content="https://digitalswitch.co.za/brand/ds-header-banner-neon.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071719">
@@ -234,9 +234,9 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <div class="eyebrow mono">Referral programme</div>
     <h1 class="headline">Know a business that needs a website?</h1>
     <div class="earn"><span class="sign">R500</span><svg class="switch" viewBox="0 0 78 44" aria-hidden="true"><rect width="78" height="44" rx="22" fill="#c3b0ff"/><circle class="knob" cx="56" cy="22" r="15" fill="#071719"/></svg></div>
-    <p class="lead">Send us its name on WhatsApp. We do the rest. If they buy a website from us, you get R500. No selling, no limit.</p>
+    <p class="lead">Send us its name in a quick form. We do the rest. If they buy a website from us, you get R500. No selling, no limit.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary wa-ref" href="#">Send a business on WhatsApp</a>
+      <a class="btn btn-primary wa-ref" href="#">Send a business</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
   </div>
@@ -248,7 +248,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <div class="eyebrow mono reveal">How it works</div>
     <h2 class="h2 reveal">Three steps. <span class="script">One</span> is yours.</h2>
     <ol class="steps">
-      <li class="step reveal"><div class="num"><span class="mono">01 · You</span></div><h3>Send us the name</h3><p>WhatsApp us the business name and area, plus a number if you have one. Send one business or ten.</p></li>
+      <li class="step reveal"><div class="num"><span class="mono">01 · You</span></div><h3>Send us the name</h3><p>Fill in the business name, what they do, the area and a number if you have one. Send one business or ten.</p></li>
       <li class="step reveal"><div class="num"><span class="mono">02 · Us</span></div><h3>We follow up</h3><p>We contact the business, show them a preview of their own website and handle everything from there.</p></li>
       <li class="step last reveal"><div class="num"><span class="mono">03 · You</span></div><h3>They buy, you get <span class="script">R500</span></h3><p>Paid to your bank account by EFT within 7 days of their payment clearing.</p></li>
     </ol>
@@ -264,12 +264,11 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
       <div class="chips reveal"><span>Salons and barbers</span><span>Plumbers</span><span>Electricians</span><span>Mechanics</span><span>Builders</span><span>Caterers</span><span>Cleaners</span><span>Photographers</span><span>Tutors</span><span>Shops and spaza</span><span>Churches and NGOs</span><span>Anyone with a WhatsApp-only business</span></div>
     </div>
     <div class="reveal">
-      <p class="lead" style="margin-top:0">Tap the button and WhatsApp opens with this ready to fill in:</p>
-      <div class="msg" style="margin-top:20px">Hi Digital Switch! I'd like to refer a business that needs a website.
-<b>Business name:</b>
-<b>Area:</b>
-<b>Their number (if you have it):</b>
-<b>My name:</b></div>
+      <p class="lead" style="margin-top:0">Tap the button and fill in a short form. It asks for:</p>
+      <div class="msg" style="margin-top:20px"><b>Your name</b> and WhatsApp number, so we can pay you
+<b>Business name</b> and what they do
+<b>Area or town</b>
+<b>Their number</b>, if you have it</div>
       <div class="hero-actions"><a class="btn btn-primary wa-ref" href="#">Send a business</a></div>
     </div>
   </div>
@@ -322,8 +321,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 
 <script>
 (function(){
-  var WA = 'https://wa.me/27761293926?text=' + encodeURIComponent("Hi Digital Switch! I'd like to refer a business that needs a website.\nBusiness name:\nArea:\nTheir number (if you have it):\nMy name:");
-  document.querySelectorAll('.wa-ref').forEach(function(a){ a.href = WA; a.target = '_blank'; a.rel = 'noopener'; });
+  document.querySelectorAll('.wa-ref').forEach(function(a){ a.href = '/refer/send/'; });
   var btn = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
   btn.addEventListener('click', function(){ var o = links.classList.toggle('open'); btn.setAttribute('aria-expanded', o); btn.textContent = o ? 'Close' : 'Menu'; });
   links.addEventListener('click', function(e){ if(e.target.closest('a')){ links.classList.remove('open'); btn.setAttribute('aria-expanded', false); btn.textContent = 'Menu'; } });
