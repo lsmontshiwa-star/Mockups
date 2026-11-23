@@ -209,6 +209,17 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 .pkg li{margin:6px 0}
 .note{margin-top:22px;color:var(--mist);font-size:16px}
 @media (max-width: 900px){.pkgs{grid-template-columns:1fr}}
+.pkg .for{margin:0;color:var(--mist);font-size:16px}
+.pkg .out{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(20px,1.8vw,24px);letter-spacing:-.03em;line-height:1.25}
+.cmp{width:100%;border-collapse:collapse;margin-top:clamp(28px,3vw,44px);font-size:15px}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:14px 12px;border-bottom:1px solid var(--street)}
+.cmp thead th{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac);font-weight:400}
+.cmp tbody th{font-weight:500;color:var(--mint);width:30%}
+.cmp td{color:var(--sage);width:35%}
+.cmp td.y{color:var(--mint)}
+.cmp td.n{color:var(--dim)}
+.cmp tr.diff td:last-child{color:var(--lilac)}
+@media (max-width: 600px){.cmp{font-size:14px}.cmp th,.cmp td{padding:12px 6px}.cmp tbody th{width:34%}}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 </head>
@@ -275,27 +286,42 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <div class="free reveal"><span>Their own .co.za domain</span><span>A professional email on it</span><span>Hosting</span><span>SSL security</span><span>Set up on Google</span></div>
     <ul class="pkgs">
       <li class="step pkg reveal">
-        <div class="num"><span class="mono">Starter · one-page website</span></div>
+        <div class="num"><span class="mono">Starter · get found, get enquiries</span></div>
         <div class="price">R3,999<small>once-off</small></div>
-        <ul>
-          <li>Custom one-page website, built for phones first</li>
-          <li>WhatsApp ordering or enquiry buttons, tap to call</li>
-          <li>Order or contact form straight to their inbox</li>
-          <li>Products or services shown with their own buttons</li>
-        </ul>
+        <p class="out">Customers find them, trust them and message them.</p>
+        <p class="for">For businesses where people call or WhatsApp to book or order: plumbers, salons, builders, cleaners, tutors.</p>
       </li>
       <li class="step pkg last reveal">
-        <div class="num"><span class="mono">Premium · works like an app</span></div>
+        <div class="num"><span class="mono">Premium · sell and get paid online</span></div>
         <div class="price">R7,999<small>once-off</small></div>
-        <ul>
-          <li>Multi-page website that installs like an app</li>
-          <li>Customers order, book and pay online: card, Instant EFT, Apple Pay, Google Pay</li>
-          <li>Every order on WhatsApp and email</li>
-          <li>Extra pages: menu, products, events, partners</li>
-        </ul>
+        <p class="out">Customers order and pay on the site, any time, without a back-and-forth.</p>
+        <p class="for">For businesses that sell food or products, or take bookings: restaurants, shops, caterers, venues.</p>
       </li>
     </ul>
-    <p class="note reveal">They see a free preview of their own site before paying anything. It goes live within 24 hours of payment. Bigger projects are quoted.</p>
+    <div class="reveal" style="overflow-x:auto">
+    <table class="cmp">
+      <thead><tr><th scope="col">What's included</th><th scope="col">Starter</th><th scope="col">Premium</th></tr></thead>
+      <tbody>
+        <tr class="diff"><th scope="row">The website</th><td>One page, up to five sections</td><td>Several pages that work like an app. Customers add it to their home screen</td></tr>
+        <tr><th scope="row">Built for phones first</th><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><th scope="row">Tap to call and contact form</th><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr class="diff"><th scope="row">How customers order</th><td>WhatsApp buttons with the product and price filled in, and an order form to their email</td><td>A cart and checkout for delivery or collection. WhatsApp ordering stays too</td></tr>
+        <tr class="diff"><th scope="row">Online payments</th><td class="n">No</td><td>Card, Instant EFT, Apple Pay and Google Pay, paid into their own account</td></tr>
+        <tr class="diff"><th scope="row">Products or menu</th><td>Products shown in a spotlight, each with its own order button</td><td>A full menu or catalogue with photos, descriptions and prices, as many items as they like</td></tr>
+        <tr class="diff"><th scope="row">Order alerts</th><td>By email</td><td>On WhatsApp and email, with the customer's details</td></tr>
+        <tr class="diff"><th scope="row">Delivery areas and fees</th><td class="n">No</td><td>Shown at checkout</td></tr>
+        <tr class="diff"><th scope="row">Extra pages</th><td class="n">No</td><td>Their own pages for things like events, catering, partners or a special product</td></tr>
+        <tr><th scope="row">Found on Google</th><td class="y">✓ Titles, descriptions and a sitemap, submitted to Google</td><td class="y">✓ Same</td></tr>
+        <tr><th scope="row">Own .co.za domain with SSL</th><td class="y">✓ Free for the first year</td><td class="y">✓ Free for the first year</td></tr>
+        <tr><th scope="row">Professional email on that domain</th><td class="y">✓ Set up for them</td><td class="y">✓ Set up for them</td></tr>
+        <tr><th scope="row">Hosting</th><td class="y">✓ Free for the first year</td><td class="y">✓ Free for the first year</td></tr>
+        <tr><th scope="row">Live within 24 hours</th><td class="y">✓ Of payment</td><td class="y">✓ Of the final payment</td></tr>
+        <tr class="diff"><th scope="row">Changes</th><td>One round before launch</td><td>Unlimited changes to words, photos and layout in the first month</td></tr>
+        <tr class="diff"><th scope="row">How they pay</th><td>Once, in full</td><td>50% deposit to start, 50% before launch</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note reveal">They see a free preview of their own site before paying anything. After the first year, the domain, email and hosting carry a small yearly renewal, and we tell them the amount before it's due. They can also take their domain with them. Bigger projects are quoted.</p>
   </div>
 </section>
 
