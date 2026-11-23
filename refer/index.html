@@ -199,6 +199,16 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
 .faq details[open] .tg{background:var(--lilac);box-shadow:0 0 14px rgba(195,176,255,.6)}
 .faq details[open] .tg::after{transform:translateX(20px);background:var(--night)}
 .faq details p{margin:0 0 26px;max-width:760px;color:var(--sage)}
+/* offer: what the business gets */
+.free{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.free span{border:1px solid rgba(195,176,255,.55);border-radius:999px;padding:9px 16px;font-size:15px;color:var(--lilac);box-shadow:0 0 16px rgba(155,123,255,.2)}
+.pkgs{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:clamp(36px,4vw,56px) 0 0}
+.pkg .price{font-family:var(--display);font-weight:200;font-size:clamp(34px,3.4vw,48px);letter-spacing:-.04em;line-height:1}
+.pkg .price small{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-left:8px}
+.pkg ul{margin:4px 0 0;padding-left:20px;color:var(--sage);font-size:16px}
+.pkg li{margin:6px 0}
+.note{margin-top:22px;color:var(--mist);font-size:16px}
+@media (max-width: 900px){.pkgs{grid-template-columns:1fr}}
 </style>
 <script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 </head>
@@ -213,6 +223,7 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a href="#how">How it works</a>
+      <a href="#offer">What they get</a>
       <a href="#send">What to send</a>
       <a href="#rules">Questions</a>
       <a href="/">Digital Switch</a>
@@ -252,6 +263,55 @@ footer{border-top:1px solid transparent;border-image:linear-gradient(90deg,trans
       <li class="step reveal"><div class="num"><span class="mono">02 · Us</span></div><h3>We follow up</h3><p>We contact the business, show them a preview of their own website and handle everything from there.</p></li>
       <li class="step last reveal"><div class="num"><span class="mono">03 · You</span></div><h3>They buy, you get <span class="script">R500</span></h3><p>Paid to your bank account by EFT within 7 days of their payment clearing.</p></li>
     </ol>
+  </div>
+</section>
+
+<!-- OFFER: what the business gets (matches INV-011 Dudu M and QUO-012 London Gawulo, 23 Nov 2026) -->
+<section class="section" id="offer" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow mono reveal">What the business gets</div>
+    <h2 class="h2 reveal">Not just a website. <span class="script">The whole</span> setup.</h2>
+    <p class="lead reveal">So they look established, get found on Google and get enquiries straight to WhatsApp. Every website comes with these, free for the first year:</p>
+    <div class="free reveal"><span>Their own .co.za domain</span><span>A professional email on it</span><span>Hosting</span><span>SSL security</span><span>Set up on Google</span></div>
+    <ul class="pkgs">
+      <li class="step pkg reveal">
+        <div class="num"><span class="mono">Starter · one-page website</span></div>
+        <div class="price">R3,999<small>once-off</small></div>
+        <ul>
+          <li>Custom one-page website, built for phones first</li>
+          <li>WhatsApp ordering or enquiry buttons, tap to call</li>
+          <li>Order or contact form straight to their inbox</li>
+          <li>Products or services shown with their own buttons</li>
+        </ul>
+      </li>
+      <li class="step pkg last reveal">
+        <div class="num"><span class="mono">Premium · works like an app</span></div>
+        <div class="price">R7,999<small>once-off</small></div>
+        <ul>
+          <li>Multi-page website that installs like an app</li>
+          <li>Customers order, book and pay online: card, Instant EFT, Apple Pay, Google Pay</li>
+          <li>Every order on WhatsApp and email</li>
+          <li>Extra pages: menu, products, events, partners</li>
+        </ul>
+      </li>
+    </ul>
+    <p class="note reveal">They see a free preview of their own site before paying anything. It goes live within 24 hours of payment. Bigger projects are quoted.</p>
+  </div>
+</section>
+
+<!-- HOW TO MENTION IT -->
+<section class="section" id="say" style="padding-top:0">
+  <div class="wrap send">
+    <div>
+      <div class="eyebrow mono reveal">If it comes up</div>
+      <h2 class="h2 reveal" style="font-size:clamp(34px,4.4vw,64px)">You don't sell. <span class="script">Just</span> mention it.</h2>
+      <p class="lead reveal">No pitch needed. Send us the name and we do the rest. If they ask, any of these is enough:</p>
+    </div>
+    <div class="msg reveal">"I know a team that builds websites. They'll show you a preview of yours <b>for free</b> first."
+
+"It comes with your own <b>.co.za</b>, a business email and hosting, free for the first year."
+
+"From <b>R3,999 once-off</b>. Live within 24 hours."</div>
   </div>
 </section>
 
