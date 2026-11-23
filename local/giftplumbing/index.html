@@ -247,7 +247,7 @@ body.intro .top{opacity:0;transform:translate(-50%,-20px)}
 .gpc-big{position:absolute;left:var(--cxp);top:calc(var(--cyp) + var(--R) + 18px);transform:translateX(-50%);text-align:center;opacity:0;will-change:opacity,transform}
 .gpc-n{display:block;font:800 clamp(110px,15vw,240px)/.8 var(--display);letter-spacing:-.06em;color:var(--orange)}
 .gpc-nl{display:block;margin-top:14px;font:500 13px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink2)}
-.gpc-side{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);width:min(560px,44vw)}
+.gpc-side{position:absolute;right:var(--pad);top:96px;bottom:28px;width:min(560px,44vw);display:flex;flex-direction:column;justify-content:center}
 .gpc-h{margin:0 0 26px;font:800 clamp(38px,4.4vw,72px)/.95 var(--display);letter-spacing:-.04em;color:var(--ink);opacity:0;transform:translate3d(0,40px,0);filter:blur(6px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1.3s cubic-bezier(.16,1,.3,1),filter 1s}
 .gpc.h-on .gpc-h{opacity:1;transform:none;filter:none}
 .gpc-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -259,14 +259,20 @@ body.intro .top{opacity:0;transform:translate(-50%,-20px)}
 .gpc-card span{grid-column:1;font:400 15px/1.45 var(--mono);color:var(--ink2);transition:color .45s}
 .gpc-card em{grid-column:2;grid-row:1/3;align-self:center;font:500 12px var(--mono);font-style:normal;letter-spacing:.14em;color:var(--mute);transition:color .45s}
 @media (hover:hover){.gpc-card:hover{background:var(--blue);color:#fff;transform:translate3d(-8px,0,0)}.gpc-card:hover span,.gpc-card:hover em{color:rgba(255,255,255,.86)}}
+@media (min-width:821px) and (max-height:760px){.gpc-h{font-size:clamp(32px,6.4vh,50px);margin:0 0 14px}.gpc-list{gap:7px}.gpc-card{padding:12px 18px;border-radius:18px}.gpc-card b{font-size:19px}.gpc-card span{font-size:14px}}
 @media (max-width:820px){
-  .gpc-side{left:20px;right:20px;width:auto;top:auto;bottom:calc(22px + 100lvh - 100svh);transform:none}
+  .gpc-side{left:20px;right:20px;width:auto;top:auto;bottom:calc(22px + 100lvh - 100svh);transform:none;display:block}
   .gpc-h{font-size:clamp(30px,8.4vw,44px);margin:0 0 14px}
   .gpc-card{padding:12px 16px;border-radius:18px;gap:2px 12px}
   .gpc-card b{font-size:18px}.gpc-card span{font-size:13.5px;line-height:1.35}
   .gpc-list{gap:7px}
   .gpc-n{font-size:clamp(70px,19vw,110px)}.gpc-nl{margin-top:6px;font-size:11px}
   .gpc-big{text-align:left;transform:none;left:calc(var(--cxp) + var(--R) + 14px);top:calc(var(--cyp) - 46px)}
+}
+@media (max-width:820px) and (max-height:720px){
+  .gpc-h{font-size:26px;margin:0 0 10px}
+  .gpc-list{gap:5px}.gpc-card{padding:8px 14px;border-radius:15px}
+  .gpc-card b{font-size:16px}.gpc-card span{font-size:12.5px;line-height:1.3}
 }
 
 /* ---------- where: arched drifting photo row ---------- */
@@ -323,17 +329,6 @@ body.intro .top{opacity:0;transform:translate(-50%,-20px)}
 .lgc{display:block;height:40px;background-repeat:no-repeat;mix-blend-mode:multiply}footer .lgc{height:44px}
 .wm{font:700 17px/1 var(--display);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}.wm em{font-style:normal;color:var(--accent)}
 </style>
-<!-- ds-og -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Gift Plumbing · Plumbing installation and repairs across Gauteng: website preview">
-<meta property="og:description" content="A preview of the new website Digital Switch built for Gift Plumbing · Plumbing installation and repairs across Gauteng. Open it on your phone.">
-<meta property="og:image" content="https://digitalswitch.co.za/local/giftplumbing/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitalswitch.co.za/local/giftplumbing/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://digitalswitch.co.za/local/giftplumbing/og.jpg">
-<!-- /ds-og -->
 </head>
 <body>
 <!-- built by the DS sites engine · look: gp-gift · sections: gp-drop, gp-wipe, gp-collapse, gp-curve, gp-quote -->
@@ -563,7 +558,7 @@ const eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 DS.onFrame(()=>{const sy=scrollY;if(sy+H*1.3<top||sy>top+tot+H)return;
   const p=DS.SHOT?1:DS.clamp((sy-top)/tot);if(p===last)return;last=p;
   const mob=W<=820;
-  const cx=mob?W*.27:W*.27,cy=mob?H*.22:H*.36,r0=Math.hypot(Math.max(cx,W-cx),Math.max(cy,H-cy)),r1=mob?W*.2:Math.min(W*.17,H*.24);
+  const rm=W*.2,cx=mob?W*.27:W*.27,cy=mob?Math.max(H*.22,84+rm+6):H*.36,r0=Math.hypot(Math.max(cx,W-cx),Math.max(cy,H-cy)),r1=mob?W*.2:Math.min(W*.17,H*.24);
   const c=eio(DS.clamp(p/.34)),R=r0+(r1-r0)*c;
   ph.style.clipPath=`circle(${R.toFixed(1)}px at ${cx.toFixed(1)}px ${cy.toFixed(1)}px)`;
   const iw=+ph.dataset.iw,ih=+ph.dataset.ih,k=Math.max(W/iw,H/ih),fx=(W-iw*k)/2+(+ph.dataset.fx)*iw*k,fy=(H-ih*k)/2+(+ph.dataset.fy)*ih*k,z=1+(mob?.24:.4)*c;
