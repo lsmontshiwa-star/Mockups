@@ -59,6 +59,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .chip b{font:800 30px var(--d);letter-spacing:-.03em}
 .chip .st{color:#ffc24b;letter-spacing:2px;font-size:15px}
 .chip small{display:block;font:500 13px var(--t);color:rgba(255,255,255,.85)}
+/* no browser scrollbar; a thin progress line on the right edge instead */
+html{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.prog{position:fixed;top:0;right:0;width:3px;height:100%;z-index:60;pointer-events:none}.prog i{display:block;width:100%;height:100%;background:var(--clay);border-radius:0 0 0 3px;transform:scaleY(0);transform-origin:0 0;will-change:transform}
 #drops,#rain{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 /* 2 the storm screen rises over the hero (hero stays put underneath), then pins and passes through three phases: heavy rain, drizzle, sun */
 .stack{position:relative}
@@ -165,6 +168,7 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   <a class="q" href="#quote">Free estimate</a>
 </nav>
 
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
 <div class="stack" id="stack">
 <header class="hero" id="top">
   <div class="ph"><img src="/assets/roofer/hero.webp" alt="A roofing crew replacing the roof of a family home" fetchpriority="high"></div>
@@ -260,7 +264,9 @@ function Rain(cv,dense){var c=cv.getContext('2d'),d=[],W=0,H=0,dpr=Math.min(2,de
 var drops=Rain($('#drops'),90),rain=Rain($('#rain'),420),fl=$('.storm .flash'),storm=$('#storm'),dark=$('.storm .dark'),grey=$('.storm .grey'),sun=$('.storm .sun'),simg=$('.storm .ph img'),P=[$('#p1'),$('#p2'),$('#p3')],S=[$('#s1'),$('#s2'),$('#s3')];
 var last=performance.now(),nextFlash=performance.now()+2500,cur=-1;
 var ss=function(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
+var prog=$('#prog'),lastY=-1;
 function frame(now){var dt=Math.min(.05,(now-last)/1000);last=now;var y=scrollY,vh=innerHeight;
+  if(y!==lastY){lastY=y;prog.style.transform='scaleY('+Math.min(1,y/Math.max(1,document.documentElement.scrollHeight-vh)).toFixed(4)+')'}
   // hero: drizzle begins as you start to scroll
   if(y<vh*1.2)drops(RM?0:.15+.6*Math.min(1,y/(vh*.6)),dt);
   // storm screen: rises over the hero, then pins; scroll moves it through heavy rain (0-.36), drizzle (.36-.68), sun (.68-1)
