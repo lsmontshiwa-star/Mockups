@@ -39,7 +39,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .nav .c:hover{background:rgba(20,23,28,.06)}
 .nav .q{font:500 14px var(--t);padding:10px 16px;border-radius:999px;background:var(--clay);color:#fff;white-space:nowrap}
 /* 1 hero */
-.hero{color:#fff;background:var(--storm)}
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;color:#fff;background:var(--storm)}
+.hero .ph{position:absolute;inset:0;overflow:hidden}
 .hero .ph img{width:100%;height:100%;object-fit:cover;object-position:60% 45%;transform:scale(1.12);animation:push 14s var(--ease) forwards}
 @keyframes push{to{transform:scale(1)}}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,15,20,.28),rgba(12,15,20,0) 30%,rgba(12,15,20,.15) 55%,rgba(12,15,20,.78))}
@@ -58,13 +59,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .chip b{font:800 30px var(--d);letter-spacing:-.03em}
 .chip .st{color:#ffc24b;letter-spacing:2px;font-size:15px}
 .chip small{display:block;font:500 13px var(--t);color:rgba(255,255,255,.85)}
-#drops,#rain{position:absolute;inset:0;z-index:1;pointer-events:none}
+#drops,#rain{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 /* 2 storm, then clear: each screen is a card that rises over the one before it (the covered one sinks back) */
 .stack{position:relative;background:#0c1016}
-.stack>.layer{width:100%;position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;transform-origin:50% 0}
-.stack>.hero{height:100vh;height:100svh;min-height:600px}
+.stack>.layer{width:100%;position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .stack>.rise{border-radius:28px 28px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.35)}
-.stack .veil{position:absolute;inset:0;background:#06080c;opacity:0;pointer-events:none;z-index:5}
 .stack .hold{height:45vh}
 .layer .ph{position:absolute;inset:0;overflow:hidden}
 .layer .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
@@ -79,10 +78,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .clear{color:#fff;background:#b9c9d6}
 .clear .ph img{transform:scale(1.08);will-change:transform}
 .clear .sun{position:absolute;inset:0;background:radial-gradient(120% 80% at 78% -10%,rgba(255,214,150,.55),rgba(255,214,150,0) 55%),linear-gradient(180deg,rgba(255,236,200,.12),rgba(255,255,255,0) 45%,rgba(12,15,20,.6));opacity:.4;will-change:opacity}
-.clear .tx2{position:absolute;left:var(--pad);bottom:calc(clamp(40px,9vh,96px) + 100lvh - 100svh);z-index:2;will-change:opacity,transform}
+.clear .tx2{position:absolute;left:var(--pad);bottom:clamp(40px,9vh,96px);z-index:2;will-change:opacity,transform}
 .clear .tx2 h3{font:800 clamp(40px,6vw,96px)/.92 var(--d);letter-spacing:-.04em}
 .clear .tx2 p{margin:14px 0 0;max-width:34ch;color:rgba(255,255,255,.9);font-size:18px}
-.stack>.work{position:relative;z-index:3;border-radius:28px 28px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.28)}
 /* 3 before/after + their photos */
 .work{padding:clamp(90px,12vh,140px) 0 clamp(70px,10vh,120px);background:var(--bg)}
 .work .hd{padding:0 var(--pad);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
@@ -151,7 +149,7 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   .cmp{aspect-ratio:4/5;border-radius:20px}
   .rev .grid,.quote .grid{grid-template-columns:1fr}
   .clear .tx2{right:var(--pad)}
-  .stack>.rise,.stack>.work{border-radius:22px 22px 0 0}
+  .stack>.rise{border-radius:22px 22px 0 0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero h1 .ln>span,.hero .fade{transform:none;opacity:1}.r{opacity:1;transform:none;filter:none}}
 </style>
@@ -164,8 +162,7 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   <a class="q" href="#quote">Free estimate</a>
 </nav>
 
-<div class="stack" id="stack">
-<header class="hero layer" id="top">
+<header class="hero" id="top">
   <div class="ph"><img src="/assets/roofer/hero.webp" alt="A roofing crew replacing the roof of a family home" fetchpriority="high"></div>
   <canvas id="drops" aria-hidden="true"></canvas>
   <div class="in">
@@ -175,10 +172,10 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
     <div class="cta fade" style="animation-delay:.75s"><a class="b" href="#quote">Get a free estimate <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a><a class="b g" href="tel:+13604419525">Call (360) 441-9525 <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
   </div>
   <div class="chip fade" style="animation-delay:.9s"><b>5.0</b><div><div class="st">★★★★★</div><small>46 Google reviews</small></div></div>
-  <div class="veil"></div>
 </header>
+<div class="stack" id="stack">
 
-<section class="storm layer rise" id="storm">
+<section class="storm layer" id="storm">
   <div class="ph"><img src="/assets/roofer/storm-house.webp" alt="A family home in a heavy storm" loading="lazy"></div>
   <div class="dark"></div>
   <canvas id="rain" aria-hidden="true"></canvas><div class="flash"></div>
@@ -188,15 +185,14 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
     <p>Put a bucket under it, move anything valuable, and call us. We'll tell you what to do tonight and get your roof sorted as soon as it's safe.</p>
     <div class="cta"><a class="b" href="tel:+13604419525">Call (360) 441-9525 <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a><a class="b g" href="#quote" data-ask="My roof is leaking">Book an inspection <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
   </div>
-  <div class="veil"></div>
 </section>
 <div class="hold" aria-hidden="true"></div>
 <section class="clear layer rise" id="clear" aria-label="After the storm">
   <div class="ph"><img src="/assets/roofer/storm-house.webp" alt="The same home in sunshine after the storm" loading="lazy"></div>
   <div class="sun"></div>
   <div class="tx2" id="clearTx"><h3>Then the sky clears.</h3><p>And your roof is the last thing you think about again.</p></div>
-  <div class="veil"></div>
 </section>
+</div>
 
 <section class="work" id="work">
   <div class="hd"><h2 class="r">Worn out.<br><em>Done right.</em></h2><p class="r" style="--dl:1">Drag across to see the difference a proper roof makes.</p></div>
@@ -210,7 +206,6 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   <div class="band r" id="band" style="--dl:2"><div class="track" id="track"><button class="card" type="button" data-msg="I think my roof needs replacing." data-chip="New roof"><img src="img/c-tearoff.webp" alt="Old roof being torn off a red house" loading="lazy" draggable="false"><span>Roof past its best?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="My skylight is leaking." data-chip="Skylight"><img src="img/c-skylight.webp" alt="Skylight on a shingle roof" loading="lazy" draggable="false"><span>Skylight letting water in?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="There&#x27;s moss all over my roof." data-chip="Moss"><img src="img/c-moss.webp" alt="Mossy old roof" loading="lazy" draggable="false"><span>Moss taking over?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="I&#x27;m interested in a metal roof." data-chip="Metal roof"><img src="img/c-metal.webp" alt="New standing seam metal roof" loading="lazy" draggable="false"><span>Thinking about metal?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="My roof was damaged in a storm." data-chip="Storm damage"><img src="img/c-crew.webp" alt="Roofer at work on a roof" loading="lazy" draggable="false"><span>Storm damage?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="My gutters overflow when it rains." data-chip="Gutters"><img src="img/c-gutter.webp" alt="Gutter along a roof edge" loading="lazy" draggable="false"><span>Gutters overflowing?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="Water is coming in near my chimney." data-chip="Leak"><img src="img/c-chimney.webp" alt="Roof work around a chimney" loading="lazy" draggable="false"><span>Leak by the chimney?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="Parts of my roof feel soft. Can you inspect it?" data-chip="Inspection"><img src="img/c-deck.webp" alt="New roof decking going down" loading="lazy" draggable="false"><span>Soft spots underfoot?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button><button class="card" type="button" data-msg="I&#x27;d like a quote for a new roof." data-chip="New roof"><img src="img/c-newroof.webp" alt="A finished new roof on a family home" loading="lazy" draggable="false"><span>Ready for a new roof?<i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></span></button></div></div>
   <p class="src">Photos from Universal Roofing LLC's own jobs</p>
 </section>
-</div>
 
 <section class="rev" id="reviews"><div class="grid"><div class="score r"><b>5.0</b><div class="st">★★★★★</div><p>46 reviews on Google</p></div><div><h2 class="r">What neighbors in Bellingham say.</h2><div class="qt r" style="--dl:1"><p>“Owner Edy Mendoza is extremely knowledgeable and met with us right away to address a roof leak, fitting us in to his busy schedule. His crew is outstanding and we couldn’t be more pleased with the outcome.”</p><small>Holly H. · Google review</small></div><div class="qt r" style="--dl:2"><p>“Edy and his crew were awesome. Great communication, quick and high quality work, reasonable pricing. Good roofers are hard to come by.”</p><small>Matthew I. · Google review</small></div></div></div></section>
 
@@ -256,14 +251,11 @@ function Rain(cv,dense){var c=cv.getContext('2d'),d=[],W=0,H=0,dpr=Math.min(2,de
   return function(k,dt){c.clearRect(0,0,W,H);if(k<=0.01)return;c.lineCap='round';
     for(var i=0;i<d.length*k;i++){var p=d[i];p.y+=p.s*dt*1.6;p.x+=p.s*dt*.25;if(p.y>1.05){p.y=-.05;p.x=Math.random()}if(p.x>1.02)p.x-=1.04;
       var x=p.x*W,y=p.y*H;c.strokeStyle='rgba(210,225,245,'+(p.o*Math.min(1,k*1.3))+')';c.lineWidth=1.1;c.beginPath();c.moveTo(x,y);c.lineTo(x-p.l*.22,y-p.l);c.stroke()}}}
-var drops=Rain($('#drops'),90),rain=Rain($('#rain'),420),fl=$('.storm .flash'),hero=$('#top'),storm=$('#storm'),clr=$('#clear'),work=$('#work'),sunL=$('.clear .sun'),cimg=$('.clear .ph img'),tx2=$('#clearTx');
-var layers=[hero,storm,clr],covers=[storm,clr,work],veils=layers.map(function(c){return c.querySelector('.veil')});
+var drops=Rain($('#drops'),90),rain=Rain($('#rain'),420),fl=$('.storm .flash'),hero=$('#top'),storm=$('#storm'),clr=$('#clear'),sunL=$('.clear .sun'),cimg=$('.clear .ph img'),tx2=$('#clearTx');
+
 var last=performance.now(),nextFlash=performance.now()+2500;
 var ss=function(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
 function frame(now){var dt=Math.min(.05,(now-last)/1000);last=now;var y=scrollY,vh=innerHeight;
-  // each card sinks back and dims as the next one rises over it
-  for(var i=0;i<layers.length;i++){var t=covers[i].getBoundingClientRect().top,k=Math.max(0,Math.min(1,1-t/vh));
-    if(!RM)layers[i].style.transform=k>0&&k<1?'scale('+(1-.06*k).toFixed(4)+')':(k>=1?'scale(.94)':'');veils[i].style.opacity=(k*.6).toFixed(3)}
   // hero: drizzle begins as you start to scroll
   var h=Math.min(1,y/(vh*.6));if(y<vh*1.2)drops(RM?0:.15+.6*h,dt);
   // storm card: full rain and lightning while it is on screen
