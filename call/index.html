@@ -155,6 +155,8 @@ input[type=file]{padding:10px;min-height:auto;color:var(--mist)}
       <div class="tzpick" id="tzPick" hidden><input id="tzQ" placeholder="Type a city, e.g. Chicago, London, Johannesburg" autocomplete="off"><div class="tzlist" id="tzList"></div></div>
       <div class="days" id="days" role="group" aria-label="Day"></div>
       <div class="slots" id="slots" role="group" aria-label="Times"><div class="loading">Loading times…</div></div>
+      <div id="bizWrap" hidden><label for="biz">Your business name</label>
+      <input id="biz" autocomplete="organization" maxlength="100"></div>
       <label for="name">Your name</label>
       <input id="name" autocomplete="name" required maxlength="80">
       <label for="email">Your email <small>(your Google Meet link goes here)</small></label>
@@ -214,10 +216,10 @@ function drawSlots(){var box=$('slots');box.innerHTML='';var d=data.days[di];if(
     if(!s.free){var t=document.createElement('small');t.textContent='Taken';b.appendChild(t)}
     b.onclick=function(){chosen=s.t;[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});msg('')};box.appendChild(b)})}
 function load(){
-  if(!LID){stop('This link is missing a part. '+HELP);return Promise.resolve()}
   $('tzName').textContent=nice(TZ)+' time';
   return fetch(EP+'?call='+encodeURIComponent(LID)+'&tz='+encodeURIComponent(TZ)+'&t='+Date.now()).then(function(r){return r.json()}).then(function(j){
   if(j&&j.error==='closed'){stop('Bookings are paused right now. '+HELP);return}
+  if(j&&j.ok&&j.guest)$('bizWrap').hidden=false;
   if(!j||!j.ok||!j.days){stop('We couldn\u2019t find this booking link. '+HELP);return}
   data=j;
   if(j.name)$('lead').textContent='We\u2019ll walk you through the website we built for '+j.name+' in 15 minutes on Google Meet: what your customers see, the buttons that bring them to you, and your own ideas for it.';
@@ -238,7 +240,7 @@ $('f').addEventListener('submit',function(e){
   if(!$('name').value.trim()){msg('Please add your name.',true);$('name').focus();return}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('email').value.trim())){msg('Please add your email, so we can send you the Meet link.',true);$('email').focus();return}
   var ref='cl'+Date.now().toString(36)+Math.random().toString(36).slice(2,8), fd=new FormData();
-  [['kind','call'],['site','call'],['ref',ref],['l',LID],['t',String(chosen)],['tz',TZ],['name',$('name').value.trim()],['email',$('email').value.trim()],['phone',$('phone').value.trim()],['note',$('note').value.trim()],
+  [['kind','call'],['site','call'],['ref',ref],['l',LID],['biz',$('biz').value.trim()],['t',String(chosen)],['tz',TZ],['name',$('name').value.trim()],['email',$('email').value.trim()],['phone',$('phone').value.trim()],['note',$('note').value.trim()],
    ['company_website',$('company_website').value],['_t',String(Date.now()-t0)]].forEach(function(p){fd.append(p[0],p[1])});
   $('go').disabled=true; msg('Booking\u2026');
   fetch(EP,{method:'POST',mode:'no-cors',body:fd}).then(function(){return poll(ref,12)}).then(function(j){
