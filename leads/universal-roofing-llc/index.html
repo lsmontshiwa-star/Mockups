@@ -60,27 +60,31 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .chip .st{color:#ffc24b;letter-spacing:2px;font-size:15px}
 .chip small{display:block;font:500 13px var(--t);color:rgba(255,255,255,.85)}
 #drops,#rain{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-/* 2 storm, then clear: each screen is a card that rises over the one before it (the covered one sinks back) */
-.stack{position:relative;background:#0c1016}
-.stack>.layer{width:100%;position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.stack>.rise{border-radius:28px 28px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.35)}
-.stack .hold{height:45vh}
-.layer .ph{position:absolute;inset:0;overflow:hidden}
-.layer .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.storm{color:#fff;background:var(--storm)}
-.storm .dark{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,28,.86),rgba(18,26,38,.74))}
+/* 2 the storm screen rises over the hero (hero stays put underneath), then pins and passes through three phases: heavy rain, drizzle, sun */
+.stack{position:relative}
+.stack>.hero{position:sticky;top:0;z-index:0}
+.storm{position:relative;z-index:1;height:420vh;height:420svh;margin-top:-1px;color:#fff;background:var(--storm);border-radius:28px 28px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.35)}
+.storm .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;border-radius:inherit}
+.storm .ph{position:absolute;inset:0;overflow:hidden}
+.storm .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.06);will-change:transform}
+.storm .dark{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,28,.88),rgba(18,26,38,.76));will-change:opacity}
+.storm .grey{position:absolute;inset:0;background:linear-gradient(180deg,rgba(62,72,84,.74),rgba(44,52,62,.52));opacity:0;will-change:opacity}
+.storm .sun{position:absolute;inset:0;background:radial-gradient(120% 80% at 78% -10%,rgba(255,214,150,.6),rgba(255,214,150,0) 55%),linear-gradient(180deg,rgba(255,236,200,.12),rgba(255,255,255,0) 45%,rgba(12,15,20,.6));opacity:0;will-change:opacity}
 .storm .flash{position:absolute;inset:0;background:#dfe8ff;opacity:0;pointer-events:none;mix-blend-mode:overlay}
-.storm .tx{position:absolute;left:var(--pad);right:var(--pad);top:50%;transform:translateY(-50%);text-align:center;z-index:2}
+.storm .ph3{position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none;will-change:opacity,transform}
+.storm .ph3.on{pointer-events:auto}
+.storm .mid{left:var(--pad);right:var(--pad);top:50%;bottom:auto;text-align:center}
+.storm .ph3.mid{transform:translateY(-50%)}
+.storm .low{left:var(--pad);right:var(--pad);top:auto;bottom:clamp(70px,12vh,120px)}
 .storm h2{font:800 clamp(48px,8vw,128px)/.9 var(--d);letter-spacing:-.045em}
 .storm h2 em{font-style:normal;color:#ffb38f}
+.storm h3{font:800 clamp(40px,6vw,96px)/.92 var(--d);letter-spacing:-.04em}
 .storm p{max-width:44ch;margin:22px auto 28px;color:rgba(255,255,255,.88);font-size:18px}
+.storm .low p{margin:14px 0 0;max-width:36ch}
 .storm .cta{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
-.clear{color:#fff;background:#b9c9d6}
-.clear .ph img{transform:scale(1.08);will-change:transform}
-.clear .sun{position:absolute;inset:0;background:radial-gradient(120% 80% at 78% -10%,rgba(255,214,150,.55),rgba(255,214,150,0) 55%),linear-gradient(180deg,rgba(255,236,200,.12),rgba(255,255,255,0) 45%,rgba(12,15,20,.6));opacity:.4;will-change:opacity}
-.clear .tx2{position:absolute;left:var(--pad);bottom:clamp(40px,9vh,96px);z-index:2;will-change:opacity,transform}
-.clear .tx2 h3{font:800 clamp(40px,6vw,96px)/.92 var(--d);letter-spacing:-.04em}
-.clear .tx2 p{margin:14px 0 0;max-width:34ch;color:rgba(255,255,255,.9);font-size:18px}
+.storm .steps{position:absolute;z-index:3;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:8px;padding:6px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.storm .steps span{font:500 12px var(--t);letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;color:rgba(255,255,255,.7);transition:background .4s,color .4s}
+.storm .steps span.on{background:#fff;color:var(--ink)}
 /* 3 before/after + their photos */
 .work{padding:clamp(90px,12vh,140px) 0 clamp(70px,10vh,120px);background:var(--bg)}
 .work .hd{padding:0 var(--pad);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
@@ -148,8 +152,7 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   .chip{left:var(--pad);right:auto;bottom:auto;top:84px}
   .cmp{aspect-ratio:4/5;border-radius:20px}
   .rev .grid,.quote .grid{grid-template-columns:1fr}
-  .clear .tx2{right:var(--pad)}
-  .stack>.rise{border-radius:22px 22px 0 0}
+  .storm{border-radius:22px 22px 0 0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero h1 .ln>span,.hero .fade{transform:none;opacity:1}.r{opacity:1;transform:none;filter:none}}
 </style>
@@ -162,6 +165,7 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   <a class="q" href="#quote">Free estimate</a>
 </nav>
 
+<div class="stack" id="stack">
 <header class="hero" id="top">
   <div class="ph"><img src="/assets/roofer/hero.webp" alt="A roofing crew replacing the roof of a family home" fetchpriority="high"></div>
   <canvas id="drops" aria-hidden="true"></canvas>
@@ -173,24 +177,26 @@ footer button{color:var(--ink);font:500 14px var(--t);text-decoration:underline;
   </div>
   <div class="chip fade" style="animation-delay:.9s"><b>5.0</b><div><div class="st">★★★★★</div><small>46 Google reviews</small></div></div>
 </header>
-<div class="stack" id="stack">
 
-<section class="storm layer" id="storm">
-  <div class="ph"><img src="/assets/roofer/storm-house.webp" alt="A family home in a heavy storm" loading="lazy"></div>
-  <div class="dark"></div>
-  <canvas id="rain" aria-hidden="true"></canvas><div class="flash"></div>
-  <div class="tx" id="stormTx">
-    <p class="k" style="color:rgba(255,255,255,.8);margin-bottom:18px">Storm damage &amp; leaks</p>
-    <h2>Water coming in<br><em>right now?</em></h2>
-    <p>Put a bucket under it, move anything valuable, and call us. We'll tell you what to do tonight and get your roof sorted as soon as it's safe.</p>
-    <div class="cta"><a class="b" href="tel:+13604419525">Call (360) 441-9525 <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a><a class="b g" href="#quote" data-ask="My roof is leaking">Book an inspection <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
+<section class="storm" id="storm">
+  <div class="pin">
+    <div class="ph"><img src="/assets/roofer/storm-house.webp" alt="A family home through a storm and into sunshine" loading="lazy"></div>
+    <div class="dark"></div><div class="grey"></div><div class="sun"></div>
+    <canvas id="rain" aria-hidden="true"></canvas><div class="flash"></div>
+    <div class="ph3 mid" id="p1">
+      <p class="k" style="color:rgba(255,255,255,.8);margin-bottom:18px">Storm damage &amp; leaks</p>
+      <h2>Water coming in<br><em>right now?</em></h2>
+      <p>Put a bucket under it, move anything valuable, and call us. We'll tell you what to do tonight and get your roof sorted as soon as it's safe.</p>
+      <div class="cta"><a class="b" href="tel:+13604419525">Call (360) 441-9525 <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a><a class="b g" href="#quote" data-ask="My roof is leaking">Book an inspection <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
+    </div>
+    <div class="ph3 mid" id="p2">
+      <h3>Easing off?</h3>
+      <p>Now is the time to look. Small storm damage turns into a big leak with the next one, so get it checked while it is quiet.</p>
+      <div class="cta"><a class="b" href="#quote" data-ask="Please check my roof after the storm">Book a roof check <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
+    </div>
+    <div class="ph3 low" id="p3"><h3>Then the sky clears.</h3><p>And your roof is the last thing you think about again.</p></div>
+    <div class="steps" aria-hidden="true"><span id="s1">Storm</span><span id="s2">Drizzle</span><span id="s3">Sun</span></div>
   </div>
-</section>
-<div class="hold" aria-hidden="true"></div>
-<section class="clear layer rise" id="clear" aria-label="After the storm">
-  <div class="ph"><img src="/assets/roofer/storm-house.webp" alt="The same home in sunshine after the storm" loading="lazy"></div>
-  <div class="sun"></div>
-  <div class="tx2" id="clearTx"><h3>Then the sky clears.</h3><p>And your roof is the last thing you think about again.</p></div>
 </section>
 </div>
 
@@ -251,19 +257,24 @@ function Rain(cv,dense){var c=cv.getContext('2d'),d=[],W=0,H=0,dpr=Math.min(2,de
   return function(k,dt){c.clearRect(0,0,W,H);if(k<=0.01)return;c.lineCap='round';
     for(var i=0;i<d.length*k;i++){var p=d[i];p.y+=p.s*dt*1.6;p.x+=p.s*dt*.25;if(p.y>1.05){p.y=-.05;p.x=Math.random()}if(p.x>1.02)p.x-=1.04;
       var x=p.x*W,y=p.y*H;c.strokeStyle='rgba(210,225,245,'+(p.o*Math.min(1,k*1.3))+')';c.lineWidth=1.1;c.beginPath();c.moveTo(x,y);c.lineTo(x-p.l*.22,y-p.l);c.stroke()}}}
-var drops=Rain($('#drops'),90),rain=Rain($('#rain'),420),fl=$('.storm .flash'),hero=$('#top'),storm=$('#storm'),clr=$('#clear'),sunL=$('.clear .sun'),cimg=$('.clear .ph img'),tx2=$('#clearTx');
-
-var last=performance.now(),nextFlash=performance.now()+2500;
+var drops=Rain($('#drops'),90),rain=Rain($('#rain'),420),fl=$('.storm .flash'),storm=$('#storm'),dark=$('.storm .dark'),grey=$('.storm .grey'),sun=$('.storm .sun'),simg=$('.storm .ph img'),P=[$('#p1'),$('#p2'),$('#p3')],S=[$('#s1'),$('#s2'),$('#s3')];
+var last=performance.now(),nextFlash=performance.now()+2500,cur=-1;
 var ss=function(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
 function frame(now){var dt=Math.min(.05,(now-last)/1000);last=now;var y=scrollY,vh=innerHeight;
   // hero: drizzle begins as you start to scroll
-  var h=Math.min(1,y/(vh*.6));if(y<vh*1.2)drops(RM?0:.15+.6*h,dt);
-  // storm card: full rain and lightning while it is on screen
-  var sr=storm.getBoundingClientRect(),cr=clr.getBoundingClientRect();
-  if(sr.top<vh&&cr.top>0){rain(RM?0:1,dt);if(!RM&&sr.top<vh*.3&&now>nextFlash){fl.animate([{opacity:0},{opacity:.55},{opacity:.1},{opacity:.4},{opacity:0}],{duration:700});nextFlash=now+4000+Math.random()*5000}}
-  // clear card: as it rises the sun comes up and the house settles
-  if(cr.top<vh&&cr.bottom>0){var c=Math.max(0,Math.min(1,1-cr.top/vh));sunL.style.opacity=(.4+.6*ss(.4,1,c)).toFixed(3);
-    if(!RM)cimg.style.transform='scale('+(1.08-.08*c).toFixed(4)+')';var tc=ss(.55,1,c);tx2.style.opacity=tc.toFixed(3);tx2.style.transform='translate3d(0,'+((1-tc)*30).toFixed(1)+'px,0)'}
+  if(y<vh*1.2)drops(RM?0:.15+.6*Math.min(1,y/(vh*.6)),dt);
+  // storm screen: rises over the hero, then pins; scroll moves it through heavy rain (0-.36), drizzle (.36-.68), sun (.68-1)
+  var r=storm.getBoundingClientRect();
+  if(r.top<vh&&r.bottom>0){
+    var p=Math.max(0,Math.min(1,-r.top/Math.max(1,r.height-vh)));
+    var a=ss(.26,.36,p),b=ss(.6,.70,p);              // a: storm -> drizzle, b: drizzle -> sun (short changes, long holds)
+    dark.style.opacity=(1-a).toFixed(3);grey.style.opacity=(a*(1-b)).toFixed(3);sun.style.opacity=b.toFixed(3);
+    if(!RM)simg.style.transform='scale('+(1.06-.06*b).toFixed(4)+')';
+    rain(RM?0:Math.max(0,1-a*.82-b*.18),dt);
+    var o=[1-ss(.22,.30,p),ss(.32,.40,p)*(1-ss(.56,.64,p)),ss(.68,.78,p)];
+    for(var i=0;i<3;i++){P[i].style.opacity=o[i].toFixed(3);P[i].classList.toggle('on',o[i]>.5);P[i].style.marginTop=i<2?((1-Math.min(1,o[i]*1.2))*24).toFixed(1)+'px':'';if(i==2)P[i].style.transform='translate3d(0,'+((1-o[i])*30).toFixed(1)+'px,0)'}
+    var ph=p<.31?0:p<.66?1:2;if(ph!==cur){cur=ph;S.forEach(function(e,i){e.classList.toggle('on',i===ph)})}
+    if(!RM&&a<.2&&r.top<vh*.3&&now>nextFlash){fl.animate([{opacity:0},{opacity:.55},{opacity:.1},{opacity:.4},{opacity:0}],{duration:700});nextFlash=now+4000+Math.random()*5000}}
   requestAnimationFrame(frame)}
 requestAnimationFrame(frame);
 /* before / after */
