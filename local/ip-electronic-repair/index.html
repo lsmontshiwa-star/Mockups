@@ -350,7 +350,8 @@ var hero=document.getElementById('hero'),fix=document.getElementById('fix'),how=
 var K=[-.42,.3,-.22,.5],R=[-7,5,-4,8];
 function pr(el){var r=el.getBoundingClientRect();return clamp(-r.top/Math.max(1,r.height-vh),0,1)}
 var last=0;
-function frame(t){var dt=Math.min(50,t-last||16);last=t;
+function frame(t){update(t);requestAnimationFrame(frame)}
+function update(t){var dt=Math.min(50,t-last||16);last=t;
  var h=document.documentElement;prog.style.transform='scaleX('+(scrollY/Math.max(1,h.scrollHeight-vh))+')';
  /* hero: the phone comes apart as you leave */
  var p=pr(hero),e=ss(0,1,p);
@@ -378,7 +379,8 @@ function frame(t){var dt=Math.min(50,t-last||16);last=t;
  /* end: the phone goes back together */
  var er=end.getBoundingClientRect(),c=1-ss(.05,.85,(vh-er.top)/vh);
  es.forEach(function(s,i){s.style.transform='translate3d(0,'+K[i]*c*vh*.9+'px,0) rotate('+R[i]*c+'deg)'});
- requestAnimationFrame(frame)}
+}
+addEventListener('scroll',function(){update(performance.now())},{passive:true});
 function size(){vw=innerWidth;vh=innerHeight;fit()}
 addEventListener('resize',size);size();
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
