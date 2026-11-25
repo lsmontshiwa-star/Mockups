@@ -1,133 +1,179 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow">
-<title>IP Electronic Repair | Phone, TV, microwave and computer repairs in Meyerton</title>
-<meta name="description" content="IP Electronic Repair, Meyerton: phones, TVs, microwaves and computers. Free diagnosis, same-day repairs, Monday to Saturday 7am to 7pm.">
-<meta name="theme-color" content="#07090c">
-<link rel="preconnect" href="https://api.fontshare.com"><link rel="preconnect" href="https://images.pexels.com">
-<link href="https://api.fontshare.com/v2/css?f[]=panchang@600,700&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IP Electronic Repair · Meyerton</title>
+<meta name="description" content="Phones, TVs, microwaves and computers fixed the same day in Meyerton. Free diagnosis. Monday to Saturday, 7am to 7pm.">
+<meta name="theme-color" content="#ebdf12">
+<link rel="preconnect" href="https://images.pexels.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07090c;--ink:#eef3f7;--mute:rgba(238,243,247,.66);--line:#8fdcff;--line2:#d9f5ff;--d:'Panchang',system-ui,sans-serif;--t:'Switzer',system-ui,sans-serif;--pad:clamp(20px,5vw,76px);--r:20px}
+:root{--y:#ebdf12;--y2:#d9cc06;--ink:#111110;--paper:#fbf8e6;--c:52vmin}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scrollbar-width:none;-ms-overflow-style:none;-webkit-text-size-adjust:100%}
-html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
-body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--t);overflow-x:clip;position:relative}
-img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.prog{position:fixed;top:0;right:0;width:3px;height:100%;z-index:80;pointer-events:none}.prog i{display:block;height:100%;background:var(--line);transform:scaleY(0);transform-origin:0 0}
-.k{font:500 12px/1 var(--t);letter-spacing:.18em;text-transform:uppercase;color:var(--line)}
-.b{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 10px 0 24px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;font-size:16px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.b i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:rgba(7,9,12,.08);transition:transform .35s}
-.b:hover{transform:translateY(-2px)}.b:hover i{transform:rotate(-45deg)}
-.b svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8}
-.b.g{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.b.g i{background:rgba(255,255,255,.1)}
-/* the one circuit that runs through the whole page */
-#wire{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:1;overflow:visible}
-#wire path{fill:none;stroke-linecap:round;stroke-linejoin:round}
-#wire .base{stroke:rgba(143,220,255,.12);stroke-width:1.5}
-#wire .lit{stroke:var(--line);stroke-width:1.8;filter:drop-shadow(0 0 3px rgba(143,220,255,.55))}
-#wire .spark{stroke:var(--line2);stroke-width:2.4;stroke-dasharray:.012 .988;filter:drop-shadow(0 0 4px rgba(217,245,255,.8))}
-#wire circle{fill:var(--bg);stroke:var(--line);stroke-width:1.6}
-section,header{position:relative;z-index:2}
-nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 18px;border-radius:999px;background:rgba(12,15,19,.62);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);white-space:nowrap}
-nav .lg{font:700 13px var(--d);letter-spacing:.02em;margin-right:10px}
-nav .ln{font-size:14px;padding:9px 13px;border-radius:999px;color:var(--mute);transition:color .25s}nav .ln:hover{color:var(--ink)}
-nav .q{font-size:14px;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600}
-/* 1 hero */
-.hero{height:100vh;height:100svh;min-height:620px;overflow:hidden}
-.hero .ph{position:absolute;inset:0;overflow:hidden}
-.hero .ph img{width:100%;height:100%;object-fit:cover;animation:kb 20s ease-out both}
-@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1.02)}}
-.hero .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,12,.45),rgba(7,9,12,.1) 35%,rgba(7,9,12,.25) 60%,var(--bg) 100%)}
-.hero .in{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(36px,9vh,90px)}
-.hero h1{font:700 clamp(44px,8.6vw,150px)/.92 var(--d);letter-spacing:-.02em}
-.hero h1 span{display:block;opacity:0;transform:translateY(40px);animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
-.hero h1 span+span{animation-delay:.15s}
-.hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-top:26px}
-.hero p{font-size:clamp(16px,1.4vw,20px);color:rgba(238,243,247,.9);max-width:40ch;opacity:0;animation:up .9s .6s forwards}
-.hero .cta{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:up .9s .8s forwards}
-.chip{position:absolute;top:96px;right:var(--pad);display:flex;gap:10px;align-items:center;padding:10px 16px;border-radius:999px;font-size:14px;background:rgba(7,9,12,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(143,220,255,.3);opacity:0;animation:up .9s 1s forwards}
-.chip b{width:8px;height:8px;border-radius:50%;background:var(--line);box-shadow:0 0 10px var(--line);animation:blink 1.6s infinite}
-@keyframes blink{50%{opacity:.3}}
-@keyframes up{to{opacity:1;transform:none}}
-/* 2 what we fix: devices drawn in light */
-.fix{height:460vh;height:460svh}
-.fix .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(20px,5vw,80px);padding:90px var(--pad) 50px}
-.dev{position:relative;aspect-ratio:1;max-height:62vh;width:100%;justify-self:center}
-.dev svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.dev path,.dev rect,.dev circle,.dev line{fill:none;stroke:var(--line);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(143,220,255,.5))}
-.dev .g{opacity:0}
-.dev .ph{position:absolute;right:-4%;bottom:-2%;width:46%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;cursor:zoom-in;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.dev .ph.on{opacity:1;transform:none}
-.dev .ph img{width:100%;height:100%;object-fit:cover}
-.fix h2{font:700 clamp(30px,3.6vw,56px)/1 var(--d);letter-spacing:-.02em;margin:16px 0 28px}
-.items{list-style:none}
-.items li{padding:16px 0;border-top:1px solid rgba(255,255,255,.08);color:rgba(238,243,247,.35);transition:color .4s}
-.items li strong{display:flex;align-items:center;gap:12px;font:600 22px/1.2 var(--t)}
-.items li strong:before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(143,220,255,.25);transition:background .4s,box-shadow .4s}
-.items li span{display:block;max-height:0;overflow:hidden;font-size:15px;color:var(--mute);transition:max-height .5s,margin .5s}
-.items li.on{color:var(--ink)}.items li.on strong:before{background:var(--line);box-shadow:0 0 10px var(--line)}
-.items li.on span{max-height:70px;margin-top:6px}
-/* 3 how it works */
-.how{padding:clamp(80px,14vh,160px) var(--pad)}
-.how .hd{max-width:720px}
-.how h2{font:700 clamp(30px,3.8vw,58px)/1 var(--d);letter-spacing:-.02em;margin:16px 0 0}
-.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,36px);margin-top:clamp(40px,7vh,70px)}
-.st{position:relative}
-.st .ph{aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;cursor:zoom-in}
-.st .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
-.st .ph:hover img{transform:scale(1.06)}
-.st .node{display:flex;align-items:center;gap:12px;margin:20px 0 8px;font:700 15px var(--d)}
-.st .node i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--line)}
-.st h3{font:600 22px/1.2 var(--t)}
-.st p{color:var(--mute);font-size:15px;margin-top:6px;max-width:34ch}
-/* 4 gallery */
-.gal{padding:clamp(40px,8vh,90px) 0 clamp(80px,12vh,140px)}
-.gal .hd{padding:0 var(--pad);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:34px}
-.gal h2{font:700 clamp(30px,3.8vw,58px)/1 var(--d);letter-spacing:-.02em;margin-top:16px}
-.gal .hd p{color:var(--mute);max-width:32ch}
-.strip{display:flex;gap:12px;height:min(60vh,560px);padding:0 var(--pad)}
-.tile{position:relative;flex:1;min-width:0;border-radius:var(--r);overflow:hidden;cursor:zoom-in;transition:flex .8s cubic-bezier(.2,.8,.2,1)}
-.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
-.strip:hover .tile{flex:.75}.strip .tile:hover{flex:2.4}.tile:hover img{transform:scale(1.05)}
-/* 5 contact */
-.contact{padding:clamp(90px,12vh,130px) var(--pad) 26px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between}
-.contact .gr{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px)}
-.contact h2{font:700 clamp(32px,4.2vw,64px)/1 var(--d);letter-spacing:-.02em;margin:16px 0 20px}
-.contact .side p{color:var(--mute);max-width:36ch}
-.facts{list-style:none;margin-top:28px}
-.facts li{display:grid;grid-template-columns:120px 1fr;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);font-size:15px}
-.facts li b{font-weight:500;color:var(--mute)}
-.facts a{color:var(--line2)}
-form{border-radius:24px;padding:clamp(20px,3vw,32px);background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px rgba(143,220,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.chips button{font-size:14px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--mute);transition:background .25s,color .25s}
-.chips button.on{background:var(--ink);color:var(--bg)}
-.fl{display:grid;gap:6px;margin-bottom:12px}.fl label{font-size:13px;color:var(--mute)}
-.fl input,.fl textarea{width:100%;font:400 16px var(--t);color:var(--ink);background:rgba(255,255,255,.05);border:0;border-radius:14px;padding:14px 16px;outline:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);-webkit-appearance:none;appearance:none}
-.fl input:focus,.fl textarea:focus{box-shadow:inset 0 0 0 1px var(--line)}
-.fl textarea{min-height:90px;resize:vertical}
-form .b{width:100%;justify-content:space-between}
-form small{display:block;margin-top:10px;font-size:13px;color:rgba(238,243,247,.45)}
-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:13px;color:rgba(238,243,247,.45)}
-.lb{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:4vh 4vw;background:rgba(4,6,8,.92);opacity:0;pointer-events:none;transition:opacity .35s;cursor:zoom-out}
-.lb.on{opacity:1;pointer-events:auto}.lb img{max-width:100%;max-height:92vh;border-radius:14px}
-.lb button{position:absolute;top:18px;right:18px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);font-size:22px}
-.r{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--dl,0)*.08s)}.r.in{opacity:1;transform:none}
-@media (max-width:860px){
-  nav .ln{display:none}
-  .chip{top:84px;left:var(--pad);right:auto}
-  .fix .pin{grid-template-columns:1fr;align-content:center;gap:6px;padding-top:80px}
-  .dev{max-height:38vh;width:min(38vh,86vw)}
-  .fix h2{font-size:26px;margin:8px 0 10px}.items li{padding:10px 0}.items li strong{font-size:18px}
-  .flow{grid-template-columns:1fr}
-  .strip{height:auto;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}
-  .tile,.strip:hover .tile,.strip .tile:hover{flex:0 0 74vw;height:56vh;scroll-snap-align:center}
-  .contact .gr{grid-template-columns:1fr}
+html{scrollbar-width:none;-ms-overflow-style:none;background:var(--y)}
+html::-webkit-scrollbar{display:none}
+body{background:var(--y);color:var(--ink);font:500 16px/1.45 Switzer,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.D{font-family:"Cabinet Grotesk",Switzer,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.86}
+.prog{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0);z-index:60;transition:background .4s}
+body.dark .prog{background:var(--y)}
+
+/* top: no container, just type and one round button */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,3vw,44px);pointer-events:none;transition:color .4s}
+.top>*{pointer-events:auto}
+body.dark .top{color:#fff}
+.mark{font:700 15px/1.1 Switzer;letter-spacing:.01em}
+.mark b{font:800 19px/1 "Cabinet Grotesk";letter-spacing:-.02em;display:block}
+.tr{display:flex;align-items:center;gap:18px;font-size:14px}
+.open{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.open i{width:8px;height:8px;border-radius:50%;background:#1b9e4b;animation:blink 2.2s infinite}
+.open.shut i{background:#c43c2c;animation:none}
+@keyframes blink{50%{opacity:.25}}
+.round{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;transition:transform .5s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.round:hover{transform:rotate(-12deg) scale(1.08);background:var(--y);color:var(--ink)}
+body.dark .round{background:var(--y);color:var(--ink)}
+.round svg{width:22px;height:22px}
+
+/* HERO */
+.hero{height:190vh;position:relative}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.name{position:absolute;inset:0;z-index:3;font-size:min(12.6vw,19vh);text-transform:uppercase;pointer-events:none}
+.name .ln{position:absolute;display:block;overflow:hidden;padding:.06em 0 .02em;white-space:nowrap}
+.name .ln span{display:inline-block;translate:0 110%;animation:up 1s cubic-bezier(.2,.85,.25,1) forwards}
+.n1{top:10vh;left:clamp(18px,3vw,44px)}
+.n2{bottom:5vh;right:clamp(18px,3vw,44px)}
+@keyframes up{to{translate:0 0}}
+.ph{position:absolute;left:50%;top:50%;width:min(132vh,100vw);aspect-ratio:4/3;transform:translate(-50%,-48%);z-index:2}
+.strip{position:absolute;inset:0;will-change:transform}
+.strip .si{position:absolute;inset:0;translate:0 60vh;opacity:0;animation:rise 1.3s cubic-bezier(.2,.85,.25,1) forwards,bob 6s ease-in-out 1.6s infinite alternate}
+.strip img{width:100%;height:100%;object-fit:cover;-webkit-mask:radial-gradient(closest-side,#000 74%,transparent 100%);mask:radial-gradient(closest-side,#000 74%,transparent 100%);-webkit-mask-size:100% 100%}
+@keyframes rise{to{translate:0 0;opacity:1}}
+@keyframes bob{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+.hb{position:absolute;left:clamp(18px,3vw,44px);bottom:8vh;z-index:4;max-width:330px;opacity:0;animation:fade 1s 1.4s forwards}
+.hb p{font-size:15px;margin-bottom:16px}
+@keyframes fade{to{opacity:1}}
+.go{display:inline-flex;align-items:center;gap:14px;font:600 15px/1 Switzer}
+.go .r{width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;overflow:hidden;transition:background .3s,color .3s}
+.go .r svg{width:18px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.go:hover .r{background:var(--paper);color:var(--ink)}
+.go:hover .r svg{transform:translateX(4px) rotate(-45deg)}
+.go u{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1.5px no-repeat;padding-bottom:3px;transition:background-size .5s}
+.go:hover u{background-size:0 1.5px;background-position:100% 100%}
+.free{font:800 13px/1 "Cabinet Grotesk";letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:10px}
+
+/* WHAT WE FIX */
+.fix{height:520vh;position:relative}
+.words{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+.word{grid-area:1/1;white-space:nowrap;text-transform:uppercase;color:var(--y2);display:flex;overflow:hidden;padding:.04em .02em}
+.word span{display:inline-block;transform:translateY(105%);transition:transform .75s cubic-bezier(.2,.85,.25,1)}
+.word.on span{transform:none}
+.word.out span{transform:translateY(-105%)}
+.disc{position:absolute;left:50%;top:50%;width:var(--c);height:var(--c);transform:translate(-50%,-50%) scale(var(--s,1));border-radius:50%;overflow:hidden;z-index:3;cursor:zoom-in;transition:width .6s cubic-bezier(.2,.8,.2,1),height .6s cubic-bezier(.2,.8,.2,1)}
+.disc:hover{width:calc(var(--c) * 1.07);height:calc(var(--c) * 1.07)}
+.disc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lines{position:absolute;left:50%;top:50%;width:calc(var(--c) * 1.923);height:calc(var(--c) * 1.923);transform:translate(-50%,-50%);z-index:2;overflow:visible;pointer-events:none}
+.lines path,.lines rect,.lines circle,.lines line{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.lines g{transition:opacity .5s}
+.fl{position:absolute;left:clamp(18px,3vw,44px);bottom:7vh;z-index:4;width:340px}
+.fl .ct{font:800 15px/1 "Cabinet Grotesk";letter-spacing:.04em;margin-bottom:12px;display:flex;gap:10px;align-items:center}
+.fl .ct i{display:block;width:60px;height:3px;background:rgba(17,17,16,.2);position:relative;overflow:hidden}
+.fl .ct i b{position:absolute;inset:0;background:var(--ink);transform-origin:0;transform:scaleX(var(--k,0))}
+.fd{position:relative;height:72px}
+.fd p{position:absolute;inset:0;opacity:0;transform:translateY(12px);transition:.5s}
+.fd p.on{opacity:1;transform:none}
+.fr{position:absolute;right:clamp(18px,3vw,44px);bottom:7vh;z-index:4;text-align:right;font-size:13px;max-width:200px;opacity:.75}
+.fix .h{position:absolute;left:clamp(18px,3vw,44px);top:13vh;z-index:4;font-size:min(5.6vw,8vh);max-width:9ch}
+
+/* HOW: ink sheet rises over yellow */
+.how{height:420vh;position:relative;background:var(--ink);color:#fff;margin-top:-60px;border-radius:var(--rr,56px) var(--rr,56px) 0 0;z-index:5}
+.how .pin{border-radius:inherit}
+.st{position:absolute;inset:0;clip-path:circle(0 at 50% 50%);will-change:clip-path}
+.st img{width:100%;height:100%;object-fit:cover;transform:scale(var(--z,1.15))}
+.st:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,transparent 55%,rgba(0,0,0,.55))}
+.howh{position:absolute;left:clamp(18px,3vw,44px);top:14vh;z-index:6;font-size:min(6vw,9vh);color:var(--y);max-width:10ch;transition:opacity .5s}
+.card{position:absolute;right:clamp(18px,3vw,44px);bottom:7vh;z-index:6;width:min(430px,calc(100vw - 36px));padding:26px 28px 28px;border-radius:30px;background:rgba(18,18,16,.34);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3)}
+.card .n{position:relative;height:clamp(64px,8vw,104px);overflow:hidden;margin-bottom:8px}
+.card .n b{position:absolute;left:0;top:0;font-size:clamp(64px,8vw,104px);color:var(--y);transform:translateY(105%);transition:transform .7s cubic-bezier(.2,.85,.25,1)}
+.card .n b.on{transform:none}
+.card .n b.out{transform:translateY(-105%)}
+.card .tx{position:relative;height:118px}
+.card .tx div{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:.55s}
+.card .tx div.on{opacity:1;transform:none}
+.card h3{font:800 32px/1 "Cabinet Grotesk";letter-spacing:-.02em;margin-bottom:10px}
+.card p{font-size:15px;opacity:.88}
+
+/* WORK: yellow sheet back over the ink */
+.work{position:relative;z-index:6;background:var(--y);margin-top:-60px;border-radius:var(--rw,56px) var(--rw,56px) 0 0;padding:16vh 0 12vh;overflow:hidden}
+.big{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;padding:0 clamp(18px,3vw,44px);margin-bottom:9vh}
+.big div{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.85,.25,1)}
+.big div.in{opacity:1;transform:none}
+.big div:nth-child(2){transition-delay:.15s}.big div:nth-child(3){transition-delay:.3s}
+.big b{display:block;font-size:min(9vw,15vh);margin-bottom:12px}
+.big span{font-size:16px;max-width:240px;display:block}
+.rail{position:relative;height:min(46vw,62vh)}
+.track{position:absolute;left:0;top:0;height:100%;display:flex;gap:18px;will-change:transform}
+.ph2{height:100%;flex:0 0 auto;border-radius:34px;overflow:hidden;cursor:zoom-in;position:relative;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform:scale(.9)}
+.ph2:hover{transform:scale(1);z-index:2}
+.ph2 img{height:100%;width:auto;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.ph2:hover img{transform:scale(1.06)}
+.ph2.t{aspect-ratio:3/4}.ph2.w{aspect-ratio:4/3}.ph2.t img,.ph2.w img{width:100%}
+.ph2 em{position:absolute;left:16px;bottom:16px;font:600 13px/1 Switzer;font-style:normal;background:var(--y);color:var(--ink);padding:9px 13px;border-radius:14px;transition:background .3s,color .3s}
+.ph2:hover em{background:var(--ink);color:var(--y)}
+
+/* END: taken apart, put back together */
+.end{position:relative;z-index:6;background:var(--y);min-height:100vh;min-height:100svh;padding:110px clamp(18px,3vw,44px) 40px;display:grid;grid-template-columns:1.05fr 1fr;gap:3vw;align-items:center}
+.end h2{font-size:min(10.5vw,17vh);text-transform:uppercase;margin-bottom:26px}
+.end h2 span{display:block}
+.facts{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:15px;margin-bottom:26px}
+.facts a{border-bottom:1.5px solid currentColor}
+.ep{position:relative;aspect-ratio:4/3;width:100%}
+.form{position:relative;background:var(--paper);border-radius:34px;padding:24px;max-width:560px;box-shadow:0 30px 60px -30px rgba(60,50,0,.45)}
+.form label{font:600 13px/1 Switzer;display:block;margin:0 0 10px 4px;opacity:.7}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chips button{font:600 14px/1 Switzer;border:0;background:#efe9c4;color:var(--ink);padding:12px 16px;border-radius:16px;cursor:pointer;transition:background .3s,color .3s,transform .3s}
+.chips button:hover{background:var(--ink);color:var(--y)}
+.chips button.on{background:var(--ink);color:var(--y)}
+.row{display:flex;gap:10px;align-items:flex-end}
+.row textarea{flex:1;font:500 16px/1.4 Switzer;border:0;background:#efe9c4;border-radius:20px;padding:15px 18px;resize:none;height:84px;color:var(--ink);outline:none}
+.row textarea::placeholder{color:#8a835a}
+.send{width:84px;height:84px;flex:0 0 84px;border-radius:50%;border:0;background:var(--ink);color:var(--y);cursor:pointer;display:grid;place-items:center;transition:transform .5s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.send:hover{transform:rotate(-20deg);background:var(--y);color:var(--ink)}
+.send svg{width:26px}
+.again{margin-top:30px;display:inline-flex;align-items:center;gap:12px;font:600 14px/1 Switzer;cursor:pointer;background:none;border:0;color:var(--ink)}
+.again .r{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;transition:transform .5s}
+.again:hover .r{transform:translateY(-4px)}
+.foot{grid-column:1/-1;display:flex;justify-content:space-between;font-size:12px;opacity:.6;padding-top:10px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:90;background:rgba(17,17,16,.92);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .4s;cursor:zoom-out}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img{max-width:92vw;max-height:88vh;border-radius:22px;transform:scale(.94);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.lb.on img{transform:none}
+
+@media (max-width:820px),(orientation:portrait){
+  :root{--c:52vw}
+  .name{font-size:15.5vw}
+  .n1{top:12vh}.n2{bottom:auto;top:calc(12vh + 1em)}
+  .ph{top:60%}
+  .ph{width:118vw;top:58%}
+  .hb{bottom:5vh;right:18px;max-width:none}
+  .tr .open{display:none}
+  .fix .h{font-size:9.5vw;top:12vh}
+  .fl{bottom:5vh;right:18px;width:auto}
+  .fr{display:none}
+  .card{left:18px;right:18px;width:auto;bottom:4vh;padding:20px 22px 22px}
+  .card .tx{height:110px}
+  .howh{font-size:11vw;top:12vh}
+  .big{grid-template-columns:1fr;gap:5vh}
+  .big b{font-size:19vw}
+  .rail{height:64vw}
+  .end{grid-template-columns:1fr;padding-top:96px}
+  .end h2{font-size:17vw}
+  .send{width:64px;height:64px;flex-basis:64px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.r{opacity:1;transform:none}.hero h1 span,.hero p,.hero .cta,.chip{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 </style>
 <!-- ds-og -->
 <meta property="og:type" content="website">
@@ -142,152 +188,202 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 <!-- /ds-og -->
 </head>
 <body>
-<div class="prog" aria-hidden="true"><i id="prog"></i></div>
-<svg id="wire" aria-hidden="true"><path class="base" id="wb"/><path class="lit" id="wl"/><path class="spark" id="ws"/><g id="nodes"></g></svg>
-<nav aria-label="Main"><a class="lg" href="#top">IP Electronic Repair</a><a class="ln" href="#fix">What we fix</a><a class="ln" href="#how">How it works</a><a class="ln" href="#contact">Find us</a><a class="q" href="#contact">Book a repair</a></nav>
+<div class="prog" id="prog"></div>
 
-<header class="hero" id="top">
-  <div class="ph"><img src="https://images.pexels.com/photos/9242896/pexels-photo-9242896.jpeg?auto=compress&cs=tinysrgb&w=2400" alt="Hands soldering a circuit board" fetchpriority="high"></div>
-  <div class="sh"></div>
-  <div class="chip"><b></b>Free diagnosis · Mon to Sat, 7am to 7pm</div>
-  <div class="in">
-    <h1 aria-label="IP Electronic Repair"><span>IP Electronic</span><span>Repair</span></h1>
-    <div class="row">
-      <p>Phones, TVs, microwaves and computers.<br>Fixed the same day, right here in Meyerton.</p>
-      <div class="cta"><a class="b" href="https://wa.me/27781095402?text=Hi%20IP%20Electronic%20Repair%2C%20I%20need%20a%20repair" target="_blank" rel="noopener">WhatsApp us <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a><a class="b g" href="tel:+27781095402">Call 078 109 5402 <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
-    </div>
+<header class="top">
+  <a class="mark" href="#top"><b>IP</b>Electronic Repair</a>
+  <div class="tr">
+    <span class="open" id="open"><i></i><span>Open today, 7am to 7pm</span></span>
+    <a class="round" href="https://wa.me/27781095402?text=Hi%20IP%20Electronic%20Repair%2C%20I%20need%20a%20repair" aria-label="WhatsApp us"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2.1 1.1 1 2.1 1.3 2.4 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.2 1.5Z"/></svg></a>
   </div>
 </header>
 
-<section class="fix" id="fix" aria-label="What we fix">
+<main id="top">
+<!-- 1. HERO -->
+<section class="hero" id="hero">
   <div class="pin">
-    <div class="dev" id="dev">
-      <svg viewBox="0 0 400 400">
-        <g class="g" id="g0"><rect x="130" y="40" width="140" height="300" rx="24" pathLength="1"/><rect x="142" y="70" width="116" height="232" rx="6" pathLength="1"/><line x1="182" y1="56" x2="218" y2="56" pathLength="1"/><circle cx="200" cy="322" r="9" pathLength="1"/><path d="M160 110l30 40-22 10 40 52" pathLength="1"/></g>
-        <g class="g" id="g1"><rect x="40" y="70" width="320" height="200" rx="10" pathLength="1"/><rect x="58" y="86" width="284" height="168" rx="4" pathLength="1"/><path d="M160 270l-26 56M240 270l26 56M120 326h160" pathLength="1"/><path d="M80 210c40-60 80 30 120-30s80 20 120-20" pathLength="1"/></g>
-        <g class="g" id="g2"><rect x="40" y="100" width="320" height="200" rx="14" pathLength="1"/><rect x="62" y="122" width="200" height="156" rx="6" pathLength="1"/><line x1="290" y1="130" x2="336" y2="130" pathLength="1"/><circle cx="313" cy="190" r="16" pathLength="1"/><path d="M296 236h34M296 256h34" pathLength="1"/><path d="M110 250c0-30 30-30 30-60M150 250c0-30 30-30 30-60M190 250c0-30 30-30 30-60" pathLength="1"/></g>
-        <g class="g" id="g3"><rect x="80" y="80" width="240" height="160" rx="10" pathLength="1"/><rect x="96" y="96" width="208" height="128" rx="4" pathLength="1"/><path d="M40 260h320l-24 30H64z" pathLength="1"/><path d="M170 160l-18 12 18 12M230 160l18 12-18 12M210 150l-20 44" pathLength="1"/></g>
-      </svg>
-      <button class="ph" type="button" data-i="0"><img src="https://images.pexels.com/photos/6755075/pexels-photo-6755075.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A phone being opened for repair" data-zoom loading="lazy"></button>
-      <button class="ph" type="button" data-i="1"><img src="https://images.pexels.com/photos/37492292/pexels-photo-37492292.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A technician repairing a television circuit board" data-zoom loading="lazy"></button>
-      <button class="ph" type="button" data-i="2"><img src="https://images.pexels.com/photos/40137556/pexels-photo-40137556.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A technician repairing an appliance in a workshop" data-zoom loading="lazy"></button>
-      <button class="ph" type="button" data-i="3"><img src="https://images.pexels.com/photos/31725401/pexels-photo-31725401.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A technician working inside a computer" data-zoom loading="lazy"></button>
-    </div>
-    <div>
-      <p class="k">What we fix</p>
-      <h2>If it plugs in,<br>bring it in.</h2>
-      <ol class="items" id="items">
-        <li><strong>Phones</strong><span>Cracked screens, batteries that die by lunch, charging ports, water damage.</span></li>
-        <li><strong>TVs</strong><span>No picture, no sound, lines on the screen, won't switch on.</span></li>
-        <li><strong>Microwaves</strong><span>Not heating, sparking, turntable or door problems.</span></li>
-        <li><strong>Computers</strong><span>Laptops and desktops: slow, won't boot, screens, keyboards, chargers.</span></li>
-      </ol>
+    <h1 class="name D" aria-label="IP Electronic Repair">
+      <span class="ln n1" id="n1">IP Electronic</span>
+      <span class="ln n2" id="n2">Repair</span>
+    </h1>
+    <div class="ph" id="ph"></div>
+    <div class="hb" id="hb">
+      <span class="free">Free diagnosis</span>
+      <p>Phones, TVs, microwaves and computers, fixed the same day in Meyerton.</p>
+      <a class="go" href="https://wa.me/27781095402?text=Hi%20IP%20Electronic%20Repair%2C%20I%20need%20a%20repair"><span class="r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span><u>WhatsApp your repair</u></a>
     </div>
   </div>
 </section>
 
+<!-- 2. WHAT WE FIX -->
+<section class="fix" id="fix">
+  <div class="pin">
+    <h2 class="h D">What we fix</h2>
+    <div class="words" id="words"></div>
+    <svg class="lines" id="lines" viewBox="0 0 1000 1000" aria-hidden="true">
+      <g data-i="0"><rect pathLength="1" x="215" y="40" width="570" height="920" rx="96"/><path pathLength="1" d="M455 92h90"/><circle pathLength="1" cx="500" cy="912" r="16"/></g>
+      <g data-i="1"><rect pathLength="1" x="50" y="200" width="900" height="600" rx="42"/><path pathLength="1" d="M500 200L370 52M500 200L640 70"/><path pathLength="1" d="M260 800l-40 90M740 800l40 90"/></g>
+      <g data-i="2"><rect pathLength="1" x="30" y="215" width="940" height="570" rx="34"/><path pathLength="1" d="M795 215v570"/><circle pathLength="1" cx="883" cy="330" r="44"/><path pathLength="1" d="M845 450h76M845 500h76M845 550h76"/><path pathLength="1" d="M80 785v40M920 785v40"/></g>
+      <g data-i="3"><rect pathLength="1" x="175" y="175" width="650" height="650" rx="28"/><path pathLength="1" d="M70 850h860l-50 70H120z"/><path pathLength="1" d="M440 885h120"/></g>
+    </svg>
+    <div class="disc" id="disc"></div>
+    <div class="fl">
+      <div class="ct"><span id="cn">01</span><i><b id="cb"></b></i><span>04</span></div>
+      <div class="fd" id="fd"></div>
+    </div>
+    <div class="fr">Tap the picture to see it full size.</div>
+  </div>
+</section>
+
+<!-- 3. HOW IT WORKS -->
 <section class="how" id="how">
-  <div class="hd"><p class="k r">How it works</p><h2 class="r" style="--dl:1">Bring it in. We find the fault. You leave with it working.</h2></div>
-  <div class="flow">
-    <div class="st r" style="--dl:1"><button class="ph" type="button"><img src="https://images.pexels.com/photos/34264956/pexels-photo-34264956.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A technician repairing electronics" data-zoom loading="lazy"></button><p class="node"><i>1</i></p><h3>Bring it in</h3><p>Pop in any day from Monday to Saturday, 7am to 7pm. No booking needed.</p></div>
-    <div class="st r" style="--dl:2"><button class="ph" type="button"><img src="https://images.pexels.com/photos/6754840/pexels-photo-6754840.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A technician checking a microchip under a microscope" data-zoom loading="lazy"></button><p class="node"><i>2</i></p><h3>Free diagnosis</h3><p>We open it up, find what's wrong and tell you the price before we touch anything.</p></div>
-    <div class="st r" style="--dl:3"><button class="ph" type="button"><img src="https://images.pexels.com/photos/9242885/pexels-photo-9242885.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A circuit board being soldered" data-zoom loading="lazy"></button><p class="node"><i>3</i></p><h3>Fixed the same day</h3><p>Most repairs are done while you wait or by the end of the day.</p></div>
-  </div>
-</section>
-
-<section class="gal" id="work">
-  <div class="hd"><div><p class="k r">In the workshop</p><h2 class="r" style="--dl:1">Small parts. Steady hands.</h2></div><p class="r" style="--dl:2">Hover to open a photo up, tap to see it full size.</p></div>
-  <div class="strip r" style="--dl:2">
-    <button class="tile" type="button"><img src="https://images.pexels.com/photos/31862950/pexels-photo-31862950.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Phone parts laid out on a repair mat" data-zoom loading="lazy"></button>
-    <button class="tile" type="button"><img src="https://images.pexels.com/photos/6755137/pexels-photo-6755137.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="A circuit board under a microscope" data-zoom loading="lazy"></button>
-    <button class="tile" type="button"><img src="https://images.pexels.com/photos/38145576/pexels-photo-38145576.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Precise soldering on a circuit board" data-zoom loading="lazy"></button>
-    <button class="tile" type="button"><img src="https://images.pexels.com/photos/6755057/pexels-photo-6755057.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="A technician fixing computer hardware" data-zoom loading="lazy"></button>
-    <button class="tile" type="button"><img src="https://images.pexels.com/photos/37340089/pexels-photo-37340089.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Hands repairing an electronic board" data-zoom loading="lazy"></button>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="gr">
-    <div class="side">
-      <p class="k r">Find us</p>
-      <h2 class="r" style="--dl:1">Broken? Bring it to us.</h2>
-      <p class="r" style="--dl:2">Tell us what's wrong on WhatsApp first, or just walk in.</p>
-      <ul class="facts r" style="--dl:3">
-        <li><b>Where</b><span>Meyerton</span></li>
-        <li><b>Open</b><span>Monday to Saturday, 7am to 7pm</span></li>
-        <li><b>Call</b><a href="tel:+27781095402">078 109 5402</a></li>
-        <li><b>Follow</b><span>IP Electronic Repair on Facebook and Instagram</span></li>
-      </ul>
+  <div class="pin">
+    <div id="steps"></div>
+    <h2 class="howh D" id="howh">Three steps. One day.</h2>
+    <div class="card">
+      <div class="n D" id="sn"></div>
+      <div class="tx" id="stx"></div>
     </div>
-    <form id="qf" class="r" style="--dl:2" novalidate>
-      <div class="chips" id="chips"><button type="button" class="on">Phone</button><button type="button">TV</button><button type="button">Microwave</button><button type="button">Computer</button><button type="button">Something else</button></div>
-      <div class="fl"><label for="fn">Your name</label><input id="fn" autocomplete="name"></div>
-      <div class="fl"><label for="fm">What's wrong with it?</label><textarea id="fm" placeholder="Make, model and what it's doing"></textarea></div>
-      <button class="b" type="submit">Send on WhatsApp <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></button>
-      <small>Opens WhatsApp with your message ready to send.</small>
-    </form>
   </div>
-  <footer><span>© <span id="yr"></span> IP Electronic Repair, Meyerton</span><span>Website preview by <a href="https://digitalswitch.co.za" target="_blank" rel="noopener">Digital Switch</a></span></footer>
 </section>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo"><img alt=""><button type="button" aria-label="Close">×</button></div>
+<!-- 4. WORK -->
+<section class="work" id="work">
+  <div class="big" id="big">
+    <div><b class="D">R0</b><span>to find out what's wrong. Diagnosis is always free.</span></div>
+    <div><b class="D">Same day</b><span>repairs, so you're not left without your phone.</span></div>
+    <div><b class="D">7 to 7</b><span>Monday to Saturday, right here in Meyerton.</span></div>
+  </div>
+  <div class="rail"><div class="track" id="track"></div></div>
+</section>
+
+<!-- 5. END -->
+<section class="end" id="contact">
+  <div>
+    <h2 class="D"><span>Bring it</span><span>in today.</span></h2>
+    <div class="facts">
+      <span>Meyerton</span>
+      <span id="hrs">Mon to Sat, 7am to 7pm</span>
+      <a href="tel:+27781095402">078 109 5402</a>
+    </div>
+    <form class="form" id="form">
+      <label>What needs fixing?</label>
+      <div class="chips" id="chips"><button type="button" class="on">Phone</button><button type="button">TV</button><button type="button">Microwave</button><button type="button">Laptop or PC</button><button type="button">Something else</button></div>
+      <div class="row"><textarea id="msg" placeholder="What's wrong with it? e.g. cracked screen, won't switch on"></textarea><button class="send" aria-label="Send on WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+    </form>
+    <button class="again" id="again"><span class="r"><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span>Back to the start</button>
+  </div>
+  <div class="ep" id="ep"></div>
+  <div class="foot"><span>© IP Electronic Repair, Meyerton</span><span>Preview by Digital Switch</span></div>
+</section>
+</main>
+
+<div class="lb" id="lb"><img alt=""></div>
+
 <script>
 (function(){
-var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
-var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;$('#yr').textContent=new Date().getFullYear();
-var ss=function(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
-/* one circuit through the whole page, drawn as a right-angled trace with rounded corners */
-var svg=$('#wire'),wb=$('#wb'),wl=$('#wl'),ws=$('#ws'),nodesG=$('#nodes'),L=1;
-function top(el){return el.getBoundingClientRect().top+scrollY}
-function build(){
-  var W=document.documentElement.clientWidth,H=document.documentElement.scrollHeight,m=W<860?14:Math.max(22,W*.025),R=18;
-  svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);
-  var hero=$('#top'),fix=$('#fix'),how=$('#how'),gal=$('#work'),con=$('#contact');
-  var pts=[[W-m,top(hero)+120],[W-m,top(fix)+80],[m,top(fix)+80],[m,top(how)+60],[W*.5,top(how)+60],[W*.5,top($('.flow'))-30],[W-m,top($('.flow'))-30],[W-m,top(gal)+40],[m,top(gal)+40],[m,top(con)+60],[W*.62,top(con)+60],[W*.62,H-40]];
-  var d='M'+pts[0][0]+' '+pts[0][1];
-  for(var i=1;i<pts.length;i++){var p=pts[i],q=pts[i-1],n=pts[i+1];
-    if(!n){d+=' L'+p[0]+' '+p[1];break}
-    var dx1=Math.sign(p[0]-q[0]),dy1=Math.sign(p[1]-q[1]),dx2=Math.sign(n[0]-p[0]),dy2=Math.sign(n[1]-p[1]);
-    d+=' L'+(p[0]-dx1*R)+' '+(p[1]-dy1*R)+' Q'+p[0]+' '+p[1]+' '+(p[0]+dx2*R)+' '+(p[1]+dy2*R)}
-  [wb,wl,ws].forEach(function(e){e.setAttribute('d',d)});
-  L=wl.getTotalLength();wl.style.strokeDasharray=L;ws.setAttribute('pathLength','1');
-  nodesG.innerHTML=pts.slice(1,-1).filter(function(_,i){return i%2===0}).map(function(p){return '<circle r="4" cx="'+p[0]+'" cy="'+p[1]+'"/>'}).join('');
-}
-build();addEventListener('resize',build);addEventListener('load',build);
-/* reveals */
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
-$$('.r').forEach(function(el){io.observe(el)});
-/* devices: each one draws itself in light, holds, then hands the current on */
-var fix=$('#fix'),G=[0,1,2,3].map(function(i){return $('#g'+i)}),P=$$('#dev .ph'),items=$$('#items li'),cur=-1;
-G.forEach(function(g){g.querySelectorAll('[pathLength]').forEach(function(s){s.style.strokeDasharray='1 1'})});
-var prog=$('#prog'),spark=0,last=performance.now(),lastY=-1;
-function frame(now){var dt=(now-last)/1000;last=now;var y=scrollY,vh=innerHeight,H=document.documentElement.scrollHeight;
-  spark=(spark+dt*.035)%1;if(!RM)ws.style.strokeDashoffset=(-spark).toFixed(4);
-  if(y!==lastY){lastY=y;
-    var pg=Math.min(1,y/Math.max(1,H-vh));prog.style.transform='scaleY('+pg.toFixed(4)+')';
-    // the trace lights up to just below the bottom of the screen
-    var reach=Math.min(1,(y+vh*.85)/H);wl.style.strokeDashoffset=(L*(1-reach)).toFixed(1);
-    var r=fix.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/Math.max(1,r.height-vh)));
-    if(r.top<vh&&r.bottom>0){var seg=Math.min(3,Math.floor(p*4)),lp=p*4-seg;
-      G.forEach(function(g,i){var on=i===seg,dr=on?ss(0,.45,lp):0,fade=on?1-ss(.88,1,lp)*(i<3?1:0):0;
-        g.style.opacity=on?fade.toFixed(3):'0';
-        g.querySelectorAll('[pathLength]').forEach(function(s,k){s.style.strokeDashoffset=(1-ss(k*.08,k*.08+.6,dr)).toFixed(3)})});
-      if(seg!==cur){cur=seg;items.forEach(function(li,i){li.classList.toggle('on',i===seg)});P.forEach(function(ph,i){ph.classList.toggle('on',i===seg)})}}
-  }
-  requestAnimationFrame(frame)}
+var P=function(id,w){return 'https://images.pexels.com/photos/'+id+'/pexels-photo-'+id+'.jpeg?auto=compress&cs=tinysrgb&w='+w};
+var vw=innerWidth,vh=innerHeight,clamp=function(v,a,b){return Math.max(a,Math.min(b,v))},ss=function(a,b,x){x=clamp((x-a)/(b-a),0,1);return x*x*(3-2*x)};
+var lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+function zoom(src){lbi.src=src;lb.classList.add('on')}
+lb.onclick=function(){lb.classList.remove('on')};
+addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on')});
+
+/* split a name line into letters that arrive one by one */
+function letters(el,d0){var t=el.textContent;el.textContent='';for(var i=0;i<t.length;i++){var s=document.createElement('span');s.textContent=t[i]===' '?' ':t[i];s.style.animationDelay=(d0+i*.045)+'s';el.appendChild(s)}}
+letters(document.getElementById('n1'),.15);letters(document.getElementById('n2'),.65);
+
+/* the hero photo: four phone layers, each its own strip */
+var HERO=14534828,cuts=[0,.285,.51,.73,1];
+function strips(host,w){var out=[];for(var i=0;i<4;i++){var s=document.createElement('div');s.className='strip';s.style.clipPath='inset(0 '+((1-cuts[i+1])*100)+'% 0 '+(cuts[i]*100)+'%)';var si=document.createElement('div');si.className='si';si.style.animationDelay=(.35+i*.14)+'s, '+(1.6+i*.4)+'s';var im=document.createElement('img');im.src=P(HERO,w);im.alt=i?'':'A phone taken apart into its four layers';si.appendChild(im);s.appendChild(si);host.appendChild(s);out.push(s)}return out}
+var hs=strips(document.getElementById('ph'),2200),es=strips(document.getElementById('ep'),1600);
+document.getElementById('ep').onclick=function(){zoom(P(HERO,2400))};
+
+/* what we fix */
+var DEV=[
+ {w:'Phones',id:14434416,pos:'50% 50%',t:'Cracked screens, dead batteries, charging ports, water damage. Most phones are done the same day.'},
+ {w:'TVs',id:9086764,pos:'60% 55%',t:'No picture, no sound, won\'t switch on. Flat screens and older sets.'},
+ {w:'Microwaves',id:4686822,pos:'50% 50%',t:'Not heating, sparking, door or turntable trouble. Bring it in and we\'ll check it for free.'},
+ {w:'Laptops',id:9432954,pos:'48% 50%',t:'Laptops and PCs: slow, won\'t boot, broken screens and keyboards, viruses and upgrades.'}];
+var words=document.getElementById('words'),disc=document.getElementById('disc'),fd=document.getElementById('fd'),W=[],DI=[],FD=[];
+DEV.forEach(function(d,i){var w=document.createElement('div');w.className='word D';for(var k=0;k<d.w.length;k++){var s=document.createElement('span');s.textContent=d.w[k];s.style.transitionDelay=(k*.035)+'s';w.appendChild(s)}words.appendChild(w);W.push(w);
+ var im=document.createElement('img');im.src=P(d.id,1400);im.alt=d.w;im.style.objectPosition=d.pos;if(i)im.style.clipPath='circle(0 at 50% 50%)';disc.appendChild(im);DI.push(im);
+ var p=document.createElement('p');p.textContent=d.t;fd.appendChild(p);FD.push(p)});
+var G=[].slice.call(document.querySelectorAll('#lines g')),GP=G.map(function(g){return [].slice.call(g.children)});
+var nm=document.querySelector('.name'),n1e=document.getElementById('n1');
+function fit(){nm.style.fontSize='100px';var nw=n1e.scrollWidth||1,pad=Math.max(18,Math.min(44,vw*.03));nm.style.fontSize=Math.min(100*(vw-2*pad)/nw,vh*.19)+'px';W.forEach(function(w){w.style.fontSize='100px';var r=w.scrollWidth||1;w.style.fontSize=Math.min(100*vw*.94/r,vh*.46)+'px'})}
+disc.onclick=function(){zoom(P(DEV[cur].id,2400))};
+var cur=-1;
+
+/* how it works */
+var STEPS=[
+ {id:6755075,h:'Bring it in',t:'Walk in with your phone, TV, microwave or laptop. Monday to Saturday, 7am to 7pm.'},
+ {id:6754839,h:'Free diagnosis',t:'We open it up, find the fault and tell you what it will cost. Checking is free.'},
+ {id:6755138,h:'Fixed same day',t:'We repair it while you get on with your day, then you collect it working.'}];
+var stH=document.getElementById('steps'),sn=document.getElementById('sn'),stx=document.getElementById('stx'),SL=[],SN=[],ST=[];
+STEPS.forEach(function(s,i){var d=document.createElement('div');d.className='st';var im=document.createElement('img');im.src=P(s.id,2000);im.alt=s.h;d.appendChild(im);stH.appendChild(d);SL.push(d);
+ var b=document.createElement('b');b.textContent='0'+(i+1);sn.appendChild(b);SN.push(b);
+ var x=document.createElement('div');x.innerHTML='<h3>'+s.h+'</h3><p>'+s.t+'</p>';stx.appendChild(x);ST.push(x)});
+var scur=-1;
+
+/* work rail */
+var RAIL=[[31862950,'t','On the bench'],[1476321,'w','Every part counted'],[6755137,'t','Board-level repairs'],[38145576,'w','Screens replaced'],[6755057,'t','Careful hands'],[6755140,'w','Down to the chip'],[37340089,'t','Back to working']];
+var tr=document.getElementById('track');
+for(var rep=0;rep<2;rep++)RAIL.forEach(function(r){var d=document.createElement('div');d.className='ph2 '+r[1];d.innerHTML='<img loading="lazy" alt="'+r[2]+'" src="'+P(r[0],1200)+'"><em>'+r[2]+'</em>';d.onclick=function(){zoom(P(r[0],2400))};tr.appendChild(d)});
+var tx=0,hover=false;tr.addEventListener('mouseenter',function(){hover=true});tr.addEventListener('mouseleave',function(){hover=false});
+
+/* big statements */
+var big=[].slice.call(document.querySelectorAll('.big div'));
+
+/* form */
+var chips=[].slice.call(document.querySelectorAll('#chips button')),dev='Phone';
+chips.forEach(function(c){c.onclick=function(){chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on');dev=c.textContent}});
+document.getElementById('form').onsubmit=function(e){e.preventDefault();var m=document.getElementById('msg').value.trim();var t='Hi IP Electronic Repair, I need a repair.\nDevice: '+dev+(m?'\nProblem: '+m:'');window.open('https://wa.me/27781095402?text='+encodeURIComponent(t),'_blank')};
+document.getElementById('again').onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+
+/* open now, in Meyerton time */
+(function(){var o=document.getElementById('open'),h=document.getElementById('hrs');try{var f=new Intl.DateTimeFormat('en-ZA',{timeZone:'Africa/Johannesburg',weekday:'short',hour:'numeric',hour12:false}).formatToParts(new Date()),wd='',hr=0;f.forEach(function(p){if(p.type==='weekday')wd=p.value;if(p.type==='hour')hr=+p.value});var open=wd!=='Sun'&&hr>=7&&hr<19;o.querySelector('span').textContent=open?'Open now, until 7pm':(wd==='Sun'?'Closed Sundays, open Monday 7am':'Closed now, opens 7am');if(!open)o.classList.add('shut')}catch(e){}})();
+
+var hero=document.getElementById('hero'),fix=document.getElementById('fix'),how=document.getElementById('how'),work=document.getElementById('work'),end=document.getElementById('contact'),
+ n1=document.getElementById('n1'),n2=document.getElementById('n2'),hb=document.getElementById('hb'),cn=document.getElementById('cn'),cb=document.getElementById('cb'),howh=document.getElementById('howh'),prog=document.getElementById('prog'),bd=document.body;
+var K=[-.42,.3,-.22,.5],R=[-7,5,-4,8];
+function pr(el){var r=el.getBoundingClientRect();return clamp(-r.top/Math.max(1,r.height-vh),0,1)}
+var last=0;
+function frame(t){var dt=Math.min(50,t-last||16);last=t;
+ var h=document.documentElement;prog.style.transform='scaleX('+(scrollY/Math.max(1,h.scrollHeight-vh))+')';
+ /* hero: the phone comes apart as you leave */
+ var p=pr(hero),e=ss(0,1,p);
+ hs.forEach(function(s,i){s.style.transform='translate3d('+(i-1.5)*e*vw*.04+'px,'+K[i]*e*vh*1.1+'px,0) rotate('+R[i]*e+'deg)'});
+ n1.style.transform='translateY('+(-e*24)+'vh)';n2.style.transform='translateY('+(e*26)+'vh)';n1.style.opacity=n2.style.opacity=1-ss(.35,.9,p);hb.style.opacity=1-ss(0,.35,p);
+ /* fix */
+ var r=fix.getBoundingClientRect(),q=clamp(-r.top/(r.height-vh),0,1),x=q*4,seg=Math.min(3,Math.floor(x)),loc=x-seg;
+ disc.style.setProperty('--s',(.25+.75*ss(-.6,0,-r.top/vh)).toFixed(3));
+ if(seg!==cur){W.forEach(function(w,i){w.classList.toggle('on',i===seg);w.classList.toggle('out',i<seg)});FD.forEach(function(f,i){f.classList.toggle('on',i===seg)});cn.textContent='0'+(seg+1);cur=seg}
+ cb.style.transform='scaleX('+((seg+loc)/4)+')';
+ G.forEach(function(g,i){var d=i===seg?ss(.02,.5,loc)*(i===3?1:1-ss(.82,.97,loc)):0;g.style.opacity=i===seg?1:0;GP[i].forEach(function(el,k){el.style.strokeDasharray='1 1';el.style.strokeDashoffset=(1-clamp(d*1.25-k*.08,0,1)).toFixed(3)})});
+ DI.forEach(function(im,i){if(!i)return;var k=ss(.8,1,x-(i-1));if(i<=seg)k=1;im.style.clipPath='circle('+(k*72).toFixed(2)+'% at 50% 50%)'});
+ /* how: ink sheet rises, steps open from a circle */
+ var hr=how.getBoundingClientRect();how.style.setProperty('--rr',(56*clamp(hr.top/vh,0,1)).toFixed(1)+'px');
+ var hq=clamp(-hr.top/(hr.height-vh),0,1),big0=Math.hypot(vw,vh)/2;
+ bd.classList.toggle('dark',hr.top<60&&hr.bottom>60);
+ SL.forEach(function(s,i){var a=[0,.36,.68][i],rad=i===0?Math.min(vw,vh)*.18*ss(-1,-.2,-hr.top/vh)+ss(0,.18,hq)*big0:ss(a,a+.2,hq)*big0;s.style.clipPath='circle('+rad.toFixed(1)+'px at 50% 50%)';s.style.setProperty('--z',(1.15-.15*ss(a,a+.3,hq)).toFixed(3))});
+ var si=hq<.36?0:hq<.68?1:2;if(hr.top>vh*.4)si=-1;
+ if(si!==scur){SN.forEach(function(b,i){b.classList.toggle('on',i===si);b.classList.toggle('out',i<si)});ST.forEach(function(d,i){d.classList.toggle('on',i===si)});scur=si}
+ howh.style.opacity=1-ss(.06,.16,hq);
+ /* work: yellow sheet rises back */
+ var wr=work.getBoundingClientRect();work.style.setProperty('--rw',(56*clamp(wr.top/vh,0,1)).toFixed(1)+'px');
+ if(wr.top<vh*.8)big.forEach(function(b){b.classList.add('in')});
+ if(wr.top<vh&&wr.bottom>0){var half=tr.scrollWidth/2;tx-=(hover?.008:.045)*dt;if(-tx>half)tx+=half;tr.style.transform='translate3d('+tx+'px,0,0)'}
+ /* end: the phone goes back together */
+ var er=end.getBoundingClientRect(),c=1-ss(.05,.85,(vh-er.top)/vh);
+ es.forEach(function(s,i){s.style.transform='translate3d(0,'+K[i]*c*vh*.9+'px,0) rotate('+R[i]*c+'deg)'});
+ requestAnimationFrame(frame)}
+function size(){vw=innerWidth;vh=innerHeight;fit()}
+addEventListener('resize',size);size();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 requestAnimationFrame(frame);
-/* every photo opens full size */
-var lb=$('#lb'),lbi=lb.querySelector('img');
-$$('[data-zoom]').forEach(function(img){(img.closest('button')||img).addEventListener('click',function(){lbi.src=img.currentSrc.replace(/w=\d+/,'w=2400');lbi.alt=img.alt;lb.classList.add('on')})});
-lb.addEventListener('click',function(){lb.classList.remove('on')});addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on')});
-/* WhatsApp form */
-var dev='Phone';$$('#chips button').forEach(function(b){b.addEventListener('click',function(){$$('#chips button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');dev=b.textContent})});
-$('#qf').addEventListener('submit',function(e){e.preventDefault();var n=$('#fn').value.trim(),m=$('#fm').value.trim();
-  var msg='Hi IP Electronic Repair'+(n?', my name is '+n:'')+'. I need a repair on my '+dev.toLowerCase()+'.'+(m?' '+m:'');
-  window.open('https://wa.me/27781095402?text='+encodeURIComponent(msg),'_blank')});
 })();
 </script>
-<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
 <script id="ds-view">(function(){var U="https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec";try{if(localStorage.getItem("ds-desk-key")||localStorage.getItem("dsc-key"))return}catch(e){}if(!navigator.sendBeacon||navigator.webdriver||/shot=1/.test(location.search)||/HeadlessChrome|PhantomJS|bot|crawl|spider|preview/i.test(navigator.userAgent))return;var m=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?"phone":"computer",tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}var v=Math.random().toString(36).slice(2,12),on=0,t0=document.visibilityState==="visible"?Date.now():0,sc=0,taps=[],seen=false;function scroll(){var h=document.documentElement,max=Math.max(1,h.scrollHeight-innerHeight);sc=Math.max(sc,Math.min(100,Math.round(100*(scrollY||h.scrollTop)/max)))}addEventListener("scroll",scroll,{passive:true});function tap(k){if(taps[taps.length-1]!==k&&taps.length<12)taps.push(k)}document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=(a.getAttribute("href")||"").toLowerCase();if(h.indexOf("tel:")===0)tap("call");else if(/wa\.me|whatsapp/.test(h))tap("whatsapp");else if(h.indexOf("mailto:")===0)tap("email");else if(h.indexOf("sms:")===0)tap("text");else if(/\/offer/.test(h))tap("offer")},true);document.addEventListener("submit",function(){tap("form")},true);function f(k){var d=new FormData();d.append("kind",k);d.append("path",location.pathname);d.append("q",location.search.slice(0,150));d.append("m",m);d.append("tz",tz);return d}function secs(){return Math.round((on+(t0?Date.now()-t0:0))/1000)}function send(){if(!seen)return;scroll();var d=f("engage");d.append("v",v);d.append("sec",secs());d.append("scroll",sc);d.append("taps",taps.join(","));navigator.sendBeacon(U,d)}document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){if(t0){on+=Date.now()-t0;t0=0}send()}else t0=Date.now()});addEventListener("pagehide",send);var iv=setInterval(function(){if(secs()<4)return;clearInterval(iv);seen=true;var k="dsv:"+location.pathname,again=false;try{again=!!sessionStorage.getItem(k);sessionStorage.setItem(k,"1")}catch(e){}if(!again){var d=f("view");d.append("ref",(document.referrer||"").slice(0,150));navigator.sendBeacon(U,d)}},1000);})();</script>
 </body>
 </html>
