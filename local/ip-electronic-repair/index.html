@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>IP Electronic Repair | Phone, TV, microwave and computer repairs in Meyerton</title>
+<meta name="description" content="IP Electronic Repair, Meyerton: phones, TVs, microwaves and computers. Free diagnosis, same-day repairs, Monday to Saturday 7am to 7pm.">
+<meta name="theme-color" content="#07090c">
+<link rel="preconnect" href="https://api.fontshare.com"><link rel="preconnect" href="https://images.pexels.com">
+<link href="https://api.fontshare.com/v2/css?f[]=panchang@600,700&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090c;--ink:#eef3f7;--mute:rgba(238,243,247,.66);--line:#8fdcff;--line2:#d9f5ff;--d:'Panchang',system-ui,sans-serif;--t:'Switzer',system-ui,sans-serif;--pad:clamp(20px,5vw,76px);--r:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scrollbar-width:none;-ms-overflow-style:none;-webkit-text-size-adjust:100%}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--t);overflow-x:clip;position:relative}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.prog{position:fixed;top:0;right:0;width:3px;height:100%;z-index:80;pointer-events:none}.prog i{display:block;height:100%;background:var(--line);transform:scaleY(0);transform-origin:0 0}
+.k{font:500 12px/1 var(--t);letter-spacing:.18em;text-transform:uppercase;color:var(--line)}
+.b{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 10px 0 24px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;font-size:16px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.b i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:rgba(7,9,12,.08);transition:transform .35s}
+.b:hover{transform:translateY(-2px)}.b:hover i{transform:rotate(-45deg)}
+.b svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8}
+.b.g{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.b.g i{background:rgba(255,255,255,.1)}
+/* the one circuit that runs through the whole page */
+#wire{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:1;overflow:visible}
+#wire path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+#wire .base{stroke:rgba(143,220,255,.12);stroke-width:1.5}
+#wire .lit{stroke:var(--line);stroke-width:1.8;filter:drop-shadow(0 0 3px rgba(143,220,255,.55))}
+#wire .spark{stroke:var(--line2);stroke-width:2.4;stroke-dasharray:.012 .988;filter:drop-shadow(0 0 4px rgba(217,245,255,.8))}
+#wire circle{fill:var(--bg);stroke:var(--line);stroke-width:1.6}
+section,header{position:relative;z-index:2}
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 18px;border-radius:999px;background:rgba(12,15,19,.62);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);white-space:nowrap}
+nav .lg{font:700 13px var(--d);letter-spacing:.02em;margin-right:10px}
+nav .ln{font-size:14px;padding:9px 13px;border-radius:999px;color:var(--mute);transition:color .25s}nav .ln:hover{color:var(--ink)}
+nav .q{font-size:14px;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600}
+/* 1 hero */
+.hero{height:100vh;height:100svh;min-height:620px;overflow:hidden}
+.hero .ph{position:absolute;inset:0;overflow:hidden}
+.hero .ph img{width:100%;height:100%;object-fit:cover;animation:kb 20s ease-out both}
+@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1.02)}}
+.hero .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,12,.45),rgba(7,9,12,.1) 35%,rgba(7,9,12,.25) 60%,var(--bg) 100%)}
+.hero .in{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(36px,9vh,90px)}
+.hero h1{font:700 clamp(44px,8.6vw,150px)/.92 var(--d);letter-spacing:-.02em}
+.hero h1 span{display:block;opacity:0;transform:translateY(40px);animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 span+span{animation-delay:.15s}
+.hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-top:26px}
+.hero p{font-size:clamp(16px,1.4vw,20px);color:rgba(238,243,247,.9);max-width:40ch;opacity:0;animation:up .9s .6s forwards}
+.hero .cta{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:up .9s .8s forwards}
+.chip{position:absolute;top:96px;right:var(--pad);display:flex;gap:10px;align-items:center;padding:10px 16px;border-radius:999px;font-size:14px;background:rgba(7,9,12,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(143,220,255,.3);opacity:0;animation:up .9s 1s forwards}
+.chip b{width:8px;height:8px;border-radius:50%;background:var(--line);box-shadow:0 0 10px var(--line);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.3}}
+@keyframes up{to{opacity:1;transform:none}}
+/* 2 what we fix: devices drawn in light */
+.fix{height:460vh;height:460svh}
+.fix .pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(20px,5vw,80px);padding:90px var(--pad) 50px}
+.dev{position:relative;aspect-ratio:1;max-height:62vh;width:100%;justify-self:center}
+.dev svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dev path,.dev rect,.dev circle,.dev line{fill:none;stroke:var(--line);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(143,220,255,.5))}
+.dev .g{opacity:0}
+.dev .ph{position:absolute;right:-4%;bottom:-2%;width:46%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;cursor:zoom-in;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.dev .ph.on{opacity:1;transform:none}
+.dev .ph img{width:100%;height:100%;object-fit:cover}
+.fix h2{font:700 clamp(30px,3.6vw,56px)/1 var(--d);letter-spacing:-.02em;margin:16px 0 28px}
+.items{list-style:none}
+.items li{padding:16px 0;border-top:1px solid rgba(255,255,255,.08);color:rgba(238,243,247,.35);transition:color .4s}
+.items li strong{display:flex;align-items:center;gap:12px;font:600 22px/1.2 var(--t)}
+.items li strong:before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(143,220,255,.25);transition:background .4s,box-shadow .4s}
+.items li span{display:block;max-height:0;overflow:hidden;font-size:15px;color:var(--mute);transition:max-height .5s,margin .5s}
+.items li.on{color:var(--ink)}.items li.on strong:before{background:var(--line);box-shadow:0 0 10px var(--line)}
+.items li.on span{max-height:70px;margin-top:6px}
+/* 3 how it works */
+.how{padding:clamp(80px,14vh,160px) var(--pad)}
+.how .hd{max-width:720px}
+.how h2{font:700 clamp(30px,3.8vw,58px)/1 var(--d);letter-spacing:-.02em;margin:16px 0 0}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,36px);margin-top:clamp(40px,7vh,70px)}
+.st{position:relative}
+.st .ph{aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;cursor:zoom-in}
+.st .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.st .ph:hover img{transform:scale(1.06)}
+.st .node{display:flex;align-items:center;gap:12px;margin:20px 0 8px;font:700 15px var(--d)}
+.st .node i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--line)}
+.st h3{font:600 22px/1.2 var(--t)}
+.st p{color:var(--mute);font-size:15px;margin-top:6px;max-width:34ch}
+/* 4 gallery */
+.gal{padding:clamp(40px,8vh,90px) 0 clamp(80px,12vh,140px)}
+.gal .hd{padding:0 var(--pad);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+.gal h2{font:700 clamp(30px,3.8vw,58px)/1 var(--d);letter-spacing:-.02em;margin-top:16px}
+.gal .hd p{color:var(--mute);max-width:32ch}
+.strip{display:flex;gap:12px;height:min(60vh,560px);padding:0 var(--pad)}
+.tile{position:relative;flex:1;min-width:0;border-radius:var(--r);overflow:hidden;cursor:zoom-in;transition:flex .8s cubic-bezier(.2,.8,.2,1)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.strip:hover .tile{flex:.75}.strip .tile:hover{flex:2.4}.tile:hover img{transform:scale(1.05)}
+/* 5 contact */
+.contact{padding:clamp(90px,12vh,130px) var(--pad) 26px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between}
+.contact .gr{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px)}
+.contact h2{font:700 clamp(32px,4.2vw,64px)/1 var(--d);letter-spacing:-.02em;margin:16px 0 20px}
+.contact .side p{color:var(--mute);max-width:36ch}
+.facts{list-style:none;margin-top:28px}
+.facts li{display:grid;grid-template-columns:120px 1fr;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);font-size:15px}
+.facts li b{font-weight:500;color:var(--mute)}
+.facts a{color:var(--line2)}
+form{border-radius:24px;padding:clamp(20px,3vw,32px);background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px rgba(143,220,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chips button{font-size:14px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--mute);transition:background .25s,color .25s}
+.chips button.on{background:var(--ink);color:var(--bg)}
+.fl{display:grid;gap:6px;margin-bottom:12px}.fl label{font-size:13px;color:var(--mute)}
+.fl input,.fl textarea{width:100%;font:400 16px var(--t);color:var(--ink);background:rgba(255,255,255,.05);border:0;border-radius:14px;padding:14px 16px;outline:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);-webkit-appearance:none;appearance:none}
+.fl input:focus,.fl textarea:focus{box-shadow:inset 0 0 0 1px var(--line)}
+.fl textarea{min-height:90px;resize:vertical}
+form .b{width:100%;justify-content:space-between}
+form small{display:block;margin-top:10px;font-size:13px;color:rgba(238,243,247,.45)}
+footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:13px;color:rgba(238,243,247,.45)}
+.lb{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:4vh 4vw;background:rgba(4,6,8,.92);opacity:0;pointer-events:none;transition:opacity .35s;cursor:zoom-out}
+.lb.on{opacity:1;pointer-events:auto}.lb img{max-width:100%;max-height:92vh;border-radius:14px}
+.lb button{position:absolute;top:18px;right:18px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);font-size:22px}
+.r{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--dl,0)*.08s)}.r.in{opacity:1;transform:none}
+@media (max-width:860px){
+  nav .ln{display:none}
+  .chip{top:84px;left:var(--pad);right:auto}
+  .fix .pin{grid-template-columns:1fr;align-content:center;gap:6px;padding-top:80px}
+  .dev{max-height:38vh;width:min(38vh,86vw)}
+  .fix h2{font-size:26px;margin:8px 0 10px}.items li{padding:10px 0}.items li strong{font-size:18px}
+  .flow{grid-template-columns:1fr}
+  .strip{height:auto;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}
+  .tile,.strip:hover .tile,.strip .tile:hover{flex:0 0 74vw;height:56vh;scroll-snap-align:center}
+  .contact .gr{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.r{opacity:1;transform:none}.hero h1 span,.hero p,.hero .cta,.chip{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
+<svg id="wire" aria-hidden="true"><path class="base" id="wb"/><path class="lit" id="wl"/><path class="spark" id="ws"/><g id="nodes"></g></svg>
+<nav aria-label="Main"><a class="lg" href="#top">IP Electronic Repair</a><a class="ln" href="#fix">What we fix</a><a class="ln" href="#how">How it works</a><a class="ln" href="#contact">Find us</a><a class="q" href="#contact">Book a repair</a></nav>
+
+<header class="hero" id="top">
+  <div class="ph"><img src="https://images.pexels.com/photos/9242896/pexels-photo-9242896.jpeg?auto=compress&cs=tinysrgb&w=2400" alt="Hands soldering a circuit board" fetchpriority="high"></div>
+  <div class="sh"></div>
+  <div class="chip"><b></b>Free diagnosis · Mon to Sat, 7am to 7pm</div>
+  <div class="in">
+    <h1 aria-label="IP Electronic Repair"><span>IP Electronic</span><span>Repair</span></h1>
+    <div class="row">
+      <p>Phones, TVs, microwaves and computers.<br>Fixed the same day, right here in Meyerton.</p>
+      <div class="cta"><a class="b" href="https://wa.me/27781095402?text=Hi%20IP%20Electronic%20Repair%2C%20I%20need%20a%20repair" target="_blank" rel="noopener">WhatsApp us <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a><a class="b g" href="tel:+27781095402">Call 078 109 5402 <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></a></div>
+    </div>
+  </div>
+</header>
+
+<section class="fix" id="fix" aria-label="What we fix">
+  <div class="pin">
+    <div class="dev" id="dev">
+      <svg viewBox="0 0 400 400">
+        <g class="g" id="g0"><rect x="130" y="40" width="140" height="300" rx="24" pathLength="1"/><rect x="142" y="70" width="116" height="232" rx="6" pathLength="1"/><line x1="182" y1="56" x2="218" y2="56" pathLength="1"/><circle cx="200" cy="322" r="9" pathLength="1"/><path d="M160 110l30 40-22 10 40 52" pathLength="1"/></g>
+        <g class="g" id="g1"><rect x="40" y="70" width="320" height="200" rx="10" pathLength="1"/><rect x="58" y="86" width="284" height="168" rx="4" pathLength="1"/><path d="M160 270l-26 56M240 270l26 56M120 326h160" pathLength="1"/><path d="M80 210c40-60 80 30 120-30s80 20 120-20" pathLength="1"/></g>
+        <g class="g" id="g2"><rect x="40" y="100" width="320" height="200" rx="14" pathLength="1"/><rect x="62" y="122" width="200" height="156" rx="6" pathLength="1"/><line x1="290" y1="130" x2="336" y2="130" pathLength="1"/><circle cx="313" cy="190" r="16" pathLength="1"/><path d="M296 236h34M296 256h34" pathLength="1"/><path d="M110 250c0-30 30-30 30-60M150 250c0-30 30-30 30-60M190 250c0-30 30-30 30-60" pathLength="1"/></g>
+        <g class="g" id="g3"><rect x="80" y="80" width="240" height="160" rx="10" pathLength="1"/><rect x="96" y="96" width="208" height="128" rx="4" pathLength="1"/><path d="M40 260h320l-24 30H64z" pathLength="1"/><path d="M170 160l-18 12 18 12M230 160l18 12-18 12M210 150l-20 44" pathLength="1"/></g>
+      </svg>
+      <button class="ph" type="button" data-i="0"><img src="https://images.pexels.com/photos/6755075/pexels-photo-6755075.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A phone being opened for repair" data-zoom loading="lazy"></button>
+      <button class="ph" type="button" data-i="1"><img src="https://images.pexels.com/photos/37492292/pexels-photo-37492292.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A technician repairing a television circuit board" data-zoom loading="lazy"></button>
+      <button class="ph" type="button" data-i="2"><img src="https://images.pexels.com/photos/40137556/pexels-photo-40137556.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A technician repairing an appliance in a workshop" data-zoom loading="lazy"></button>
+      <button class="ph" type="button" data-i="3"><img src="https://images.pexels.com/photos/31725401/pexels-photo-31725401.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A technician working inside a computer" data-zoom loading="lazy"></button>
+    </div>
+    <div>
+      <p class="k">What we fix</p>
+      <h2>If it plugs in,<br>bring it in.</h2>
+      <ol class="items" id="items">
+        <li><strong>Phones</strong><span>Cracked screens, batteries that die by lunch, charging ports, water damage.</span></li>
+        <li><strong>TVs</strong><span>No picture, no sound, lines on the screen, won't switch on.</span></li>
+        <li><strong>Microwaves</strong><span>Not heating, sparking, turntable or door problems.</span></li>
+        <li><strong>Computers</strong><span>Laptops and desktops: slow, won't boot, screens, keyboards, chargers.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="hd"><p class="k r">How it works</p><h2 class="r" style="--dl:1">Bring it in. We find the fault. You leave with it working.</h2></div>
+  <div class="flow">
+    <div class="st r" style="--dl:1"><button class="ph" type="button"><img src="https://images.pexels.com/photos/34264956/pexels-photo-34264956.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A technician repairing electronics" data-zoom loading="lazy"></button><p class="node"><i>1</i></p><h3>Bring it in</h3><p>Pop in any day from Monday to Saturday, 7am to 7pm. No booking needed.</p></div>
+    <div class="st r" style="--dl:2"><button class="ph" type="button"><img src="https://images.pexels.com/photos/6754840/pexels-photo-6754840.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A technician checking a microchip under a microscope" data-zoom loading="lazy"></button><p class="node"><i>2</i></p><h3>Free diagnosis</h3><p>We open it up, find what's wrong and tell you the price before we touch anything.</p></div>
+    <div class="st r" style="--dl:3"><button class="ph" type="button"><img src="https://images.pexels.com/photos/9242885/pexels-photo-9242885.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A circuit board being soldered" data-zoom loading="lazy"></button><p class="node"><i>3</i></p><h3>Fixed the same day</h3><p>Most repairs are done while you wait or by the end of the day.</p></div>
+  </div>
+</section>
+
+<section class="gal" id="work">
+  <div class="hd"><div><p class="k r">In the workshop</p><h2 class="r" style="--dl:1">Small parts. Steady hands.</h2></div><p class="r" style="--dl:2">Hover to open a photo up, tap to see it full size.</p></div>
+  <div class="strip r" style="--dl:2">
+    <button class="tile" type="button"><img src="https://images.pexels.com/photos/31862950/pexels-photo-31862950.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Phone parts laid out on a repair mat" data-zoom loading="lazy"></button>
+    <button class="tile" type="button"><img src="https://images.pexels.com/photos/6755137/pexels-photo-6755137.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="A circuit board under a microscope" data-zoom loading="lazy"></button>
+    <button class="tile" type="button"><img src="https://images.pexels.com/photos/38145576/pexels-photo-38145576.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Precise soldering on a circuit board" data-zoom loading="lazy"></button>
+    <button class="tile" type="button"><img src="https://images.pexels.com/photos/6755057/pexels-photo-6755057.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="A technician fixing computer hardware" data-zoom loading="lazy"></button>
+    <button class="tile" type="button"><img src="https://images.pexels.com/photos/37340089/pexels-photo-37340089.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Hands repairing an electronic board" data-zoom loading="lazy"></button>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="gr">
+    <div class="side">
+      <p class="k r">Find us</p>
+      <h2 class="r" style="--dl:1">Broken? Bring it to us.</h2>
+      <p class="r" style="--dl:2">Tell us what's wrong on WhatsApp first, or just walk in.</p>
+      <ul class="facts r" style="--dl:3">
+        <li><b>Where</b><span>Meyerton</span></li>
+        <li><b>Open</b><span>Monday to Saturday, 7am to 7pm</span></li>
+        <li><b>Call</b><a href="tel:+27781095402">078 109 5402</a></li>
+        <li><b>Follow</b><span>IP Electronic Repair on Facebook and Instagram</span></li>
+      </ul>
+    </div>
+    <form id="qf" class="r" style="--dl:2" novalidate>
+      <div class="chips" id="chips"><button type="button" class="on">Phone</button><button type="button">TV</button><button type="button">Microwave</button><button type="button">Computer</button><button type="button">Something else</button></div>
+      <div class="fl"><label for="fn">Your name</label><input id="fn" autocomplete="name"></div>
+      <div class="fl"><label for="fm">What's wrong with it?</label><textarea id="fm" placeholder="Make, model and what it's doing"></textarea></div>
+      <button class="b" type="submit">Send on WhatsApp <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i></button>
+      <small>Opens WhatsApp with your message ready to send.</small>
+    </form>
+  </div>
+  <footer><span>© <span id="yr"></span> IP Electronic Repair, Meyerton</span><span>Website preview by <a href="https://digitalswitch.co.za" target="_blank" rel="noopener">Digital Switch</a></span></footer>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo"><img alt=""><button type="button" aria-label="Close">×</button></div>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;$('#yr').textContent=new Date().getFullYear();
+var ss=function(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
+/* one circuit through the whole page, drawn as a right-angled trace with rounded corners */
+var svg=$('#wire'),wb=$('#wb'),wl=$('#wl'),ws=$('#ws'),nodesG=$('#nodes'),L=1;
+function top(el){return el.getBoundingClientRect().top+scrollY}
+function build(){
+  var W=document.documentElement.clientWidth,H=document.documentElement.scrollHeight,m=W<860?14:Math.max(22,W*.025),R=18;
+  svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  var hero=$('#top'),fix=$('#fix'),how=$('#how'),gal=$('#work'),con=$('#contact');
+  var pts=[[W-m,top(hero)+120],[W-m,top(fix)+80],[m,top(fix)+80],[m,top(how)+60],[W*.5,top(how)+60],[W*.5,top($('.flow'))-30],[W-m,top($('.flow'))-30],[W-m,top(gal)+40],[m,top(gal)+40],[m,top(con)+60],[W*.62,top(con)+60],[W*.62,H-40]];
+  var d='M'+pts[0][0]+' '+pts[0][1];
+  for(var i=1;i<pts.length;i++){var p=pts[i],q=pts[i-1],n=pts[i+1];
+    if(!n){d+=' L'+p[0]+' '+p[1];break}
+    var dx1=Math.sign(p[0]-q[0]),dy1=Math.sign(p[1]-q[1]),dx2=Math.sign(n[0]-p[0]),dy2=Math.sign(n[1]-p[1]);
+    d+=' L'+(p[0]-dx1*R)+' '+(p[1]-dy1*R)+' Q'+p[0]+' '+p[1]+' '+(p[0]+dx2*R)+' '+(p[1]+dy2*R)}
+  [wb,wl,ws].forEach(function(e){e.setAttribute('d',d)});
+  L=wl.getTotalLength();wl.style.strokeDasharray=L;ws.setAttribute('pathLength','1');
+  nodesG.innerHTML=pts.slice(1,-1).filter(function(_,i){return i%2===0}).map(function(p){return '<circle r="4" cx="'+p[0]+'" cy="'+p[1]+'"/>'}).join('');
+}
+build();addEventListener('resize',build);addEventListener('load',build);
+/* reveals */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+$$('.r').forEach(function(el){io.observe(el)});
+/* devices: each one draws itself in light, holds, then hands the current on */
+var fix=$('#fix'),G=[0,1,2,3].map(function(i){return $('#g'+i)}),P=$$('#dev .ph'),items=$$('#items li'),cur=-1;
+G.forEach(function(g){g.querySelectorAll('[pathLength]').forEach(function(s){s.style.strokeDasharray='1 1'})});
+var prog=$('#prog'),spark=0,last=performance.now(),lastY=-1;
+function frame(now){var dt=(now-last)/1000;last=now;var y=scrollY,vh=innerHeight,H=document.documentElement.scrollHeight;
+  spark=(spark+dt*.035)%1;if(!RM)ws.style.strokeDashoffset=(-spark).toFixed(4);
+  if(y!==lastY){lastY=y;
+    var pg=Math.min(1,y/Math.max(1,H-vh));prog.style.transform='scaleY('+pg.toFixed(4)+')';
+    // the trace lights up to just below the bottom of the screen
+    var reach=Math.min(1,(y+vh*.85)/H);wl.style.strokeDashoffset=(L*(1-reach)).toFixed(1);
+    var r=fix.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/Math.max(1,r.height-vh)));
+    if(r.top<vh&&r.bottom>0){var seg=Math.min(3,Math.floor(p*4)),lp=p*4-seg;
+      G.forEach(function(g,i){var on=i===seg,dr=on?ss(0,.45,lp):0,fade=on?1-ss(.88,1,lp)*(i<3?1:0):0;
+        g.style.opacity=on?fade.toFixed(3):'0';
+        g.querySelectorAll('[pathLength]').forEach(function(s,k){s.style.strokeDashoffset=(1-ss(k*.08,k*.08+.6,dr)).toFixed(3)})});
+      if(seg!==cur){cur=seg;items.forEach(function(li,i){li.classList.toggle('on',i===seg)});P.forEach(function(ph,i){ph.classList.toggle('on',i===seg)})}}
+  }
+  requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+/* every photo opens full size */
+var lb=$('#lb'),lbi=lb.querySelector('img');
+$$('[data-zoom]').forEach(function(img){(img.closest('button')||img).addEventListener('click',function(){lbi.src=img.currentSrc.replace(/w=\d+/,'w=2400');lbi.alt=img.alt;lb.classList.add('on')})});
+lb.addEventListener('click',function(){lb.classList.remove('on')});addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on')});
+/* WhatsApp form */
+var dev='Phone';$$('#chips button').forEach(function(b){b.addEventListener('click',function(){$$('#chips button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');dev=b.textContent})});
+$('#qf').addEventListener('submit',function(e){e.preventDefault();var n=$('#fn').value.trim(),m=$('#fm').value.trim();
+  var msg='Hi IP Electronic Repair'+(n?', my name is '+n:'')+'. I need a repair on my '+dev.toLowerCase()+'.'+(m?' '+m:'');
+  window.open('https://wa.me/27781095402?text='+encodeURIComponent(msg),'_blank')});
+})();
+</script>
+<script defer src="/assets/ds-analytics.js" id="ds-analytics"></script>
+<script id="ds-view">(function(){var U="https://script.google.com/macros/s/AKfycbxlYzHtwp5RsRfuzF2RxP04zKlj-0x_iBFvwuCXOV94xAv66Lyf-iaNbsYNK6ekP4n_/exec";try{if(localStorage.getItem("ds-desk-key")||localStorage.getItem("dsc-key"))return}catch(e){}if(!navigator.sendBeacon||navigator.webdriver||/shot=1/.test(location.search)||/HeadlessChrome|PhantomJS|bot|crawl|spider|preview/i.test(navigator.userAgent))return;var m=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?"phone":"computer",tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}var v=Math.random().toString(36).slice(2,12),on=0,t0=document.visibilityState==="visible"?Date.now():0,sc=0,taps=[],seen=false;function scroll(){var h=document.documentElement,max=Math.max(1,h.scrollHeight-innerHeight);sc=Math.max(sc,Math.min(100,Math.round(100*(scrollY||h.scrollTop)/max)))}addEventListener("scroll",scroll,{passive:true});function tap(k){if(taps[taps.length-1]!==k&&taps.length<12)taps.push(k)}document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=(a.getAttribute("href")||"").toLowerCase();if(h.indexOf("tel:")===0)tap("call");else if(/wa\.me|whatsapp/.test(h))tap("whatsapp");else if(h.indexOf("mailto:")===0)tap("email");else if(h.indexOf("sms:")===0)tap("text");else if(/\/offer/.test(h))tap("offer")},true);document.addEventListener("submit",function(){tap("form")},true);function f(k){var d=new FormData();d.append("kind",k);d.append("path",location.pathname);d.append("q",location.search.slice(0,150));d.append("m",m);d.append("tz",tz);return d}function secs(){return Math.round((on+(t0?Date.now()-t0:0))/1000)}function send(){if(!seen)return;scroll();var d=f("engage");d.append("v",v);d.append("sec",secs());d.append("scroll",sc);d.append("taps",taps.join(","));navigator.sendBeacon(U,d)}document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){if(t0){on+=Date.now()-t0;t0=0}send()}else t0=Date.now()});addEventListener("pagehide",send);var iv=setInterval(function(){if(secs()<4)return;clearInterval(iv);seen=true;var k="dsv:"+location.pathname,again=false;try{again=!!sessionStorage.getItem(k);sessionStorage.setItem(k,"1")}catch(e){}if(!again){var d=f("view");d.append("ref",(document.referrer||"").slice(0,150));navigator.sendBeacon(U,d)}},1000);})();</script>
+</body>
+</html>
