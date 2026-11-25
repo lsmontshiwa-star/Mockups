@@ -7,7 +7,8 @@
 <meta name="description" content="Phones, TVs, microwaves and computers fixed the same day in Meyerton. Free diagnosis. Monday to Saturday, 7am to 7pm.">
 <meta name="theme-color" content="#ebdf12">
 <link rel="preconnect" href="https://images.pexels.com">
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
 <style>
 :root{--y:#ebdf12;--y2:#d9cc06;--ink:#111110;--paper:#fbf8e6;--c:52vmin}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -24,8 +25,8 @@ body.dark .prog{background:var(--y)}
 .top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,3vw,44px);pointer-events:none;transition:color .4s}
 .top>*{pointer-events:auto}
 body.dark .top{color:#fff}
-.mark{font:700 15px/1.1 Switzer;letter-spacing:.01em}
-.mark b{font:800 19px/1 "Cabinet Grotesk";letter-spacing:-.02em;display:block}
+.mark{font:700 15px/1.1 Switzer,system-ui,sans-serif;letter-spacing:.01em}
+.mark b{font:800 19px/1 "Cabinet Grotesk",Switzer,sans-serif;letter-spacing:-.02em;display:block}
 .tr{display:flex;align-items:center;gap:18px;font-size:14px}
 .open{display:flex;align-items:center;gap:8px;white-space:nowrap}
 .open i{width:8px;height:8px;border-radius:50%;background:#1b9e4b;animation:blink 2.2s infinite}
@@ -54,14 +55,14 @@ body.dark .round{background:var(--y);color:var(--ink)}
 .hb{position:absolute;left:clamp(18px,3vw,44px);bottom:8vh;z-index:4;max-width:330px;opacity:0;animation:fade 1s 1.4s forwards}
 .hb p{font-size:15px;margin-bottom:16px}
 @keyframes fade{to{opacity:1}}
-.go{display:inline-flex;align-items:center;gap:14px;font:600 15px/1 Switzer}
+.go{display:inline-flex;align-items:center;gap:14px;font:600 15px/1 Switzer,system-ui,sans-serif}
 .go .r{width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;overflow:hidden;transition:background .3s,color .3s}
 .go .r svg{width:18px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .go:hover .r{background:var(--paper);color:var(--ink)}
 .go:hover .r svg{transform:translateX(4px) rotate(-45deg)}
 .go u{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1.5px no-repeat;padding-bottom:3px;transition:background-size .5s}
 .go:hover u{background-size:0 1.5px;background-position:100% 100%}
-.free{font:800 13px/1 "Cabinet Grotesk";letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:10px}
+.free{font:800 13px/1 "Cabinet Grotesk",Switzer,sans-serif;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:10px}
 
 /* WHAT WE FIX */
 .fix{height:520vh;position:relative}
@@ -76,8 +77,8 @@ body.dark .round{background:var(--y);color:var(--ink)}
 .lines{position:absolute;left:50%;top:50%;width:calc(var(--c) * 1.923);height:calc(var(--c) * 1.923);transform:translate(-50%,-50%);z-index:2;overflow:visible;pointer-events:none}
 .lines path,.lines rect,.lines circle,.lines line{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .lines g{transition:opacity .5s}
-.fl{position:absolute;left:clamp(18px,3vw,44px);bottom:7vh;z-index:4;width:340px}
-.fl .ct{font:800 15px/1 "Cabinet Grotesk";letter-spacing:.04em;margin-bottom:12px;display:flex;gap:10px;align-items:center}
+.fl{position:absolute;left:clamp(18px,3vw,44px);bottom:7vh;z-index:4;width:300px}
+.fl .ct{font:800 15px/1 "Cabinet Grotesk",Switzer,sans-serif;letter-spacing:.04em;margin-bottom:12px;display:flex;gap:10px;align-items:center}
 .fl .ct i{display:block;width:60px;height:3px;background:rgba(17,17,16,.2);position:relative;overflow:hidden}
 .fl .ct i b{position:absolute;inset:0;background:var(--ink);transform-origin:0;transform:scaleX(var(--k,0))}
 .fd{position:relative;height:72px}
@@ -95,13 +96,13 @@ body.dark .round{background:var(--y);color:var(--ink)}
 .howh{position:absolute;left:clamp(18px,3vw,44px);top:14vh;z-index:6;font-size:min(6vw,9vh);color:var(--y);max-width:10ch;transition:opacity .5s}
 .card{position:absolute;right:clamp(18px,3vw,44px);bottom:7vh;z-index:6;width:min(430px,calc(100vw - 36px));padding:26px 28px 28px;border-radius:30px;background:rgba(18,18,16,.34);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3)}
 .card .n{position:relative;height:clamp(64px,8vw,104px);overflow:hidden;margin-bottom:8px}
-.card .n b{position:absolute;left:0;top:0;font-size:clamp(64px,8vw,104px);color:var(--y);transform:translateY(105%);transition:transform .7s cubic-bezier(.2,.85,.25,1)}
+.card .n b{position:absolute;left:0;top:0;font-size:clamp(64px,8vw,104px);color:var(--y);transform:translateY(140%);transition:transform .7s cubic-bezier(.2,.85,.25,1)}
 .card .n b.on{transform:none}
-.card .n b.out{transform:translateY(-105%)}
+.card .n b.out{transform:translateY(-140%)}
 .card .tx{position:relative;height:118px}
 .card .tx div{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:.55s}
 .card .tx div.on{opacity:1;transform:none}
-.card h3{font:800 32px/1 "Cabinet Grotesk";letter-spacing:-.02em;margin-bottom:10px}
+.card h3{font:800 32px/1 "Cabinet Grotesk",Switzer,sans-serif;letter-spacing:-.02em;margin-bottom:10px}
 .card p{font-size:15px;opacity:.88}
 
 /* WORK: yellow sheet back over the ink */
@@ -119,7 +120,7 @@ body.dark .round{background:var(--y);color:var(--ink)}
 .ph2 img{height:100%;width:auto;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
 .ph2:hover img{transform:scale(1.06)}
 .ph2.t{aspect-ratio:3/4}.ph2.w{aspect-ratio:4/3}.ph2.t img,.ph2.w img{width:100%}
-.ph2 em{position:absolute;left:16px;bottom:16px;font:600 13px/1 Switzer;font-style:normal;background:var(--y);color:var(--ink);padding:9px 13px;border-radius:14px;transition:background .3s,color .3s}
+.ph2 em{position:absolute;left:16px;bottom:16px;font:600 13px/1 Switzer,system-ui,sans-serif;font-style:normal;background:var(--y);color:var(--ink);padding:9px 13px;border-radius:14px;transition:background .3s,color .3s}
 .ph2:hover em{background:var(--ink);color:var(--y)}
 
 /* END: taken apart, put back together */
@@ -130,18 +131,18 @@ body.dark .round{background:var(--y);color:var(--ink)}
 .facts a{border-bottom:1.5px solid currentColor}
 .ep{position:relative;aspect-ratio:4/3;width:100%}
 .form{position:relative;background:var(--paper);border-radius:34px;padding:24px;max-width:560px;box-shadow:0 30px 60px -30px rgba(60,50,0,.45)}
-.form label{font:600 13px/1 Switzer;display:block;margin:0 0 10px 4px;opacity:.7}
+.form label{font:600 13px/1 Switzer,system-ui,sans-serif;display:block;margin:0 0 10px 4px;opacity:.7}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.chips button{font:600 14px/1 Switzer;border:0;background:#efe9c4;color:var(--ink);padding:12px 16px;border-radius:16px;cursor:pointer;transition:background .3s,color .3s,transform .3s}
+.chips button{font:600 14px/1 Switzer,system-ui,sans-serif;border:0;background:#efe9c4;color:var(--ink);padding:12px 16px;border-radius:16px;cursor:pointer;transition:background .3s,color .3s,transform .3s}
 .chips button:hover{background:var(--ink);color:var(--y)}
 .chips button.on{background:var(--ink);color:var(--y)}
 .row{display:flex;gap:10px;align-items:flex-end}
-.row textarea{flex:1;font:500 16px/1.4 Switzer;border:0;background:#efe9c4;border-radius:20px;padding:15px 18px;resize:none;height:84px;color:var(--ink);outline:none}
+.row textarea{flex:1;font:500 16px/1.4 Switzer,system-ui,sans-serif;border:0;background:#efe9c4;border-radius:20px;padding:15px 18px;resize:none;height:84px;color:var(--ink);outline:none}
 .row textarea::placeholder{color:#8a835a}
 .send{width:84px;height:84px;flex:0 0 84px;border-radius:50%;border:0;background:var(--ink);color:var(--y);cursor:pointer;display:grid;place-items:center;transition:transform .5s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
 .send:hover{transform:rotate(-20deg);background:var(--y);color:var(--ink)}
 .send svg{width:26px}
-.again{margin-top:30px;display:inline-flex;align-items:center;gap:12px;font:600 14px/1 Switzer;cursor:pointer;background:none;border:0;color:var(--ink)}
+.again{margin-top:30px;display:inline-flex;align-items:center;gap:12px;font:600 14px/1 Switzer,system-ui,sans-serif;cursor:pointer;background:none;border:0;color:var(--ink)}
 .again .r{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;transition:transform .5s}
 .again:hover .r{transform:translateY(-4px)}
 .foot{grid-column:1/-1;display:flex;justify-content:space-between;font-size:12px;opacity:.6;padding-top:10px}
@@ -175,17 +176,6 @@ body.dark .round{background:var(--y);color:var(--ink)}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 </style>
-<!-- ds-og -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="IP Electronic Repair: website preview">
-<meta property="og:description" content="A preview of the new website Digital Switch built for IP Electronic Repair. Open it on your phone.">
-<meta property="og:image" content="https://digitalswitch.co.za/local/ip-electronic-repair/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://digitalswitch.co.za/local/ip-electronic-repair/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://digitalswitch.co.za/local/ip-electronic-repair/og.jpg">
-<!-- /ds-og -->
 </head>
 <body>
 <div class="prog" id="prog"></div>
@@ -224,7 +214,7 @@ body.dark .round{background:var(--y);color:var(--ink)}
       <g data-i="0"><rect pathLength="1" x="215" y="40" width="570" height="920" rx="96"/><path pathLength="1" d="M455 92h90"/><circle pathLength="1" cx="500" cy="912" r="16"/></g>
       <g data-i="1"><rect pathLength="1" x="50" y="200" width="900" height="600" rx="42"/><path pathLength="1" d="M500 200L370 52M500 200L640 70"/><path pathLength="1" d="M260 800l-40 90M740 800l40 90"/></g>
       <g data-i="2"><rect pathLength="1" x="30" y="215" width="940" height="570" rx="34"/><path pathLength="1" d="M795 215v570"/><circle pathLength="1" cx="883" cy="330" r="44"/><path pathLength="1" d="M845 450h76M845 500h76M845 550h76"/><path pathLength="1" d="M80 785v40M920 785v40"/></g>
-      <g data-i="3"><rect pathLength="1" x="175" y="175" width="650" height="650" rx="28"/><path pathLength="1" d="M70 850h860l-50 70H120z"/><path pathLength="1" d="M440 885h120"/></g>
+      <g data-i="3"><rect pathLength="1" x="175" y="175" width="650" height="650" rx="28"/><path pathLength="1" d="M130 850h740l-44 62H174z"/><path pathLength="1" d="M440 885h120"/></g>
     </svg>
     <div class="disc" id="disc"></div>
     <div class="fl">
@@ -302,7 +292,7 @@ document.getElementById('ep').onclick=function(){zoom(P(HERO,2400))};
 /* what we fix */
 var DEV=[
  {w:'Phones',id:14434416,pos:'50% 50%',t:'Cracked screens, dead batteries, charging ports, water damage. Most phones are done the same day.'},
- {w:'TVs',id:9086764,pos:'60% 55%',t:'No picture, no sound, won\'t switch on. Flat screens and older sets.'},
+ {w:'TVs',id:9086764,pos:'30% 62%',t:'No picture, no sound, won\'t switch on. Flat screens and older sets.'},
  {w:'Microwaves',id:4686822,pos:'50% 50%',t:'Not heating, sparking, door or turntable trouble. Bring it in and we\'ll check it for free.'},
  {w:'Laptops',id:9432954,pos:'48% 50%',t:'Laptops and PCs: slow, won\'t boot, broken screens and keyboards, viruses and upgrades.'}];
 var words=document.getElementById('words'),disc=document.getElementById('disc'),fd=document.getElementById('fd'),W=[],DI=[],FD=[];
@@ -329,7 +319,7 @@ var scur=-1;
 /* work rail */
 var RAIL=[[31862950,'t','On the bench'],[1476321,'w','Every part counted'],[6755137,'t','Board-level repairs'],[38145576,'w','Screens replaced'],[6755057,'t','Careful hands'],[6755140,'w','Down to the chip'],[37340089,'t','Back to working']];
 var tr=document.getElementById('track');
-for(var rep=0;rep<2;rep++)RAIL.forEach(function(r){var d=document.createElement('div');d.className='ph2 '+r[1];d.innerHTML='<img loading="lazy" alt="'+r[2]+'" src="'+P(r[0],1200)+'"><em>'+r[2]+'</em>';d.onclick=function(){zoom(P(r[0],2400))};tr.appendChild(d)});
+for(var rep=0;rep<2;rep++)RAIL.forEach(function(r){var d=document.createElement('div');d.className='ph2 '+r[1];d.innerHTML='<img alt="'+r[2]+'" src="'+P(r[0],1200)+'"><em>'+r[2]+'</em>';d.onclick=function(){zoom(P(r[0],2400))};tr.appendChild(d)});
 var tx=0,hover=false;tr.addEventListener('mouseenter',function(){hover=true});tr.addEventListener('mouseleave',function(){hover=false});
 
 /* big statements */
